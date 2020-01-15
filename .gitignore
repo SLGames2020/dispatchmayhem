@@ -55,6 +55,7 @@ ExportedObj/
 sysinfo.txt
 
 # Unity3D lock file
+/[Tt]emp/[Uu]nity[Ll]ockfile
 *.lock
 
 # Builds
