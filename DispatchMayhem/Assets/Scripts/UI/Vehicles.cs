@@ -25,7 +25,7 @@ public class Vehicles : MonoBehaviour
     private void Start()
     {
         audioSource = GetComponent<AudioSource>();
-        audioSource.PlayOneShot(SoundManager.instance.truckArrives);
-        audioSource.PlayOneShot(SoundManager.instance.truckLeaves);
+        //audioSource.PlayOneShot(SoundManager.instance.truckArrives);
+        //audioSource.PlayOneShot(SoundManager.instance.truckLeaves);
     }
 }
