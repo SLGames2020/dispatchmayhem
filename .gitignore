@@ -1,9 +1,9 @@
-dispatchmayhem/[Ll]ibrary/
-dispatchmayhem/[Tt]emp/
-dispatchmayhem/[Oo]bj/
-dispatchmayhem/[Bb]uild/
-dispatchmayhem/[Bb]uilds/
-Assets/AssetStoreTools*
+[Dd]ispatch[Mm]ayhem/[Ll]ibrary/
+[Dd]ispatch[Mm]ayhem/[Tt]emp/
+[Dd]ispatch[Mm]ayhem/[Oo]bj/
+[Dd]ispatch[Mm]ayhem/[Bb]uild/
+[Dd]ispatch[Mm]ayhem/[Bb]uilds/
+[Dd]ispatch[Mm]ayhem/Assets/AssetStoreTools*
 
 # Visual Studio cache directory
 .vs/
