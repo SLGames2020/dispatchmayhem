@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class Vehicles : MonoBehaviour
 {
-    public GameObject SidePanel;
+    public GameObject MainPanel;
     private AudioSource audioSource;
     int counter;
 
@@ -14,11 +14,11 @@ public class Vehicles : MonoBehaviour
         counter++;
         if (counter % 2 == 1)
         {
-            SidePanel.gameObject.SetActive(true);
+            MainPanel.gameObject.SetActive(true);
         }
         else
         {
-            SidePanel.gameObject.SetActive(false);
+            MainPanel.gameObject.SetActive(false);
         }
     }
 
