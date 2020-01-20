@@ -400,3 +400,17 @@ MigrationBackup/
 
 # Ionide (cross platform F# VS Code tools) working folder
 .ionide/
+DispatchMayhem/Library/assetDatabase3
+DispatchMayhem/Library/CurrentLayout.dwlt
+DispatchMayhem/Library/ScriptAssemblies/Assembly-CSharp-Editor.dll
+DispatchMayhem/Library/ScriptAssemblies/Assembly-CSharp.dll
+DispatchMayhem/Library/CurrentLayout.dwlt
+DispatchMayhem/Library/LastSceneManagerSetup.txt
+DispatchMayhem/Library/ScriptAssemblies/Assembly-CSharp-Editor.dll
+DispatchMayhem/Library/ScriptAssemblies/Assembly-CSharp.dll
+DispatchMayhem/Library/ScriptAssemblies/Unity.Analytics.DataPrivacy.dll
+DispatchMayhem/Library/ScriptAssemblies/Unity.CollabProxy.Editor.dll
+DispatchMayhem/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll
+DispatchMayhem/Library/ScriptAssemblies/Unity.TextMeshPro.dll
+DispatchMayhem/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll
+DispatchMayhem/Library/shadercompiler-UnityShaderCompiler.exe0.log
