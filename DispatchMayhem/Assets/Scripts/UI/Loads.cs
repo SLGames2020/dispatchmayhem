@@ -6,6 +6,9 @@ using UnityEngine.UI;
 public class Loads : MonoBehaviour
 {
     public GameObject MainPanel;
+    public Text titleText;
+    public Text statusText1;
+    public Text statusText2;
     private AudioSource audioSource;
     int counter;
 
@@ -13,8 +16,12 @@ public class Loads : MonoBehaviour
     {
         counter++;
         if (counter % 2 == 1)
+        //if (MainPanel.gameObject.activeSelf)
         {
             MainPanel.gameObject.SetActive(true);
+            titleText.text = "Load Details";
+            statusText1.text = "Origin\t\tDestination\t\tWeight\t\tType\t\tPay";
+            statusText2.text = "Ottawa\t\tMontreal\t\t9001 lbs\t\tFood\t\t1.5/mil";
         }
         else
         {
