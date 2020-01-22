@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LoadType : MonoBehaviour
+public class TruckType
 {
-    public string label = "undefined goods";
+    public string label = "undefined truck";
 
 }

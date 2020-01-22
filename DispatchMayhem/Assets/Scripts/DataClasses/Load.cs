@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Load : MonoBehaviour
+public class Load
 {
     public City origin;
     public City destination;
