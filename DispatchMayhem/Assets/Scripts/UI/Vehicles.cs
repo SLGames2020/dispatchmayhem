@@ -14,15 +14,21 @@ public class Vehicles : MonoBehaviour
 
     public void togglePanel()
     {
-        counter++;
-        if (counter % 2 == 1)
+        //counter++;
+        if (!MainPanel.gameObject.activeSelf)
         {
             MainPanel.gameObject.SetActive(true);
             titleText.text = "Truck Details";
             statusText1.text = "";
             statusText2.text = "";
         }
-        else
+        else if (MainPanel.gameObject.activeSelf && titleText.text == "Load Details")
+        {
+            titleText.text = "Truck Details";
+            statusText1.text = "";
+            statusText2.text = "";
+        }
+        else if (MainPanel.gameObject.activeSelf && titleText.text == "Truck Details")
         {
             MainPanel.gameObject.SetActive(false);
         }
