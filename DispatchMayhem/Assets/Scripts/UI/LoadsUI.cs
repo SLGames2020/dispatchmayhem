@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Loads : MonoBehaviour
+public class LoadsUI : MonoBehaviour
 {
     public GameObject MainPanel;
     public Text titleText;
