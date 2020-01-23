@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -10,6 +10,11 @@ public class Truck
     public string rigLabel = "Undefined transport";
 
     public TruckStates status = TruckStates.IDLE;
+
+    public void Loading()
+    {
+
+    }
 
     // Start is called before the first frame update
     //void Start()
