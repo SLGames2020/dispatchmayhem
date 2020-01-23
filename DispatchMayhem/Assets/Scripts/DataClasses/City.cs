@@ -4,21 +4,40 @@ using UnityEngine;
 
 public class City : MonoBehaviour
 {
-    public List<Load> loads;
     public string label = "unknown city";
+    public Vector2 gps;
 
-    public float lat;
-    public float lon;  
+    [HideInInspector] public List<Load> loads;
+
+    private float lastTim;
 
     // Start is called before the first frame update
-    //void Start()
-    //{
-    //    
-    //}
+    void Start()
+    {
+        //loads.Clear();
+
+        lastTim = Time.time + 1.0f;
+    }
 
     // Update is called once per frame
-    //void Update()
-    //{
-    //    
-    //}
+    void Update()
+    {
+        if (Time.time > lastTim)
+        {
+            lastTim = Time.time + 1.0f;
+
+           if (Random.Range(0, 60) == 0) // GM.inst.LOADSPAWNTIME) == 0)
+           {
+                Vector2 Des;
+                do
+                {
+                    Des = GM.inst.openCities[Random.Range(0, GM.inst.openCities.Count)].gps;
+                }
+                while (Des == gps);
+
+                Load ld = new Load(gps, Des);
+                loads.Add(ld);
+           }
+        }
+    }
 }

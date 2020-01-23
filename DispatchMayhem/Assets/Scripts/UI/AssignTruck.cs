@@ -31,6 +31,10 @@ public class AssignTruck : MonoBehaviour
                 Debug.Log("Selected Truck is unavailable");
                 //TODO: error message that they have selected the wrong truck
             }
+            else
+            {
+
+            }
         }
     }
 }
