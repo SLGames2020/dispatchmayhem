@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class City : MonoBehaviour
 {
-    public string label = "unknown city";
+    public string label = "unkdfnown city";
     public Vector2 gps;
 
     [HideInInspector] public List<Load> loads;
