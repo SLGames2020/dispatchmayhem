@@ -11,11 +11,6 @@ public class Truck
 
     public TruckStates status = TruckStates.IDLE;
 
-    public void Loading()
-    {
-       
-    }
-
     // Start is called before the first frame update
     //void Start()
     //{
