@@ -10,12 +10,9 @@ public class LoadsUI : MonoBehaviour
     public Text statusText1;
     public Text statusText2;
     private AudioSource audioSource;
-    int counter;
 
     public void togglePanel()
     {
-       // counter++;
-       // if (counter % 2 == 1)
         if (!MainPanel.gameObject.activeSelf)
         {
             MainPanel.gameObject.SetActive(true);
@@ -37,10 +34,7 @@ public class LoadsUI : MonoBehaviour
 
     public void newLoad()
     {
-        if (counter >= 1)
-        {
-            audioSource = GetComponent<AudioSource>();
-            //audioSource.PlayOneShot(SoundManager.instance.newLoad);
-        }
+        audioSource = GetComponent<AudioSource>();
+        //audioSource.PlayOneShot(SoundManager.instance.newLoad);
     }
 }

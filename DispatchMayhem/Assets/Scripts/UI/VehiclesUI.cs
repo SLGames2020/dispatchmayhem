@@ -14,7 +14,6 @@ public class VehiclesUI : MonoBehaviour
 
     public void togglePanel()
     {
-        //counter++;
         if (!MainPanel.gameObject.activeSelf)
         {
             MainPanel.gameObject.SetActive(true);
