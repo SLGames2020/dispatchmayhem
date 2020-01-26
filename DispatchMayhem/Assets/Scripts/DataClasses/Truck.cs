@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Truck
+public class Truck : MonoBehaviour
 {
     public enum TruckStates { IDLE, LOADING, ONROUTE, UNLOADING, IMPOUNDED, REPAIRING }
 

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Load
+public class Load : MonoBehaviour
 {
     public Vector2 origin;
     public Vector2 destination;

@@ -1,8 +1,9 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Trailer
+public class Trailer : MonoBehaviour
 {
     int space;
     int spaceLiquid;

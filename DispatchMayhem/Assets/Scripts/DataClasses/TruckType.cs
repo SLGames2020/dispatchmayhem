@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TruckType
+public class TruckType : MonoBehaviour
 {
     public int age;
     public int health;

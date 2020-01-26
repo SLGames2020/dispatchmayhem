@@ -44,5 +44,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   label: unknown city
-  lat: 0
-  lon: 0
+  gps: {x: 0, y: 0}
+  loads: []
