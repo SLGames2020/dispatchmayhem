@@ -43,6 +43,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec084d0c9111a644da8e0c970fa31ad7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  loadPrefab: {fileID: 8065267893138532041, guid: e12a4446a469fbe43bf70df1a35233e3,
+    type: 3}
   label: unknown city
   gps: {x: 0, y: 0}
   loads: []

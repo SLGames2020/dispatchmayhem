@@ -19,6 +19,7 @@ public class LoadsUI : MonoBehaviour
             titleText.text = "Load Details";
             statusText1.text = "Origin\t\tDestination\t\tWeight\t\tType\t\tPay";
             statusText2.text = "Ottawa\t\tMontreal\t\t9001 lbs\t\tFood\t\t1.5/mil";
+            //statusText2.text = GM.wrldLoads.text[0];
         }
         else if (MainPanel.gameObject.activeSelf && titleText.text == "Truck Details")
         {
