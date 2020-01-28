@@ -4,15 +4,15 @@ using UnityEngine;
 
 public class TruckType : MonoBehaviour
 {
-    public int age;
-    public int health;
-    public int minSpeed = 0;
-    public int maxSpeed;
-    public int minSpace = 0;
-    public int maxSpace;
-    public float cost;
-    public float minFuel = 0.0f;
-    public float maxFuel;
+    int age;
+    int health;
+    int minSpeed = 0;
+    int maxSpeed;
+    int minSpace = 0;
+    int maxSpace;
+    float cost;
+    float minFuel = 0.0f;
+    float maxFuel;
 
     public void UsedTruck()
     {
