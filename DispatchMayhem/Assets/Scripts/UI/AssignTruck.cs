@@ -18,7 +18,7 @@ public class AssignTruck : MonoBehaviour
     *******************************************************/
     public void AssignLoadToTruck()
     {
-        if (UIM.inst.state != UIM.UIState.SELECT)
+    /*    if (UIM.inst.state != UIM.UIState.SELECT)
         {
             Debug.Log("Load and/or Truck not selected");
             //TODO: Error message or sound as the load or truck has not been selected
@@ -35,6 +35,6 @@ public class AssignTruck : MonoBehaviour
             {
 
             }
-        }
+        }*/
     }
 }

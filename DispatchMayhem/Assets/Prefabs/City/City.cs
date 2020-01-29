@@ -67,9 +67,9 @@ public class City : MonoBehaviour
             ld.origin = gps;
             ld.destinationLabel = go.GetComponent<City>().label;
             ld.destination = des;
-            ldgo.name = label + "load: " + loads.Count;
+            ldgo.name = label + " load: " + loads.Count;
             ldgo.transform.parent = this.transform;
-            if (AddLoadToLoadBox(ld))
+            if (UIM.inst.AddToLoadList(ldgo))
             {
                 loads.Add(ldgo);
                 GM.inst.AddLoadToMasterList(ldgo);
