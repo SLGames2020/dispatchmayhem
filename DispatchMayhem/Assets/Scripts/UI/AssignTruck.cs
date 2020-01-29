@@ -18,23 +18,23 @@ public class AssignTruck : MonoBehaviour
     *******************************************************/
     public void AssignLoadToTruck()
     {
-        if (UIM.inst.state != UIM.UIState.SELECT)
-        {
-            Debug.Log("Load and/or Truck not selected");
-            //TODO: Error message or sound as the load or truck has not been selected
-            //maybe prevent this by disabling the button until both are selected first
-        }
-        else
-        {
-            if (UIM.inst.trucks[UIM.inst.truckIdx].status != Truck.TruckStates.IDLE)
-            {
-                Debug.Log("Selected Truck is unavailable");
-                //TODO: error message that they have selected the wrong truck
-            }
-            else
-            {
+        //if (UIM.inst.state != UIM.UIState.SELECT)
+        //{
+        //    Debug.Log("Load and/or Truck not selected");
+        //    //TODO: Error message or sound as the load or truck has not been selected
+        //    //maybe prevent this by disabling the button until both are selected first
+        //}
+        //else
+        //{
+        //    if (UIM.inst.trucks[UIM.inst.truckIdx].status != Truck.TruckStates.IDLE)
+        //    {
+        //        Debug.Log("Selected Truck is unavailable");
+        //        //TODO: error message that they have selected the wrong truck
+        //    }
+        //    else
+        //    {
 
-            }
-        }
+        //    }
+        //}
     }
 }
