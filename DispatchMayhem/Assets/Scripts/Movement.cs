@@ -29,12 +29,25 @@ public class Movement : MonoBehaviour
         }
 
         Vector2 tempvec = new Vector2(this.transform.position.x, this.transform.position.y);
-        Vector2 newvec = new Vector2(100, 100);
+        //Vector2 newvec = new Vector2(100, 100);
 
         Debug.Log("DestinationMarker: " + DestinationMarker);
-        tempvec = Move(tempvec, cityArray[DestinationMarker],100.0f);
+        tempvec = Move(tempvec, cityArray[DestinationMarker], 100.0f);
+
+        Vector3 newPos = new Vector3(cityArray[DestinationMarker].x, cityArray[DestinationMarker].y, this.transform.position.z );
 
         this.transform.position = new Vector3(tempvec.x, tempvec.y, this.transform.position.z);
+
+        Debug.Log("newPos: " + newPos);
+
+        this.transform.LookAt( newPos);
+
+        if (this.transform.rotation.x < 0)
+        {
+            this.transform.Rotate(new Vector3(0, 0, 1), 180);
+        }
+
+
         if((tempvec - cityArray[DestinationMarker]).magnitude < 1.0f )
         {
             DestinationMarker++;
