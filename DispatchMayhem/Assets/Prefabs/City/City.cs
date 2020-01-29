@@ -32,19 +32,12 @@ public class City : MonoBehaviour
     }
 
     // Update is called once per frame
-   /* void Update()
+    void Update()
     {
-        if (Time.time > lastTime)
-        {
-            lastTime = Time.time + 1.0f;
-            Debug.Log(label + " updating");
-            if (Random.Range(0, GM.inst.LOADSPAWNTIME) == 0)
-            {
-                Debug.Log(label + " spawning load");
-                SpawnLoad();
-            }
-        }
-    }*/
+        //float newx = this.transform.position.x;
+        //newx += (30.0f * Time.deltaTime);
+        //this.transform.position = new Vector3(newx, this.transform.position.y, this.transform.position.z);
+    }
 
     /**************************************************************************
         SpawnLoad
