@@ -10,7 +10,6 @@ public class VehiclesUI : MonoBehaviour
     public Text statusText1;
     public Text statusText2;
     private AudioSource audioSource;
-    int counter;
 
     public void togglePanel()
     {
