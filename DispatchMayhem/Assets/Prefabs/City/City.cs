@@ -73,7 +73,7 @@ public class City : MonoBehaviour
             {
                 loads.Add(ldgo);
                 GM.inst.AddLoadToMasterList(ldgo);
-                Debug.Log("Load Added for " + label);
+                //Debug.Log("Load Added for " + label);
             }
             else
             {

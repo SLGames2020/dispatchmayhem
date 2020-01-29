@@ -64,7 +64,7 @@ public class GM : MonoBehaviour
     {
         if (ld != null)
         {
-            Debug.Log("load added to master");
+            //Debug.Log("load added to master");
             wrldLoads.Add(ld);
         }
         else

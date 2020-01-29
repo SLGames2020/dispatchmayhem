@@ -71,8 +71,11 @@ public class UIM : MonoBehaviour
         template.GetComponent<ListObject>().listGO = truckGO;
 
         string txt = truckGO.GetComponent<Truck>().rigLabel;
-        template.transform.parent = vehicleBoxContent.transform;
+        template.transform.SetParent(vehicleBoxContent.transform, false);
         template.GetComponentInChildren<Text>().text = txt;
+
+        template.GetComponent<Button>().onClick.AddListener(delegate { AssignTruck(truckGO); });
+
         return true;
     }
 
@@ -91,20 +94,25 @@ public class UIM : MonoBehaviour
 
         Load ld = ldgo.GetComponent<Load>();
         string txt = ld.originLabel + " to " + ld.destinationLabel;
-        template.transform.parent = loadBoxContent.transform;
+        template.transform.SetParent(loadBoxContent.transform,false);
         template.GetComponentInChildren<Text>().text = txt;
+
+        template.GetComponent<Button>().onClick.AddListener(delegate { AssignLoad(ldgo); });
+
         return true;
     }
 
-    public bool AssignLoad(GameObject assLoad)
+    public void AssignLoad(GameObject assLoad)
     {
         loadSelected = assLoad;
-        return true;
+        Debug.Log("Received assLoad");
     }
 
     public bool AssignTruck(GameObject assTruck)
     {
         vehicleSelected = assTruck;
+
+        Debug.Log("Received assTruck");
         return true;
     }
 }

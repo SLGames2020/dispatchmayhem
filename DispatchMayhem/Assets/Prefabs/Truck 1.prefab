@@ -107,6 +107,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ac810d37ab220d40b5b88f3e4493e65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cityArray: []
+  load: {fileID: 0}
+  assButt: {fileID: 0}
 --- !u!114 &215430292
 MonoBehaviour:
   m_ObjectHideFlags: 0
