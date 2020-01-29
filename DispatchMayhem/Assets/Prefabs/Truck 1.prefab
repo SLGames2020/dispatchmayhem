@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 8188259209050289430}
   - component: {fileID: 8188259209050289431}
   - component: {fileID: 8188259209050289435}
+  - component: {fileID: 215430292}
   m_Layer: 0
   m_Name: Truck 1
   m_TagString: Untagged
@@ -50,7 +51,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8188259209050289428}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -106,6 +107,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ac810d37ab220d40b5b88f3e4493e65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &215430292
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8188259209050289428}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b05e978b0d85c04f8835dee3d39a981, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: {fileID: 0}
+  rigLabel: Undefined transport
+  status: 0
 --- !u!64 &8188259210778141760
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -130,10 +146,6 @@ PrefabInstance:
     - target: {fileID: 1270833023264384, guid: c254d40a2c1a69f4cacdc993e40c9fa8, type: 3}
       propertyPath: m_Name
       value: Van
-      objectReference: {fileID: 0}
-    - target: {fileID: 1270833023264384, guid: c254d40a2c1a69f4cacdc993e40c9fa8, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4324091281796014, guid: c254d40a2c1a69f4cacdc993e40c9fa8, type: 3}
       propertyPath: m_LocalPosition.x
@@ -196,12 +208,12 @@ PrefabInstance:
       value: 25.94
       objectReference: {fileID: 0}
     - target: {fileID: 4783879582580928, guid: c254d40a2c1a69f4cacdc993e40c9fa8, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -5.18
-      objectReference: {fileID: 0}
-    - target: {fileID: 4783879582580928, guid: c254d40a2c1a69f4cacdc993e40c9fa8, type: 3}
       propertyPath: m_LocalPosition.y
       value: 1.81
+      objectReference: {fileID: 0}
+    - target: {fileID: 4783879582580928, guid: c254d40a2c1a69f4cacdc993e40c9fa8, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -5.18
       objectReference: {fileID: 0}
     - target: {fileID: 4783879582580928, guid: c254d40a2c1a69f4cacdc993e40c9fa8, type: 3}
       propertyPath: m_LocalScale.x

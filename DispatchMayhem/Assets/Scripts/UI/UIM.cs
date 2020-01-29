@@ -96,4 +96,15 @@ public class UIM : MonoBehaviour
         return true;
     }
 
+    public bool AssignLoad(GameObject assLoad)
+    {
+        loadSelected = assLoad;
+        return true;
+    }
+
+    public bool AssignTruck(GameObject assTruck)
+    {
+        vehicleSelected = assTruck;
+        return true;
+    }
 }
