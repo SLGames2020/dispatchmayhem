@@ -4,33 +4,40 @@ using UnityEngine;
 
 public class Movement : MonoBehaviour
 {
-    Vector2[] cityArray = new Vector2[4];
-    Vector2 CurrentPosition;
+    List<Vector2> cityArray = new List<Vector2>();
+   // Vector2 CurrentPosition;
     int DestinationMarker = 0;
 
     //// Start is called before the first frame update
     void Start()
     {
-        for(int i = 0; i < 4; i++)
-        {
-            cityArray[i] = new Vector2( Random.Range(0, 100), Random.Range(0, 100));
-        }
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        Vector2 tempvec = new Vector2(this.transform.position.x, this.transform.position.z);
+        if (cityArray.Count == 0)
+        {
+            foreach (GameObject currCity in GM.inst.openCities)
+            {
+                Vector2 cityLoc = currCity.GetComponent<City>().transform.position;
+                cityArray.Add(cityLoc);
+            }
+        }
+
+        Vector2 tempvec = new Vector2(this.transform.position.x, this.transform.position.y);
         Vector2 newvec = new Vector2(100, 100);
 
-        tempvec = Move(tempvec, cityArray[DestinationMarker],10.0f);
+        Debug.Log("DestinationMarker: " + DestinationMarker);
+        tempvec = Move(tempvec, cityArray[DestinationMarker],100.0f);
 
-        this.transform.position = new Vector3(tempvec.x, this.transform.position.y, tempvec.y);
+        this.transform.position = new Vector3(tempvec.x, tempvec.y, this.transform.position.z);
         if((tempvec - cityArray[DestinationMarker]).magnitude < 1.0f )
         {
             DestinationMarker++;
 
-            if(DestinationMarker > 3)
+            if(DestinationMarker >= cityArray.Count)
             {
                 DestinationMarker = 0;
             }
@@ -41,8 +48,8 @@ public class Movement : MonoBehaviour
     {
         Vector2 NewDestination = Destination - CurrentPosition;
         Vector2 NewLoc = (NewDestination.normalized * speed)*Time.deltaTime + CurrentPosition;
-
-
+        Debug.Log("Destination: " + Destination);
+        Debug.Log("CurrentPosition: " + CurrentPosition);
         return NewLoc;
     }
 }
