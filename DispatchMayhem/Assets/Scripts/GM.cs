@@ -11,8 +11,10 @@ public class GM : MonoBehaviour
     public List<GameObject> openCities;
     public List<GameObject> wrldLoads;
 
+    [SerializeField] private int loadCount = 0;
+
     //**** CONSTANTS DECLRATIONS ****
-    public int LOADSPAWNTIME = 60;                                           //number of seconds (on average) between load creations in a city
+    public int LOADSPAWNTIME = 120;                                           //number of seconds (on average) between load creations in a city
 
     void Awake()
     {
@@ -38,10 +40,10 @@ public class GM : MonoBehaviour
     //}
 
     // Update is called once per frame
-    //void Update()
-    //{
-    //
-    //}
+    void Update()
+    {
+        loadCount = wrldLoads.Count;
+    }
 
     private void OnApplicationQuit()
     {

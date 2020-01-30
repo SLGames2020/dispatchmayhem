@@ -83,19 +83,11 @@ public class City : MonoBehaviour
         }
     }
 
-     /****************************************************************************
-        AddLoadToLoadBox
-        
-     *****************************************************************************/
-    private bool AddLoadToLoadBox(Load ld)
-    {
-        string txt = ld.originLabel + " to " + ld.destinationLabel;
-        var copy = Instantiate(listItemTemplate);
-        copy.transform.parent = loadBoxContent.transform;
-        copy.GetComponentInChildren<Text>().text = txt;
-        return true;
-    }
+    /*****************************************************************************
+        AddLoadToList
 
+        This method will take the newly spawned 
+ 
     /*****************************************************************************
         
     

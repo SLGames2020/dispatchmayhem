@@ -16,6 +16,7 @@ public class UIM : MonoBehaviour
     public GameObject vehicleBoxContent;
 
     [HideInInspector] public GameObject loadSelected;
+    [HideInInspector] public GameObject loadSelectedListItem;
     [HideInInspector] public GameObject vehicleSelected;
 
 //    public List<Load> loads;
@@ -97,14 +98,15 @@ public class UIM : MonoBehaviour
         template.transform.SetParent(loadBoxContent.transform,false);
         template.GetComponentInChildren<Text>().text = txt;
 
-        template.GetComponent<Button>().onClick.AddListener(delegate { AssignLoad(ldgo); });
+        template.GetComponent<Button>().onClick.AddListener(delegate { AssignLoad(ldgo, template); });
 
         return true;
     }
 
-    public void AssignLoad(GameObject assLoad)
+    public void AssignLoad(GameObject assLoad, GameObject listItem)
     {
         loadSelected = assLoad;
+        loadSelectedListItem = listItem;
         Debug.Log("Received assLoad");
     }
 

@@ -95,5 +95,7 @@ public class Movement : MonoBehaviour
 
         string destString = load.GetComponent<Load>().destinationLabel;
         cityArray.Add(GameObject.Find(destString).transform.position);
+
+        Destroy(UIM.inst.loadSelectedListItem);
     }
 }
