@@ -117,4 +117,9 @@ public class UIM : MonoBehaviour
         Debug.Log("Received assTruck");
         return true;
     }
+
+    public void exitGame()
+    {
+        Application.Quit();
+    }
 }
