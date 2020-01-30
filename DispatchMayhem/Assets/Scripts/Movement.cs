@@ -40,21 +40,11 @@ public class Movement : MonoBehaviour
 
         if (cityArray.Count != 0)
         {
-            /*foreach (GameObject currCity in GM.inst.openCities)
-            {
-                Vector2 cityLoc = currCity.GetComponent<City>().transform.position;
-                cityArray.Add(cityLoc);
-            }*/
-
-
             Vector2 tempvec = new Vector2(this.transform.position.x, this.transform.position.y);
-            //Vector2 newvec = new Vector2(100, 100);
 
             Vector2 tv2 = new Vector2(cityArray[DestinationMarker].x, cityArray[DestinationMarker].y);
 
             //Debug.Log("DestinationMarker: " + DestinationMarker);
-            //tempvec = Move(tempvec, cityArray[DestinationMarker], 100.0f);
-
             tempvec = Move(tempvec, tv2, 100.0f);
 
             Vector3 newPos = new Vector3(cityArray[DestinationMarker].x, cityArray[DestinationMarker].y, this.transform.position.z);
@@ -68,8 +58,7 @@ public class Movement : MonoBehaviour
             this.transform.LookAt(newPos);
 
             if ((this.transform.rotation.x < 0 && this.transform.rotation.y > 0 )|| 
-                (this.transform.rotation.x > 0 && this.transform.rotation.y > 0))// ||
-                //(this.transform.rotation.x < 0 && this.transform.rotation.y < 0))
+                (this.transform.rotation.x > 0 && this.transform.rotation.y > 0))
             {
                 this.transform.Rotate(new Vector3(0, 0, 1), 180);
             }
@@ -104,8 +93,6 @@ public class Movement : MonoBehaviour
 
         DestinationMarker = 0;
         cityArray.Clear();
-        //cityArray.Add(load.GetComponent<Load>().origin);
-        //cityArray.Add(load.GetComponent<Load>().destination;
 
         string origString = load.GetComponent<Load>().originLabel;
         cityArray.Add(GameObject.Find(origString).transform.position);
