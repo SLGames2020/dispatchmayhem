@@ -999,12 +999,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 181c8e85879bdb64b8ae0bbc57c2537b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mainMusic: {fileID: 0}
-  truckArrives: {fileID: 0}
-  truckLeaves: {fileID: 0}
-  scaleStation: {fileID: 0}
+  mainMusic: {fileID: 8300000, guid: c75fe8c021f26b3418ee6f0f79be8e45, type: 3}
+  truckArrives: {fileID: 8300000, guid: c70f890ba09a0da40b36b8ca047dd796, type: 3}
+  truckLeaves: {fileID: 8300000, guid: c70f890ba09a0da40b36b8ca047dd796, type: 3}
+  scaleStation: {fileID: 8300000, guid: c75fe8c021f26b3418ee6f0f79be8e45, type: 3}
   issueOccurs: {fileID: 0}
-  fined: {fileID: 0}
+  fined: {fileID: 8300000, guid: 2947ea3c5098d794c9702bc450b65349, type: 3}
   newLoad: {fileID: 0}
   buttonClicks: {fileID: 8300000, guid: bfc1a1763e9d39045b5337016812c51a, type: 3}
 --- !u!1 &1198648318 stripped
