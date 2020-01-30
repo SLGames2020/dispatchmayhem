@@ -11,6 +11,8 @@ public class Movement : MonoBehaviour
 
     [HideInInspector]public GameObject load;
     public Button assButt;
+    AudioSource button;
+    bool button_play;
 
     //// Start is called before the first frame update
     void Start()
@@ -18,11 +20,24 @@ public class Movement : MonoBehaviour
         Debug.Log("Adding Truck");
         UIM.inst.AddToTruckList(this.gameObject);
         assButt.onClick.AddListener(delegate { loadTruck(); } );
+        button = GetComponent<AudioSource>();
+        button_play = false;
     }
 
     // Update is called once per frame
     void Update()
     {
+        if(Input.GetMouseButtonDown(2))
+        {
+            button.Play();
+            button_play = true;
+        }
+        else
+        {
+            button_play = false;
+        }
+
+
         if (cityArray.Count != 0)
         {
             /*foreach (GameObject currCity in GM.inst.openCities)
