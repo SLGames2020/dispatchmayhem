@@ -644,6 +644,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameManager
       objectReference: {fileID: 0}
+    - target: {fileID: 971170494, guid: 88434a23b918a45489fee1ee94bf660d, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 971170494, guid: 88434a23b918a45489fee1ee94bf660d, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6717182344203654982, guid: 88434a23b918a45489fee1ee94bf660d,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -768,14 +776,6 @@ PrefabInstance:
     - target: {fileID: 949821642, guid: 88434a23b918a45489fee1ee94bf660d, type: 3}
       propertyPath: LOADSPAWNTIME
       value: 30
-      objectReference: {fileID: 0}
-    - target: {fileID: 971170494, guid: 88434a23b918a45489fee1ee94bf660d, type: 3}
-      propertyPath: m_RootOrder
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 971170494, guid: 88434a23b918a45489fee1ee94bf660d, type: 3}
-      propertyPath: m_RootOrder
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1736034772479886499, guid: 88434a23b918a45489fee1ee94bf660d,
         type: 3}
@@ -1237,6 +1237,11 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1377043275}
+    - target: {fileID: 700087460072996232, guid: f6f49996127db0341a13bb4a51df16f5,
+        type: 3}
+      propertyPath: m_PixelPerfect
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f6f49996127db0341a13bb4a51df16f5, type: 3}
 --- !u!1 &1808182770 stripped

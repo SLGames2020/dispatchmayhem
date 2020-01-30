@@ -67,7 +67,9 @@ public class Movement : MonoBehaviour
 
             this.transform.LookAt(newPos);
 
-            if (this.transform.rotation.x < 0)
+            if ((this.transform.rotation.x < 0 && this.transform.rotation.y > 0 )|| 
+                (this.transform.rotation.x > 0 && this.transform.rotation.y > 0))// ||
+                //(this.transform.rotation.x < 0 && this.transform.rotation.y < 0))
             {
                 this.transform.Rotate(new Vector3(0, 0, 1), 180);
             }
