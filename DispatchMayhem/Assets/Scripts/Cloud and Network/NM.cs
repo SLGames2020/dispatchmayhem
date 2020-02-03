@@ -13,7 +13,6 @@ public class NM : MonoBehaviour
     private static NM instance = null;
     public static NM inst { get { return instance; } }
 
-
     private TcpClient mapboxClient;
     private StreamReader reader;
     private StreamWriter writer;

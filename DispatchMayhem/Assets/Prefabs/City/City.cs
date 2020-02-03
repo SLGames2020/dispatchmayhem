@@ -26,7 +26,7 @@ public class City : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //GM.inst.AddCityToMasterList(this.gameObject);
+        GM.inst.AddCityToMasterList(this.gameObject);
         StartCoroutine(SpawnLoad());
         //lastTime = Time.time + 1.0f;
     }

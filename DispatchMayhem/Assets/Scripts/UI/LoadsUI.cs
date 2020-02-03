@@ -11,7 +11,7 @@ public class LoadsUI : MonoBehaviour
     public Text statusText2;
     private AudioSource audioSource;
 
-    public void togglePanel()
+    public void TogglePanel()
     {
         if (!MainPanel.gameObject.activeSelf)
         {
@@ -32,7 +32,7 @@ public class LoadsUI : MonoBehaviour
         }
     }
 
-    public void newLoad()
+    public void NewLoad()
     {
         audioSource = GetComponent<AudioSource>();
         //audioSource.PlayOneShot(SoundManager.instance.newLoad);
