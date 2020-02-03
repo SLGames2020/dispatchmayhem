@@ -7,7 +7,7 @@ public class ScrollView : MonoBehaviour
     public GameObject ScrollBox;
     int counter;
 
-    public void togglePanel()
+    public void TogglePanel()
     {
         counter++;
         if (counter % 2 == 1)

@@ -11,7 +11,7 @@ public class VehiclesUI : MonoBehaviour
     public Text statusText2;
     private AudioSource audioSource;
 
-    public void togglePanel()
+    public void TogglePanel()
     {
         if (!MainPanel.gameObject.activeSelf)
         {

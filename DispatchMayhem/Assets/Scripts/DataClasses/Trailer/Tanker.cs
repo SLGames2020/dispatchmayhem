@@ -5,6 +5,7 @@ using UnityEngine;
 public class Tanker : Trailer
 {
     TrailerType status = TrailerType.TANKER;
+
     void Start()
     {
         base.maxLoads(600, 50000);
