@@ -26,7 +26,6 @@ public class GM : MonoBehaviour
         }
 
         openCities.Clear();
-        //wrldLoads.Clear();
     }
     // Start is called before the first frame update
     //void Start()
