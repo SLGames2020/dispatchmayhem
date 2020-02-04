@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class WeatherEvents : MonoBehaviour
 {
+    void Seasons()
+    {
+        
+    }
+
     void RainOrSnow()
     {
         int temperature = 0;
@@ -31,7 +36,7 @@ public class WeatherEvents : MonoBehaviour
         }
         else if(temperature <= 0)
         {
-            isRain = true;
+            isSnow = true;
             snowAmount = Random.Range(0f, 100f);
             if(snowAmount >= 10f)
             {
