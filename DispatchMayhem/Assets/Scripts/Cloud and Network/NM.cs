@@ -4,9 +4,15 @@ using System.Net.Sockets;
 using System.Collections;
 using System.ComponentModel;
 using System.Collections.Generic;
-//using System.Text.RegularExpressions;
 
 using UnityEngine;
+
+using MapBox;
+using Mapbox.Utils;
+using Mapbox.Unity.Map;
+using MapBox.Directions;
+using Mapbox.Unity.Utilities;
+
 
 public class NM : MonoBehaviour
 {
@@ -19,6 +25,13 @@ public class NM : MonoBehaviour
     private TcpClient mapboxClient;
     private StreamReader reader;
     private StreamWriter writer;
+
+    private const string directionsURI = "https://api.mapbox.com/directions/v5/mapbox/driving/";
+    private const string geometriesParam = "geometries=geojson";
+    private const string accessTokenSuffix = "&access_token=";
+
+    private DirectionResult routeResults;
+
 
     void Awake()
     {
