@@ -13,6 +13,15 @@ public class TruckType : MonoBehaviour
     public float cost;
     public float minFuel = 0.0f;
     public float maxFuel;
+    public TruckType(int a, int h, int minSP, int maxSP,  int maxS, float c, float maxF)
+    {
+        age = a;
+        health = h;
+        maxSpeed = maxSP;
+        maxSpace = maxS;
+        cost = c;
+        maxFuel = maxF;
+    }
 
     public void UsedTruck()
     {
