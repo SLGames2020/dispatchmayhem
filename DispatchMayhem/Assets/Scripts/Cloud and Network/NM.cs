@@ -22,9 +22,9 @@ public class NM : MonoBehaviour
 
     public delegate void routeCallBack(Vector2[] route);
     public routeCallBack FindRoute;
+    private Vector2[] testRoute;
 
     public string accessToken = "pk.eyJ1Ijoic2xnYW1lcyIsImEiOiJjazVlMm00MXYwMGxoM2ZwYnN1NjIxcjJxIn0.IGD0z3Stw1R5fXMAWpz2JA";
-
 
     private TcpClient mapboxClient;
     private StreamReader reader;
@@ -36,6 +36,8 @@ public class NM : MonoBehaviour
 
     private Directions routeResults;
 
+    private Vector2 s = new Vector2(-75.6973f, 45.4215f);
+    private Vector2 e = new Vector2(-74.7303f, 45.0213f);
 
     void Awake()
     {
@@ -47,11 +49,15 @@ public class NM : MonoBehaviour
         {
             Destroy(this.gameObject);
         }
+
+        FindRoute = MyTestCallBack;
+        Debug.Log("Network Manager Awake");
     }
     // Start is called before the first frame update
     void Start()
     {
-        
+        GetRoute(s, e, FindRoute);
+
     }
 
     // Update is called once per frame
@@ -64,6 +70,14 @@ public class NM : MonoBehaviour
         instance = null;
     }
 
+    /*******************************
+        test callback routine
+
+    **********************************/
+    public void MyTestCallBack(Vector2[] rte)
+    {
+        Debug.Log(rte);
+    }
     /*************************************************************
         GetRoute
 
@@ -77,7 +91,10 @@ public class NM : MonoBehaviour
     public void GetRoute(Vector2 start, Vector2 end, routeCallBack callback)
     {
 
-        string uri = directionsURI + start.x + "," + start.y + ";" + end.x + "," + end.y + geometriesParam + accessToken;
+        string uri = directionsURI + start.x + "," + start.y + ";" + end.x + "," + end.y 
+                    + geometriesParam + accessTokenSuffix + accessToken;
+
+        Debug.Log(uri);
         StartCoroutine(DownloadRoute(callback, uri));
     }
 
@@ -99,12 +116,15 @@ public class NM : MonoBehaviour
         if (request.isNetworkError || request.isHttpError) Debug.Log(request.error + " uri: " + uri);
         else
         {
+            Debug.Log(request.downloadHandler.text);
             routeResults = JsonUtility.FromJson<Directions>(request.downloadHandler.text);
-
-
-            Texture2D tx2d = ((DownloadHandlerTexture)request.downloadHandler).texture;
-            Sprite newsprt = Sprite.Create(tx2d, new Rect(0.0f, 0.0f, tx2d.width, tx2d.height), new Vector2(0.5f, 0.5f), 100.0f);
-            cb(newsprt);
+            Waypoint[] wps = routeResults
+            Debug.Log(routeResults);
+            //Vector2[] temprts = new Vector2[routeResults.]
+            //
+            //Texture2D tx2d = ((DownloadHandlerTexture)request.downloadHandler).texture;
+            //Sprite newsprt = Sprite.Create(tx2d, new Rect(0.0f, 0.0f, tx2d.width, tx2d.height), new Vector2(0.5f, 0.5f), 100.0f);
+            //cb(newsprt);
         }
     }
 
