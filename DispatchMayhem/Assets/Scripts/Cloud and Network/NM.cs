@@ -4,6 +4,7 @@ using System.Net.Sockets;
 using System.Collections;
 using System.ComponentModel;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 
 using UnityEngine;
 using UnityEngine.Networking;
@@ -117,9 +118,29 @@ public class NM : MonoBehaviour
         else
         {
             Debug.Log(request.downloadHandler.text);
-            routeResults = JsonUtility.FromJson<Directions>(request.downloadHandler.text);
-            Waypoint[] wps = routeResults
-            Debug.Log(routeResults);
+            //routeResults = JsonUtility.FromJson<Directions>(request.downloadHandler.text);
+            //Waypoint wps = routeResults;
+            //Debug.Log(routeResults);
+            //Regex.Matches(cmd, GM.inst.spawnTrigger).Count;
+            //Match match = Regex.Match(request.downloadHandler.text, "Contains");
+            string dlstring = request.downloadHandler.text;
+            string searchstring = "\"coordinates\":[";
+            int startidx = dlstring.IndexOf(searchstring);
+            int offset = searchstring.Length;
+            startidx += offset;
+            searchstring = "],\"type\"";
+            int endidx = dlstring.IndexOf(searchstring);
+            string coordarray = dlstring.Substring(startidx, endidx - startidx);
+            if (coordarray.Length == 0)
+            {
+                Debug.Log("Does not Contain a Waypoint list");
+            }
+            else
+            {
+                Debug.Log("Start: " + startidx + " End: " + endidx + " Length: " + coordarray.Length);
+                Debug.Log("Waypoint List: " + coordarray);
+            }
+
             //Vector2[] temprts = new Vector2[routeResults.]
             //
             //Texture2D tx2d = ((DownloadHandlerTexture)request.downloadHandler).texture;
