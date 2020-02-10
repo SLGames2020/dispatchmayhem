@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class Trailer : MonoBehaviour
 {
+
     public enum TrailerType
     {
         FLATBED,
