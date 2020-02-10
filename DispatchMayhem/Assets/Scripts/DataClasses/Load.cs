@@ -9,8 +9,8 @@ public class Load : MonoBehaviour
     public string destinationLabel;
     public Vector2 destination;
 
-
-    int payouts[NUM_LOAD_TYPES][2] = 
+    // Commented out due to incorrect syntax preventing game from running
+    /*int payouts[NUM_LOAD_TYPES][2] = 
     // MIN               /ax
     {
         { 0.5f ,  1.0f}, // MILK
@@ -18,17 +18,18 @@ public class Load : MonoBehaviour
         { 0.5f ,  1.0f}, // WATER
         { 0.5f ,  1.0f}, // MILK
         { 0.5f ,  1.0f}, // MILK
-    }
+    }*/
 
 
 
     public int typeIDX;
     public float weight = 0.0f;
 
-    public float Pay()
+    // Commented out due to incorrect syntax preventing game from running
+    /*public float Pay()
     {
         return Random.Range(payouts[typeIDX][0], payouts[typeIDX][1]);
-    }
+    }*/
 
     public Load() { }
     //public Load(Vector2 o, Vector2 d, int t=0, float w=1000.0f, float p=1.5f)
