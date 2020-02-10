@@ -15,7 +15,7 @@ public class Vechilles : MonoBehaviour
     }*/
     public void Truck()
     {
-        TruckType[] Semitruck = { new SemiTruck(0, 500, 115, 0, 125000f, 500f), }
+       // TruckType[] Semitruck = { new SemiTruck(0, 500, 115, 0, 125000f, 500f), }
     }
 
 
