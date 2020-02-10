@@ -10,7 +10,7 @@ public class Load : MonoBehaviour
     public Vector2 destination;
 
     // Commented out due to incorrect syntax preventing game from running
-    /*int payouts[NUM_LOAD_TYPES][2] = 
+    int payouts[NUM_LOAD_TYPES][2] = 
     // MIN               /ax
     {
         { 0.5f ,  1.0f}, // MILK
@@ -18,7 +18,7 @@ public class Load : MonoBehaviour
         { 0.5f ,  1.0f}, // WATER
         { 0.5f ,  1.0f}, // MILK
         { 0.5f ,  1.0f}, // MILK
-    }*/
+    }
 
 
 
