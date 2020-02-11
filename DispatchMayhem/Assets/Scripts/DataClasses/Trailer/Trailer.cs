@@ -27,60 +27,60 @@ public class Trailer : MonoBehaviour
          
     }
 
-    void TrailerCost()
+    public void TrailerCost()
     {
-        if (base.age >= 1)
+        if (age >= 1)
         {
-            cost == 70000;
+            cost = 70000;
         }
-        else if (base.age >= 5)
+        else if (age >= 5)
         {
-            cost == 70000 / 2;
+            cost = 70000 / 2;
         }
-        else if (base.age >= 10)
+        else if (age >= 10)
         {
-            cost == 70000 / 4;
+            cost = 70000 / 4;
         }
-        else if (base.age >= 15)
+        else if (age >= 15)
         {
-            cost == 70000 / 6;
+            cost = 70000 / 6;
         }
-        else if (base.age >= 20)
+        else if (age >= 20)
         {
-            cost == 70000 / 8;
+            cost = 70000 / 8;
         }
     }
 
-    void TrailerAge()
+    public void TrailerAge()
     {
-        if (base.age >= 1)
+        if (age >= 1)
         {
-            health == 15000f;
+            health = 15000f;
         }
-        else if (base.age >= 5)
+        else if (age >= 5)
         {
-            health == 15000f / 2;
+            health = 15000f / 2;
         }
-        else if (base.age >= 10)
+        else if (age >= 10)
         {
-            health == 15000f / 4;
+            health = 15000f / 4;
         }
-        else if (base.age >= 15)
+        else if (age >= 15)
         {
-            health == 70000 / 6;
+            health = 70000 / 6;
         }
-        else if (base.age >= 20)
+        else if (age >= 20)
         {
-            health == 70000 / 8;
+            health = 70000 / 8;
         }
-        else if (base.age >= 25)
+        else if (age >= 25)
         {
-            health == 0;
-            Debug.log("This trailer is no longer good");
+            health = 0;
+            Debug.Log("This trailer is no longer good");
         }
     }
 
-    void TrailerSpace()
+    public void TrailerSpace()
     {
         if(maxSpace >= 20000)
         {

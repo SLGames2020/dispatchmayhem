@@ -1,11 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using System.Text;
 
 public class DateTimeUI : MonoBehaviour
 {
-    public GameObject dt;
+    public GameObject Dt;
+    Text txt;
     public int StartYear;
     public int StartMonth;
     public int StartDay;
@@ -23,7 +25,7 @@ public class DateTimeUI : MonoBehaviour
 
     void Start()
     {
-
+        txt = Dt.GetComponent<Text>();
         gameTime += StartSecond;
         gameTime += StartMinute * MinToSec;
         gameTime += StartHour * HourToSec;
@@ -85,6 +87,6 @@ public class DateTimeUI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //dt.Text = GetTime();
+        txt.text = GetTime();
     }
 }

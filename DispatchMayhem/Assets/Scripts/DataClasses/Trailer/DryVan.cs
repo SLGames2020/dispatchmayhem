@@ -5,6 +5,7 @@ using UnityEngine;
 public class DryVan : Trailer
 {
     TrailerType status = TrailerType.DRYVAN;
+
     void Start()
     {
         base.maxLoads(708, 55000);
