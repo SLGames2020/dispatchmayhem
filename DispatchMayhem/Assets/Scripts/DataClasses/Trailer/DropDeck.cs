@@ -8,7 +8,9 @@ public class DropDeck : Trailer
     void Start()
     {
         base.maxLoads(800, 96000);
-
+        TrailerAge();
+        TrailerCost();
+        TrailerSpace();
     }
 
 

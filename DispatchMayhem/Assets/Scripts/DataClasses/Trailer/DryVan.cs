@@ -8,5 +8,8 @@ public class DryVan : Trailer
     void Start()
     {
         base.maxLoads(708, 55000);
+        TrailerAge();
+        TrailerCost();
+        TrailerSpace();
     }
 }

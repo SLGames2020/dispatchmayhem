@@ -8,6 +8,9 @@ public class Flatbed : Trailer
     void Start()
     {
         base.maxLoads(400, 48000);
+        TrailerAge();
+        TrailerCost();
+        TrailerSpace();
     }
 }
 
