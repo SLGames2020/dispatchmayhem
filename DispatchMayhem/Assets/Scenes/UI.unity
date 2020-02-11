@@ -481,6 +481,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Canvas
       objectReference: {fileID: 0}
+    - target: {fileID: 7946689348248793042, guid: f6f49996127db0341a13bb4a51df16f5,
+        type: 3}
+      propertyPath: m_FontData.m_Alignment
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 700087460072996233, guid: f6f49996127db0341a13bb4a51df16f5,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -594,12 +599,12 @@ PrefabInstance:
     - target: {fileID: 2965243084789955114, guid: f6f49996127db0341a13bb4a51df16f5,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 200
+      value: 150
       objectReference: {fileID: 0}
     - target: {fileID: 2965243084789955114, guid: f6f49996127db0341a13bb4a51df16f5,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 106
+      value: 80
       objectReference: {fileID: 0}
     - target: {fileID: 2965243084789955114, guid: f6f49996127db0341a13bb4a51df16f5,
         type: 3}
@@ -609,12 +614,7 @@ PrefabInstance:
     - target: {fileID: 4764029808134145074, guid: f6f49996127db0341a13bb4a51df16f5,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -439
-      objectReference: {fileID: 0}
-    - target: {fileID: 7946689348248793042, guid: f6f49996127db0341a13bb4a51df16f5,
-        type: 3}
-      propertyPath: m_FontData.m_Alignment
-      value: 1
+      value: -525
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f6f49996127db0341a13bb4a51df16f5, type: 3}
