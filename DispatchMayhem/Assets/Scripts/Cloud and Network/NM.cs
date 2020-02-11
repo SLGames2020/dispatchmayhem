@@ -15,13 +15,12 @@ using Mapbox.Unity.Map;
 using Mapbox.Directions;
 using Mapbox.Unity.Utilities;
 
-
 public class NM : MonoBehaviour
 {
     private static NM instance = null;
     public static NM inst { get { return instance; } }
 
-    public delegate void routeCallBack(Vector2[] route);
+    public delegate void routeCallBack(List<Vector2> route, float distance);
     public routeCallBack FindRoute;
     private Vector2[] testRoute;
 
@@ -75,18 +74,22 @@ public class NM : MonoBehaviour
         test callback routine
 
     **********************************/
-    public void MyTestCallBack(Vector2[] rte)
+    public void MyTestCallBack(List<Vector2> rte, float dst)
     {
-        Debug.Log(rte);
+        foreach (Vector2 pnt in rte)
+        {
+            Debug.Log("Waypoint List: [" + pnt.x + "," + pnt.y + "]");
+        }
+        Debug.Log("Distance: " + dst);
     }
     /*************************************************************
         GetRoute
 
         This just sets up and calls a coroutine to the actual 
-        http image request, because the webrequest can take time.
+        http route request, because the webrequest can take time.
 
-        (and because we have the actual game object the coroutine
-        can update the character whenever they're ready
+        callback will be called once the route data is received
+        and processed
 
     ***************************************************************/
     public void GetRoute(Vector2 start, Vector2 end, routeCallBack callback)
@@ -102,11 +105,14 @@ public class NM : MonoBehaviour
     /**************************************************************
         DownloadAndSetImage
 
-        This coroutine does the actual http call for the webimage.
-        once found it will update the passed PC's image.
+        This coroutine does the actual http call route data.
+        once found it strips out the "coordinates" array and 
+        creates a list of Vector2s. The list, as well as the route
+        distance is passed to the Call back function
 
-        Note that this is an overlay image and does not change the
-        character's sprite or animation.
+        Note that this can be optomized and if I hear back from
+        Mapbox about what utilities they have to extract the 
+        coordinate, I will change it to use their supplied code
 
     ***************************************************************/
     IEnumerator DownloadRoute(routeCallBack cb, string uri)
@@ -117,35 +123,68 @@ public class NM : MonoBehaviour
         if (request.isNetworkError || request.isHttpError) Debug.Log(request.error + " uri: " + uri);
         else
         {
-            Debug.Log(request.downloadHandler.text);
-            //routeResults = JsonUtility.FromJson<Directions>(request.downloadHandler.text);
-            //Waypoint wps = routeResults;
-            //Debug.Log(routeResults);
-            //Regex.Matches(cmd, GM.inst.spawnTrigger).Count;
-            //Match match = Regex.Match(request.downloadHandler.text, "Contains");
+            //Debug.Log(request.downloadHandler.text);                  //leaving in Debugs for now in case verifications are required
+
             string dlstring = request.downloadHandler.text;
-            string searchstring = "\"coordinates\":[";
+
+            string searchstring = ",\"distance\":";                     //find and extract the distance data (while it's convient)
             int startidx = dlstring.IndexOf(searchstring);
             int offset = searchstring.Length;
             startidx += offset;
-            searchstring = "],\"type\"";
+            searchstring = ",\"duration\":";
             int endidx = dlstring.IndexOf(searchstring);
+            float dist = float.Parse(dlstring.Substring(startidx, endidx - startidx));
+
+            searchstring = "{\"coordinates\":[";                        //here we find and extract JUST the coordinates array
+            startidx = dlstring.IndexOf(searchstring);
+            offset = searchstring.Length;
+            startidx += offset;
+            searchstring = "],\"type\"";
+            endidx = dlstring.IndexOf(searchstring); 
             string coordarray = dlstring.Substring(startidx, endidx - startidx);
-            if (coordarray.Length == 0)
+
+            if (coordarray.Length == 0)                             
             {
-                Debug.Log("Does not Contain a Waypoint list");
+                //Debug.Log("Does not Contain a Waypoint list");
+                dist = -1.0f;                                         //return no route data found
             }
             else
             {
-                Debug.Log("Start: " + startidx + " End: " + endidx + " Length: " + coordarray.Length);
-                Debug.Log("Waypoint List: " + coordarray);
-            }
+                //Debug.Log("Start: " + startidx + " End: " + endidx + " Length: " + coordarray.Length);
+                //Debug.Log("Waypoint List: " + coordarray);
 
-            //Vector2[] temprts = new Vector2[routeResults.]
-            //
-            //Texture2D tx2d = ((DownloadHandlerTexture)request.downloadHandler).texture;
-            //Sprite newsprt = Sprite.Create(tx2d, new Rect(0.0f, 0.0f, tx2d.width, tx2d.height), new Vector2(0.5f, 0.5f), 100.0f);
-            //cb(newsprt);
+                List<Vector2> waypoints = new List<Vector2>();
+                waypoints.Clear();
+
+                endidx = 0;                
+                bool scanning = true;
+                while (scanning)
+                {
+                    startidx = 0;
+                    endidx = coordarray.IndexOf(",[");                                                          //each waypoint is formated as [#.###,#.###],[#.###,#.###],... ...],
+                    if (endidx < 0)                                                                             //if the next waypoint is not found
+                    {
+                        endidx = coordarray.Length;                                                             //just extract what is left
+                        scanning = false;
+                    }
+                    string wypnt = coordarray.Substring(startidx, endidx - startidx);                           //wypnt is now a single [#.###,#.###] data set
+                    //Debug.Log(wypnt);
+                    //Debug.Log("Start: " + startidx + " End: " + endidx + " Length: " + coordarray.Length);
+                    if (scanning)                                                                               //only do the substring if we have more waypoints
+                    {                                                                                           //otherwise we get an error
+                        coordarray = coordarray.Substring(endidx + 1, coordarray.Length - endidx - 1);
+                    }
+
+                    startidx = 1;                                                                               //now extract the individual lng and lats
+                    endidx = wypnt.IndexOf(",");
+                    float lng = float.Parse(wypnt.Substring(startidx, endidx - startidx));
+                    startidx = endidx + 1;
+                    endidx = wypnt.Length - 1;
+                    float lat = float.Parse(wypnt.Substring(startidx, endidx - startidx));
+                    waypoints.Add(new Vector2(lng, lat));
+                }
+                cb(waypoints, dist);                                                                           //once complete, send it all to the call back
+            }
         }
     }
 

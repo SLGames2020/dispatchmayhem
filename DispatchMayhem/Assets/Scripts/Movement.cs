@@ -29,8 +29,8 @@ public class Movement : MonoBehaviour
     {
         if(Input.GetMouseButtonDown(2))
         {
-            button.Play();
-            button_play = true;
+            //button.Play();
+            button_play = false;
         }
         else
         {
