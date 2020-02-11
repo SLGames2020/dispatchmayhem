@@ -11,7 +11,7 @@ public class Load : MonoBehaviour
 
     // Commented out due to incorrect syntax preventing game from running
     /*int payouts[NUM_LOAD_TYPES][2] = 
-    // MIN               /ax
+        // MIN    //MAX
     {
         { 0.5f ,  1.0f}, // MILK
         { 0.5f ,  1.0f}, // OIL

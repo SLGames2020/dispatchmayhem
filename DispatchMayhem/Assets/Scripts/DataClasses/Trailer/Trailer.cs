@@ -5,6 +5,10 @@ using UnityEngine;
 
 public class Trailer : MonoBehaviour
 {
+    public int age;
+    public int maxSpace;
+    public float health;
+    public float cost;
 
     public enum TrailerType
     {
@@ -21,6 +25,79 @@ public class Trailer : MonoBehaviour
     public void maxLoads(int space, int weight)
     {
          
+    }
+
+    void TrailerCost()
+    {
+        if (base.age >= 1)
+        {
+            cost == 70000;
+        }
+        else if (base.age >= 5)
+        {
+            cost == 70000 / 2;
+        }
+        else if (base.age >= 10)
+        {
+            cost == 70000 / 4;
+        }
+        else if (base.age >= 15)
+        {
+            cost == 70000 / 6;
+        }
+        else if (base.age >= 20)
+        {
+            cost == 70000 / 8;
+        }
+    }
+
+    void TrailerAge()
+    {
+        if (base.age >= 1)
+        {
+            health == 15000f;
+        }
+        else if (base.age >= 5)
+        {
+            health == 15000f / 2;
+        }
+        else if (base.age >= 10)
+        {
+            health == 15000f / 4;
+        }
+        else if (base.age >= 15)
+        {
+            health == 70000 / 6;
+        }
+        else if (base.age >= 20)
+        {
+            health == 70000 / 8;
+        }
+        else if (base.age >= 25)
+        {
+            health == 0;
+            Debug.log("This trailer is no longer good");
+        }
+    }
+
+    void TrailerSpace()
+    {
+        if(maxSpace >= 20000)
+        {
+            cost = cost * 2;
+        }
+        else if(maxSpace >= 30000)
+        {
+            cost = cost * 3;
+        }
+        else if(maxSpace >= 40000)
+        {
+            cost = cost * 4;
+        }
+        else if(maxSpace >= 50000)
+        {
+            cost = cost * 5;
+        }
     }
 }
 
