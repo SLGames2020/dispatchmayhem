@@ -8,8 +8,7 @@ public class Load : MonoBehaviour
     public Vector2 origin;
     public string destinationLabel;
     public Vector2 destination;
-
-<<<<<<< HEAD
+    
 
     /*int payouts[NUM_LOAD_TYPES][2] = 
     // MIN               /ax
@@ -30,12 +29,7 @@ public class Load : MonoBehaviour
     //{
         //return Random.Range(payouts[typeIDX][0], payouts[typeIDX][1]);
     //}
-
-=======
-    public int typeIDX;
-    public float weight = 0.0f;
-
->>>>>>> master
+    
     public Load() { }
     //public Load(Vector2 o, Vector2 d, int t=0, float w=1000.0f, float p=1.5f)
     //           { origin = o; destination = d; typeIDX = t; weight = w; pay = p; }

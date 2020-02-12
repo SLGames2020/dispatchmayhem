@@ -111,7 +111,7 @@ public class Trailer : MonoBehaviour
         {
 
         }
-        else if(type == Flatbed)
+        //else if(type == Flatbed)
     }
 }
 
