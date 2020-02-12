@@ -5,8 +5,11 @@ using UnityEngine;
 public class ReferVan : Trailer
 {
     TrailerType status = TrailerType.REFERVAN;
+
     void Start()
     {
-        base.maxLoads(708, 55000);
+        TrailerAge(Random.Range(1000, 5000));
+        TrailerCost(22000);
+        TrailerSpace(Random.Range(20000, 50000));
     }
 }

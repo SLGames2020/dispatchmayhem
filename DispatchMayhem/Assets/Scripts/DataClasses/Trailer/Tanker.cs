@@ -5,13 +5,11 @@ using UnityEngine;
 public class Tanker : Trailer
 {
     TrailerType status = TrailerType.TANKER;
-
+    
     void Start()
     {
-        base.maxLoads(600, 50000);
+        TrailerAge(Random.Range(1000, 5000));
+        TrailerCost(28000);
+        TrailerSpace(Random.Range(20000, 50000));
     }
-
-
-
-
 }

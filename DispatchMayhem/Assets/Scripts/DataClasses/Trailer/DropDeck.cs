@@ -5,8 +5,11 @@ using UnityEngine;
 public class DropDeck : Trailer
 {
     TrailerType status = TrailerType.DROPDECK;
+
     void Start()
     {
-        base.maxLoads(800, 96000);
+        TrailerAge(Random.Range(1000, 5000));
+        TrailerCost(25000);
+        TrailerSpace(Random.Range(20000, 50000));
     }
 }
