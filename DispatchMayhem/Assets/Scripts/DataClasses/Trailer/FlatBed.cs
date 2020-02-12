@@ -8,10 +8,9 @@ public class Flatbed : Trailer
     
     void Start()
     {
-        base.maxLoads(400, 48000);
-        TrailerAge();
-        TrailerCost();
-        TrailerSpace();
+        TrailerAge(Random.Range(1000, 5000));
+        TrailerCost(23000);
+        TrailerSpace(Random.Range(20000, 50000));
     }
 }
 

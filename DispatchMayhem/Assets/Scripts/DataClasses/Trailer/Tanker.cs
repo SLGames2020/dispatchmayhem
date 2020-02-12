@@ -8,9 +8,8 @@ public class Tanker : Trailer
     
     void Start()
     {
-        base.maxLoads(600, 50000);
-        TrailerAge();
-        TrailerCost();
-        TrailerSpace();
+        TrailerAge(Random.Range(1000, 5000));
+        TrailerCost(28000);
+        TrailerSpace(Random.Range(20000, 50000));
     }
 }

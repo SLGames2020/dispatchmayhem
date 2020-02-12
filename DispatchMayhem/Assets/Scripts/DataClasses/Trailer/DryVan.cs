@@ -8,9 +8,8 @@ public class DryVan : Trailer
 
     void Start()
     {
-        base.maxLoads(708, 55000);
-        TrailerAge();
-        TrailerCost();
-        TrailerSpace();
+        TrailerAge(Random.Range(1000, 5000));
+        TrailerCost(20000);
+        TrailerSpace(Random.Range(20000, 50000));
     }
 }

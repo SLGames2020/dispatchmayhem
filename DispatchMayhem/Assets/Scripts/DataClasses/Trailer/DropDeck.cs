@@ -8,9 +8,8 @@ public class DropDeck : Trailer
 
     void Start()
     {
-        base.maxLoads(800, 96000);
-        TrailerAge();
-        TrailerCost();
-        TrailerSpace();
+        TrailerAge(Random.Range(1000, 5000));
+        TrailerCost(25000);
+        TrailerSpace(Random.Range(20000, 50000));
     }
 }

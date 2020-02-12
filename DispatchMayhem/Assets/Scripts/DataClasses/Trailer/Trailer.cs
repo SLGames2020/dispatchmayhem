@@ -22,56 +22,53 @@ public class Trailer : MonoBehaviour
     public GameObject trailer;
     public TrailerType type;
 
-    public void maxLoads(int space, int weight)
-    {
-         
-    }
-
-    public void TrailerCost()
+    public void TrailerCost(float cost)
     {
         if (age >= 1)
         {
-            cost = 70000;
+            cost = cost;
         }
         else if (age >= 5)
         {
-            cost = 70000 / 2;
+            cost = cost / 2;
         }
         else if (age >= 10)
         {
-            cost = 70000 / 4;
+            cost = cost / 4;
         }
         else if (age >= 15)
         {
-            cost = 70000 / 6;
+            cost = cost / 6;
         }
         else if (age >= 20)
         {
-            cost = 70000 / 8;
+            cost = cost / 8;
         }
+
+        TrailerSpace(Random.Range(20000, 50000));
     }
 
-    public void TrailerAge()
+    public void TrailerAge(float health)
     {
         if (age >= 1)
         {
-            health = 15000f;
+            health = health;
         }
         else if (age >= 5)
         {
-            health = 15000f / 2;
+            health = health / 2;
         }
         else if (age >= 10)
         {
-            health = 15000f / 4;
+            health = health / 4;
         }
         else if (age >= 15)
         {
-            health = 70000 / 6;
+            health = health / 6;
         }
         else if (age >= 20)
         {
-            health = 70000 / 8;
+            health = health / 8;
         }
         else if (age >= 25)
         {
@@ -80,7 +77,7 @@ public class Trailer : MonoBehaviour
         }
     }
 
-    public void TrailerSpace()
+    public void TrailerSpace(int maxSpace)
     {
         if(maxSpace >= 20000)
         {
@@ -98,6 +95,23 @@ public class Trailer : MonoBehaviour
         {
             cost = cost * 5;
         }
+    }
+
+    public void AllowedLoads()
+    {
+        if(type == TrailerType.TANKER)
+        {
+
+        }
+        else if(type == TrailerType.DROPDECK)
+        {
+
+        }
+        else if(type == TrailerType.FLATBED)
+        {
+
+        }
+        else if(type == Flatbed)
     }
 }
 
