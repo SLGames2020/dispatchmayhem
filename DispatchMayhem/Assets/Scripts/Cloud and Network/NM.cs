@@ -15,14 +15,16 @@ using Mapbox.Unity.Map;
 using Mapbox.Directions;
 using Mapbox.Unity.Utilities;
 
+public delegate void routeCallBack(List<Vector2> route, float distance);
+
 public class NM : MonoBehaviour
 {
     private static NM instance = null;
-    public static NM inst { get { return instance; } }
+    public static NM Inst { get { return instance; } }
 
-    public delegate void routeCallBack(List<Vector2> route, float distance);
-    public routeCallBack FindRoute;
-    private Vector2[] testRoute;
+
+    //public routeCallBack FindRoute;
+    //private Vector2[] testRoute;
 
     public string accessToken = "pk.eyJ1Ijoic2xnYW1lcyIsImEiOiJjazVlMm00MXYwMGxoM2ZwYnN1NjIxcjJxIn0.IGD0z3Stw1R5fXMAWpz2JA";
 
@@ -50,13 +52,13 @@ public class NM : MonoBehaviour
             Destroy(this.gameObject);
         }
 
-        FindRoute = MyTestCallBack;
+        //FindRoute = MyTestCallBack;
         Debug.Log("Network Manager Awake");
     }
     // Start is called before the first frame update
     void Start()
     {
-        GetRoute(s, e, FindRoute);
+        //GetRoute(s, e, FindRoute);
 
     }
 
@@ -120,12 +122,19 @@ public class NM : MonoBehaviour
         UnityWebRequest request = UnityWebRequest.Get(uri);
         yield return request.SendWebRequest();
 
-        if (request.isNetworkError || request.isHttpError) Debug.Log(request.error + " uri: " + uri);
+        string dlstring = request.downloadHandler.text;
+
+        if (request.isNetworkError || request.isHttpError)
+        {
+            Debug.Log(request.error + " uri: " + uri);
+        }
+        else if (dlstring.IndexOf("NoRoute") > 0)
+        {
+            Debug.Log(request.downloadHandler.text);
+        }
         else
         {
-            //Debug.Log(request.downloadHandler.text);                  //leaving in Debugs for now in case verifications are required
-
-            string dlstring = request.downloadHandler.text;
+            Debug.Log(request.downloadHandler.text);                  //leaving in Debugs for now in case verifications are required
 
             string searchstring = ",\"distance\":";                     //find and extract the distance data (while it's convient)
             int startidx = dlstring.IndexOf(searchstring);
@@ -140,10 +149,10 @@ public class NM : MonoBehaviour
             offset = searchstring.Length;
             startidx += offset;
             searchstring = "],\"type\"";
-            endidx = dlstring.IndexOf(searchstring); 
+            endidx = dlstring.IndexOf(searchstring);
             string coordarray = dlstring.Substring(startidx, endidx - startidx);
 
-            if (coordarray.Length == 0)                             
+            if (coordarray.Length == 0)
             {
                 //Debug.Log("Does not Contain a Waypoint list");
                 dist = -1.0f;                                         //return no route data found
@@ -156,7 +165,7 @@ public class NM : MonoBehaviour
                 List<Vector2> waypoints = new List<Vector2>();
                 waypoints.Clear();
 
-                endidx = 0;                
+                endidx = 0;
                 bool scanning = true;
                 while (scanning)
                 {

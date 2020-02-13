@@ -5,23 +5,42 @@ using UnityEngine.UI;
 
 public class Movement : MonoBehaviour
 {
-    public List<Vector2> cityArray = new List<Vector2>();
+    //public delegate void NM.inst.routeCallBack(List<Vector2> route, float distance);
+    private List<Vector2> route;
+    public routeCallBack FoundRoute;
+
+
+    //public List<Vector2> cityArray = new List<Vector2>();
    // Vector2 CurrentPosition;
     int DestinationMarker = 0;
 
     [HideInInspector]public GameObject load;
     public Button assButt;
+    public Vector2 gps = new Vector2(-75.6973f, 45.4215f);
     AudioSource button;
     bool button_play;
+
+    private Vector2 s = new Vector2(-75.6973f, 45.4215f);
+    private Vector2 e = new Vector2(-74.7303f, 45.0213f);
+
+    private Vector2 destination;
 
     //// Start is called before the first frame update
     void Start()
     {
+        route = new List<Vector2>();
+        route.Clear();
+
+        FoundRoute = RouteCallBack;
+
         Debug.Log("Adding Truck");
         UIM.inst.AddToTruckList(this.gameObject);
         assButt.onClick.AddListener(delegate { loadTruck(); } );
         button = GetComponent<AudioSource>();
         button_play = false;
+
+        destination = gps;
+
     }
 
     // Update is called once per frame
@@ -37,43 +56,46 @@ public class Movement : MonoBehaviour
             button_play = false;
         }
 
+        //Vector2 tempvec = new Vector2(this.transform.position.x, this.transform.position.y);
 
-        if (cityArray.Count != 0)
+
+        if (route.Count != 0)
         {
-            Vector2 tempvec = new Vector2(this.transform.position.x, this.transform.position.y);
-
-            Vector2 tv2 = new Vector2(cityArray[DestinationMarker].x, cityArray[DestinationMarker].y);
+            Vector2 tv2 = new Vector2(route[DestinationMarker].x, route[DestinationMarker].y);
 
             //Debug.Log("DestinationMarker: " + DestinationMarker);
-            tempvec = Move(tempvec, tv2, 100.0f);
+            gps = Move(gps, tv2, 100.0f);
+            Debug.Log("cityArray: " + route[0] + " " + route[1] + " tempvec: " + gps);
 
-            Vector3 newPos = new Vector3(cityArray[DestinationMarker].x, cityArray[DestinationMarker].y, this.transform.position.z);
-
-            Debug.Log("cityArray: " + cityArray[0] + " " + cityArray[1] + " tempvec: " + tempvec);
-
-            this.transform.position = new Vector3(tempvec.x, tempvec.y, this.transform.position.z);
+            this.transform.position = new Vector3(gps.x, gps.y, this.transform.position.z);
 
             //Debug.Log("newPos: " + newPos);
-
+            Vector3 newPos = new Vector3(route[DestinationMarker].x, route[DestinationMarker].y, this.transform.position.z);
             this.transform.LookAt(newPos);
 
-            if ((this.transform.rotation.x < 0 && this.transform.rotation.y > 0 )|| 
+            if ((this.transform.rotation.x < 0 && this.transform.rotation.y > 0) ||
                 (this.transform.rotation.x > 0 && this.transform.rotation.y > 0))
             {
+
                 this.transform.Rotate(new Vector3(0, 0, 1), 180);
             }
 
-
-            if ((tempvec - cityArray[DestinationMarker]).magnitude < 1.0f)
+            if ((gps - route[DestinationMarker]).magnitude < 0.1f)
             {
                 DestinationMarker++;
-
-                if (DestinationMarker >= cityArray.Count)
-                {
-                    DestinationMarker = 0;
-                    cityArray.Clear();
-                }
             }
+        }
+
+        Debug.Log("gps: " + gps + " Dest: " + destination + " mag: " + (gps - destination).magnitude);
+        if ((gps - destination).magnitude < 0.1f)
+        {
+            route.Clear();
+            DestinationMarker = 0;
+            Debug.Log("We have arrived!");
+        }
+        else if ( route.Count == 0 )
+        {
+            NM.Inst.GetRoute(gps, destination, FoundRoute);
         }
     }
 
@@ -92,14 +114,33 @@ public class Movement : MonoBehaviour
         Debug.Log("Load assigned");
 
         DestinationMarker = 0;
-        cityArray.Clear();
+        //cityArray.Clear();
 
-        string origString = load.GetComponent<Load>().originLabel;
-        cityArray.Add(GameObject.Find(origString).transform.position);
+        destination = load.GetComponent<Load>().destination;
+        Debug.Log("Load Destination: " + destination);
 
-        string destString = load.GetComponent<Load>().destinationLabel;
-        cityArray.Add(GameObject.Find(destString).transform.position);
+        //cityArray.Add(GameObject.Find(origString).transform.position);
+
+        //string destString = load.GetComponent<Load>().destinationLabel;
+        //cityArray.Add(GameObject.Find(destString).transform.position);
 
         Destroy(UIM.inst.loadSelectedListItem);
     }
+
+
+
+    /*******************************
+    test callback routine
+
+**********************************/
+    public void RouteCallBack(List<Vector2> rte, float dst)
+    {
+        foreach (Vector2 pnt in rte)
+        {
+            Debug.Log("Waypoint List: [" + pnt.x + "," + pnt.y + "]");
+        }
+        Debug.Log("Distance: " + dst);
+    }
 }
+
+

@@ -25,7 +25,7 @@ public class DateTimeUI : MonoBehaviour
 
     void Start()
     {
-        txt = Dt.GetComponent<Text>();
+        //txt = Dt.GetComponent<Text>();
         gameTime += StartSecond;
         gameTime += StartMinute * MinToSec;
         gameTime += StartHour * HourToSec;
@@ -87,6 +87,6 @@ public class DateTimeUI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        txt.text = GetTime();
+        //txt.text = GetTime();
     }
 }
