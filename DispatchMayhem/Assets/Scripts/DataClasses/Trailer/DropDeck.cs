@@ -5,7 +5,7 @@ using UnityEngine;
 public class DropDeck : Trailer
 {
     TrailerType status = TrailerType.DROPDECK;
-
+    public GameObject dropdeck;
     void Start()
     {
         TrailerAge(Random.Range(1000, 5000));

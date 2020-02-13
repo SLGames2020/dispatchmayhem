@@ -32,7 +32,7 @@ public class LoadManager : MonoBehaviour
         trailer.GetComponent<Trailer>();
         if(allowed == Products.BOXES)
         {
-
+            
         }
         else if(allowed == Products.COLDGOODS)
         {
