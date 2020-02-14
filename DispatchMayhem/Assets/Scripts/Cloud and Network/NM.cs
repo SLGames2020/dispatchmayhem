@@ -38,8 +38,8 @@ public class NM : MonoBehaviour
 
     private Directions routeResults;
 
-    private Vector2 s = new Vector2(-75.6973f, 45.4215f);
-    private Vector2 e = new Vector2(-74.7303f, 45.0213f);
+    //private Vector2 s = new Vector2(-75.6973f, 45.4215f);
+    //private Vector2 e = new Vector2(-74.7303f, 45.0213f);
 
     void Awake()
     {
@@ -62,8 +62,8 @@ public class NM : MonoBehaviour
 
     }
 
-    // Update is called once per frame
-    void Update()
+// Update is called once per frame
+void Update()
     {
         
     }

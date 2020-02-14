@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657868, g: 0.49641263, b: 0.57481706, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -560,12 +560,12 @@ PrefabInstance:
     - target: {fileID: 2877860227348290972, guid: 94cd19da4a39af443a473c278e6b79e6,
         type: 3}
       propertyPath: gps.x
-      value: 45.5017
+      value: -73.5673
       objectReference: {fileID: 0}
     - target: {fileID: 2877860227348290972, guid: 94cd19da4a39af443a473c278e6b79e6,
         type: 3}
       propertyPath: gps.y
-      value: 73.5673
+      value: 45.5017
       objectReference: {fileID: 0}
     - target: {fileID: 2877860227348290972, guid: 94cd19da4a39af443a473c278e6b79e6,
         type: 3}
@@ -786,6 +786,16 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2639892911160912598, guid: 60a1d5edf1ae0fc45b0d39149f03c76a,
         type: 3}
+    - target: {fileID: 2877860228871984890, guid: 88434a23b918a45489fee1ee94bf660d,
+        type: 3}
+      propertyPath: gps.y
+      value: 45.4215
+      objectReference: {fileID: 0}
+    - target: {fileID: 2877860228871984890, guid: 88434a23b918a45489fee1ee94bf660d,
+        type: 3}
+      propertyPath: gps.x
+      value: -76.6972
+      objectReference: {fileID: 0}
     - target: {fileID: 2877860228130413324, guid: 88434a23b918a45489fee1ee94bf660d,
         type: 3}
       propertyPath: loadBoxContent
@@ -808,6 +818,16 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2639892911160912598, guid: 60a1d5edf1ae0fc45b0d39149f03c76a,
         type: 3}
+    - target: {fileID: 2877860228130413324, guid: 88434a23b918a45489fee1ee94bf660d,
+        type: 3}
+      propertyPath: gps.y
+      value: 45.5017
+      objectReference: {fileID: 0}
+    - target: {fileID: 2877860228130413324, guid: 88434a23b918a45489fee1ee94bf660d,
+        type: 3}
+      propertyPath: gps.x
+      value: -73.5673
+      objectReference: {fileID: 0}
     - target: {fileID: 2877860228585918639, guid: 88434a23b918a45489fee1ee94bf660d,
         type: 3}
       propertyPath: loadBoxContent
@@ -830,6 +850,16 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2639892911160912598, guid: 60a1d5edf1ae0fc45b0d39149f03c76a,
         type: 3}
+    - target: {fileID: 2877860228585918639, guid: 88434a23b918a45489fee1ee94bf660d,
+        type: 3}
+      propertyPath: gps.y
+      value: 45.0213
+      objectReference: {fileID: 0}
+    - target: {fileID: 2877860228585918639, guid: 88434a23b918a45489fee1ee94bf660d,
+        type: 3}
+      propertyPath: gps.x
+      value: -74.7303
+      objectReference: {fileID: 0}
     - target: {fileID: 949821642, guid: 88434a23b918a45489fee1ee94bf660d, type: 3}
       propertyPath: LOADSPAWNTIME
       value: 30
@@ -1022,12 +1052,12 @@ PrefabInstance:
     - target: {fileID: 2877860227348290972, guid: 94cd19da4a39af443a473c278e6b79e6,
         type: 3}
       propertyPath: gps.x
-      value: 45.5017
+      value: -73.5673
       objectReference: {fileID: 0}
     - target: {fileID: 2877860227348290972, guid: 94cd19da4a39af443a473c278e6b79e6,
         type: 3}
       propertyPath: gps.y
-      value: 73.5673
+      value: 45.5017
       objectReference: {fileID: 0}
     - target: {fileID: 2877860227348290972, guid: 94cd19da4a39af443a473c278e6b79e6,
         type: 3}
@@ -1339,6 +1369,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c2575bbc6860d843b65dc0186ff7e4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Dt: {fileID: 0}
   StartYear: 2020
   StartMonth: 1
   StartDay: 1

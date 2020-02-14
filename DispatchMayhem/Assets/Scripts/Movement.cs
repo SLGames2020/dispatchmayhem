@@ -20,10 +20,12 @@ public class Movement : MonoBehaviour
     AudioSource button;
     bool button_play;
 
-    private Vector2 s = new Vector2(-75.6973f, 45.4215f);
-    private Vector2 e = new Vector2(-74.7303f, 45.0213f);
+    //private Vector2 s = new Vector2(-75.6973f, 45.4215f);
+    //private Vector2 e = new Vector2(-74.7303f, 45.0213f);
 
     private Vector2 destination;
+    private float lastTime;
+    private bool gettingRoute;
 
     //// Start is called before the first frame update
     void Start()
@@ -40,6 +42,8 @@ public class Movement : MonoBehaviour
         button_play = false;
 
         destination = gps;
+
+        lastTime = Time.time + 1.0f;
 
     }
 
@@ -86,17 +90,22 @@ public class Movement : MonoBehaviour
             }
         }
 
-        Debug.Log("gps: " + gps + " Dest: " + destination + " mag: " + (gps - destination).magnitude);
-        if ((gps - destination).magnitude < 0.1f)
-        {
-            route.Clear();
-            DestinationMarker = 0;
-            Debug.Log("We have arrived!");
-        }
-        else if ( route.Count == 0 )
-        {
-            NM.Inst.GetRoute(gps, destination, FoundRoute);
-        }
+        //Debug.Log("gps: " + gps + " Dest: " + destination + " mag: " + (gps - destination).magnitude);
+        //if (((gps - destination).magnitude < 0.1f) && (DestinationMarker > 0))
+        //{
+        //    route.Clear();
+        //    DestinationMarker = 0;
+        //    Debug.Log("We have arrived!");
+        //}
+        //else if (( route.Count == 0 ) && (!gettingRoute))
+        //{
+        //    if (lastTime < Time.time)
+        //    {
+        //        lastTime = Time.time + 1.0f;
+        //        NM.Inst.GetRoute(gps, destination, FoundRoute);
+        //        gettingRoute = true;
+        //    }
+        //}
     }
 
     public Vector2 Move(Vector2 CurrentPosition, Vector2 Destination, float speed)
@@ -132,14 +141,16 @@ public class Movement : MonoBehaviour
     /*******************************
     test callback routine
 
-**********************************/
+    **********************************/
     public void RouteCallBack(List<Vector2> rte, float dst)
     {
         foreach (Vector2 pnt in rte)
         {
-            Debug.Log("Waypoint List: [" + pnt.x + "," + pnt.y + "]");
+            //Debug.Log("Waypoint List: [" + pnt.x + "," + pnt.y + "]");
+            route.Add(pnt);
         }
-        Debug.Log("Distance: " + dst);
+        Debug.Log("Distance: " + dst + " Waypoints: " + route.Count);
+        gettingRoute = false;
     }
 }
 
