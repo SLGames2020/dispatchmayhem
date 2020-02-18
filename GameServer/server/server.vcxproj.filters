@@ -1,0 +1,167 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Source Files\Models">
+      <UniqueIdentifier>{c07f33d2-a3c5-4973-a0e4-a553a25baa37}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Models\GET">
+      <UniqueIdentifier>{74dce6bc-b245-45f2-8773-947f9f1931f4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Models\POST">
+      <UniqueIdentifier>{35a5bd12-a17e-48b1-9aee-cbcfcb146252}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Controllers">
+      <UniqueIdentifier>{ed9df50f-f49a-4399-a072-663652f72208}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\View">
+      <UniqueIdentifier>{bd3a1ec8-02b8-497f-9359-34b6d21e03c0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\View\Responses">
+      <UniqueIdentifier>{4bd1c57e-668a-4e19-9b8d-c665400b4ac3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\View\Responses\POST">
+      <UniqueIdentifier>{dcb2572e-cf4e-4a67-a164-46a645ec4d97}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\View\Responses\GET">
+      <UniqueIdentifier>{6fa8406b-fa09-419f-a50b-43dc6339fecd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\View\Requests">
+      <UniqueIdentifier>{f8ea13ae-ee45-4614-83f3-ec8d91211e96}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\View\Requests\POST">
+      <UniqueIdentifier>{5b904a25-5b86-4551-8240-f7365430b171}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\View\Requests\GET">
+      <UniqueIdentifier>{f0434a4f-6ba7-4162-9ac4-1b7a9469bce6}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SessionManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerDiedRequest.cpp">
+      <Filter>Source Files\View\Requests\GET</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerDiedResponse.cpp">
+      <Filter>Source Files\View\Responses\GET</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerDiedController.cpp">
+      <Filter>Source Files\Controllers</Filter>
+    </ClCompile>
+    <ClCompile Include="LoginController.cpp">
+      <Filter>Source Files\Controllers</Filter>
+    </ClCompile>
+    <ClCompile Include="LoginRequest.cpp">
+      <Filter>Source Files\View\Requests\POST</Filter>
+    </ClCompile>
+    <ClCompile Include="LoginResponse.cpp">
+      <Filter>Source Files\View\Responses\POST</Filter>
+    </ClCompile>
+    <ClCompile Include="GetRequestView.cpp">
+      <Filter>Source Files\View</Filter>
+    </ClCompile>
+    <ClCompile Include="PostRequestView.cpp">
+      <Filter>Source Files\View</Filter>
+    </ClCompile>
+    <ClCompile Include="EatingController.cpp">
+      <Filter>Source Files\Controllers</Filter>
+    </ClCompile>
+    <ClCompile Include="EatingRequest.cpp">
+      <Filter>Source Files\View\Requests\POST</Filter>
+    </ClCompile>
+    <ClCompile Include="EatingResponse.cpp">
+      <Filter>Source Files\View\Responses\POST</Filter>
+    </ClCompile>
+    <ClCompile Include="ConnectTestCTRL.cpp">
+      <Filter>Source Files\Controllers</Filter>
+    </ClCompile>
+    <ClCompile Include="GetConnectTestRequest.cpp">
+      <Filter>Source Files\View\Requests\GET</Filter>
+    </ClCompile>
+    <ClCompile Include="GetConnectTestResponse.cpp">
+      <Filter>Source Files\View\Responses\GET</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="PlayerDiedRequest.h">
+      <Filter>Source Files\View\Requests\GET</Filter>
+    </ClInclude>
+    <ClInclude Include="SessionManager.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerDiedResponse.h">
+      <Filter>Source Files\View\Responses\GET</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerDiedController.h">
+      <Filter>Source Files\Controllers</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerDiedModel.h">
+      <Filter>Source Files\Models\GET</Filter>
+    </ClInclude>
+    <ClInclude Include="LoginModel.h">
+      <Filter>Source Files\Models\POST</Filter>
+    </ClInclude>
+    <ClInclude Include="LoginController.h">
+      <Filter>Source Files\Controllers</Filter>
+    </ClInclude>
+    <ClInclude Include="LoginRequest.h">
+      <Filter>Source Files\View\Requests\POST</Filter>
+    </ClInclude>
+    <ClInclude Include="LoginResponse.h">
+      <Filter>Source Files\View\Responses\POST</Filter>
+    </ClInclude>
+    <ClInclude Include="GetRequestView.h">
+      <Filter>Source Files\View</Filter>
+    </ClInclude>
+    <ClInclude Include="PostRequestView.h">
+      <Filter>Source Files\View</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="EatingModel.h">
+      <Filter>Source Files\Models\POST</Filter>
+    </ClInclude>
+    <ClInclude Include="EatingController.h">
+      <Filter>Source Files\Controllers</Filter>
+    </ClInclude>
+    <ClInclude Include="EatingRequest.h">
+      <Filter>Source Files\View\Requests\POST</Filter>
+    </ClInclude>
+    <ClInclude Include="EatingResponse.h">
+      <Filter>Source Files\View\Responses\POST</Filter>
+    </ClInclude>
+    <ClInclude Include="ConnectTestModel.h">
+      <Filter>Source Files\Models\GET</Filter>
+    </ClInclude>
+    <ClInclude Include="ConnectTestCTRL.h">
+      <Filter>Source Files\Controllers</Filter>
+    </ClInclude>
+    <ClInclude Include="GetConnectTestRequest.h">
+      <Filter>Source Files\View\Requests\GET</Filter>
+    </ClInclude>
+    <ClInclude Include="GetConnectTestResponse.h">
+      <Filter>Source Files\View\Responses\GET</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="server.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+</Project>
