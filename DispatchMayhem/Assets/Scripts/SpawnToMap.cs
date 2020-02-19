@@ -29,6 +29,8 @@
 
 		void Start()
 		{
+
+            _map = this.gameObject.GetComponent<AbstractMap>();
             _trailerPrefab.transform.parent = _truckPrefab.transform;
 
 			_locations = new Vector2d[_locationStrings.Length];
@@ -60,5 +62,34 @@
 				spawnedObject.transform.localScale = new Vector3(_spawnScale, _spawnScale, _spawnScale);
 			}
 		}
-	}
+        /***********************************************************************************
+            UpdateMyMapPosition
+
+            This method is used by the game assets to place themselves to the at their current
+            GPS locations.
+
+            Not that as public components, the GPSs coordinates could be retrieved from the
+            update method and the position can be automatic once the object is added
+            to the _spawnedObjects list
+
+        *************************************************************************************/
+        public void UpdateMyMapPosition(GameObject go, Vector2 loc)
+        {
+            int idx = _spawnedObjects.FindIndex(go);
+            if (idx != -1 )
+            {
+                _locations[idx].x = loc.x;
+                _locations[idx].y = loc.y;
+            }
+            else
+            {
+                _spawnedObjects.Add(go);
+                Vector2d tmpvec;
+                tmpvec.x = loc.x;
+                tmpvec.y = loc.y;
+                _locations.Add(tmpvec);
+            }
+        }
+    }
 }
+ 

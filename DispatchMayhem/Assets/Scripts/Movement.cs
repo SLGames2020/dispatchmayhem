@@ -9,7 +9,7 @@ public class Movement : MonoBehaviour
     private List<Vector2> route;
     public routeCallBack FoundRoute;
 
-
+    public GameObject map;
     //public List<Vector2> cityArray = new List<Vector2>();
    // Vector2 CurrentPosition;
     int DestinationMarker = 0;
@@ -90,22 +90,23 @@ public class Movement : MonoBehaviour
             }
         }
 
-        //Debug.Log("gps: " + gps + " Dest: " + destination + " mag: " + (gps - destination).magnitude);
-        //if (((gps - destination).magnitude < 0.1f) && (DestinationMarker > 0))
-        //{
-        //    route.Clear();
-        //    DestinationMarker = 0;
-        //    Debug.Log("We have arrived!");
-        //}
-        //else if (( route.Count == 0 ) && (!gettingRoute))
-        //{
-        //    if (lastTime < Time.time)
-        //    {
-        //        lastTime = Time.time + 1.0f;
-        //        NM.Inst.GetRoute(gps, destination, FoundRoute);
-        //        gettingRoute = true;
-        //    }
-        //}
+        Debug.Log("gps: " + gps + " Dest: " + destination + " mag: " + (gps - destination).magnitude);
+        if (((gps - destination).magnitude < 0.1f) && (DestinationMarker > 0))
+        {
+            route.Clear();
+            DestinationMarker = 0;
+            Debug.Log("We have arrived!");
+        }
+        else if ((route.Count == 0) && (!gettingRoute))
+        {
+            if ((lastTime < Time.time) || (destination == Vector2.zero))
+            {
+                Debug.Log("Getting new route");
+                lastTime = Time.time + 1.0f;
+                NM.Inst.GetRoute(gps, destination, FoundRoute);
+                gettingRoute = true;
+            }
+        }
     }
 
     public Vector2 Move(Vector2 CurrentPosition, Vector2 Destination, float speed)

@@ -72,8 +72,6 @@ public class City : MonoBehaviour
             if (UIM.inst.AddToLoadList(ldgo))
             {
                 loads.Add(ldgo);
-                //GM.inst.AddLoadToMasterList(ldgo);
-                //Debug.Log("Load Added for " + label);
             }
             else
             {
