@@ -5,7 +5,7 @@ using UnityEngine;
 public class ReferVan : Trailer
 {
     TrailerType status = TrailerType.REFERVAN;
-
+    public GameObject refervan;
     void Start()
     {
         TrailerAge(Random.Range(1000, 5000));

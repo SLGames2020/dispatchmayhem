@@ -5,7 +5,7 @@ using UnityEngine;
 public class DryVan : Trailer
 {
     TrailerType status = TrailerType.DRYVAN;
-
+    public GameObject dryvan;
     void Start()
     {
         TrailerAge(Random.Range(1000, 5000));
