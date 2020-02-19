@@ -15,6 +15,8 @@ using Mapbox.Unity.Map;
 using Mapbox.Directions;
 using Mapbox.Unity.Utilities;
 
+using Assets.Scripts.Cloud_and_Networking.Responses;
+
 public class NM : MonoBehaviour
 {
     private static NM instance = null;
@@ -34,6 +36,8 @@ public class NM : MonoBehaviour
     private const string geometriesParam = "?geometries=geojson";
     private const string accessTokenSuffix = "&access_token=";
 
+    private string GetConnectTesturi = "http://149.248.59.60:8777/DispatchMayhem/GetConnectTest";
+
     private Directions routeResults;
 
     private Vector2 s = new Vector2(-75.6973f, 45.4215f);
@@ -50,13 +54,15 @@ public class NM : MonoBehaviour
             Destroy(this.gameObject);
         }
 
-        FindRoute = MyTestCallBack;
+        //FindRoute = MyTestCallBack;
         Debug.Log("Network Manager Awake");
     }
     // Start is called before the first frame update
     void Start()
     {
-        GetRoute(s, e, FindRoute);
+        //GetRoute(s, e, FindRoute);
+
+        StartCoroutine(MakeGetRequest(GetConnectTesturi, "JVT"));
 
     }
 
@@ -188,6 +194,39 @@ public class NM : MonoBehaviour
         }
     }
 
+    /*****************************************************************************************
+        MakeGetRequest
 
+        this is a test coroutine for invoking get requests and verifying the returned data
+        of the game server
+        
+    ******************************************************************************************/
+    public IEnumerator MakeGetRequest(string uri, string user = "")
+    {
+        Debug.Log("Get Request: " + uri);
+        UnityWebRequest req = new UnityWebRequest(uri);
+        req.SetRequestHeader("UserID", "Test");
+        if (user != "")
+        {
+            req.SetRequestHeader("UserName", user);
+        }
+
+        DownloadHandlerBuffer dH = new DownloadHandlerBuffer();
+        req.downloadHandler = dH;
+
+        yield return req.SendWebRequest();
+        Debug.Log("Response Code: " + req.responseCode);
+        Debug.Log(req.downloadHandler.text);
+
+        if ((req.isNetworkError) || (req.responseCode > 299))
+        {
+            Debug.LogWarning("Error: " + req.error);
+        }
+        else
+        {
+            Debug.Log("Success: Response Received" + req.downloadHandler.text);
+            ConnectTestData myJSON = JsonUtility.FromJson<ConnectTestData>(req.downloadHandler.text);
+        }
+    }
 
 }
