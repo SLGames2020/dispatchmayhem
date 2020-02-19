@@ -1,0 +1,21 @@
+download the zip file from:
+
+https://github.com/Microsoft/vcpkg
+
+extract to a location on your C:\vpckg
+
+enter the folder, hold shift and open a windows powershell or cmd prompt
+
+type:
+
+               C:\vpckg\bootstrap-vcpkg.bat
+
+run this( should take 1 min)
+
+               C:\vpckg\vcpkg install cpprestsdk cpprestsdk:x64-windows
+
+               this may take a while...(i mean a while...over half an hour)
+
+finally:
+
+               C:\vpckg\vcpkg integrate install
