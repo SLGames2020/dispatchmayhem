@@ -25,11 +25,17 @@
         [SerializeField]
         GameObject _trailerPrefab;
 
-		List<GameObject> _spawnedObjects;
+        GameObject _truckSpawn;
+        GameObject _trailerSpawn;
+
+        List<GameObject> _spawnedObjects;
 
 		void Start()
 		{
-            _trailerPrefab.transform.parent = _truckPrefab.transform;
+            _truckSpawn = Instantiate(_truckPrefab);
+            _trailerSpawn = Instantiate(_trailerPrefab);
+
+            _trailerSpawn.transform.parent = _truckSpawn.transform;
 
 			_locations = new Vector2d[_locationStrings.Length];
 			_spawnedObjects = new List<GameObject>();
