@@ -27,6 +27,12 @@
 
         List<GameObject> _spawnedObjects;
 
+        void Awake()
+        {
+            _spawnedObjects = new List<GameObject>();
+            _spawnedObjects.Clear();
+        }
+
         void Start()
         {
 
@@ -34,8 +40,7 @@
             //_trailerPrefab.transform.parent = _truckPrefab.transform;
 
             _locations = new Vector2d[_locationStrings.Length];
-            _spawnedObjects = new List<GameObject>();
-            _spawnedObjects.Clear();
+
 
             for (int i = 0; i < _locationStrings.Length; i++)
             {
@@ -60,8 +65,10 @@
                 //var location = _locations[i];
                 Vector2d loc = Vec2To2d(spawnedObject.GetComponent<MapSupport>().gps);
                 //spawnedObject.transform.localPosition = _map.GeoToWorldPosition(location, true);
-                spawnedObject.transform.localPosition = _map.GeoToWorldPosition(loc, true);
+                Vector2d tloc = new Vector2d(loc.y, loc.x);
+                spawnedObject.transform.localPosition = _map.GeoToWorldPosition(tloc, true);
                 spawnedObject.transform.localScale = new Vector3(_spawnScale, _spawnScale, _spawnScale);
+                Debug.Log(spawnedObject.transform.localPosition);
             }
         }
         /***********************************************************************************
@@ -114,6 +121,7 @@
                 _spawnedObjects.Add(go);
                 go.transform.localPosition = _map.GeoToWorldPosition(Vec2To2d(ms.gps), true);
                 go.transform.localScale = new Vector3(_spawnScale, _spawnScale, _spawnScale);
+                Debug.Log("Added to Map! " + ms.gps);
             }
 
             return retval;

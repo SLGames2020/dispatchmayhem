@@ -72,7 +72,7 @@ public class Movement : MonoBehaviour
             Vector2 tv2 = new Vector2(route[DestinationMarker].x, route[DestinationMarker].y);
 
             //Debug.Log("DestinationMarker: " + DestinationMarker);
-            mapSupport.gps = Move(mapSupport.gps, tv2, 0.05f*Time.deltaTime);
+            mapSupport.gps = Move(mapSupport.gps, tv2, 25.0f*Time.deltaTime);
             Debug.Log("cityArray: " + route[0] + " " + route[1] + " tempvec: " + mapSupport.gps);
 
             //this.transform.position = new Vector3(mapSupport.gps.x, mapSupport.gps.y, this.transform.position.z);
@@ -91,6 +91,7 @@ public class Movement : MonoBehaviour
             if ((mapSupport.gps - route[DestinationMarker]).magnitude < 0.1f)
             {
                 DestinationMarker++;
+                Debug.Log("Route change: " + DestinationMarker);
             }
 
             Debug.Log("gps: " + mapSupport.gps + " Dest: " + destination + " mag: " + (mapSupport.gps - destination).magnitude);
@@ -133,7 +134,8 @@ public class Movement : MonoBehaviour
         //cityArray.Clear();
 
         destination = load.GetComponent<Load>().destination;
-        Debug.Log("Load Destination: " + destination);
+        string name = load.GetComponent<Load>().destinationLabel;
+        Debug.Log("Load Destination: " + name);
 
         if ((lastTime < Time.time) || (destination != Vector2.zero))
         {
