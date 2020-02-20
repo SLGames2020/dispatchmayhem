@@ -9,14 +9,14 @@ public class Movement : MonoBehaviour
     private List<Vector2> route;
     public routeCallBack FoundRoute;
 
-    public GameObject map;
+    //public GameObject map;
     //public List<Vector2> cityArray = new List<Vector2>();
    // Vector2 CurrentPosition;
     int DestinationMarker = 0;
 
     [HideInInspector]public GameObject load;
     public Button assButt;
-    public Vector2 gps = new Vector2(-75.6973f, 45.4215f);
+    //public Vector2 gps = new Vector2(-75.6973f, 45.4215f);
     AudioSource button;
     bool button_play;
 
@@ -25,7 +25,9 @@ public class Movement : MonoBehaviour
 
     private Vector2 destination;
     private float lastTime;
-    private bool gettingRoute;
+    //private bool gettingRoute;
+
+    private MapSupport mapSupport;
 
     //// Start is called before the first frame update
     void Start()
@@ -41,7 +43,9 @@ public class Movement : MonoBehaviour
         button = GetComponent<AudioSource>();
         button_play = false;
 
-        destination = gps;
+
+        mapSupport = this.gameObject.GetComponent<MapSupport>();
+        destination = mapSupport.gps;
 
         lastTime = Time.time + 1.0f;
 
@@ -63,15 +67,15 @@ public class Movement : MonoBehaviour
         //Vector2 tempvec = new Vector2(this.transform.position.x, this.transform.position.y);
 
 
-        if (route.Count != 0)
+        if (DestinationMarker < route.Count)
         {
             Vector2 tv2 = new Vector2(route[DestinationMarker].x, route[DestinationMarker].y);
 
             //Debug.Log("DestinationMarker: " + DestinationMarker);
-            gps = Move(gps, tv2, 100.0f);
-            Debug.Log("cityArray: " + route[0] + " " + route[1] + " tempvec: " + gps);
+            mapSupport.gps = Move(mapSupport.gps, tv2, 0.05f*Time.deltaTime);
+            Debug.Log("cityArray: " + route[0] + " " + route[1] + " tempvec: " + mapSupport.gps);
 
-            this.transform.position = new Vector3(gps.x, gps.y, this.transform.position.z);
+            //this.transform.position = new Vector3(mapSupport.gps.x, mapSupport.gps.y, this.transform.position.z);
 
             //Debug.Log("newPos: " + newPos);
             Vector3 newPos = new Vector3(route[DestinationMarker].x, route[DestinationMarker].y, this.transform.position.z);
@@ -84,29 +88,31 @@ public class Movement : MonoBehaviour
                 this.transform.Rotate(new Vector3(0, 0, 1), 180);
             }
 
-            if ((gps - route[DestinationMarker]).magnitude < 0.1f)
+            if ((mapSupport.gps - route[DestinationMarker]).magnitude < 0.1f)
             {
                 DestinationMarker++;
             }
+
+            Debug.Log("gps: " + mapSupport.gps + " Dest: " + destination + " mag: " + (mapSupport.gps - destination).magnitude);
         }
 
-        Debug.Log("gps: " + gps + " Dest: " + destination + " mag: " + (gps - destination).magnitude);
-        if (((gps - destination).magnitude < 0.1f) && (DestinationMarker > 0))
+
+        if (((mapSupport.gps - destination).magnitude < 0.1f) && (DestinationMarker > 0))
         {
-            route.Clear();
-            DestinationMarker = 0;
+            //route.Clear();
+            //DestinationMarker = 0;
             Debug.Log("We have arrived!");
         }
-        else if ((route.Count == 0) && (!gettingRoute))
-        {
-            if ((lastTime < Time.time) || (destination == Vector2.zero))
-            {
-                Debug.Log("Getting new route");
-                lastTime = Time.time + 1.0f;
-                NM.Inst.GetRoute(gps, destination, FoundRoute);
-                gettingRoute = true;
-            }
-        }
+        //else   ((route.Count == 0) && (!gettingRoute))
+        //{
+        //    if ((lastTime < Time.time) || (destination != Vector2.zero))
+        //    {
+        //        Debug.Log("Getting new route");
+        //        lastTime = Time.time + 1.0f;
+        //        NM.Inst.GetRoute(mapSupport.gps, destination, FoundRoute);
+        //        gettingRoute = true;
+        //    }
+        //}
     }
 
     public Vector2 Move(Vector2 CurrentPosition, Vector2 Destination, float speed)
@@ -121,7 +127,7 @@ public class Movement : MonoBehaviour
     public void loadTruck()
     {
         load = UIM.inst.loadSelected;
-        Debug.Log("Load assigned");
+        //Debug.Log("Load assigned");
 
         DestinationMarker = 0;
         //cityArray.Clear();
@@ -129,15 +135,16 @@ public class Movement : MonoBehaviour
         destination = load.GetComponent<Load>().destination;
         Debug.Log("Load Destination: " + destination);
 
-        //cityArray.Add(GameObject.Find(origString).transform.position);
-
-        //string destString = load.GetComponent<Load>().destinationLabel;
-        //cityArray.Add(GameObject.Find(destString).transform.position);
+        if ((lastTime < Time.time) || (destination != Vector2.zero))
+        {
+            Debug.Log("Getting new route");
+            lastTime = Time.time + 1.0f;
+            NM.Inst.GetRoute(mapSupport.gps, destination, FoundRoute);
+            //gettingRoute = true;
+        }
 
         Destroy(UIM.inst.loadSelectedListItem);
     }
-
-
 
     /*******************************
     test callback routine
@@ -145,13 +152,15 @@ public class Movement : MonoBehaviour
     **********************************/
     public void RouteCallBack(List<Vector2> rte, float dst)
     {
+        route.Clear();
         foreach (Vector2 pnt in rte)
         {
             //Debug.Log("Waypoint List: [" + pnt.x + "," + pnt.y + "]");
             route.Add(pnt);
         }
+        DestinationMarker = 0;
         Debug.Log("Distance: " + dst + " Waypoints: " + route.Count);
-        gettingRoute = false;
+        //gettingRoute = false;
     }
 }
 
