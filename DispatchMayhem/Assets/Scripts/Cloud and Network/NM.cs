@@ -15,6 +15,8 @@ using Mapbox.Unity.Map;
 using Mapbox.Directions;
 using Mapbox.Unity.Utilities;
 
+using Assets.Scripts.Cloud_and_Networking.Responses;
+
 public delegate void routeCallBack(List<Vector2> route, float distance);
 
 public class NM : MonoBehaviour
@@ -35,6 +37,8 @@ public class NM : MonoBehaviour
     private const string directionsURI = "https://api.mapbox.com/directions/v5/mapbox/driving/";
     private const string geometriesParam = "?geometries=geojson";
     private const string accessTokenSuffix = "&access_token=";
+
+    private string GetConnectTesturi = "http://149.248.59.60:8777/DispatchMayhem/GetConnectTest";
 
     private Directions routeResults;
 
@@ -59,6 +63,8 @@ public class NM : MonoBehaviour
     void Start()
     {
         //GetRoute(s, e, FindRoute);
+
+        StartCoroutine(MakeGetRequest(GetConnectTesturi, "JVT"));
 
     }
 
@@ -197,6 +203,39 @@ void Update()
         }
     }
 
+    /*****************************************************************************************
+        MakeGetRequest
 
+        this is a test coroutine for invoking get requests and verifying the returned data
+        of the game server
+        
+    ******************************************************************************************/
+    public IEnumerator MakeGetRequest(string uri, string user = "")
+    {
+        Debug.Log("Get Request: " + uri);
+        UnityWebRequest req = new UnityWebRequest(uri);
+        req.SetRequestHeader("UserID", "Test");
+        if (user != "")
+        {
+            req.SetRequestHeader("UserName", user);
+        }
+
+        DownloadHandlerBuffer dH = new DownloadHandlerBuffer();
+        req.downloadHandler = dH;
+
+        yield return req.SendWebRequest();
+        Debug.Log("Response Code: " + req.responseCode);
+        Debug.Log(req.downloadHandler.text);
+
+        if ((req.isNetworkError) || (req.responseCode > 299))
+        {
+            Debug.LogWarning("Error: " + req.error);
+        }
+        else
+        {
+            Debug.Log("Success: Response Received" + req.downloadHandler.text);
+            ConnectTestData myJSON = JsonUtility.FromJson<ConnectTestData>(req.downloadHandler.text);
+        }
+    }
 
 }
