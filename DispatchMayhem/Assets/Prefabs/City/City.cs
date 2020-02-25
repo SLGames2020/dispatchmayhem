@@ -26,7 +26,7 @@ public class City : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        GM.inst.AddCityToMasterList(this.gameObject);
+        //CityM.inst.AddCityToMasterList(this.gameObject);
         StartCoroutine(SpawnLoad());
         //lastTime = Time.time + 1.0f;
     }
@@ -53,11 +53,11 @@ public class City : MonoBehaviour
 
         while (stillOpen)
         {
-            yield return new WaitForSeconds(Random.Range(1, GM.inst.LOADSPAWNTIME));
+            yield return new WaitForSeconds(Random.Range(1, CityM.inst.LOADSPAWNTIME));
             do
             {
-                go = GM.inst.openCities[Random.Range(0, GM.inst.openCities.Count - 1)];
-                des = go.GetComponent<City>().gps;
+                go = CityM.inst.openCities[Random.Range(0, CityM.inst.openCities.Count - 1)];
+                des = go.GetComponent<MapSupport>().gps;
             }
             while (des == gps);                     //loop till we find a city that isn't us
 
