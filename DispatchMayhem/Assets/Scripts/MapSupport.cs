@@ -7,7 +7,7 @@ using Mapbox.Examples;
 public class MapSupport : MonoBehaviour
 {
     public Vector2 gps;
-    public Mapbox.Examples.SpawnToMap spawntomap;
+    private Mapbox.Examples.SpawnToMap spawntomap;
     
 
     void Awake()

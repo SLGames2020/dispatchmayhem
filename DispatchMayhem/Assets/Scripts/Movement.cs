@@ -37,7 +37,7 @@ public class Movement : MonoBehaviour
 
         FoundRoute = RouteCallBack;
 
-        Debug.Log("Adding Truck");
+        //Debug.Log("Adding Truck");
         UIM.inst.AddToTruckList(this.gameObject);
         assButt.onClick.AddListener(delegate { loadTruck(); } );
         button = GetComponent<AudioSource>();

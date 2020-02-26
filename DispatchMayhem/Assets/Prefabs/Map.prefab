@@ -25,7 +25,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 601805143935098277}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 695.2117, y: 6643.384, z: -6331.1504}
+  m_LocalPosition: {x: 695.2117, y: 0, z: -6331.1504}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -46,5 +46,3 @@ MonoBehaviour:
   _map: {fileID: 0}
   _locationStrings: []
   _spawnScale: 3
-  _truckPrefab: {fileID: 0}
-  _trailerPrefab: {fileID: 0}

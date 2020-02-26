@@ -53,10 +53,10 @@ public class City : MonoBehaviour
 
         while (stillOpen)
         {
-            yield return new WaitForSeconds(Random.Range(1, CityM.inst.LOADSPAWNTIME));
+            yield return new WaitForSeconds(Random.Range(1, CyM.inst.LOADSPAWNTIME));
             do
             {
-                go = CityM.inst.openCities[Random.Range(0, CityM.inst.openCities.Count - 1)];
+                go = CyM.inst.openCities[Random.Range(0, CyM.inst.openCities.Count - 1)];
                 des = go.GetComponent<MapSupport>().gps;
             }
             while (des == gps);                     //loop till we find a city that isn't us
