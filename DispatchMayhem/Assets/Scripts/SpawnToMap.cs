@@ -119,7 +119,7 @@
             else
             {
                 _spawnedObjects.Add(go);
-                go.transform.localPosition = _map.GeoToWorldPosition(Vec2To2d(ms.gps), true);
+                go.transform.localPosition = _map.GeoToWorldPosition(Vec2To2d(ms.gps), true); 
                 go.transform.localScale = new Vector3(_spawnScale, _spawnScale, _spawnScale);
                 //Debug.Log("Added to Map! " + ms.gps);
             }

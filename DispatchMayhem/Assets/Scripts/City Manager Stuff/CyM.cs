@@ -49,8 +49,8 @@ public class CyM : MonoBehaviour
             //TextAsset jsonfile1 = Resources.Load<TextAsset>(tmppath);
             string jsonstr = File.ReadAllText(tmppath, Encoding.UTF8);
 
-            Debug.Log(tmppath);
-            Debug.Log(jsonstr);
+            //Debug.Log(tmppath);
+            //Debug.Log(jsonstr);
 
             //CitylistJSONobj cntrydata = JsonUtility.FromJson<CitylistJSONobj>(jsonfile.text);
             CitylistJSONobj cntrydata = JsonUtility.FromJson<CitylistJSONobj>(jsonstr);
@@ -69,12 +69,13 @@ public class CyM : MonoBehaviour
                     ctyscript.stillOpen = true;
                     ctyGO.GetComponent<MapSupport>().gps = cty.GetGPS();
                     openCities.Add(ctyGO);
-                    Debug.Log("City: " + cty.city + " @" + cty.GetGPS());
+                    //Debug.Log("City: " + cty.city + " @" + cty.GetGPS());
                     cnt++;
                 }
                 cnt2++;
+                if (cnt > 10) break;               //only 10 cities for now
             }
-            Debug.Log("place " + cnt + "of " + cnt2);
+            //Debug.Log("place " + cnt + "of " + cnt2);
         }
     }
 
