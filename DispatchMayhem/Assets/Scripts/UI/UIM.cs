@@ -67,7 +67,7 @@ public class UIM : MonoBehaviour
     public bool AddToTruckList(GameObject truckGO)
     {
 
-        Debug.Log("Truck being added");
+        //Debug.Log("Truck being added");
         GameObject template = Instantiate(listItemTemplate, this.transform.position, Quaternion.identity);
         template.GetComponent<ListObject>().listGO = truckGO;
 

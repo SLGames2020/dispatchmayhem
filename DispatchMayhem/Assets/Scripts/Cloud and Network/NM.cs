@@ -64,7 +64,7 @@ public class NM : MonoBehaviour
     {
         //GetRoute(s, e, FindRoute);
 
-        StartCoroutine(MakeGetRequest(GetConnectTesturi, "JVT"));
+        //StartCoroutine(MakeGetRequest(GetConnectTesturi, "JVT"));
 
     }
 

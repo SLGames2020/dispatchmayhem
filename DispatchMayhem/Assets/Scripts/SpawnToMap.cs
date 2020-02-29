@@ -68,7 +68,7 @@
                 Vector2d tloc = new Vector2d(loc.y, loc.x);
                 spawnedObject.transform.localPosition = _map.GeoToWorldPosition(tloc, true);
                 spawnedObject.transform.localScale = new Vector3(_spawnScale, _spawnScale, _spawnScale);
-                Debug.Log(spawnedObject.transform.localPosition);
+                //Debug.Log(spawnedObject.transform.localPosition);
             }
         }
         /***********************************************************************************
@@ -119,9 +119,9 @@
             else
             {
                 _spawnedObjects.Add(go);
-                go.transform.localPosition = _map.GeoToWorldPosition(Vec2To2d(ms.gps), true);
+                go.transform.localPosition = _map.GeoToWorldPosition(Vec2To2d(ms.gps), true); 
                 go.transform.localScale = new Vector3(_spawnScale, _spawnScale, _spawnScale);
-                Debug.Log("Added to Map! " + ms.gps);
+                //Debug.Log("Added to Map! " + ms.gps);
             }
 
             return retval;
