@@ -14,13 +14,13 @@ public class ShopManager : MonoBehaviour
     /*void Start()
     {
         
-    }
+    } */
 
     // Update is called once per frame
     void Update()
     {
-        
-    } */
+        Rotate();
+    } 
 
     void TruckShop()
     {
@@ -40,6 +40,12 @@ public class ShopManager : MonoBehaviour
     void HelpInfo()
     {
 
+    }
+
+    void Rotate()
+    {
+        TruckSeller.transform.Rotate(0, 20 * Time.deltaTime, 0); //rotates 50 degrees per second around z axis
+        TrailerSeller.transform.Rotate(0, 20 * Time.deltaTime, 0); //rotates 50 degrees per second around z axis
     }
 
 }
