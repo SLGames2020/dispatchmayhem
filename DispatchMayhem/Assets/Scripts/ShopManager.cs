@@ -44,8 +44,8 @@ public class ShopManager : MonoBehaviour
 
     void Rotate()
     {
-        TruckSeller.transform.Rotate(0, 20 * Time.deltaTime, 0); //rotates 50 degrees per second around z axis
-        TrailerSeller.transform.Rotate(0, 20 * Time.deltaTime, 0); //rotates 50 degrees per second around z axis
+        TruckSeller.transform.Rotate(0, 20 * Time.deltaTime, 0); //rotates 20 degrees per second around y axis
+        TrailerSeller.transform.Rotate(0, 20 * Time.deltaTime, 0); 
     }
 
 }
