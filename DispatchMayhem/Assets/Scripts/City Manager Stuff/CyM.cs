@@ -68,7 +68,7 @@ public class CyM : MonoBehaviour
                     ctyscript.label = cty.city;
                     ctyscript.stillOpen = true;
                     Vector2 tv2 = cty.GetGPS();
-                    tv2 -= new Vector2(1.0f, 0.0f);
+                    //tv2 -= new Vector2(1.0f, 0.0f);
                     //ctyGO.GetComponent<MapSupport>().gps = cty.GetGPS();
                     ctyGO.GetComponent<MapSupport>().gps = tv2;
                     openCities.Add(ctyGO);

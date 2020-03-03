@@ -11,6 +11,8 @@ public class Movement : MonoBehaviour
     public Button assButt;
     public AudioSource button;
 
+    public float haulDistance = 0.0f;
+    public float haulCost = 0.0f;
     public bool button_play;
 
     private MapSupport mapSupport;
@@ -20,9 +22,10 @@ public class Movement : MonoBehaviour
     private Vector2 destination;
 
 
-    public float loadDelayTime;                                //the time we will be finished loading/unloading 
+    public float loadDelayTime;                                //the time we will be finished loading/unloading (should come from game manager)
     public float myTime;
     private float lastTime;
+    private float haulingCost;
     private int destinationMarker = 0;
     private int loadMark = -1;                                   //the point in the route list to delay for loading
     private bool travellingToOrigin = true;
@@ -78,7 +81,7 @@ public class Movement : MonoBehaviour
                 Debug.Log("Reached Marker");
                 loadMark = -1;                                                  //flush out the load point until we get a new point
                 loadDelayTime = Time.time + 6.0f;                               //wait an hour for unloading (this needs to reference a proper Time Manager Delay reference)
-                if ((mapSupport.gps - destination).magnitude > 0.1f)            //if we're not at the destination
+                if ((mapSupport.gps - destination).magnitude > 0.05f)            //if we're not at the destination
                 {
                     Debug.Log("Getting route to Destination");                  
                     NM.Inst.GetRoute(mapSupport.gps, destination, FoundRoute);  //reroute to the destination
@@ -87,9 +90,13 @@ public class Movement : MonoBehaviour
             else if (loadMark != -1)                        //only move if we've received a loading point
             {
                 Vector2 tv2 = new Vector2(route[destinationMarker].x, route[destinationMarker].y);
-
+                Vector2 lastgps = mapSupport.gps;
                 mapSupport.gps = Move(mapSupport.gps, tv2, 20.0f * Time.deltaTime);
-                //Debug.Log("cityArray: " + route[0] + " " + route[1] + " tempvec: " + mapSupport.gps);
+
+                float tmpdis = CalcDistance(lastgps, mapSupport.gps);
+                haulDistance += tmpdis;
+                haulCost += (tmpdis * haulingCost);
+                //Debug.Log("from: {" + lastgps.y + "," + lastgps.x + "} To: {" + mapSupport.gps.y + "," + mapSupport.gps.x + "} is: " + CalcDistance(lastgps, mapSupport.gps));
 
                 Vector3 newlook = this.transform.position - lastPosition;
                 Quaternion newrot = Quaternion.FromToRotation(this.transform.forward, newlook);
@@ -142,42 +149,48 @@ public class Movement : MonoBehaviour
     *****************************************************************/
     public void loadTruck()
     {
-        if (Time.time < loadDelayTime)          //if we are currently being loaded/unloaded
+        if (UIM.inst.vehicleSelected == this.gameObject)
         {
-            Debug.Log("We are still Loading");  //icon and/or error sound is needed here
-        }
-        else
-        {
-            load = UIM.inst.loadSelected;
-            route.Clear();
-            travellingToOrigin = false;
-            destinationMarker = 0;
-            loadMark = -1;                           //flag that we don't have a route (loading point) yet
-            loadDelayTime = Time.time;                  //default to moving right away (to the load origin)
-
-            Load ld = load.GetComponent<Load>();
-            origin = ld.origin;
-            destination = ld.destination;
-            string name = ld.destinationLabel;
-            Debug.Log("Load Destination: " + name);
-
-            if ((lastTime < Time.time) || (destination != Vector2.zero))
+            if (Time.time < loadDelayTime)          //if we are currently being loaded/unloaded
             {
-                if ((mapSupport.gps - origin).magnitude > 0.1f)             //if we are not close to the loads origin
-                {
-                    travellingToOrigin = true;
-                    Debug.Log("Getting route to origin");
-                    NM.Inst.GetRoute(mapSupport.gps, origin, FoundRoute);
-                    loadDelayTime = Time.time;                              //no delaying to go pick up the load
-                    lastTime = Time.time + 1.0f;                            //block us from calling mapbox more than once per second
-                }
-                else
-                {
-                    Debug.Log("Waiting To Load");
-                    loadDelayTime = Time.time + 6.0f;                      //1 minute hard coded for now, but this should reference a Time Manager "1 Hour" time value
-                }
+                Debug.Log("We are still Loading");  //icon and/or error sound is needed here
             }
-            Destroy(UIM.inst.loadSelectedListItem);                           //remove the load from the selection list
+            else
+            {
+                load = UIM.inst.loadSelected;
+                route.Clear();
+                travellingToOrigin = false;
+                destinationMarker = 0;
+                loadMark = -1;                              //flag that we don't have a route (loading point) yet
+                loadDelayTime = Time.time;                  //default to moving right away (to the load origin)
+                haulCost = 0.0f;
+                haulDistance = 0.0f;
+
+                Load ld = load.GetComponent<Load>();
+                haulingCost = ld.haulingCost;
+                origin = ld.origin;
+                destination = ld.destination;
+                string name = ld.destinationLabel;
+                Debug.Log("Load Destination: " + name);
+
+                if ((lastTime < Time.time) || (destination != Vector2.zero))
+                {
+                    if ((mapSupport.gps - origin).magnitude > 0.1f)             //if we are not close to the loads origin
+                    {
+                        travellingToOrigin = true;
+                        Debug.Log("Getting route to origin");
+                        NM.Inst.GetRoute(mapSupport.gps, origin, FoundRoute);
+                        loadDelayTime = Time.time;                              //no delaying to go pick up the load
+                        lastTime = Time.time + 1.0f;                            //block us from calling mapbox more than once per second
+                    }
+                    else
+                    {
+                        Debug.Log("Waiting To Load");
+                        loadDelayTime = Time.time + 6.0f;                      //1 minute hard coded for now, but this should reference a Time Manager "1 Hour" time value
+                    }
+                }
+                Destroy(UIM.inst.loadSelectedListItem);                           //remove the load from the selection list
+            }
         }
     }
 
@@ -194,6 +207,51 @@ public class Movement : MonoBehaviour
         }
         loadMark = route.Count - 1;                                     //set the loading point (delay) to the last entry
         Debug.Log("Distance: " + (int)(dst/1000.0f) + " Waypoints: " + route.Count);
+    }
+
+    /**********************************************************************
+        CalcDistance
+
+        The function uses the Haversine forumula to accurately calculate
+        the "rhumb" line (shortest distance between two points on a sphere).
+
+        It takes in the origin and destination lat and long, converst them
+        to radians, and runs the calc found here:
+        https://www.movable-type.co.uk/scripts/latlong.html
+
+        note the return value is in miles (because thats the way trucking works)
+
+    ************************************************************************/
+    public float CalcDistance(Vector2 orig, Vector2 dest)
+    {
+        float phi1 = DegsToRads(orig.y);
+        float phi2 = DegsToRads(dest.y);
+        float deltaphi = DegsToRads(dest.y - orig.y);
+        float deltlambda = DegsToRads(dest.x - orig.x);
+
+        const float r = 3958.755866f;
+
+        float a = (Mathf.Sin(deltaphi / 2.0f) * Mathf.Sin(deltaphi / 2.0f))
+                + (Mathf.Cos(phi1) * Mathf.Cos(phi2) 
+                * (Mathf.Sin(deltlambda / 2.0f) * Mathf.Sin(deltlambda / 2.0f)));
+
+        float c = 2.0f * Mathf.Atan2(Mathf.Sqrt(a), Mathf.Sqrt(1.0f - a));
+
+        return (r * c);
+    }
+
+    /***********************************************************************
+        DegsToRads
+
+        This is a quick function to convert degrees to radians, given
+        the number of degrees
+
+        ie  deg * pi / 180
+
+    *************************************************************************/
+    private float DegsToRads(float degs)
+    {
+        return (degs * Mathf.PI / 180.0f);
     }
 }
 

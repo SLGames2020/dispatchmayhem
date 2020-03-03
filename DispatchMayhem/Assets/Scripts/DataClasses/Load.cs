@@ -8,7 +8,8 @@ public class Load : MonoBehaviour
     public Vector2 origin;
     public string destinationLabel;
     public Vector2 destination;
-    
+
+    public float haulingCost = 1.5f;            //default/temporaty $1.5/mile
 
     /*int payouts[NUM_LOAD_TYPES][2] = 
     // MIN               /ax
