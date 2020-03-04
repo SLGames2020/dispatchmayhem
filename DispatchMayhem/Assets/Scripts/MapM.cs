@@ -73,6 +73,8 @@
                 var spawnedObject = _spawnedObjects[i];
                 //var location = _locations[i];
                 Vector2d loc = Vec2To2d(spawnedObject.GetComponent<MapSupport>().gps);
+                if (spawnedObject.tag == "City") loc = loc + new Vector2d(-3.20f, 0.15f);
+
                 //spawnedObject.transform.localPosition = _map.GeoToWorldPosition(location, true);
                 Vector2d tloc = new Vector2d(loc.y, loc.x);
                 spawnedObject.transform.localPosition = _map.GeoToWorldPosition(tloc, true);
