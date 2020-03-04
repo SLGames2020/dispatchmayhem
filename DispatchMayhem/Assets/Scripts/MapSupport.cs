@@ -7,6 +7,7 @@ using Mapbox.Examples;
 public class MapSupport : MonoBehaviour
 {
     public Vector2 gps;
+    public float baseScale;
     //private Mapbox.Examples.SpawnToMap spawntomap;
     
 

@@ -91,7 +91,7 @@ public class Movement : MonoBehaviour
             }
             else if (loadMark != -1)                        //only move if we've received a loading point
             {
-                Vector2 tv2 = new Vector2(route[destinationMarker].x, route[destinationMarker].y);
+                Vector2 tv2 = route[destinationMarker];
                 Vector2 lastgps = mapSupport.gps;
                 mapSupport.gps = Move(mapSupport.gps, tv2, 20.0f * Time.deltaTime);
 

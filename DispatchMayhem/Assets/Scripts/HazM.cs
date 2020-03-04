@@ -8,7 +8,15 @@ public class HazM : MonoBehaviour
     private static HazM instance = null;
     public static HazM Inst { get { return instance; } }
 
+    public GameObject inspectorPrefab;
+
     public List<Vector2> locsOnRoads;
+
+    public int maxInspectors = 1;
+
+
+    private int numOfInspectors = 0;
+
 
     void Awake()
     {
@@ -35,7 +43,16 @@ public class HazM : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (locsOnRoads.Count != 0)
+        {
+            if (numOfInspectors < maxInspectors)
+            {
+                GameObject insp = Instantiate(inspectorPrefab, this.transform);
+                insp.GetComponent<MapSupport>().gps = locsOnRoads[Random.Range(0, locsOnRoads.Count)];
+                numOfInspectors++;
+                Debug.Log("inspector spawned");
+            }
+        }
     }
 
     private void OnApplicationQuit()
