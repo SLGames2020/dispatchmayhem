@@ -30,6 +30,8 @@ public class Movement : MonoBehaviour
     private int loadMark = -1;                                   //the point in the route list to delay for loading
     private bool travellingToOrigin = true;
 
+    private const float closeEnough = 0.05f;
+
     //// Start is called before the first frame update
     void Start()
     {
@@ -81,7 +83,7 @@ public class Movement : MonoBehaviour
                 Debug.Log("Reached Marker");
                 loadMark = -1;                                                  //flush out the load point until we get a new point
                 loadDelayTime = Time.time + 6.0f;                               //wait an hour for unloading (this needs to reference a proper Time Manager Delay reference)
-                if ((mapSupport.gps - destination).magnitude > 0.05f)            //if we're not at the destination
+                if ((mapSupport.gps - destination).magnitude > closeEnough)     //if we're not at the destination
                 {
                     Debug.Log("Getting route to Destination");                  
                     NM.Inst.GetRoute(mapSupport.gps, destination, FoundRoute);  //reroute to the destination
@@ -110,7 +112,7 @@ public class Movement : MonoBehaviour
                     this.transform.Rotate(new Vector3(0, 0, 1), 180);
                 }
 
-                if ((mapSupport.gps - route[destinationMarker]).magnitude < 0.1f)
+                if ((mapSupport.gps - route[destinationMarker]).magnitude < closeEnough)
                 {
                     destinationMarker++;
                     //Debug.Log("Route change: " + destinationMarker);
@@ -119,7 +121,7 @@ public class Movement : MonoBehaviour
             }
             else
             {
-                if ((mapSupport.gps - destination).magnitude < 0.1f)   //if we're close to the destination, and we have travelled a route
+                if ((mapSupport.gps - destination).magnitude < closeEnough)   //if we're close to the destination, and we have travelled a route
                 {
                     Debug.Log("Load has been delivered!");
                 }
@@ -175,7 +177,7 @@ public class Movement : MonoBehaviour
 
                 if ((lastTime < Time.time) || (destination != Vector2.zero))
                 {
-                    if ((mapSupport.gps - origin).magnitude > 0.1f)             //if we are not close to the loads origin
+                    if ((mapSupport.gps - origin).magnitude > closeEnough)      //if we are not close to the loads origin
                     {
                         travellingToOrigin = true;
                         Debug.Log("Getting route to origin");
@@ -194,10 +196,13 @@ public class Movement : MonoBehaviour
         }
     }
 
-    /*******************************
-    test callback routine
+    /**************************************************************
+        RouteCallBack
 
-    **********************************/
+        This is the call back for when the route has been recieved
+        by the Network Manager (through the mapbox api)
+
+    ***************************************************************/
     public void RouteCallBack(List<Vector2> rte, float dst)
     {
         foreach (Vector2 pnt in rte)

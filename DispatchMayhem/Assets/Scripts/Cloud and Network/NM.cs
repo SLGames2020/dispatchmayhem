@@ -73,10 +73,11 @@ void Update()
     {
         
     }
-    private void OnApplicationQuit()
-    {
-        instance = null;
-    }
+
+private void OnApplicationQuit()
+{
+    instance = null;
+}
 
     /*******************************
         test callback routine
@@ -199,8 +200,9 @@ void Update()
                     waypoints.Add(new Vector2(lng, lat));
                 }
                 cb(waypoints, dist);                                                                           //once complete, send it all to the call back
+                HazM.Inst.AddRoadLoc(waypoints[UnityEngine.Random.Range(0, waypoints.Count)]);                  //pull out a single waypoint and send it to the Hazard Manager so it can build
             }
-        }
+        }                                                                                                       //a list of valid road locations to place hard markers
     }
 
     /*****************************************************************************************
