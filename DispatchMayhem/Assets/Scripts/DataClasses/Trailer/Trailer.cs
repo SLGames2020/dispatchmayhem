@@ -22,11 +22,21 @@ public class Trailer : MonoBehaviour
     public GameObject trailer;
     public TrailerType type;
 
+    public TrailerType GetTrailerType()
+    {
+        return type;
+    }
+
+    public int GetMaxSpace()
+    {
+        return maxSpace;
+    }
+
     public void TrailerCost(float cost)
     {
         if (age >= 1)
         {
-            cost = cost;
+            cost = 100000;
         }
         else if (age >= 5)
         {
@@ -52,7 +62,7 @@ public class Trailer : MonoBehaviour
     {
         if (age >= 1)
         {
-            health = health;
+            health = 1500;
         }
         else if (age >= 5)
         {
@@ -77,8 +87,10 @@ public class Trailer : MonoBehaviour
         }
     }
 
-    public void TrailerSpace(int maxSpace)
+    public void TrailerSpace(int SpaceSize)
     {
+        maxSpace = SpaceSize;
+
         if(maxSpace >= 20000)
         {
             cost = cost * 2;
@@ -95,23 +107,8 @@ public class Trailer : MonoBehaviour
         {
             cost = cost * 5;
         }
-    }
 
-    public void AllowedLoads()
-    {
-        if(type == TrailerType.TANKER)
-        {
 
-        }
-        else if(type == TrailerType.DROPDECK)
-        {
-
-        }
-        else if(type == TrailerType.FLATBED)
-        {
-
-        }
-        //else if(type == Flatbed)
     }
 }
 
