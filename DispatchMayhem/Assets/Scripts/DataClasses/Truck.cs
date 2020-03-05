@@ -5,8 +5,9 @@ using UnityEngine;
 public class Truck : MonoBehaviour
 {
     public enum TruckStates { IDLE, LOADING, ONROUTE, UNLOADING, IMPOUNDED, REPAIRING }
-
-    public LoadType type;
+    
+    //public LoadType type;
+    public LoadManager.Products type;
     public string rigLabel = "Undefined transport";
 
     public TruckStates status = TruckStates.IDLE;

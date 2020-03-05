@@ -7,7 +7,7 @@ using Mapbox.Examples;
 public class MapSupport : MonoBehaviour
 {
     public Vector2 gps;
-    public float baseScale;
+    public Vector3 baseScale = new Vector3(200.0f, 200.0f, 200.0f);
     //private Mapbox.Examples.SpawnToMap spawntomap;
     
 
@@ -17,7 +17,6 @@ public class MapSupport : MonoBehaviour
         //spawntomap = mapOB.GetComponent<SpawnToMap>();
         gps.y = 45.016667f;                             //default all objects to cornwall for now
         gps.x = -74.733333f;                            //(this will need to be changed to a "Depot" lookup eventually)
-
     }
 
     // Start is called before the first frame update

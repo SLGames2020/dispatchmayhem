@@ -48,7 +48,9 @@ public class HazM : MonoBehaviour
             if (numOfInspectors < maxInspectors)
             {
                 GameObject insp = Instantiate(inspectorPrefab, this.transform);
-                insp.GetComponent<MapSupport>().gps = locsOnRoads[Random.Range(0, locsOnRoads.Count)];
+                MapSupport maps = insp.GetComponent<MapSupport>();
+                maps.gps = locsOnRoads[Random.Range(0, locsOnRoads.Count)];
+                maps.baseScale = new Vector3( 0.450f, 0.10f, 0.30f );
                 numOfInspectors++;
                 Debug.Log("inspector spawned");
             }

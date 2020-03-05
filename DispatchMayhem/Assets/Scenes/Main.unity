@@ -260,6 +260,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gps: {x: 0, y: 0}
+  baseScale: {x: 200, y: 200, z: 200}
 --- !u!82 &185722980
 AudioSource:
   m_ObjectHideFlags: 0
@@ -426,7 +427,7 @@ PrefabInstance:
     - target: {fileID: 114478715909612932, guid: e6b749c6d877f4c19a5a5c3c0783d53b,
         type: 3}
       propertyPath: _options.locationOptions.latitudeLongitude
-      value: 43.6529, -79.3849
+      value: 45.0205, -74.7309
       objectReference: {fileID: 0}
     - target: {fileID: 114478715909612932, guid: e6b749c6d877f4c19a5a5c3c0783d53b,
         type: 3}
@@ -441,7 +442,7 @@ PrefabInstance:
     - target: {fileID: 114478715909612932, guid: e6b749c6d877f4c19a5a5c3c0783d53b,
         type: 3}
       propertyPath: _previewOptions.isPreviewEnabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 114478715909612932, guid: e6b749c6d877f4c19a5a5c3c0783d53b,
         type: 3}
@@ -467,6 +468,16 @@ PrefabInstance:
         type: 3}
       propertyPath: _options.locationOptions.zoom
       value: 9.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114478715909612932, guid: e6b749c6d877f4c19a5a5c3c0783d53b,
+        type: 3}
+      propertyPath: _imagery._layerProperty.sourceType
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114478715909612932, guid: e6b749c6d877f4c19a5a5c3c0783d53b,
+        type: 3}
+      propertyPath: _imagery._layerProperty.sourceOptions.layerSource.Id
+      value: mapbox://styles/mapbox/outdoors-v10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e6b749c6d877f4c19a5a5c3c0783d53b, type: 3}
@@ -757,6 +768,7 @@ MonoBehaviour:
   button_play: 0
   loadDelayTime: 0
   myTime: 0
+  currentSpeed: 25
 --- !u!114 &800126021
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -770,6 +782,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gps: {x: 0, y: 0}
+  baseScale: {x: 0.6, y: 0.6, z: 0.6}
 --- !u!114 &800126022
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -782,8 +795,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b05e978b0d85c04f8835dee3d39a981, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: {fileID: 0}
+  type: 0
   rigLabel: Truck only
+  currentSpeed: 25
   status: 0
 --- !u!1 &928117323 stripped
 GameObject:
@@ -811,6 +825,7 @@ MonoBehaviour:
   button_play: 0
   loadDelayTime: 0
   myTime: 0
+  currentSpeed: 25
 --- !u!114 &928117325
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -824,6 +839,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gps: {x: 0, y: 0}
+  baseScale: {x: 0.6, y: 0.6, z: 0.6}
 --- !u!114 &928117326
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -836,8 +852,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b05e978b0d85c04f8835dee3d39a981, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: {fileID: 0}
+  type: 0
   rigLabel: Truck and Trailer
+  currentSpeed: 25
   status: 0
 --- !u!1 &1079148992
 GameObject:
@@ -856,7 +873,7 @@ GameObject:
   - component: {fileID: 1079148993}
   m_Layer: 0
   m_Name: Cube (1)
-  m_TagString: Untagged
+  m_TagString: Truck
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -923,8 +940,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b05e978b0d85c04f8835dee3d39a981, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: {fileID: 0}
+  type: 0
   rigLabel: Cube
+  currentSpeed: 25
   status: 0
 --- !u!114 &1079148996
 MonoBehaviour:
@@ -939,6 +957,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gps: {x: 0, y: 0}
+  baseScale: {x: 0.6, y: 0.6, z: 0.6}
 --- !u!114 &1079148997
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -959,6 +978,7 @@ MonoBehaviour:
   button_play: 0
   loadDelayTime: 0
   myTime: 0
+  currentSpeed: 25
 --- !u!33 &1079148998
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -976,7 +996,7 @@ Transform:
   m_GameObject: {fileID: 1079148992}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 20, y: 20, z: 20}
+  m_LocalScale: {x: 4, y: 4, z: 4}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 8
@@ -992,6 +1012,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Map Truck
+      objectReference: {fileID: 0}
+    - target: {fileID: 5754004622760582403, guid: 29c78fba6ca4a794a80cc0fd66e6866e,
+        type: 3}
+      propertyPath: m_TagString
+      value: Truck
       objectReference: {fileID: 0}
     - target: {fileID: 1301228032263173592, guid: 29c78fba6ca4a794a80cc0fd66e6866e,
         type: 3}
@@ -1047,6 +1072,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1301228032263173592, guid: 29c78fba6ca4a794a80cc0fd66e6866e,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1301228032263173592, guid: 29c78fba6ca4a794a80cc0fd66e6866e,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1301228032263173592, guid: 29c78fba6ca4a794a80cc0fd66e6866e,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 29c78fba6ca4a794a80cc0fd66e6866e, type: 3}
@@ -1161,6 +1201,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Truck (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 100008, guid: b70eb1cf1be37564f8063fba2095584b, type: 3}
+      propertyPath: m_TagString
+      value: Truck
+      objectReference: {fileID: 0}
     - target: {fileID: 400008, guid: b70eb1cf1be37564f8063fba2095584b, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -1204,6 +1248,18 @@ PrefabInstance:
     - target: {fileID: 400008, guid: b70eb1cf1be37564f8063fba2095584b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400008, guid: b70eb1cf1be37564f8063fba2095584b, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 400008, guid: b70eb1cf1be37564f8063fba2095584b, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 400008, guid: b70eb1cf1be37564f8063fba2095584b, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b70eb1cf1be37564f8063fba2095584b, type: 3}

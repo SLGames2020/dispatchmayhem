@@ -32,6 +32,10 @@ public class Movement : MonoBehaviour
 
     private const float closeEnough = 0.05f;
 
+    //public float currentSpeed = 25.0f;
+
+    //private float fullSpeed = 25.0f;
+
     //// Start is called before the first frame update
     void Start()
     {

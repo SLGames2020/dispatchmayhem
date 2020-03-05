@@ -53,7 +53,6 @@ public class City : MonoBehaviour
 
         while (stillOpen)
         {
-            yield return new WaitForSeconds(Random.Range(1, CyM.inst.LOADSPAWNTIME));
             do
             {
                 go = CyM.inst.openCities[Random.Range(0, CyM.inst.openCities.Count - 1)];
@@ -78,6 +77,7 @@ public class City : MonoBehaviour
                 Destroy(ldgo);
                 Debug.Log("Failed to add load to list for " + label);
             }
+            yield return new WaitForSeconds(Random.Range(1, CyM.inst.LOADSPAWNTIME));       //have the yield at the end so we get loads right away
         }
     }
 
