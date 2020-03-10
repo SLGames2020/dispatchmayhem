@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -23,9 +24,13 @@ public class Movement : MonoBehaviour
 
 
     public float loadDelayTime;                                //the time we will be finished loading/unloading (should come from game manager)
-    public float myTime;
+    //public float myTime;
     private float lastTime;
     private float haulingCost;
+    private float highwayWaitTime = 0.0f;
+           public void SetWaitTime (float wt) { highwayWaitTime = wt; }
+    private DateTime lastGameTime;
+
     private int destinationMarker = 0;
     private int loadMark = -1;                                   //the point in the route list to delay for loading
     private bool travellingToOrigin = true;
@@ -56,7 +61,7 @@ public class Movement : MonoBehaviour
 
         loadDelayTime = Time.time;
         lastTime = Time.time + 1.0f;                            //temporary 1s blocking of mapbox calls so we don't chew up our free alotment
-
+        lastGameTime = GameTime.Inst.gmTime;
         lastPosition = this.transform.position;
     }
 
@@ -73,7 +78,7 @@ public class Movement : MonoBehaviour
             button_play = false;
         }
 
-        myTime = Time.time;
+        //myTime = Time.time;
 
         if (destinationMarker < route.Count)                                    //On Route
         {
@@ -93,7 +98,12 @@ public class Movement : MonoBehaviour
                     NM.Inst.GetRoute(mapSupport.gps, destination, FoundRoute);  //reroute to the destination
                 }
             }
-            else if (loadMark != -1)                        //only move if we've received a loading point
+            else if (highwayWaitTime > 0.0f)                                    //the highway wait timing is seperate here so we can have
+            {                                                                   //different hooks for the hazards and the loading/unloading delay times
+                TimeSpan t = GameTime.Inst.gmTime - lastGameTime;               
+                highwayWaitTime -= (float)t.TotalHours;
+            }                                                                   
+            else if (loadMark != -1)                                            //only move if we've received a loading point
             {
                 Vector2 tv2 = route[destinationMarker];
                 Vector2 lastgps = mapSupport.gps;
@@ -107,7 +117,7 @@ public class Movement : MonoBehaviour
                 Vector3 newlook = this.transform.position - lastPosition;
                 Quaternion newrot = Quaternion.FromToRotation(this.transform.forward, newlook);
                 this.transform.rotation = Quaternion.Slerp(this.transform.rotation,newrot, 1.0f * Time.deltaTime);
-                lastPosition = this.transform.position;
+                //lastPosition = this.transform.position;
 
                 if ((this.transform.rotation.x < 0 && this.transform.rotation.y > 0) ||
                     (this.transform.rotation.x > 0 && this.transform.rotation.y > 0))
@@ -132,8 +142,18 @@ public class Movement : MonoBehaviour
                 destinationMarker = route.Count;                       //when all is done, stop everything
             }
         }
+        lastGameTime = GameTime.Inst.gmTime;
     }
+    /****************************************************************
+        Move
 
+        This method is responsible to advancing object forward given
+        it's current position, where it's going, and a speed value
+
+        Not that this will eventually have to include using the gametime
+        to factoring in the game speed
+
+    ******************************************************************/
     public Vector2 Move(Vector2 CurrentPosition, Vector2 Destination, float speed)
     {
         Vector2 NewDestination = Destination - CurrentPosition;
@@ -142,6 +162,7 @@ public class Movement : MonoBehaviour
         //Debug.Log("CurrentPosition: " + CurrentPosition);
         return NewLoc;
     }
+
     /****************************************************************
         loadTruck
         
@@ -240,7 +261,7 @@ public class Movement : MonoBehaviour
         float deltaphi = DegsToRads(dest.y - orig.y);
         float deltlambda = DegsToRads(dest.x - orig.x);
 
-        const float r = 3958.755866f;
+        const float r = 3958.755866f;                                       //radius of the earth
 
         float a = (Mathf.Sin(deltaphi / 2.0f) * Mathf.Sin(deltaphi / 2.0f))
                 + (Mathf.Cos(phi1) * Mathf.Cos(phi2) 
