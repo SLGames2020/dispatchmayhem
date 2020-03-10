@@ -8,7 +8,7 @@ public class Movement : MonoBehaviour
     public routeCallBack FoundRoute;
 
     [HideInInspector]public GameObject load;
-    public Button assButt;
+    //public Button assButt;
     public AudioSource button;
 
     public float haulDistance = 0.0f;
@@ -46,7 +46,7 @@ public class Movement : MonoBehaviour
 
         //Debug.Log("Adding Truck");
         UIM.inst.AddToTruckList(this.gameObject);
-        assButt.onClick.AddListener(delegate { loadTruck(); } );
+        //assButt.onClick.AddListener(delegate { loadTruck(); } );
         button = GetComponent<AudioSource>();
         button_play = false;
 
@@ -155,8 +155,10 @@ public class Movement : MonoBehaviour
     *****************************************************************/
     public void loadTruck()
     {
+        Debug.Log("loadTruck");  //icon and/or error sound is needed here
         if (UIM.inst.vehicleSelected == this.gameObject)
         {
+            Debug.Log("loadTruck 2");  //icon and/or error sound is needed here
             if (Time.time < loadDelayTime)          //if we are currently being loaded/unloaded
             {
                 Debug.Log("We are still Loading");  //icon and/or error sound is needed here

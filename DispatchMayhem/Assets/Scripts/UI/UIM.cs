@@ -10,7 +10,16 @@ public class UIM : MonoBehaviour
 
     public enum UIState { UNDEFINED, SELECT, ADD, DELETE };
 
+    public GameObject AnalyticsPanel;
+    public GameObject ShopPanel;
+    public GameObject SettingsPanel;
+    public GameObject TrucksPanel;
+    public GameObject JobsPanel;
 
+    public GameObject[] Trucks;
+
+    // JD TODO: revisit these being in here. Should be within a Jobs file on it's own, not in the main menu manager
+    // for now just get this working with new architecture
     public GameObject listItemTemplate;
     public GameObject loadBoxContent;
     public GameObject vehicleBoxContent;
@@ -25,6 +34,8 @@ public class UIM : MonoBehaviour
 //    public UIState state = UIState.UNDEFINED;
 //    public int loadIdx = -1;
 //    public int truckIdx = -1;
+
+
 
     void Awake()
     {
@@ -54,6 +65,8 @@ public class UIM : MonoBehaviour
         instance = null;
     }
 
+    // JD TODO: revisit these being in here. Should be within a Jobs file on it's own, not in the main menu manager
+    // for now just get this working with new architecture
     /****************************************************************************
        AddTruckToList
 
@@ -66,8 +79,6 @@ public class UIM : MonoBehaviour
     *****************************************************************************/
     public bool AddToTruckList(GameObject truckGO)
     {
-
-        //Debug.Log("Truck being added");
         GameObject template = Instantiate(listItemTemplate, this.transform.position, Quaternion.identity);
         template.GetComponent<ListObject>().listGO = truckGO;
 
@@ -79,7 +90,8 @@ public class UIM : MonoBehaviour
 
         return true;
     }
-
+    // JD TODO: revisit these being in here. Should be within a Jobs file on it's own, not in the main menu manager
+    // for now just get this working with new architecture
     /****************************************************************************
        AddLoadToList 
 
@@ -102,20 +114,48 @@ public class UIM : MonoBehaviour
 
         return true;
     }
-
+    // JD TODO: revisit these being in here. Should be within a Jobs file on it's own, not in the main menu manager
+    // for now just get this working with new architecture
     public void AssignLoad(GameObject assLoad, GameObject listItem)
     {
         loadSelected = assLoad;
         loadSelectedListItem = listItem;
+        JobsPanel.transform.Find("LoadBox").gameObject.SetActive(false);
+        JobsPanel.transform.Find("VehicleBox").gameObject.SetActive(true);
         Debug.Log("Received assLoad");
     }
-
+    // JD TODO: revisit these being in here. Should be within a Jobs file on it's own, not in the main menu manager
+    // for now just get this working with new architecture
     public bool AssignTruck(GameObject assTruck)
     {
         vehicleSelected = assTruck;
+        //JobsPanel.transform.Find("VehicleBox").gameObject.SetActive(false);
+        JobsPanel.transform.Find("Assign").gameObject.SetActive(true);
 
         Debug.Log("Received assTruck");
         return true;
+    }
+
+
+    public void LoadPanel(GameObject Panel)
+    {
+        ClosePanel();
+        Panel.SetActive(true);
+
+        //JD TODO each panel should have it's own script and call load on it.
+        JobsPanel.transform.Find("VehicleBox").gameObject.SetActive(false);
+        JobsPanel.transform.Find("LoadBox").gameObject.SetActive(true);
+        JobsPanel.transform.Find("Assign").gameObject.SetActive(false);
+    }
+
+    public void ClosePanel()
+    {
+        Debug.Log("close Clicked");
+        AnalyticsPanel.SetActive(false);
+        ShopPanel.SetActive(false);
+        SettingsPanel.SetActive(false);
+        TrucksPanel.SetActive(false);
+        JobsPanel.SetActive(false);
     }
 
     public void exitGame()
