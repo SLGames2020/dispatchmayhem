@@ -9,9 +9,9 @@ public enum CityTrafficLevels { LIGHT, MODERATE, HEAVY, JAMMED }
 public class GameTime : MonoBehaviour
 {
     private static GameTime instance = null;
-    public static GameTime Inst { get { return instance; } }
+    public static GameTime inst { get { return instance; } }
 
-    public Text timeText;
+    //public Text timeText;
 
     public static float[] trafficDelays = { 1.0f, 1.5f, 3.0f, 6.0f };
     public float GetTrafficDelay(int trafficlevel) { return trafficDelays[trafficlevel]; }
@@ -19,12 +19,12 @@ public class GameTime : MonoBehaviour
     [Range(0.3333f, 10.0f)]
     public float timeScale = 10.0f;
 
-    static private DateTime gTime;
-            public DateTime gmTime { get { return gmTime; } }
-    static private int      gHour;
-            public int      gmHour { get { return gHour; } }
-    static private bool     gPM;
-            public bool     gmPM   { get { return gPM; } }
+    private DateTime gTime;
+     public DateTime gmTime { get { return gTime; } }
+    private int      gHour;
+     public int      gmHour { get { return gHour; } }
+    private bool     gPM;
+     public bool     gmPM   { get { return gPM; } }
 
     private static float gmTimeScale = 10.0f;             //base time scale is 1 minute Real Time = 1 hour Game Time (A good playerPref candidate)
     
@@ -71,16 +71,16 @@ public class GameTime : MonoBehaviour
             timeScale = gmTimeScale;
         }
 
-        timeText.text = gTime.ToLongDateString() + "\n" + gTime.ToShortTimeString();
+        //timeText.text = gTime.ToLongDateString() + "\n" + gTime.ToShortTimeString();
 
-        if (timeText.text.Contains("PM"))
-        {
-            gPM = true;
-        }
-        else
-        {
-            gPM = false;
-        }
+        //if (timeText.text.Contains("PM"))
+        //{
+        //    gPM = true;
+        //}
+        //else
+        //{
+        //    gPM = false;
+        //}
     }
 
     public void OnApplicationQuit()
@@ -104,10 +104,14 @@ public class GameTime : MonoBehaviour
     void TimeTick()
     {
         gTime = gmTime.AddMinutes(timeScale/10.0f);                            //yes this is how it works
-        gHour = gTime.Hour;                                                   //quick access value\
-        if (gPM)
+        gHour = gTime.Hour;                                                   //quick access value
+        if (gHour > 11)
         {
-            gHour += 12;
+            gPM = true;
+        }
+        else
+        {
+            gPM = false;
         }
     }
 

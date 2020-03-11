@@ -36,7 +36,7 @@ public class HazM : MonoBehaviour
         locsOnRoads = new List<Vector2>();
         locsOnRoads.Clear();
 
-        Debug.Log("Hazard Manager Awake");
+        //Debug.Log("Hazard Manager Awake");
     }
     // Start is called before the first frame update
     void Start()
@@ -74,7 +74,7 @@ public class HazM : MonoBehaviour
         GameObject insp = Instantiate(inspectorPrefab, this.transform);
         MapSupport maps = insp.GetComponent<MapSupport>();
         maps.gps = locsOnRoads[Random.Range(0, locsOnRoads.Count)];
-        maps.baseScale = new Vector3(0.450f, 0.10f, 0.30f);
+        maps.baseScale = new Vector3(4.50f, 1.0f, 3.0f);
         numOfInspectors++;
         Debug.Log("inspector spawned");
 

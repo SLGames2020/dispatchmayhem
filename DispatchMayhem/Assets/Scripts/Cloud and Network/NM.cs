@@ -57,14 +57,11 @@ public class NM : MonoBehaviour
         }
 
         //FindRoute = MyTestCallBack;
-        Debug.Log("Network Manager Awake");
+        //Debug.Log("Network Manager Awake");
     }
     // Start is called before the first frame update
     void Start()
     {
-        //GetRoute(s, e, FindRoute);
-
-        //StartCoroutine(MakeGetRequest(GetConnectTesturi, "JVT"));
 
     }
 

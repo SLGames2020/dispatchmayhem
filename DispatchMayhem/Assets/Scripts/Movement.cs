@@ -23,13 +23,11 @@ public class Movement : MonoBehaviour
     private Vector2 destination;
 
 
-    public float loadDelayTime;                                //the time we will be finished loading/unloading (should come from game manager)
+    public DateTime loadDelayTime;                                //the time we will be finished loading/unloading (should come from game manager)
     //public float myTime;
     private float lastTime;
     private float haulingCost;
-    private float highwayWaitTime = 0.0f;
-           public void SetWaitTime (float wt) { highwayWaitTime = wt; }
-    private DateTime lastGameTime;
+    private DateTime hazardWaitTime;
 
     private int destinationMarker = 0;
     private int loadMark = -1;                                   //the point in the route list to delay for loading
@@ -59,9 +57,9 @@ public class Movement : MonoBehaviour
         mapSupport = this.gameObject.GetComponent<MapSupport>();
         origin = mapSupport.gps;
 
-        loadDelayTime = Time.time;
+        loadDelayTime = GameTime.inst.gmTime;                   //just some safety initialization
+        hazardWaitTime = GameTime.inst.gmTime;
         lastTime = Time.time + 1.0f;                            //temporary 1s blocking of mapbox calls so we don't chew up our free alotment
-        lastGameTime = GameTime.Inst.gmTime;
         lastPosition = this.transform.position;
     }
 
@@ -82,7 +80,7 @@ public class Movement : MonoBehaviour
 
         if (destinationMarker < route.Count)                                    //On Route
         {
-            if (Time.time < loadDelayTime )                                      //if we are loading, don't move
+            if (GameTime.inst.gmTime < loadDelayTime )                                      //if we are loading, don't move
             {
                 //Need a loading graphic/state here
                 Debug.Log("loading/unloading");
@@ -91,17 +89,17 @@ public class Movement : MonoBehaviour
             {
                 Debug.Log("Reached Marker");
                 loadMark = -1;                                                  //flush out the load point until we get a new point
-                loadDelayTime = Time.time + 6.0f;                               //wait an hour for unloading (this needs to reference a proper Time Manager Delay reference)
+                loadDelayTime = GameTime.inst.gmTime;
+                loadDelayTime.AddHours(1.0f);                                   //wait an hour for unloading (this needs to reference a proper Time Manager Delay reference)
                 if ((mapSupport.gps - destination).magnitude > closeEnough)     //if we're not at the destination
                 {
                     Debug.Log("Getting route to Destination");                  
                     NM.Inst.GetRoute(mapSupport.gps, destination, FoundRoute);  //reroute to the destination
                 }
             }
-            else if (highwayWaitTime > 0.0f)                                    //the highway wait timing is seperate here so we can have
+            else if (GameTime.inst.gmTime < hazardWaitTime)                     //the highway wait timing is seperate here so we can have
             {                                                                   //different hooks for the hazards and the loading/unloading delay times
-                TimeSpan t = GameTime.Inst.gmTime - lastGameTime;               
-                highwayWaitTime -= (float)t.TotalHours;
+                Debug.Log("Hazard Waiting");
             }                                                                   
             else if (loadMark != -1)                                            //only move if we've received a loading point
             {
@@ -142,7 +140,6 @@ public class Movement : MonoBehaviour
                 destinationMarker = route.Count;                       //when all is done, stop everything
             }
         }
-        lastGameTime = GameTime.Inst.gmTime;
     }
     /****************************************************************
         Move
@@ -163,6 +160,22 @@ public class Movement : MonoBehaviour
         return NewLoc;
     }
 
+    /*******************************************************************
+        SetWaitTime
+
+        This function is used by the hazards to set a number of hours
+        for the truck to wait. 
+
+        Basically it adds the number of hours to wait to the current
+        game time and will stop the truck until the game time is
+        greater than that time.
+
+    ********************************************************************/
+    public void SetWaitTime(float wt)
+    {
+        hazardWaitTime = GameTime.inst.gmTime;
+        hazardWaitTime.AddHours(wt);
+    } 
     /****************************************************************
         loadTruck
         
@@ -176,13 +189,13 @@ public class Movement : MonoBehaviour
     *****************************************************************/
     public void loadTruck()
     {
-        Debug.Log("loadTruck");  //icon and/or error sound is needed here
+        Debug.Log("load Truck");                        //icon and/or error sound is needed here
         if (UIM.inst.vehicleSelected == this.gameObject)
         {
-            Debug.Log("loadTruck 2");  //icon and/or error sound is needed here
-            if (Time.time < loadDelayTime)          //if we are currently being loaded/unloaded
+            Debug.Log("loadT ruck 2");                  //icon and/or error sound is needed here
+            if (GameTime.inst.gmTime < loadDelayTime)   //if we are currently being loaded/unloaded
             {
-                Debug.Log("We are still Loading");  //icon and/or error sound is needed here
+                Debug.Log("We are still Loading");      //icon and/or error sound is needed here
             }
             else
             {
@@ -191,7 +204,6 @@ public class Movement : MonoBehaviour
                 travellingToOrigin = false;
                 destinationMarker = 0;
                 loadMark = -1;                              //flag that we don't have a route (loading point) yet
-                loadDelayTime = Time.time;                  //default to moving right away (to the load origin)
                 haulCost = 0.0f;
                 haulDistance = 0.0f;
 
@@ -209,13 +221,13 @@ public class Movement : MonoBehaviour
                         travellingToOrigin = true;
                         Debug.Log("Getting route to origin");
                         NM.Inst.GetRoute(mapSupport.gps, origin, FoundRoute);
-                        loadDelayTime = Time.time;                              //no delaying to go pick up the load
+                        loadDelayTime = GameTime.inst.gmTime;                   //no delaying to go pick up the load
                         lastTime = Time.time + 1.0f;                            //block us from calling mapbox more than once per second
                     }
                     else
                     {
-                        Debug.Log("Waiting To Load");
-                        loadDelayTime = Time.time + 6.0f;                      //1 minute hard coded for now, but this should reference a Time Manager "1 Hour" time value
+                        loadDelayTime = GameTime.inst.gmTime;
+                        loadDelayTime.AddHours(1.0f);                                   //wait an hour for unloading (this needs to reference a proper Time Manager Delay reference)
                     }
                 }
                 Destroy(UIM.inst.loadSelectedListItem);                           //remove the load from the selection list

@@ -21,7 +21,7 @@ public class GM : MonoBehaviour
 
     void Awake()
     {
-        Debug.Log("Game Manager Awake");
+        //Debug.Log("Game Manager Awake");
 
         if (instance == null)
         {

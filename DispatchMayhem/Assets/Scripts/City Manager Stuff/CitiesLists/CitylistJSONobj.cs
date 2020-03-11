@@ -2,6 +2,8 @@
 using System;
 using UnityEngine;
 
+//this came from here (https://simplemaps.com/data/ca-cities) and is free as long as we credit them
+//other countries list can also be found there when required
 [Serializable]
 public class CityJSONobj
 {

@@ -12,15 +12,16 @@ public class Inspector : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        lastHour = GameTime.Inst.gmHour;
+        Debug.Log("Inspector Started");
+        lastHour = GameTime.inst.gmHour;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (GameTime.Inst.gmHour != lastHour)
+        if (GameTime.inst.gmHour != lastHour)
         {
-            lastHour = GameTime.Inst.gmHour;
+            lastHour = GameTime.inst.gmHour;
             lifespan -= 1.0f;
             if (lifespan <= 0.0f)
             {
@@ -31,6 +32,7 @@ public class Inspector : MonoBehaviour
     //called on contact with another collider or rigid body
     void OnCollisionEnter(Collision col)
     {
+        Debug.Log("Inspector Collision Detected");
         if (col.gameObject.tag == "Truck")
         {
             float wtime = HazM.Inst.GetInspectionTime();
