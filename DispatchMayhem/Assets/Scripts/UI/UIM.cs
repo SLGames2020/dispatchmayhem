@@ -15,6 +15,7 @@ public class UIM : MonoBehaviour
     public GameObject SettingsPanel;
     public GameObject TrucksPanel;
     public GameObject JobsPanel;
+    public GameObject TruckerPanel;
 
     public GameObject[] Trucks;
 
@@ -45,12 +46,12 @@ public class UIM : MonoBehaviour
 
     public void ClosePanel()
     {
-        Debug.Log("close Clicked");
         AnalyticsPanel.SetActive(false);
         ShopPanel.SetActive(false);
         SettingsPanel.SetActive(false);
         TrucksPanel.SetActive(false);
         JobsPanel.SetActive(false);
+        TruckerPanel.SetActive(false);
     }
 
     public void exitGame()

@@ -55,9 +55,7 @@ public class NM : MonoBehaviour
         {
             Destroy(this.gameObject);
         }
-
-        //FindRoute = MyTestCallBack;
-        Debug.Log("Network Manager Awake");
+        
     }
     // Start is called before the first frame update
     void Start()

@@ -21,10 +21,8 @@ public class JobsPanel : BasePanel
 
     int numListItems = 0;
 
-
     public bool LoadActiveItems()
     {
-        Debug.Log("Loading Active Items");
         foreach (Transform child in ActiveloadBoxContent.transform)
         {
             GameObject.Destroy(child.gameObject);
@@ -32,71 +30,68 @@ public class JobsPanel : BasePanel
 
         foreach (Load ld in GM.inst.ActiveJobs)
         {
-            Debug.Log("Loading Active Items 1");
-            GameObject template = Instantiate(ActivelistItemTemplate, this.transform.position, Quaternion.identity);
-//            template.GetComponent<ListObject>().listGO = ldgo;
+            if (ld.assigned == false)
+            {
+                GameObject template = Instantiate(ActivelistItemTemplate, this.transform.position, Quaternion.identity);
 
-            string txt = ld.originLabel + " to " + ld.destinationLabel;
-            template.transform.SetParent(ActiveloadBoxContent.transform, false);
-            template.GetComponentInChildren<Text>().text = txt;
+                string txt = ld.originLabel + " to " + ld.destinationLabel;
+                template.transform.SetParent(ActiveloadBoxContent.transform, false);
+                template.GetComponentInChildren<Text>().text = txt;
 
-            Text SrcText = template.transform.Find("Pickup").gameObject.GetComponent<Text>();
-            SrcText.text = ld.originLabel;
-            Text DestText = template.transform.Find("DropOff").gameObject.GetComponent<Text>();
-            DestText.text = ld.destinationLabel;
-            Text timeText = template.transform.Find("Time").gameObject.GetComponent<Text>();
-            timeText.text = ld.DueDate.DayOfWeek.ToString() + " " + ld.DueDate.ToShortTimeString();
+                Text SrcText = template.transform.Find("Pickup").gameObject.GetComponent<Text>();
+                SrcText.text = ld.originLabel;
+                Text DestText = template.transform.Find("DropOff").gameObject.GetComponent<Text>();
+                DestText.text = ld.destinationLabel;
+                Text timeText = template.transform.Find("Time").gameObject.GetComponent<Text>();
+                timeText.text = ld.DueDate.DayOfWeek.ToString() + " " + ld.DueDate.ToShortTimeString();
+                Text LoadText = template.transform.Find("LoadText").gameObject.GetComponent<Text>();
+                LoadText.text = ld.value.ToString();
 
-            GameObject LoadTypeIcon = template.transform.Find("LoadType").gameObject;
-            
-            GameObject driver1 = template.transform.Find("Driver1").gameObject;
-            GameObject driver2 = template.transform.Find("Driver2").gameObject;
-            GameObject driver3 = template.transform.Find("Driver3").gameObject;
-            SetupDriverButton(driver1, 0, ld);
-            SetupDriverButton(driver2, 1, ld);
-            SetupDriverButton(driver3, 2, ld);
+                GameObject LoadTypeIcon = template.transform.Find("LoadType").gameObject;
 
+                GameObject driver1 = template.transform.Find("Driver1").gameObject;
+                GameObject driver2 = template.transform.Find("Driver2").gameObject;
+                GameObject driver3 = template.transform.Find("Driver3").gameObject;
+
+                SetupDriverButton(driver1, 0, ld, template);
+                SetupDriverButton(driver2, 1, ld, template);
+                SetupDriverButton(driver3, 2, ld, template);
+            }
         }
 
         return true;
     }
 
-    private void SetupDriverButton(GameObject driver, int DriverID, Load load)
+    private void SetupDriverButton(GameObject driver, int DriverID, Load load, GameObject listItem)
     {
         driver.SetActive(false);
-        if (load.assigned == true)
+
+        if (GM.inst.Trucks[DriverID] != null)
         {
-            if (load.driverID == DriverID)
+            driver.SetActive(true);
+            if (GM.inst.Trucks[DriverID].GetComponent<Movement>().currLoad == null)
             {
-                driver.SetActive(true);
+                driver.GetComponent<Button>().onClick.AddListener(delegate { AssignLoad(load, DriverID, listItem); });
+            }
+            else
+            {
+                Color FadeColor = driver.GetComponent<Image>().color;
+                FadeColor.r = 0.5f;
+                FadeColor.g = 0.5f;
+                FadeColor.b = 0.5f;
+                FadeColor.a = 0.25f;
+                driver.GetComponent<Image>().color = FadeColor;
+                driver.transform.GetChild(0).GetComponent<Image>().color = FadeColor;
+                driver.transform.GetChild(1).gameObject.SetActive(false);
             }
         }
-        else
-        {
-            if (GM.inst.Trucks[DriverID] != null)
-            {
-                driver.SetActive(true);
-                if (GM.inst.Trucks[DriverID].GetComponent<Movement>().currLoad == null)
-                {
-                    driver.GetComponent<Button>().onClick.AddListener(delegate { AssignLoad(load, DriverID); });
-                }
-                else
-                {
-                    Color FadeColor = driver.GetComponent<Image>().color;
-                    FadeColor.r = 0.5f;
-                    FadeColor.g = 0.5f;
-                    FadeColor.b = 0.5f;
-                    FadeColor.a = 0.25f;
-                    driver.GetComponent<Image>().color = FadeColor;
-                    driver.transform.GetChild(0).GetComponent<Image>().color = FadeColor;
-                }
-            }
-        }
+
     }
 
-    public void AssignLoad(Load assLoad, int driverIndex)
+    public void AssignLoad(Load assLoad, int driverIndex, GameObject listItem)
     {
         GM.inst.AssignJob(assLoad, driverIndex);
+        Destroy(listItem);
         LoadActiveItems();
         Close();
     }

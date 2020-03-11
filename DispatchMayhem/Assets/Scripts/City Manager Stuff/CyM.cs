@@ -24,7 +24,7 @@ public class CyM : MonoBehaviour
 
     void Awake()
     {
-        Debug.Log("City Manager Awake");
+        //Debug.Log("City Manager Awake");
 
         if (instance == null)
         {

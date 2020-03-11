@@ -17,6 +17,7 @@ public class TruckerUI : MonoBehaviour
     public int TruckerID;
     public string name;
 
+    public GameObject TruckerPanel;
 
     // Start is called before the first frame update
     void Start()
@@ -27,12 +28,16 @@ public class TruckerUI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Texts[3].text = "ETA:" + (int)(GM.inst.Trucks[TruckerID].GetComponent<Movement>().timeRemaining / 60) + "m " + (int)(GM.inst.Trucks[TruckerID].GetComponent<Movement>().timeRemaining % 60) + "s";
+        if (GM.inst.Trucks[TruckerID] != null && GM.inst.Trucks[TruckerID].GetComponent<Movement>() != null)
+        {
+            Texts[3].text = "ETA: " + (int)(GM.inst.Trucks[TruckerID].GetComponent<Movement>().timeRemaining / 60) + "m " + (int)(GM.inst.Trucks[TruckerID].GetComponent<Movement>().timeRemaining % 60) + "s";
+        }
     }
 
 
     public void AnimateIn()
     {
+        UIM.inst.LoadPanel(TruckerPanel);
         if (GM.inst.Trucks[TruckerID].GetComponent<Load>() == null)
         {
             //popup load selection to deliver.

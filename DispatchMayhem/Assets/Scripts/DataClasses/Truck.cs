@@ -11,7 +11,7 @@ public class Truck : MonoBehaviour
 
     public TruckStates status = TruckStates.IDLE;
 
-    TruckType[] SemiTruck =
+   /* TruckType[] SemiTruck =
     {
          new TruckType(0, 500, 0, 0, 115, 125000.00f, 500.00f),
          new TruckType(0, 550, 0, 0, 115, 150000.00f, 600.00f),
@@ -31,7 +31,7 @@ public class Truck : MonoBehaviour
             new TruckType(0, 400, 0, 400, 110, 125000.00f, 450.00f),
             new TruckType(0, 450, 0, 450, 120, 150000.00f, 500.00f),
     };
-
+    */
     public void Loading()
     {
 
