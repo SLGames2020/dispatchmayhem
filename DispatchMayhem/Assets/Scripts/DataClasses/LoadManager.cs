@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class LoadManager : MonoBehaviour
 {
-    
-
     public string originLabel;
     public Vector2 origin;
     public string destinationLabel;
@@ -88,10 +86,6 @@ public class LoadManager : MonoBehaviour
             pay = 100 * space;
         }
 
-    }
-
-    
-
-    
+    }   
 
 }

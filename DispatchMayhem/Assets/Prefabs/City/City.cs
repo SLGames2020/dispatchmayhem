@@ -67,9 +67,10 @@ public class City : MonoBehaviour
             ld.origin = mapSupport.gps;
             ld.destinationLabel = go.GetComponent<City>().label;
             ld.destination = des;
+            ld.GenerateGoodsAndPrices();
             ldgo.name = label + " load: " + loads.Count;
             ldgo.transform.parent = this.transform;
-            if (UIM.inst.AddToLoadList(ldgo))
+            if (UIM.inst.JobsPanel.GetComponent<JobsPanel>().AddToLoadList(ldgo))
             {
                 loads.Add(ldgo);
             }

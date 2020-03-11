@@ -17,7 +17,10 @@ public class GM : MonoBehaviour
     public static GM inst { get { return instance; } }
 
     public Country[] countriesSupported = { new Country("CA", 400000) };         //the ISO 3166-2 codes, and minimum supported city size for the countries we're supporting (eventually should be made user configurable)
-                                                                                //this came from here (https://simplemaps.com/data/ca-cities) and is free as long as we credit them
+                                                                                 //this came from here (https://simplemaps.com/data/ca-cities) and is free as long as we credit them                                                                                
+
+    public GameObject[] Trucks;
+    [HideInInspector] public List<Load> ActiveJobs = new List<Load>();
 
     void Awake()
     {
@@ -51,6 +54,28 @@ public class GM : MonoBehaviour
         instance = null;
     }
 
+    public void TakeJob(GameObject assLoad)
+    {
+        ActiveJobs.Add(assLoad.GetComponent<Load>());
+    }
+
+    public void AssignJob(Load load, int DriverIndex)
+    {
+        load.driverID = DriverIndex;
+        load.assigned = true;
+        AssignLoadToTruck(DriverIndex, load);
+    }
+
+    /****************************************************************************
+       AddTruckToList
+       As Trucks are added to the map they are added to our GameManager Script.
+
+    *****************************************************************************/
+    public void AssignLoadToTruck(int truckIndex, Load loaddata)
+    {
+        Debug.Log("assigning to Truck :" + truckIndex);
+        Trucks[truckIndex].GetComponent<Movement>().loadTruck(loaddata);
+    }
     ///*****************************************************************************
     //    AddCityTo/RemoveCityFromMasterList
 
@@ -86,5 +111,5 @@ public class GM : MonoBehaviour
     //        Debug.LogError("attempt to remove Null city from master");
     //    }
     //}
-    
+
 }

@@ -11,9 +11,13 @@ public class Movement : MonoBehaviour
     //public Button assButt;
     public AudioSource button;
 
+    [HideInInspector] public Load currLoad;
+
     public float haulDistance = 0.0f;
     public float haulCost = 0.0f;
     public bool button_play;
+
+    public bool hasLoad = false;
 
     private MapSupport mapSupport;
     private List<Vector2> route;
@@ -30,6 +34,8 @@ public class Movement : MonoBehaviour
     private int loadMark = -1;                                   //the point in the route list to delay for loading
     private bool travellingToOrigin = true;
 
+    [HideInInspector] public float timeRemaining;
+
     //// Start is called before the first frame update
     void Start()
     {
@@ -39,7 +45,7 @@ public class Movement : MonoBehaviour
         FoundRoute = RouteCallBack;
 
         //Debug.Log("Adding Truck");
-        UIM.inst.AddToTruckList(this.gameObject);
+        //GM.inst.AddToTruckList(this.gameObject);
         //assButt.onClick.AddListener(delegate { loadTruck(); } );
         button = GetComponent<AudioSource>();
         button_play = false;
@@ -71,7 +77,8 @@ public class Movement : MonoBehaviour
 
         if (destinationMarker < route.Count)                                    //On Route
         {
-            if (Time.time < loadDelayTime )                                      //if we are loading, don't move
+            currLoad.state = Load.LoadState.DELIVERING;
+            if (Time.time < loadDelayTime)                                      //if we are loading, don't move
             {
                 //Need a loading graphic/state here
                 Debug.Log("loading/unloading");
@@ -83,7 +90,7 @@ public class Movement : MonoBehaviour
                 loadDelayTime = Time.time + 6.0f;                               //wait an hour for unloading (this needs to reference a proper Time Manager Delay reference)
                 if ((mapSupport.gps - destination).magnitude > 0.05f)            //if we're not at the destination
                 {
-                    Debug.Log("Getting route to Destination");                  
+                    Debug.Log("Getting route to Destination");
                     NM.Inst.GetRoute(mapSupport.gps, destination, FoundRoute);  //reroute to the destination
                 }
             }
@@ -100,7 +107,7 @@ public class Movement : MonoBehaviour
 
                 Vector3 newlook = this.transform.position - lastPosition;
                 Quaternion newrot = Quaternion.FromToRotation(this.transform.forward, newlook);
-                this.transform.rotation = Quaternion.Slerp(this.transform.rotation,newrot, 1.0f * Time.deltaTime);
+                this.transform.rotation = Quaternion.Slerp(this.transform.rotation, newrot, 1.0f * Time.deltaTime);
                 lastPosition = this.transform.position;
 
                 if ((this.transform.rotation.x < 0 && this.transform.rotation.y > 0) ||
@@ -122,6 +129,12 @@ public class Movement : MonoBehaviour
                 if ((mapSupport.gps - destination).magnitude < 0.1f)   //if we're close to the destination, and we have travelled a route
                 {
                     Debug.Log("Load has been delivered!");
+                    currLoad.state = Load.LoadState.DELIVERED;
+                    // JD TODO: at this point we need to ensure the coin icon appears in the TruckerUI panel to claim the money. 
+                    // We will need a new panel created to claim the job which upon claim, assigns the money to the players currency 
+                    // in the game manager then makes the load assigned to the truck null as well as removes it from the activeJobs 
+                    // list in the game manager.
+                    currLoad = null;
                 }
                 destinationMarker = route.Count;                       //when all is done, stop everything
             }
@@ -132,8 +145,9 @@ public class Movement : MonoBehaviour
     {
         Vector2 NewDestination = Destination - CurrentPosition;
         Vector2 NewLoc = (NewDestination.normalized * speed)*Time.deltaTime + CurrentPosition;
-        //Debug.Log("Destination: " + Destination);
-        //Debug.Log("CurrentPosition: " + CurrentPosition);
+
+        timeRemaining = (Destination / (NewDestination.normalized * speed) * Time.deltaTime + CurrentPosition).magnitude;
+
         return NewLoc;
     }
     /****************************************************************
@@ -147,53 +161,46 @@ public class Movement : MonoBehaviour
         route from our current position to the start position.
 
     *****************************************************************/
-    public void loadTruck()
+    public void loadTruck(Load newLoad)
     {
-        Debug.Log("loadTruck");  //icon and/or error sound is needed here
-        if (UIM.inst.vehicleSelected == this.gameObject)
+        if (Time.time < loadDelayTime)          //if we are currently being loaded/unloaded
         {
-            Debug.Log("loadTruck 2");  //icon and/or error sound is needed here
-            if (Time.time < loadDelayTime)          //if we are currently being loaded/unloaded
-            {
-                Debug.Log("We are still Loading");  //icon and/or error sound is needed here
-            }
-            else
-            {
-                load = UIM.inst.loadSelected;
-                route.Clear();
-                travellingToOrigin = false;
-                destinationMarker = 0;
-                loadMark = -1;                              //flag that we don't have a route (loading point) yet
-                loadDelayTime = Time.time;                  //default to moving right away (to the load origin)
-                haulCost = 0.0f;
-                haulDistance = 0.0f;
+            Debug.Log("We are still Loading");  //icon and/or error sound is needed here
+        }
+        else
+        {
+            route.Clear();
+            travellingToOrigin = false;
+            destinationMarker = 0;
+            loadMark = -1;                              //flag that we don't have a route (loading point) yet
+            loadDelayTime = Time.time;                  //default to moving right away (to the load origin)
+            haulCost = 0.0f;
+            haulDistance = 0.0f;
+            currLoad = newLoad;
+            currLoad.state = Load.LoadState.ASSIGNED;
+            //haulingCost = ld.haulingCost;
+            origin = currLoad.origin;
+            destination = currLoad.destination;
+            string name = currLoad.destinationLabel;
 
-                Load ld = load.GetComponent<Load>();
-                haulingCost = ld.haulingCost;
-                origin = ld.origin;
-                destination = ld.destination;
-                string name = ld.destinationLabel;
-                Debug.Log("Load Destination: " + name);
-
-                if ((lastTime < Time.time) || (destination != Vector2.zero))
+            if ((lastTime < Time.time) || (destination != Vector2.zero))
+            {
+                if ((mapSupport.gps - origin).magnitude > 0.1f)             //if we are not close to the loads origin
                 {
-                    if ((mapSupport.gps - origin).magnitude > 0.1f)             //if we are not close to the loads origin
-                    {
-                        travellingToOrigin = true;
-                        Debug.Log("Getting route to origin");
-                        NM.Inst.GetRoute(mapSupport.gps, origin, FoundRoute);
-                        loadDelayTime = Time.time;                              //no delaying to go pick up the load
-                        lastTime = Time.time + 1.0f;                            //block us from calling mapbox more than once per second
-                    }
-                    else
-                    {
-                        Debug.Log("Waiting To Load");
-                        loadDelayTime = Time.time + 6.0f;                      //1 minute hard coded for now, but this should reference a Time Manager "1 Hour" time value
-                    }
+                    travellingToOrigin = true;
+                    Debug.Log("Getting route to origin");
+                    NM.Inst.GetRoute(mapSupport.gps, origin, FoundRoute);
+                    loadDelayTime = Time.time;                              //no delaying to go pick up the load
+                    lastTime = Time.time + 1.0f;                            //block us from calling mapbox more than once per second
                 }
-                Destroy(UIM.inst.loadSelectedListItem);                           //remove the load from the selection list
+                else
+                {
+                    Debug.Log("Waiting To Load");
+                    loadDelayTime = Time.time + 6.0f;                      //1 minute hard coded for now, but this should reference a Time Manager "1 Hour" time value
+                }
             }
         }
+        
     }
 
     /*******************************
