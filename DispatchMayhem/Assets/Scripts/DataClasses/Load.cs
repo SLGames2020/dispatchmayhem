@@ -4,35 +4,45 @@ using UnityEngine;
 
 public class Load : MonoBehaviour
 {
-    public string originLabel;
     public Vector2 origin;
-    public string destinationLabel;
     public Vector2 destination;
 
-    public float haulingCost = 1.5f;            //default/temporaty $1.5/mile
+    public string originLabel; // where to pickup load
+    public string destinationLabel; // where to drop off load
 
-    /*int payouts[NUM_LOAD_TYPES][2] = 
-    // MIN               /ax
+    public float value; // cost gained or lost from successfully delivering or failing to deliver in time.
+    public System.DateTime DueDate; // when the load needs to be dropped off by.
+    public int typeIDX; // type of load i.e (OIL, WATER, IBEAMS, CORN etc...)
+
+    public bool assigned = false;
+    public int driverID = -1; // unassigned
+
+    public enum LoadState
     {
-        { 0.5f ,  1.0f}, // MILK
-        { 0.5f ,  1.0f}, // OIL
-        { 0.5f ,  1.0f}, // WATER
-        { 0.5f ,  1.0f}, // MILK
-        { 0.5f ,  1.0f}, // MILK
+        UNASSIGNED,
+        ASSIGNED,
+        DELIVERING,
+        DELIVERED,
+        PAID,
+
+        NUM_LOAD_STATES
     }
-    */
 
+    public LoadState state;
 
-    public int typeIDX;
-    public float weight = 0.0f;
+    public Load()
+    {
+        state = LoadState.UNASSIGNED;
+    }
 
-   // public float Pay()
-    //{
-        //return Random.Range(payouts[typeIDX][0], payouts[typeIDX][1]);
-    //}
-    
-    public Load() { }
-    //public Load(Vector2 o, Vector2 d, int t=0, float w=1000.0f, float p=1.5f)
-    //           { origin = o; destination = d; typeIDX = t; weight = w; pay = p; }
+    public void GenerateGoodsAndPrices()
+    {
+        typeIDX = Random.Range(0, 2); // create an enum later for all the types of load contents
 
+        double tmpDueInc = Random.Range(0.1000f, 6.600f);
+        DueDate = System.DateTime.Now.Add(System.TimeSpan.FromDays( tmpDueInc));
+
+        //JD TODO: in the future make load contents and due date from current time scale the price
+        value = Random.Range(100, 10000);
+    }
 }
