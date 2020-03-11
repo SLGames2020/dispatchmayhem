@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4777644280487526802}
   - component: {fileID: 3416988620658381929}
-  - component: {fileID: 8184480453316128103}
+  - component: {fileID: 3255010968932075421}
   - component: {fileID: 4777644280487526803}
   - component: {fileID: 4777644280487526812}
   - component: {fileID: 4777644280487526813}
@@ -49,7 +49,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gps: {x: 0, y: 0}
   baseScale: {x: 200, y: 200, z: 200}
---- !u!114 &8184480453316128103
+--- !u!114 &3255010968932075421
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -58,9 +58,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 4777644280487526814}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a03726c16043c804dbb31f3d20a526a6, type: 3}
+  m_Script: {fileID: 11500000, guid: 047d15612a721dd418801fdcc3f15322, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lifespan: 12
 --- !u!33 &4777644280487526803
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -117,5 +118,5 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 0.5, y: 1, z: 0.5}
   m_Center: {x: 0, y: 0, z: 0}

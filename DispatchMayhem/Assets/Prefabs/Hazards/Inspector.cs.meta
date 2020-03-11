@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< HEAD:DispatchMayhem/Assets/Prefabs/Hazards/Inspector.cs.meta
 guid: 047d15612a721dd418801fdcc3f15322
+=======
+guid: 9ab3b7988bcc1d744b63337a84a43bf3
+>>>>>>> master:DispatchMayhem/Assets/Scripts/Sounds/MainMusic.cs.meta
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2

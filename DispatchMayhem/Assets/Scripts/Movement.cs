@@ -18,7 +18,7 @@ public class Movement : MonoBehaviour
 
     private MapSupport mapSupport;
     private List<Vector2> route;
-    private Vector3 lastPosition;
+    private Vector3[] lastPosition;
     private Vector2 origin;
     private Vector2 destination;
 
@@ -60,7 +60,8 @@ public class Movement : MonoBehaviour
         loadDelayTime = GameTime.inst.gmTime;                   //just some safety initialization
         hazardWaitTime = GameTime.inst.gmTime;
         lastTime = Time.time + 1.0f;                            //temporary 1s blocking of mapbox calls so we don't chew up our free alotment
-        lastPosition = this.transform.position;
+        lastPosition = new Vector3[] { this.transform.position, this.transform.position, this.transform.position, this.transform.position, this.transform.position,
+                                       this.transform.position, this.transform.position, this.transform.position, this.transform.position, this.transform.position};
     }
 
     // Update is called once per frame
@@ -80,26 +81,29 @@ public class Movement : MonoBehaviour
 
         if (destinationMarker < route.Count)                                    //On Route
         {
-            if (GameTime.inst.gmTime < loadDelayTime )                                      //if we are loading, don't move
+            for (int x=0; x < lastPosition.Length - 1; x++)
             {
-                //Need a loading graphic/state here
-                Debug.Log("loading/unloading");
+                lastPosition[x+1] = lastPosition[x];
+            }
+            lastPosition[0] = this.transform.position;
+
+            if (GameTime.inst.gmTime < loadDelayTime )                          //if we are loading, don't move
+            {
+                Debug.Log("loading/unloading");                                 //Need a loading graphic/state and sound here
             }
             else if (destinationMarker == loadMark)                             //if we're at the loading point
             {
-                Debug.Log("Reached Marker");
                 loadMark = -1;                                                  //flush out the load point until we get a new point
                 loadDelayTime = GameTime.inst.gmTime;
                 loadDelayTime.AddHours(1.0f);                                   //wait an hour for unloading (this needs to reference a proper Time Manager Delay reference)
                 if ((mapSupport.gps - destination).magnitude > closeEnough)     //if we're not at the destination
                 {
-                    Debug.Log("Getting route to Destination");                  
                     NM.Inst.GetRoute(mapSupport.gps, destination, FoundRoute);  //reroute to the destination
                 }
             }
             else if (GameTime.inst.gmTime < hazardWaitTime)                     //the highway wait timing is seperate here so we can have
             {                                                                   //different hooks for the hazards and the loading/unloading delay times
-                Debug.Log("Hazard Waiting");
+                Debug.Log("Hazard Waiting");                                    //add a sound here
             }                                                                   
             else if (loadMark != -1)                                            //only move if we've received a loading point
             {
@@ -110,26 +114,16 @@ public class Movement : MonoBehaviour
                 float tmpdis = CalcDistance(lastgps, mapSupport.gps);
                 haulDistance += tmpdis;
                 haulCost += (tmpdis * haulingCost);
-                //Debug.Log("from: {" + lastgps.y + "," + lastgps.x + "} To: {" + mapSupport.gps.y + "," + mapSupport.gps.x + "} is: " + CalcDistance(lastgps, mapSupport.gps));
 
-                Vector3 newlook = this.transform.position - lastPosition;
-                Quaternion newrot = Quaternion.FromToRotation(this.transform.forward, newlook);
-                this.transform.rotation = Quaternion.Slerp(this.transform.rotation,newrot, 1.0f * Time.deltaTime);
-                //lastPosition = this.transform.position;
+                Vector3 newlook = this.transform.position - lastPosition[lastPosition.Length-1]; // lastpossum; // lastPosition[1];
 
-                if ((this.transform.rotation.x < 0 && this.transform.rotation.y > 0) ||
-                    (this.transform.rotation.x > 0 && this.transform.rotation.y > 0))
-                {
-
-                    this.transform.Rotate(new Vector3(0, 0, 1), 180);
-                }
+                Quaternion newrot = Quaternion.LookRotation(newlook);
+                this.transform.rotation = Quaternion.Slerp(this.transform.rotation, newrot, 1.0f * Time.deltaTime);
 
                 if ((mapSupport.gps - route[destinationMarker]).magnitude < closeEnough)
                 {
                     destinationMarker++;
-                    //Debug.Log("Route change: " + destinationMarker);
                 }
-                //Debug.Log("gps: " + mapSupport.gps + " Dest: " + destination + " mag: " + (mapSupport.gps - destination).magnitude);
             }
             else
             {
@@ -174,7 +168,8 @@ public class Movement : MonoBehaviour
     public void SetWaitTime(float wt)
     {
         hazardWaitTime = GameTime.inst.gmTime;
-        hazardWaitTime.AddHours(wt);
+        hazardWaitTime = hazardWaitTime.AddHours(wt);
+        Debug.Log("current time: " + GameTime.inst.gmTime + " hazard Time: " + hazardWaitTime);
     } 
     /****************************************************************
         loadTruck

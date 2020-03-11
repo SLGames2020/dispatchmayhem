@@ -30,10 +30,10 @@ public class Inspector : MonoBehaviour
         }
     }
     //called on contact with another collider or rigid body
-    void OnCollisionEnter(Collision col)
+    void OnTriggerEnter(Collider col)
     {
         Debug.Log("Inspector Collision Detected");
-        if (col.gameObject.tag == "Truck")
+        if (col.tag == "Truck")
         {
             float wtime = HazM.Inst.GetInspectionTime();
             col.gameObject.GetComponent<Movement>().SetWaitTime(wtime);
