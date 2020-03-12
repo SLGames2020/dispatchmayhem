@@ -24,8 +24,6 @@ public class GM : MonoBehaviour
 
     void Awake()
     {
-        Debug.Log("Game Manager Awake");
-
         if (instance == null)
         {
             instance = this;
@@ -73,7 +71,6 @@ public class GM : MonoBehaviour
     *****************************************************************************/
     public void AssignLoadToTruck(int truckIndex, Load loaddata)
     {
-        Debug.Log("assigning to Truck :" + truckIndex);
         Trucks[truckIndex].GetComponent<Movement>().loadTruck(loaddata);
     }
     ///*****************************************************************************
