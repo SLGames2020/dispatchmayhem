@@ -199,46 +199,40 @@ public class Movement : MonoBehaviour
     *****************************************************************/
     public void loadTruck(Load newLoad)
     {
-        Debug.Log("load Truck");                        //icon and/or error sound is needed here
-        if (UIM.inst.vehicleSelected == this.gameObject)
+        if (GameTime.inst.gmTime < loadDelayTime)   //if we are currently being loaded/unloaded
         {
-            Debug.Log("loadT ruck 2");                  //icon and/or error sound is needed here
-            if (GameTime.inst.gmTime < loadDelayTime)   //if we are currently being loaded/unloaded
-            {
-                Debug.Log("We are still Loading");      //icon and/or error sound is needed here
-            }
-            else
-            {
-                load = UIM.inst.loadSelected;
-                route.Clear();
-                travellingToOrigin = false;
-                destinationMarker = 0;
-                loadMark = -1;                              //flag that we don't have a route (loading point) yet
-                haulCost = 0.0f;
-                haulDistance = 0.0f;
+            Debug.Log("We are still Loading");      //icon and/or error sound is needed here
+        }
+        else
+        {
+            currLoad = newLoad;
+            route.Clear();
+            travellingToOrigin = false;
+            destinationMarker = 0;
+            loadMark = -1;                              //flag that we don't have a route (loading point) yet
+            haulCost = 0.0f;
+            haulDistance = 0.0f;
 
-                Load ld = load.GetComponent<Load>();
-                haulingCost = ld.haulingCost;
-                origin = ld.origin;
-                destination = ld.destination;
-                string name = ld.destinationLabel;
-                Debug.Log("Load Destination: " + name);
+            haulingCost = currLoad.haulingCost;
+            origin = currLoad.origin;
+            destination = currLoad.destination;
+            string name = currLoad.destinationLabel;
+            Debug.Log("Load Destination: " + name);
 
-                if ((lastTime < Time.time) || (destination != Vector2.zero))
+            if ((lastTime < Time.time) || (destination != Vector2.zero))
+            {
+                if ((mapSupport.gps - origin).magnitude > closeEnough)      //if we are not close to the loads origin
                 {
-                    if ((mapSupport.gps - origin).magnitude > closeEnough)      //if we are not close to the loads origin
-                    {
-                        travellingToOrigin = true;
-                        Debug.Log("Getting route to origin");
-                        NM.Inst.GetRoute(mapSupport.gps, origin, FoundRoute);
-                        loadDelayTime = GameTime.inst.gmTime;                   //no delaying to go pick up the load
-                        lastTime = Time.time + 1.0f;                            //block us from calling mapbox more than once per second
-                    }
-                    else
-                    {
-                        loadDelayTime = GameTime.inst.gmTime;
-                        loadDelayTime.AddHours(1.0f);                                   //wait an hour for unloading (this needs to reference a proper Time Manager Delay reference)
-                    }
+                    travellingToOrigin = true;
+                    Debug.Log("Getting route to origin");
+                    NM.Inst.GetRoute(mapSupport.gps, origin, FoundRoute);
+                    loadDelayTime = GameTime.inst.gmTime;                   //no delaying to go pick up the load
+                    lastTime = Time.time + 1.0f;                            //block us from calling mapbox more than once per second
+                }
+                else
+                {
+                    loadDelayTime = GameTime.inst.gmTime;
+                    loadDelayTime.AddHours(1.0f);                                   //wait an hour for unloading (this needs to reference a proper Time Manager Delay reference)
                 }
             }
         }

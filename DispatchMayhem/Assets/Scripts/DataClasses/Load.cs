@@ -14,6 +14,8 @@ public class Load : MonoBehaviour
     public System.DateTime DueDate; // when the load needs to be dropped off by.
     public int typeIDX; // type of load i.e (OIL, WATER, IBEAMS, CORN etc...)
 
+    public float haulingCost = 1.5f;
+
     public bool assigned = false;
     public int driverID = -1; // unassigned
 

@@ -573,16 +573,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1902843070}
     m_Modifications:
-    - target: {fileID: 5237361399565312084, guid: fe07ef46e9aac5743aa227d4d236815b,
-        type: 3}
-      propertyPath: m_Name
-      value: Truck2
-      objectReference: {fileID: 0}
-    - target: {fileID: 5237361399565312084, guid: fe07ef46e9aac5743aa227d4d236815b,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 7698701530442055076, guid: fe07ef46e9aac5743aa227d4d236815b,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -702,6 +692,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5237361399565312084, guid: fe07ef46e9aac5743aa227d4d236815b,
+        type: 3}
+      propertyPath: m_Name
+      value: Truck2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5237361399565312084, guid: fe07ef46e9aac5743aa227d4d236815b,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3270579688811649514, guid: fe07ef46e9aac5743aa227d4d236815b,
         type: 3}
@@ -909,8 +909,6 @@ MonoBehaviour:
   haulCost: 0
   button_play: 0
   hasLoad: 0
-  loadDelayTime: 0
-  myTime: 0
   timeRemaining: 0
 --- !u!114 &800126021
 MonoBehaviour:
@@ -965,8 +963,6 @@ MonoBehaviour:
   haulCost: 0
   button_play: 0
   hasLoad: 0
-  loadDelayTime: 0
-  myTime: 0
   timeRemaining: 0
 --- !u!114 &928117325
 MonoBehaviour:
@@ -1149,8 +1145,6 @@ MonoBehaviour:
   haulCost: 0
   button_play: 0
   hasLoad: 0
-  loadDelayTime: 0
-  myTime: 0
   timeRemaining: 0
 --- !u!33 &1079148998
 MeshFilter:
@@ -1318,8 +1312,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mainMusic: {fileID: 0}
-  soundEffects: {fileID: 0}
-  soundEffects1: {fileID: 0}
+  shop: {fileID: 0}
+  drivers: {fileID: 0}
   truckSounds: {fileID: 0}
 --- !u!1 &1244210887
 GameObject:
@@ -1354,7 +1348,6 @@ Transform:
   - {fileID: 1153719616}
   - {fileID: 231854884}
   - {fileID: 1754714354}
-  - {fileID: 327783915}
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2330,6 +2323,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1714626568}
   - component: {fileID: 1714626569}
+  - component: {fileID: 1714626570}
+  - component: {fileID: 1714626571}
   m_Layer: 0
   m_Name: Game Manager
   m_TagString: Untagged
@@ -2347,8 +2342,7 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 355790723}
+  m_Children: []
   m_Father: {fileID: 1244210888}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2369,6 +2363,36 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   ActiveJobs: []
+--- !u!114 &1714626570
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1714626567}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c6a8ec81f5ceac84db575dd12709792b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timeScale: 10
+--- !u!114 &1714626571
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1714626567}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f6f6c51978eb4a41bd5188852cc612e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inspectorPrefab: {fileID: 4777644280487526814, guid: d6fe277b69c4c0246bf21fb39a56e2ed,
+    type: 3}
+  locsOnRoads: []
+  baseInspectionTime: 0.5
+  maxInspectors: 1
 --- !u!1 &1754714353
 GameObject:
   m_ObjectHideFlags: 0
