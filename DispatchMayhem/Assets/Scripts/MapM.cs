@@ -103,7 +103,8 @@
             else
             {
                 _spawnedObjects.Add(go);
-                //Debug.Log("Added to Map! " +  go.name + ms.gps);
+               // Debug.Log("Added to Map! " + ms.gps);
+               // Debug.Log(go.name + " added to the map");
                 go.transform.localPosition = _map.GeoToWorldPosition(Vec2To2d(ms.gps), true);
                 go.transform.localScale = new Vector3(_spawnScale, _spawnScale, _spawnScale);
             }

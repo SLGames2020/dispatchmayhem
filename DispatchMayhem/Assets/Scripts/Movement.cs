@@ -12,9 +12,13 @@ public class Movement : MonoBehaviour
     //public Button assButt;
     public AudioSource button;
 
+    [HideInInspector] public Load currLoad;
+
     public float haulDistance = 0.0f;
     public float haulCost = 0.0f;
     public bool button_play;
+
+    public bool hasLoad = false;
 
     private MapSupport mapSupport;
     private List<Vector2> route;
@@ -38,6 +42,7 @@ public class Movement : MonoBehaviour
     //public float currentSpeed = 25.0f;
 
     //private float fullSpeed = 25.0f;
+    [HideInInspector] public float timeRemaining;
 
     //// Start is called before the first frame update
     void Start()
@@ -48,7 +53,7 @@ public class Movement : MonoBehaviour
         FoundRoute = RouteCallBack;
 
         //Debug.Log("Adding Truck");
-        UIM.inst.AddToTruckList(this.gameObject);
+        //GM.inst.AddToTruckList(this.gameObject);
         //assButt.onClick.AddListener(delegate { loadTruck(); } );
         button = GetComponent<AudioSource>();
         button_play = false;
@@ -81,6 +86,8 @@ public class Movement : MonoBehaviour
 
         if (destinationMarker < route.Count)                                    //On Route
         {
+            currLoad.state = Load.LoadState.DELIVERING;
+
             for (int x=0; x < lastPosition.Length - 1; x++)
             {
                 lastPosition[x+1] = lastPosition[x];
@@ -98,6 +105,7 @@ public class Movement : MonoBehaviour
                 loadDelayTime.AddHours(1.0f);                                   //wait an hour for unloading (this needs to reference a proper Time Manager Delay reference)
                 if ((mapSupport.gps - destination).magnitude > closeEnough)     //if we're not at the destination
                 {
+                    Debug.Log("Getting route to Destination");
                     NM.Inst.GetRoute(mapSupport.gps, destination, FoundRoute);  //reroute to the destination
                 }
             }
@@ -130,6 +138,12 @@ public class Movement : MonoBehaviour
                 if ((mapSupport.gps - destination).magnitude < closeEnough)   //if we're close to the destination, and we have travelled a route
                 {
                     Debug.Log("Load has been delivered!");
+                    currLoad.state = Load.LoadState.DELIVERED;
+                    // JD TODO: at this point we need to ensure the coin icon appears in the TruckerUI panel to claim the money. 
+                    // We will need a new panel created to claim the job which upon claim, assigns the money to the players currency 
+                    // in the game manager then makes the load assigned to the truck null as well as removes it from the activeJobs 
+                    // list in the game manager.
+                    currLoad = null;
                 }
                 destinationMarker = route.Count;                       //when all is done, stop everything
             }
@@ -149,8 +163,9 @@ public class Movement : MonoBehaviour
     {
         Vector2 NewDestination = Destination - CurrentPosition;
         Vector2 NewLoc = (NewDestination.normalized * speed)*Time.deltaTime + CurrentPosition;
-        //Debug.Log("Destination: " + Destination);
-        //Debug.Log("CurrentPosition: " + CurrentPosition);
+
+        timeRemaining = (Destination / (NewDestination.normalized * speed) * Time.deltaTime + CurrentPosition).magnitude;
+
         return NewLoc;
     }
 
@@ -182,7 +197,7 @@ public class Movement : MonoBehaviour
         route from our current position to the start position.
 
     *****************************************************************/
-    public void loadTruck()
+    public void loadTruck(Load newLoad)
     {
         Debug.Log("load Truck");                        //icon and/or error sound is needed here
         if (UIM.inst.vehicleSelected == this.gameObject)
@@ -225,9 +240,9 @@ public class Movement : MonoBehaviour
                         loadDelayTime.AddHours(1.0f);                                   //wait an hour for unloading (this needs to reference a proper Time Manager Delay reference)
                     }
                 }
-                Destroy(UIM.inst.loadSelectedListItem);                           //remove the load from the selection list
             }
         }
+        
     }
 
     /**************************************************************

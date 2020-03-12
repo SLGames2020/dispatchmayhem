@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 8188259209050289430}
   - component: {fileID: 8188259209050289431}
   - component: {fileID: 8188259209050289435}
+  - component: {fileID: 8287253374745043054}
   - component: {fileID: 215430292}
   m_Layer: 0
   m_Name: Truck 1
@@ -61,7 +62,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 09b9fbbe34edc1142ba731405dc9366c, type: 2}
+  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -107,9 +108,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ac810d37ab220d40b5b88f3e4493e65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cityArray: []
   load: {fileID: 0}
-  assButt: {fileID: 0}
+  button: {fileID: 0}
+  currLoad: {fileID: 0}
+  haulDistance: 0
+  haulCost: 0
+  button_play: 0
+  hasLoad: 0
+  loadDelayTime: 0
+  myTime: 0
+  timeRemaining: 0
+--- !u!114 &8287253374745043054
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8188259209050289428}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a66292a18d65244088718329aefd22e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  source: {fileID: 0}
+  test1: {fileID: 0}
 --- !u!114 &215430292
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -122,7 +144,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b05e978b0d85c04f8835dee3d39a981, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: {fileID: 0}
   rigLabel: Undefined transport
   status: 0
 --- !u!64 &8188259210778141760
