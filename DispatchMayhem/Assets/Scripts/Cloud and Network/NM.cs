@@ -60,9 +60,6 @@ public class NM : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //GetRoute(s, e, FindRoute);
-
-        //StartCoroutine(MakeGetRequest(GetConnectTesturi, "JVT"));
 
     }
 
@@ -71,10 +68,11 @@ void Update()
     {
         
     }
-    private void OnApplicationQuit()
-    {
-        instance = null;
-    }
+
+private void OnApplicationQuit()
+{
+    instance = null;
+}
 
     /*******************************
         test callback routine
@@ -196,9 +194,14 @@ void Update()
                     float lat = float.Parse(wypnt.Substring(startidx, endidx - startidx));
                     waypoints.Add(new Vector2(lng, lat));
                 }
-                cb(waypoints, dist);                                                                           //once complete, send it all to the call back
+                cb(waypoints, dist);                                                                            //once complete, send it all to the call back
+
+                int minway = (int)((waypoints.Count * 0.20f) + 1.0f);                                           //here we want to grab a random way point outside of the cities
+                int maxway = (int) (waypoints.Count * 0.80f);                                                   //(so our hazards are not right on top of the city markers)
+                if (minway == maxway) maxway++;
+                HazM.Inst.AddRoadLoc(waypoints[UnityEngine.Random.Range(minway, maxway)]);                      //pull out a single waypoint and send it to the Hazard Manager so it can build
             }
-        }
+        }                                                                                                       //a list of valid road locations to place hard markers
     }
 
     /*****************************************************************************************

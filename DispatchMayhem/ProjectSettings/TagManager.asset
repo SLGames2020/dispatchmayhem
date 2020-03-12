@@ -6,6 +6,7 @@ TagManager:
   tags:
   - City
   - Load
+  - Truck
   layers:
   - Default
   - TransparentFX

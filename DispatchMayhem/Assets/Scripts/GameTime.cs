@@ -8,8 +8,10 @@ public enum CityTrafficLevels { LIGHT, MODERATE, HEAVY, JAMMED }
 
 public class GameTime : MonoBehaviour
 {
-    public static GameTime _instance = null;
-    public static GameTime Instance { get { return _instance; } }
+    private static GameTime instance = null;
+    public static GameTime inst { get { return instance; } }
+
+    //public Text timeText;
 
     public static float[] trafficDelays = { 1.0f, 1.5f, 3.0f, 6.0f };
     public float GetTrafficDelay(int trafficlevel) { return trafficDelays[trafficlevel]; }
@@ -17,32 +19,33 @@ public class GameTime : MonoBehaviour
     [Range(0.3333f, 10.0f)]
     public float timeScale = 10.0f;
 
-    public Text timeText;
-
-    [HideInInspector] static public DateTime gmTime;
-    [HideInInspector] static public int gmHour;
-    [HideInInspector] static public bool gmPM;
-    public int GetHour () { return gmHour; }  
-    public bool isPM () { return gmPM; }
+    private DateTime gTime;
+     public DateTime gmTime { get { return gTime; } }
+    private int      gHour;
+     public int      gmHour { get { return gHour; } }
+    private bool     gPM;
+     public bool     gmPM   { get { return gPM; } }
 
     private static float gmTimeScale = 10.0f;             //base time scale is 1 minute Real Time = 1 hour Game Time (A good playerPref candidate)
     
 
     private void Awake()
     {
-        if ((_instance != null) && (_instance != this))
+        if ((instance != null) && (instance != this))
         {
              Destroy(this.gameObject);
         }
         else
         {
-            _instance = this;
+            instance = this;
         }
     }
     // Start is called before the first frame update
     void Start()
     {
-        gmTime = System.DateTime.Now;                      //initialize with real time for now, but this should have a check for a save and restore to that
+        gTime = System.DateTime.Now;                      //initialize with real time for now, but this should have a check for a save and restore to that
+        gHour = gTime.Hour;
+        gPM = true;                                       //possibly glitch prone but setting it to something for now (it's corrected in the first update frame)
 
         if (PlayerPrefs.HasKey("TimeScale"))
         {
@@ -53,7 +56,7 @@ public class GameTime : MonoBehaviour
             PlayerPrefs.SetFloat("TimeScale", gmTimeScale);
             PlayerPrefs.Save();
         }
-        InvokeRepeating("TimeTick", 0.1f, 0.1f);
+        InvokeRepeating("TimeTick", 0.1f, 0.1f);            //increment the time every tenth of a second for some resolution
 
         timeScale = gmTimeScale;
 
@@ -68,21 +71,21 @@ public class GameTime : MonoBehaviour
             timeScale = gmTimeScale;
         }
 
-        timeText.text = gmTime.ToLongDateString() + "\n" + gmTime.ToShortTimeString();
+        //timeText.text = gTime.ToLongDateString() + "\n" + gTime.ToShortTimeString();
 
-        if (timeText.text.Contains("PM"))
-        {
-            gmPM = true;
-        }
-        else
-        {
-            gmPM = false;
-        }
+        //if (timeText.text.Contains("PM"))
+        //{
+        //    gPM = true;
+        //}
+        //else
+        //{
+        //    gPM = false;
+        //}
     }
 
     public void OnApplicationQuit()
     {
-        _instance = null;
+        instance = null;
     }
 
     /************************************************************
@@ -100,11 +103,15 @@ public class GameTime : MonoBehaviour
     *************************************************************/
     void TimeTick()
     {
-        gmTime = gmTime.AddMinutes(timeScale/10.0f);                            //yes this is how it works
-        gmHour = gmTime.Hour;                                                   //quick access value\
-        if (gmPM)
+        gTime = gmTime.AddMinutes(timeScale/10.0f);                            //yes this is how it works
+        gHour = gTime.Hour;                                                   //quick access value
+        if (gHour > 11)
         {
-            gmHour += 12;
+            gPM = true;
+        }
+        else
+        {
+            gPM = false;
         }
     }
 
