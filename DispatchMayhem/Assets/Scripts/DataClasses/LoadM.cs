@@ -30,10 +30,10 @@ public class LoadM : MonoBehaviour
     //}
 
     public int allowed;
-                                            //make sure to add new product labels before the "Undefined" entry
+    //make sure to add new product labels before the "Undefined" entry
     private string[] productLabels = { "Boxes", "Cold Goods", "Construction (Large)", "Construction", "Liquids", "Undefined" };
-        public string getProdcutLabel(int pidx) { return productLabels[pidx]; }
-        public int productMax = 0;
+    public string getProdcutLabel(int pidx) { return productLabels[pidx]; }
+    public int productMax = 0;
 
     public JobsPanel panelToAddLoadsTo;
 
@@ -72,7 +72,7 @@ public class LoadM : MonoBehaviour
         Trailer.TrailerType currType;
         if (allowed == BOXES)
         {
-            currType =  trailer.GetComponent<DryVan>().GetTrailerType();
+            currType = trailer.GetComponent<DryVan>().GetTrailerType();
             if (currType != Trailer.TrailerType.DRYVAN)
             {
                 isAllowed = false;
@@ -81,7 +81,7 @@ public class LoadM : MonoBehaviour
 
             pay = 100 * space;
         }
-        else if(allowed == COLDGOODS)
+        else if (allowed == COLDGOODS)
         {
             currType = trailer.GetComponent<ReferVan>().GetTrailerType();
             if (currType != Trailer.TrailerType.REFERVAN)
@@ -92,7 +92,7 @@ public class LoadM : MonoBehaviour
 
             pay = 100 * space;
         }
-        else if(allowed == CONTRUCTION)
+        else if (allowed == CONTRUCTION)
         {
             currType = trailer.GetComponent<Flatbed>().GetTrailerType();
             if (currType != Trailer.TrailerType.FLATBED)
@@ -103,7 +103,7 @@ public class LoadM : MonoBehaviour
 
             pay = 100 * space;
         }
-        else if(allowed == CONTRUCTION_LARGE)
+        else if (allowed == CONTRUCTION_LARGE)
         {
             currType = trailer.GetComponent<DropDeck>().GetTrailerType();
             if (currType != Trailer.TrailerType.DROPDECK)
@@ -114,10 +114,10 @@ public class LoadM : MonoBehaviour
 
             pay = 100 * space;
         }
-        else if(allowed == LIQUIDS)
+        else if (allowed == LIQUIDS)
         {
             currType = trailer.GetComponent<Tanker>().GetTrailerType();
-            if(currType != Trailer.TrailerType.TANKER)
+            if (currType != Trailer.TrailerType.TANKER)
             {
                 isAllowed = false;
                 Debug.Log("This product is not allowed please select the correct trailer");
@@ -156,22 +156,109 @@ public class LoadM : MonoBehaviour
         ld.destination = des;
         ld.productType = Random.Range(0, TOTALPRODUCTS);
         ld.productLabel = productLabels[ld.productType];
-        ldgo.name = ld.productLabel + " (" + ld.originLabel + " to " + ld.destinationLabel +")";
+        ld.DueDate = GetDeliveryTime(GameTime.inst.gmTime);
+        ld.value = GetDeliveryValue(ld.productType, ld.DueDate);
+        ldgo.name = ld.productLabel + " (" + ld.originLabel + " to " + ld.destinationLabel + ")";
         ldgo.transform.parent = this.transform;
 
-        //if (panelToAddLoadsTo.AddToLoadList(ldgo))
-        //{
-        //    //loads.Add(ldgo);
-        //}
-        //else
-        //{
-        //    Destroy(ldgo);
-        //    //Debug.Log("Failed to add load to list for " + label);
-        //}
+        if (panelToAddLoadsTo.AddToLoadList(ldgo))
+        {
+            //    //loads.Add(ldgo);
+        }
+        else
+        {
+            Destroy(ldgo);
+            //Debug.Log("Failed to add load to list for " + label);
+        }
     }
 
+    /*******************************************************************************
+        GetDeliveryTime
 
+        This method generates a random delivery time (days before delivery is over due)
+        of between 3 and 5 days. But for sake of variety and urgency, there will be a
+        10% chance for a 2 day deliver, and a 2.5% chance for a one day delivery. This 
+        more rare loads will also have greater payout factors. (determined by the 
+        GetDeliveryValue method.
 
+        Delivery times are returned in int hours so we don't have to deal with odd
+        minutes of the day.
+
+    *********************************************************************************/
+    private System.DateTime GetDeliveryTime(System.DateTime gtim)
+    {
+        System.DateTime retval = new System.DateTime(gtim.Year, gtim.Month, gtim.Day, gtim.Hour, 0, 0);
+
+        float chnce = Random.Range(0.0f, 100.0f);
+        int hrs = 0;
+
+        if (chnce < 2.5f)                       
+        {
+            hrs = 12 + Random.Range(0, 24);        // up to 1.5 days delivery time
+        }
+        else if (chnce < 10.0)
+        {
+            hrs = 24 + Random.Range(0, 36);         //up to 2.5 days delivery time
+        }
+        else
+        {
+            hrs = 72 + Random.Range(0, 96);        //and this is 3 to 7 days delivery for regular price
+        }
+
+        retval = retval.AddHours(hrs);
+        return (retval);
+
+    }
+
+    /*********************************************************************************
+        GetDeliveryValue
+
+        This method takes in the delivery time and the load type and determines 
+        what the value the load (money recieved by the player upon delivery)
+
+        Load values are determined by the Goods table, with a factor added in for 
+        rushed loads (overnight deliver 3X, next day is 1.5X)
+
+    *********************************************************************************/
+    private float GetDeliveryValue(int good, System.DateTime tim)
+    {
+        float retval = 0.0f;
+
+        switch (good)                               //using two digits ints for the values
+        {                                           //so they appeared rounded to hundreds
+            case BOXES:
+                retval = 20 + Random.Range(0, 10);
+                break;
+            case COLDGOODS:
+                retval = 25 + Random.Range(0, 15);
+                break;
+            case CONTRUCTION_LARGE:
+                retval = 30 + Random.Range(0, 25);
+                break;
+            case CONTRUCTION:
+                retval = 20 + Random.Range(0, 20);
+                break;
+            case LIQUIDS:
+                retval = 30 + Random.Range(0, 30);
+                break;
+            default:
+                retval = 20 + Random.Range(0, 10);
+                break;
+        }
+
+        if ((tim - GameTime.inst.gmTime).TotalDays <= 1.5f)      //rushed deliveries get a price premium
+        {
+            retval *= 3.0f;
+        }
+        else if ((tim - GameTime.inst.gmTime).TotalDays <= 2.5f) 
+        {
+            retval *= 1.5f;
+        }
+
+        retval *= 100;                                      //now scalled to be thousands 
+
+        return (retval);
+    }
 
 
 }
