@@ -17,6 +17,11 @@ public class Movement : MonoBehaviour
     public float haulDistance = 0.0f;
     public float haulCost = 0.0f;
     public bool button_play;
+    public AudioClip warning;
+    public AudioClip idle;
+    public AudioClip moving;
+    public AudioClip starting;
+    public AudioClip backingUp;
 
     public bool hasLoad = false;
 
@@ -97,6 +102,7 @@ public class Movement : MonoBehaviour
             if (GameTime.inst.gmTime < loadDelayTime )                          //if we are loading, don't move
             {
                 Debug.Log("loading/unloading");                                 //Need a loading graphic/state and sound here
+                SoundManager.instance.TruckIdle(idle);
             }
             else if (destinationMarker == loadMark)                             //if we're at the loading point
             {
@@ -112,6 +118,7 @@ public class Movement : MonoBehaviour
             else if (GameTime.inst.gmTime < hazardWaitTime)                     //the highway wait timing is seperate here so we can have
             {                                                                   //different hooks for the hazards and the loading/unloading delay times
                 Debug.Log("Hazard Waiting");                                    //add a sound here
+                SoundManager.instance.Warning(warning);
             }                                                                   
             else if (loadMark != -1)                                            //only move if we've received a loading point
             {

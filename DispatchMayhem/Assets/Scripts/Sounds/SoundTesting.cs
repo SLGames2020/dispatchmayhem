@@ -22,7 +22,7 @@ public class SoundTesting : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.W))
         {
-            SoundManager.instance.Shop(test1);
+            SoundManager.instance.Warning(test1);
         }
     }
 }
