@@ -133,22 +133,6 @@
         }
 
         /******************************************************************************************
-            RemoveFromMap
-
-            This mehtod takes a gameobject and removes it from the _spawnedObjects list
-
-            This needs to be called before any object on the map is destroyed, otherwise
-            we get errors in the Update method
-
-            The return value is whether the object was found and removed from the list
-            
-        *******************************************************************************************/
-        public bool RemoveFromMap(GameObject remob)
-        {
-            return (_spawnedObjects.Remove(remob));
-        }
-
-        /******************************************************************************************
             Vec2To2d
 
             This method takes a standard unity Vector2 (Unity v2017 and newer) to a Vector2d
