@@ -10,13 +10,16 @@ public class Movement : MonoBehaviour
 
     [HideInInspector]public GameObject load;
     //public Button assButt;
-    public AudioSource button;
 
     [HideInInspector] public Load currLoad;
 
     public float haulDistance = 0.0f;
     public float haulCost = 0.0f;
-    public bool button_play;
+    public AudioClip warning;
+    public AudioClip idle;
+    public AudioClip moving;
+    public AudioClip loading;
+    public AudioClip unloading;
 
     public bool hasLoad = false;
 
@@ -55,8 +58,6 @@ public class Movement : MonoBehaviour
         //Debug.Log("Adding Truck");
         //GM.inst.AddToTruckList(this.gameObject);
         //assButt.onClick.AddListener(delegate { loadTruck(); } );
-        button = GetComponent<AudioSource>();
-        button_play = false;
 
 
         mapSupport = this.gameObject.GetComponent<MapSupport>();
@@ -72,15 +73,6 @@ public class Movement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetMouseButtonDown(2))
-        {
-            //button.Play();
-            button_play = false;
-        }
-        else
-        {
-            button_play = false;
-        }
 
         //myTime = Time.time;
 
@@ -97,6 +89,7 @@ public class Movement : MonoBehaviour
             if (GameTime.inst.gmTime < loadDelayTime )                          //if we are loading, don't move
             {
                 Debug.Log("loading/unloading");                                 //Need a loading graphic/state and sound here
+                SoundManager.instance.TruckIdle(loading);
             }
             else if (destinationMarker == loadMark)                             //if we're at the loading point
             {
@@ -112,6 +105,7 @@ public class Movement : MonoBehaviour
             else if (GameTime.inst.gmTime < hazardWaitTime)                     //the highway wait timing is seperate here so we can have
             {                                                                   //different hooks for the hazards and the loading/unloading delay times
                 Debug.Log("Hazard Waiting");                                    //add a sound here
+                SoundManager.instance.Warning(warning);
             }                                                                   
             else if (loadMark != -1)                                            //only move if we've received a loading point
             {
@@ -138,6 +132,7 @@ public class Movement : MonoBehaviour
                 if ((mapSupport.gps - destination).magnitude < closeEnough)   //if we're close to the destination, and we have travelled a route
                 {
                     Debug.Log("Load has been delivered!");
+                    SoundManager.instance.Warning(unloading);
                     currLoad.state = Load.LoadState.DELIVERED;
                     // JD TODO: at this point we need to ensure the coin icon appears in the TruckerUI panel to claim the money. 
                     // We will need a new panel created to claim the job which upon claim, assigns the money to the players currency 
@@ -202,6 +197,7 @@ public class Movement : MonoBehaviour
         if (GameTime.inst.gmTime < loadDelayTime)   //if we are currently being loaded/unloaded
         {
             Debug.Log("We are still Loading");      //icon and/or error sound is needed here
+            SoundManager.instance.Warning(idle);
         }
         else
         {
@@ -212,6 +208,7 @@ public class Movement : MonoBehaviour
             loadMark = -1;                              //flag that we don't have a route (loading point) yet
             haulCost = 0.0f;
             haulDistance = 0.0f;
+            SoundManager.instance.TruckMoving(moving);
 
             haulingCost = currLoad.haulingCost;
             origin = currLoad.origin;

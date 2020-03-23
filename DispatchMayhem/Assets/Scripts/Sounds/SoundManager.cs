@@ -5,9 +5,11 @@ using UnityEngine;
 public class SoundManager : MonoBehaviour
 {
     public AudioSource mainMusic;
-    public AudioSource shop;
-    public AudioSource drivers;
-    public AudioSource truckSounds;
+    public AudioSource warningSound;
+    public AudioSource truckStart;
+    public AudioSource truckBackingup;
+    public AudioSource truckIdling;
+    public AudioSource truckMoving;
 
     public static SoundManager instance = null;
    
@@ -33,22 +35,35 @@ public class SoundManager : MonoBehaviour
 
     }
 
-    public void Shop(AudioClip clip)
+    public void Warning(AudioClip clip)
     {
-        shop.clip = clip;
-        shop.PlayOneShot(clip, 0.6f);
+        warningSound.clip = clip;
+        warningSound.PlayOneShot(clip, 1.0f);
 
     }
 
-    public void Drivers(AudioClip clip)
+    public void TruckStart(AudioClip clip)
     {
-        drivers.clip = clip;
-        drivers.PlayOneShot(clip, 0.7f);
+        truckStart.clip = clip;
+        truckStart.PlayOneShot(clip, 0.6f);
     }
 
-    public void TruckSounds(AudioClip clip)
+    public void TruckBackingUp(AudioClip clip)
     {
-        truckSounds.clip = clip;
-        truckSounds.PlayOneShot(clip, 0.8f);
+        truckBackingup.clip = clip;
+        truckBackingup.PlayOneShot(clip, 0.6f);
     }
+
+    public void TruckIdle(AudioClip clip)
+    {
+        truckIdling.clip = clip;
+        truckIdling.PlayOneShot(clip, 0.6f);
+    }
+
+    public void TruckMoving(AudioClip clip)
+    {
+        truckMoving.clip = clip;
+        truckMoving.PlayOneShot(clip, 0.6f);
+    }
+
 }
