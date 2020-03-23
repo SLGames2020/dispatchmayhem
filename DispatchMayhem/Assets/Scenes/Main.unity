@@ -253,8 +253,8 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: c6560e78b0f96c345a6a072d0bc47fc8, type: 3}
-  m_PlayOnAwake: 0
-  m_Volume: 1
+  m_PlayOnAwake: 1
+  m_Volume: 0.495
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -1163,8 +1163,8 @@ MonoBehaviour:
   warning: {fileID: 8300000, guid: b12dc57f482f77147b1ce6e0df8e6c19, type: 3}
   idle: {fileID: 8300000, guid: 32d8239460235ce4282a8a8267034c91, type: 3}
   moving: {fileID: 8300000, guid: 9d5a37cdd24c46047b1dbfb3373829e4, type: 3}
-  starting: {fileID: 8300000, guid: 2837cbbe43d589746b244993bd659c8a, type: 3}
-  backingUp: {fileID: 8300000, guid: 5d5724a81d54b07478a2e3a3460f2c11, type: 3}
+  loading: {fileID: 8300000, guid: 2837cbbe43d589746b244993bd659c8a, type: 3}
+  unloading: {fileID: 8300000, guid: 2837cbbe43d589746b244993bd659c8a, type: 3}
   hasLoad: 0
   timeRemaining: 0
 --- !u!114 &800126021
@@ -1219,11 +1219,11 @@ MonoBehaviour:
   haulDistance: 0
   haulCost: 0
   button_play: 0
-  warning: {fileID: 0}
-  idle: {fileID: 0}
-  moving: {fileID: 0}
-  starting: {fileID: 0}
-  backingUp: {fileID: 0}
+  warning: {fileID: 8300000, guid: b12dc57f482f77147b1ce6e0df8e6c19, type: 3}
+  idle: {fileID: 8300000, guid: 32d8239460235ce4282a8a8267034c91, type: 3}
+  moving: {fileID: 8300000, guid: 9d5a37cdd24c46047b1dbfb3373829e4, type: 3}
+  loading: {fileID: 8300000, guid: 32d8239460235ce4282a8a8267034c91, type: 3}
+  unloading: {fileID: 8300000, guid: 32d8239460235ce4282a8a8267034c91, type: 3}
   hasLoad: 0
   timeRemaining: 0
 --- !u!114 &928117325
@@ -1409,8 +1409,8 @@ MonoBehaviour:
   warning: {fileID: 0}
   idle: {fileID: 0}
   moving: {fileID: 0}
-  starting: {fileID: 0}
-  backingUp: {fileID: 0}
+  loading: {fileID: 0}
+  unloading: {fileID: 0}
   hasLoad: 0
   timeRemaining: 0
 --- !u!33 &1079148998
