@@ -1210,11 +1210,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   load: {fileID: 0}
-  button: {fileID: 0}
   currLoad: {fileID: 0}
   haulDistance: 0
   haulCost: 0
-  button_play: 0
   warning: {fileID: 8300000, guid: b12dc57f482f77147b1ce6e0df8e6c19, type: 3}
   idle: {fileID: 8300000, guid: 32d8239460235ce4282a8a8267034c91, type: 3}
   moving: {fileID: 8300000, guid: 9d5a37cdd24c46047b1dbfb3373829e4, type: 3}
@@ -1269,11 +1267,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   load: {fileID: 0}
-  button: {fileID: 0}
   currLoad: {fileID: 0}
   haulDistance: 0
   haulCost: 0
-  button_play: 0
   warning: {fileID: 8300000, guid: b12dc57f482f77147b1ce6e0df8e6c19, type: 3}
   idle: {fileID: 8300000, guid: 32d8239460235ce4282a8a8267034c91, type: 3}
   moving: {fileID: 8300000, guid: 9d5a37cdd24c46047b1dbfb3373829e4, type: 3}
@@ -1456,11 +1452,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   load: {fileID: 0}
-  button: {fileID: 0}
   currLoad: {fileID: 0}
   haulDistance: 0
   haulCost: 0
-  button_play: 0
   warning: {fileID: 0}
   idle: {fileID: 0}
   moving: {fileID: 0}
@@ -3498,6 +3492,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inspectorPrefab: {fileID: 4777644280487526814, guid: d6fe277b69c4c0246bf21fb39a56e2ed,
     type: 3}
+  warning: {fileID: 8300000, guid: b12dc57f482f77147b1ce6e0df8e6c19, type: 3}
   locsOnRoads: []
   baseInspectionTime: 0.5
   maxInspectors: 1

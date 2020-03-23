@@ -15,7 +15,6 @@ public class Movement : MonoBehaviour
 
     public float haulDistance = 0.0f;
     public float haulCost = 0.0f;
-    public AudioClip warning;
     public AudioClip idle;
     public AudioClip moving;
     public AudioClip loading;
@@ -80,32 +79,30 @@ public class Movement : MonoBehaviour
         {
             currLoad.state = Load.LoadState.DELIVERING;
 
-            for (int x=0; x < lastPosition.Length - 1; x++)
-            {
+            for (int x=0; x < lastPosition.Length - 1; x++)                     //save an array of last positions to smooth out the movement
+            {                                                                   //slerp/lerp does not work very well with the mapmanager controlling an objects transform
                 lastPosition[x+1] = lastPosition[x];
             }
             lastPosition[0] = this.transform.position;
 
             if (GameTime.inst.gmTime < loadDelayTime )                          //if we are loading, don't move
-            {
-                Debug.Log("loading/unloading");                                 //Need a loading graphic/state and sound here
-                SoundManager.instance.TruckIdle(loading);
+            {                                                                                
+                                                                                //Need a loading graphic/state here
             }
             else if (destinationMarker == loadMark)                             //if we're at the loading point
             {
                 loadMark = -1;                                                  //flush out the load point until we get a new point
-                loadDelayTime = GameTime.inst.gmTime;
-                loadDelayTime.AddHours(1.0f);                                   //wait an hour for unloading (this needs to reference a proper Time Manager Delay reference)
+                loadDelayTime = GameTime.inst.gmTime.AddHours(1.0f); ;          //wait an hour for unloading (this needs to reference a proper Time Manager Delay reference)
                 if ((mapSupport.gps - destination).magnitude > closeEnough)     //if we're not at the destination
                 {
-                    Debug.Log("Getting route to Destination");
                     NM.Inst.GetRoute(mapSupport.gps, destination, FoundRoute);  //reroute to the destination
+                    SoundManager.instance.TruckIdle(loading);
                 }
             }
             else if (GameTime.inst.gmTime < hazardWaitTime)                     //the highway wait timing is seperate here so we can have
             {                                                                   //different hooks for the hazards and the loading/unloading delay times
                 Debug.Log("Hazard Waiting");                                    //add a sound here
-                SoundManager.instance.Warning(warning);
+                //SoundManager.instance.Warning(warning);
             }                                                                   
             else if (loadMark != -1)                                            //only move if we've received a loading point
             {
@@ -131,7 +128,6 @@ public class Movement : MonoBehaviour
             {
                 if ((mapSupport.gps - destination).magnitude < closeEnough)   //if we're close to the destination, and we have travelled a route
                 {
-                    Debug.Log("Load has been delivered!");
                     SoundManager.instance.Warning(unloading);
                     currLoad.state = Load.LoadState.DELIVERED;
                     // JD TODO: at this point we need to ensure the coin icon appears in the TruckerUI panel to claim the money. 
@@ -214,14 +210,12 @@ public class Movement : MonoBehaviour
             origin = currLoad.origin;
             destination = currLoad.destination;
             string name = currLoad.destinationLabel;
-            Debug.Log("Load Destination: " + name);
 
             if ((lastTime < Time.time) || (destination != Vector2.zero))
             {
                 if ((mapSupport.gps - origin).magnitude > closeEnough)      //if we are not close to the loads origin
                 {
                     travellingToOrigin = true;
-                    Debug.Log("Getting route to origin");
                     NM.Inst.GetRoute(mapSupport.gps, origin, FoundRoute);
                     loadDelayTime = GameTime.inst.gmTime;                   //no delaying to go pick up the load
                     lastTime = Time.time + 1.0f;                            //block us from calling mapbox more than once per second
@@ -251,7 +245,6 @@ public class Movement : MonoBehaviour
             route.Add(pnt);
         }
         loadMark = route.Count - 1;                                     //set the loading point (delay) to the last entry
-        Debug.Log("Distance: " + (int)(dst/1000.0f) + " Waypoints: " + route.Count);
     }
 
     /**********************************************************************

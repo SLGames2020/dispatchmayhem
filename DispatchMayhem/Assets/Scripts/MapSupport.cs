@@ -31,4 +31,18 @@ public class MapSupport : MonoBehaviour
     //{
     //    
     //}
+    //void OnDestroy()
+    //{
+    //    if (this.gameObject != null)
+    //    {
+    //        if (!MapM.inst.RemoveFromMap(this.gameObject))
+    //        {
+    //            Debug.Log("Attempt to Remove non-existant Map Object!");
+    //        }
+    //        else
+    //        {
+    //            Debug.Log("Removed map object");
+    //        }
+    //    }
+    //}
 }

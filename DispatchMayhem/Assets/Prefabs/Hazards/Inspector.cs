@@ -37,8 +37,9 @@ public class Inspector : MonoBehaviour
         {
             float wtime = HazM.Inst.GetInspectionTime();
             col.gameObject.GetComponent<Movement>().SetWaitTime(wtime);
-            if(lifespan < wtime )
-            {
+
+            if(lifespan < wtime )                   //Don't let the inspection station close until                 
+            {                                       //it's last inspection has completed
                 lifespan = wtime;
             }
             Debug.Log("Inspection Time: " + wtime);

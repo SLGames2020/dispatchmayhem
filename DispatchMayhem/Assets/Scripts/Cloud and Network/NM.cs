@@ -102,7 +102,6 @@ private void OnApplicationQuit()
         string uri = directionsURI + start.x + "," + start.y + ";" + end.x + "," + end.y 
                     + geometriesParam + accessTokenSuffix + accessToken;
 
-        Debug.Log(uri);
         StartCoroutine(DownloadRoute(callback, uri));
     }
 
@@ -136,8 +135,6 @@ private void OnApplicationQuit()
         }
         else
         {
-            Debug.Log(request.downloadHandler.text);                  //leaving in Debugs for now in case verifications are required
-
             string searchstring = ",\"distance\":";                     //find and extract the distance data (while it's convient)
             int startidx = dlstring.IndexOf(searchstring);
             int offset = searchstring.Length;
