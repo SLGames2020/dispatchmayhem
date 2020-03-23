@@ -26,7 +26,7 @@ public class GameTime : MonoBehaviour
     private bool     gPM;
      public bool     gmPM   { get { return gPM; } }
 
-    private static float gmTimeScale = 10.0f;             //base time scale is 1 minute Real Time = 1 hour Game Time (A good playerPref candidate)
+    private static float gmTimeScale = 1.0f;             //base time scale is 1 minute Real Time = 1 hour Game Time (A good playerPref candidate)
     
 
     private void Awake()
@@ -103,8 +103,9 @@ public class GameTime : MonoBehaviour
     *************************************************************/
     void TimeTick()
     {
-        gTime = gmTime.AddMinutes(timeScale/10.0f);                            //yes this is how it works
-        gHour = gTime.Hour;                                                   //quick access value
+        gTime = gmTime.AddMinutes(timeScale/10.0f); //this converts timeScale minutes of game time into one second of Real Time
+                                                    //(assumes 0.1 second update rate from the InvokeRepeating above)
+        gHour = gTime.Hour;                         //a quick access value for course time checks
         if (gHour > 11)
         {
             gPM = true;

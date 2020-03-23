@@ -20,10 +20,10 @@ public class LoadM : MonoBehaviour
 
     //private enum Products
     //{
-    private const int BOXES = 0;
+    private const int BOXES = 0;                //using const ints because Enums are difficult to use randomly
     private const int COLDGOODS = 1;
-    private const int CONTRUCTION_LARGE = 2;
-    private const int CONTRUCTION = 3;
+    private const int CONSTRUCTION_LARGE = 2;
+    private const int CONSTRUCTION = 3;
     private const int LIQUIDS = 4;
     private const int UNDEFINED = 5;             //error catch, only ever set at instantiation (always equal to TOTALPRODUCTS)
     private const int TOTALPRODUCTS = 5;
@@ -32,7 +32,7 @@ public class LoadM : MonoBehaviour
     public int allowed;
     //make sure to add new product labels before the "Undefined" entry
     private string[] productLabels = { "Boxes", "Cold Goods", "Construction (Large)", "Construction", "Liquids", "Undefined" };
-    public string getProdcutLabel(int pidx) { return productLabels[pidx]; }
+    public string getProductLabel(int pidx) { return productLabels[pidx]; }
     public int productMax = 0;
 
     public JobsPanel panelToAddLoadsTo;
@@ -92,7 +92,7 @@ public class LoadM : MonoBehaviour
 
             pay = 100 * space;
         }
-        else if (allowed == CONTRUCTION)
+        else if (allowed == CONSTRUCTION)
         {
             currType = trailer.GetComponent<Flatbed>().GetTrailerType();
             if (currType != Trailer.TrailerType.FLATBED)
@@ -103,7 +103,7 @@ public class LoadM : MonoBehaviour
 
             pay = 100 * space;
         }
-        else if (allowed == CONTRUCTION_LARGE)
+        else if (allowed == CONSTRUCTION_LARGE)
         {
             currType = trailer.GetComponent<DropDeck>().GetTrailerType();
             if (currType != Trailer.TrailerType.DROPDECK)
@@ -198,7 +198,7 @@ public class LoadM : MonoBehaviour
         }
         else if (chnce < 10.0)
         {
-            hrs = 24 + Random.Range(0, 36);         //up to 2.5 days delivery time
+            hrs = 36 + Random.Range(0, 24);         //up to 2.5 days delivery time
         }
         else
         {
@@ -232,10 +232,10 @@ public class LoadM : MonoBehaviour
             case COLDGOODS:
                 retval = 25 + Random.Range(0, 15);
                 break;
-            case CONTRUCTION_LARGE:
+            case CONSTRUCTION_LARGE:
                 retval = 30 + Random.Range(0, 25);
                 break;
-            case CONTRUCTION:
+            case CONSTRUCTION:
                 retval = 20 + Random.Range(0, 20);
                 break;
             case LIQUIDS:
