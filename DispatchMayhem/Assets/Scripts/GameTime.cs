@@ -11,7 +11,7 @@ public class GameTime : MonoBehaviour
     private static GameTime instance = null;
     public static GameTime inst { get { return instance; } }
 
-    //public Text timeText;
+    public Text timeText;
 
     public static float[] trafficDelays = { 1.0f, 1.5f, 3.0f, 6.0f };
     public float GetTrafficDelay(int trafficlevel) { return trafficDelays[trafficlevel]; }
@@ -71,7 +71,7 @@ public class GameTime : MonoBehaviour
             timeScale = gmTimeScale;
         }
 
-        //timeText.text = gTime.ToLongDateString() + "\n" + gTime.ToShortTimeString();
+        timeText.text = gTime.ToShortDateString() + " " + gTime.ToShortTimeString();
 
         //if (timeText.text.Contains("PM"))
         //{

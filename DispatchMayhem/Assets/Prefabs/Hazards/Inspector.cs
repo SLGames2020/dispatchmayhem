@@ -32,7 +32,7 @@ public class Inspector : MonoBehaviour
     //called on contact with another collider or rigid body
     void OnTriggerEnter(Collider col)
     {
-        Debug.Log("Inspector Collision Detected");
+        //Debug.Log("Inspector Collision Detected");
         if (col.tag == "Truck")
         {
             float wtime = HazM.Inst.GetInspectionTime();

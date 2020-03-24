@@ -144,6 +144,6 @@ public class HazM : MonoBehaviour
     public void AddRoadLoc(Vector2 loc)
     {
         locsOnRoads.Add(loc);
-        Debug.Log("Hazard Location added: " + loc);
+        //Debug.Log("Hazard Location added: " + loc);
     }
 }
