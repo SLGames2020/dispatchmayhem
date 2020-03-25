@@ -87,23 +87,23 @@
             //                               MAP CONTROLS                                      //
             //---------------------------------------------------------------------------------//
 
-            if (Input.GetAxis("Mouse ScrollWheel") > 0.0f) // zoom in
-            {
-                _map.UpdateMap(_map.AbsoluteZoom + 1.0f);
-                if (_map.AbsoluteZoom >= 12.0f)
-                {
-                    _map.UpdateMap(12.0f);
-                }
-            }
+            //if (Input.GetAxis("Mouse ScrollWheel") > 0.0f) // zoom in
+            //{
+            //    _map.UpdateMap(_map.AbsoluteZoom + 1.0f);
+            //    if (_map.AbsoluteZoom >= 12.0f)
+            //    {
+            //        _map.UpdateMap(12.0f);
+            //    }
+            //}
 
-            if (Input.GetAxis("Mouse ScrollWheel") < 0.0f) // zoom out
-            {
-                _map.UpdateMap(_map.AbsoluteZoom - 1.0f);
-                if (_map.AbsoluteZoom <= 8.0f)
-                {
-                    _map.UpdateMap(8.0f);
-                }
-            }
+            //if (Input.GetAxis("Mouse ScrollWheel") < 0.0f) // zoom out
+            //{
+            //    _map.UpdateMap(_map.AbsoluteZoom - 1.0f);
+            //    if (_map.AbsoluteZoom <= 8.0f)
+            //    {
+            //        _map.UpdateMap(8.0f);
+            //    }
+            //}
         }
 
         /******************************************************************************************
