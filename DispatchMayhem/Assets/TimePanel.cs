@@ -21,7 +21,6 @@ public class TimePanel : MonoBehaviour
 
     public void ChangeTime(int buttonID)
     {
-        Debug.Log("hanging Time");
         // swap the image on the bar when selected.
         gameObject.GetComponent<Image>().sprite = ButtonImages[buttonID];
 
