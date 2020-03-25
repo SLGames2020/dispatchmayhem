@@ -65,13 +65,22 @@
             for (int i = 0; i < count; i++)
             {
                 var spawnedObject = _spawnedObjects[i];
-                MapSupport msup = spawnedObject.GetComponent<MapSupport>();
-                Vector2d loc = Vec2To2d(msup.gps);
-                if (spawnedObject.tag == "City") loc = loc + new Vector2d(-3.20f, 0.15f); //shift over the cities because they are positioned improperly for some reason
+                if (spawnedObject != null)  
+                {
+                    MapSupport msup = spawnedObject.GetComponent<MapSupport>();
+                    Vector2d loc = Vec2To2d(msup.gps);
+                    if (spawnedObject.tag == "City") loc = loc + new Vector2d(-3.20f, 0.15f); //shift over the cities because they are positioned improperly for some reason
 
-                Vector2d tloc = new Vector2d(loc.y, loc.x);
-                spawnedObject.transform.localPosition = _map.GeoToWorldPosition(tloc, true);
-                spawnedObject.transform.localScale = new Vector3(msup.baseScale.x*_map.Zoom, msup.baseScale.y*_map.Zoom, msup.baseScale.z *_map.Zoom);
+                    Vector2d tloc = new Vector2d(loc.y, loc.x);
+                    spawnedObject.transform.localPosition = _map.GeoToWorldPosition(tloc, true);
+                    spawnedObject.transform.localScale = new Vector3(msup.baseScale.x * _map.Zoom, msup.baseScale.y * _map.Zoom, msup.baseScale.z * _map.Zoom);
+                }
+                else
+                {
+                    Debug.Log("Removing Null map object!");
+                    _spawnedObjects.RemoveAt(i);
+                }
+
             }
 
             //---------------------------------------------------------------------------------//

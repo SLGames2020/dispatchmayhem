@@ -9,6 +9,7 @@ public class HazM : MonoBehaviour
     public static HazM Inst { get { return instance; } }
 
     public GameObject inspectorPrefab;
+    public AudioClip warning;
 
     public List<Vector2> locsOnRoads;
     public float baseInspectionTime = 0.5f;
@@ -124,8 +125,10 @@ public class HazM : MonoBehaviour
         {
             waittime = baseInspectionTime * 4.0f;
         }
+        SoundManager.instance.Warning(warning);                 //for now just one warning for all, but different sounds could be used for different levels of inspections
         return waittime;
     }
+
 
     /********************************************************
         AddRoadLoc
@@ -141,6 +144,6 @@ public class HazM : MonoBehaviour
     public void AddRoadLoc(Vector2 loc)
     {
         locsOnRoads.Add(loc);
-        Debug.Log("Hazard Location added: " + loc);
+        //Debug.Log("Hazard Location added: " + loc);
     }
 }

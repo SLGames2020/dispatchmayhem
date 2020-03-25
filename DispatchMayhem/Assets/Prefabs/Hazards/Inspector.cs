@@ -32,13 +32,14 @@ public class Inspector : MonoBehaviour
     //called on contact with another collider or rigid body
     void OnTriggerEnter(Collider col)
     {
-        Debug.Log("Inspector Collision Detected");
+        //Debug.Log("Inspector Collision Detected");
         if (col.tag == "Truck")
         {
             float wtime = HazM.Inst.GetInspectionTime();
             col.gameObject.GetComponent<Movement>().SetWaitTime(wtime);
-            if(lifespan < wtime )
-            {
+
+            if(lifespan < wtime )                   //Don't let the inspection station close until                 
+            {                                       //it's last inspection has completed
                 lifespan = wtime;
             }
             Debug.Log("Inspection Time: " + wtime);
