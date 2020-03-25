@@ -24,17 +24,6 @@ public class Finances : MonoBehaviour
         {
             Destroy(this.gameObject);
         }
-
-        if (PlayerPrefs.HasKey("money"))
-        {
-            currCurrency = PlayerPrefs.GetFloat("money");
-        }
-        else
-        {
-            PlayerPrefs.SetFloat("money", 1500.0f);
-            currCurrency = 1500.0f;
-        }
-
     }
         // Start is called before the first frame update
     //void Start()
@@ -51,7 +40,6 @@ public class Finances : MonoBehaviour
 
     private void OnApplicationQuit()
     {
-        PlayerPrefs.SetFloat("money", currCurrency);
         instance = null;
     }
 
