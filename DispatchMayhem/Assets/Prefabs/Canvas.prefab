@@ -274,7 +274,6 @@ RectTransform:
   m_LocalScale: {x: 1.8612235, y: 1.8612235, z: 1.8612235}
   m_Children:
   - {fileID: 4479513766107933432}
-  - {fileID: 2780954923677171242}
   - {fileID: 265313007666300047}
   m_Father: {fileID: 700087460072996233}
   m_RootOrder: 3
@@ -1585,7 +1584,6 @@ RectTransform:
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 6587913176089168755, guid: f5cc67516e5618d4ab912a0ac6367ed0,
     type: 3}
-  m_PrefabInstance: {fileID: 5801177670068664865}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &6124093166666962780
 PrefabInstance:
