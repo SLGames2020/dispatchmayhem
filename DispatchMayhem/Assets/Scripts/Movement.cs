@@ -15,6 +15,8 @@ public class Movement : MonoBehaviour
 
     public float haulDistance = 0.0f;
     public float haulCost = 0.0f;
+    public float truckSpeed = 65.244f;               //legislated 105kph in miles
+
     public AudioClip idle;
     public AudioClip moving;
     public AudioClip loading;
@@ -99,7 +101,7 @@ public class Movement : MonoBehaviour
             {
                 Vector2 tv2 = route[destinationMarker];
                 lastgps = mapSupport.gps;
-                mapSupport.gps = Move(mapSupport.gps, tv2, 20.0f * Time.deltaTime);
+                mapSupport.gps = Move(mapSupport.gps, tv2, truckSpeed);
 
                 Vector3 newlook = this.transform.position - lastPosition[lastPosition.Length-1]; // lastpossum; // lastPosition[1];
 
@@ -147,12 +149,45 @@ public class Movement : MonoBehaviour
     ******************************************************************/
     public Vector2 Move(Vector2 CurrentPosition, Vector2 Destination, float speed)
     {
-        Vector2 NewDestination = Destination - CurrentPosition;
-        Vector2 NewLoc = (NewDestination.normalized * speed)*Time.deltaTime + CurrentPosition;
+        Vector2 todest = Destination - CurrentPosition;
+        Vector2 degspeed = CalcAngleSpeed(speed, todest, CurrentPosition.y);
 
-        timeRemaining = (Destination / (NewDestination.normalized * speed) * Time.deltaTime + CurrentPosition).magnitude;
+        Debug.Log(CurrentPosition + " " + Destination);
+        Debug.Log(todest + " " + degspeed);
+
+        degspeed.x = GameTime.inst.gmHoursToRealSeconds(degspeed.x);
+        degspeed.y = GameTime.inst.gmHoursToRealSeconds(degspeed.y);
+
+        //Vector2 NewLoc = (NewDestination.normalized * speed)*Time.deltaTime + CurrentPosition;
+        Vector2 NewLoc = degspeed * Time.deltaTime + CurrentPosition;
+
+        timeRemaining = (todest / degspeed).magnitude;
 
         return NewLoc;
+    }
+
+    /***********************************************************************
+    CalcAngleSpeed
+
+    This method takes in a speed in mph, a direction cartisean), and an
+    earth based latitude and will returns a Vec2 of degrees/second (lat/long)
+
+    note there is a small error here as our direction is based on the surface
+    of the earth/sphere, not a flat plane, and will not create a true 
+    cartisean direction, but we're well within the accuracy for this project
+
+    **************************************************************************/
+    public Vector2 CalcAngleSpeed(float spd, Vector2 dir, float lat)
+    {
+        float empdate = 69.171f;                                     //Earth Miles Per Degree At The Equator (this the value for all longitude degrees)
+        float dr = -Mathf.Atan(dir.y / dir.x);
+        float empdalat = empdate / Mathf.Cos(DegsToRads(lat));      //Earth Miles Per Degree At LATitude (latitude needs to be compensated for the angle from the equator)
+        Debug.Log(dr/Mathf.PI * 180.0f);
+        float xdph = Mathf.Cos(dr) * spd / empdate;                 //convert mph to Degrees Per Hour
+        float ydph = Mathf.Sin(dr) * spd / empdalat;
+
+        return (new Vector2(xdph, ydph));
+
     }
 
     /*******************************************************************

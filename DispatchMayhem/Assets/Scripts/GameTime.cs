@@ -165,8 +165,8 @@ public class GameTime : MonoBehaviour
         Primarly for coroutine waits
 
     ***************************************************************/
-    public float gmHoursToRealSeconds(float gmHrs)
+    public float gmHoursToRealSeconds(float hrs)
     {
-        return (gmHrs * 60.0f / gmTimeScale);
+        return (hrs / 60.0f / gmTimeScale);
     }
 }
