@@ -10,6 +10,8 @@ public class Finances : MonoBehaviour
 
     public GameObject confirmPurchase;
         public Text confirmPriceText;
+        public Text confirmMessage;
+        public GameObject yesButton;
 
     public Text cashText;
 
@@ -31,11 +33,16 @@ public class Finances : MonoBehaviour
         if (PlayerPrefs.HasKey("money"))
         {
             currCurrency = PlayerPrefs.GetFloat("money");
+            if (currCurrency < 0.0f)                        //proto: just restart with more cash for easy testing
+            {
+                PlayerPrefs.SetFloat("money", 500000.0f);
+                currCurrency = 500000.0f;
+            }
         }
         else
         {
-            PlayerPrefs.SetFloat("money", 1500.0f);
-            currCurrency = 1500.0f;
+            PlayerPrefs.SetFloat("money", 500000.0f);
+            currCurrency = 500000.0f;
         }
 
         //confirmPriceText = confirmPurchase.FindComponentInChildWithTag<Text>("ConfirmPrice");
@@ -90,17 +97,30 @@ public class Finances : MonoBehaviour
         on the "PurchaseYes" and "PurchaseNo"/"close" methods below
 
     ***************************************************************************/
-    public void ValidatePurchase(float price)
+    public void ValidatePurchase(float price, string name)
     {
-        purchasePrice = price;
+
+        if (price < currCurrency)
+        {
+            yesButton.SetActive(true);
+            purchasePrice = price;
+            confirmMessage.text = "Are you sure you wish to buy the " + name +"?";
+        }
+        else
+        {
+            yesButton.SetActive(false);
+            purchasePrice = 0.0f;
+            confirmMessage.text = "You cannot afford the " + name;
+        }
         int tmpp = (int)price;                          //get rid of decimal places
         confirmPriceText.text = '$' + tmpp.ToString();
         confirmPurchase.SetActive(true);
     }
 
-    public void PerchaseYes()
+    public void PurchaseYes()
     {
-        currCurrency -= purchasePrice;
+        Debug.Log("money to add: " + -purchasePrice);
+        AddMoney(-purchasePrice);
         confirmPurchase.SetActive(false);
     }
 

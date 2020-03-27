@@ -7,7 +7,7 @@ public class TruckBuy : MonoBehaviour
     
     public void BuyUlitmateTruck()
     {
-        Finances.inst.ValidatePurchase(250000f);
+        Finances.inst.ValidatePurchase(250000f, "Ultimate Truck");
     }
     
     //// Start is called before the first frame update
