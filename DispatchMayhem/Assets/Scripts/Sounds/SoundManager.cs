@@ -33,8 +33,8 @@ public class SoundManager : MonoBehaviour
 
     public void SoundEffect(AudioClip clip)
     {
-        soundEffects.clip = clip;
-        soundEffects.PlayOneShot(clip, 1.0f);
+        //soundEffects.clip = clip;
+        //soundEffects.PlayOneShot(clip, 1.0f);
 
     }
 
