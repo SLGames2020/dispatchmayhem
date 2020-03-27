@@ -909,6 +909,7 @@ GameObject:
   - component: {fileID: 8657435494162007886}
   - component: {fileID: 3609659192589489874}
   - component: {fileID: 2223599728459123658}
+  - component: {fileID: 2701286147192813025}
   m_Layer: 5
   m_Name: TruckPanel
   m_TagString: Untagged
@@ -980,6 +981,18 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
+--- !u!114 &2701286147192813025
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3549949576836292981}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08c0bf2bfd4bc864fb3bd94fdd809603, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3608423216293233203
 GameObject:
   m_ObjectHideFlags: 0
