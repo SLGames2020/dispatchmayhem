@@ -18,7 +18,7 @@ public class Finances : MonoBehaviour
     public float currCurrency;
 
     private float purchasePrice = 0.0f;
-
+    private int lastMinute;
     void Awake()
     {
         if (instance == null)
@@ -50,14 +50,19 @@ public class Finances : MonoBehaviour
 
     }
     // Start is called before the first frame update
-    //void Start()
-    //{
-
-    //}
+    void Start()
+    {
+        lastMinute = GameTime.inst.gmTime.Minute;
+    }
 
     // Update is called once per frame
     void Update()
         {
+        if (lastMinute != GameTime.inst.gmTime.Minute)
+        {
+            lastMinute = GameTime.inst.gmTime.Minute;
+            AddMoney(-5.0f);
+        }
         int tmpcur = (int)currCurrency;
         cashText.text = tmpcur.ToString();
         }
@@ -83,7 +88,7 @@ public class Finances : MonoBehaviour
 
         if (currCurrency <= 0.0f)
         {
-            Debug.Log("Player out of Money!");
+            GM.inst.GameOver();
         }
     }
 
@@ -119,7 +124,6 @@ public class Finances : MonoBehaviour
 
     public void PurchaseYes()
     {
-        Debug.Log("money to add: " + -purchasePrice);
         AddMoney(-purchasePrice);
         confirmPurchase.SetActive(false);
     }
