@@ -1,18 +1,19 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 
 public class MixLevels : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public AudioMixer masterMixer;
+
+    public void SetSfxlvl(float sfxLvl)
     {
-        
+        masterMixer.SetFloat("SfxVolume", sfxLvl);
     }
 
-    // Update is called once per frame
-    void Update()
+    public void SetMusicLvl(float musicLvl)
     {
-        
+        masterMixer.SetFloat("MusicVolume", musicLvl);
     }
 }
