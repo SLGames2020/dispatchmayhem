@@ -16,6 +16,7 @@ public class UIM : MonoBehaviour
     public GameObject TrucksPanel;
     public GameObject JobsPanel;
     public GameObject TruckerPanel;
+    public AudioClip buttonClick;
 
     public GameObject[] Trucks;
 
@@ -36,12 +37,25 @@ public class UIM : MonoBehaviour
         instance = null;
     }
 
+    public void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.Escape))
+        {
+            SettingsPanel.SetActive(true);
+            Pause();
+        }
+    }
 
+    public void Pause()
+    {
+        Time.timeScale = Time.timeScale == 0 ? 1 : 0;
+    }
 
     public void LoadPanel(GameObject Panel)
     {
         ClosePanel();
         Panel.SetActive(true);
+        Pause();
     }
 
     public void ClosePanel()
@@ -52,6 +66,7 @@ public class UIM : MonoBehaviour
         TrucksPanel.SetActive(false);
         JobsPanel.SetActive(false);
         TruckerPanel.SetActive(false);
+        
     }
 
     public void exitGame()
