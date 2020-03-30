@@ -143,24 +143,25 @@ public class Movement : MonoBehaviour
         This method is responsible to advancing object forward given
         it's current position, where it's going, and a speed value
 
-        Not that this will eventually have to include using the gametime
-        to factoring in the game speed
+        Here the speed is converted from MPH in game time to 
+        degs/sec in real time so that it works properly with Mapbox
+        and the GPS system
 
     ******************************************************************/
     public Vector2 Move(Vector2 CurrentPosition, Vector2 Destination, float speed)
     {
         Vector2 todest = Destination - CurrentPosition;
-        Vector2 degspeed = CalcAngleSpeed(speed, todest, CurrentPosition.y);
+        Vector2 degspeed = CalcAngleSpeed(speed, todest, CurrentPosition.y);        //calculates the deg/sec as a (lat,long) vector
 
-        Debug.Log(CurrentPosition + " " + Destination);
-        Debug.Log(todest + " " + degspeed);
+        //Debug.Log("current: " + CurrentPosition + " Destination: " + Destination);
+        //Debug.Log("Direction" + todest + " Degspd (MPH): " + degspeed);
 
         degspeed.x = GameTime.inst.gmHoursToRealSeconds(degspeed.x);
         degspeed.y = GameTime.inst.gmHoursToRealSeconds(degspeed.y);
 
-        //Vector2 NewLoc = (NewDestination.normalized * speed)*Time.deltaTime + CurrentPosition;
-        Vector2 NewLoc = degspeed * Time.deltaTime + CurrentPosition;
-
+        //Debug.Log("Degspd (degs/sec): (" + degspeed.x + "," + degspeed.y +")");
+        Vector2 NewLoc = CurrentPosition + degspeed * Time.deltaTime;
+        //Debug.Log("NewLoc: " + NewLoc);
         timeRemaining = (todest / degspeed).magnitude;
 
         return NewLoc;
@@ -179,11 +180,11 @@ public class Movement : MonoBehaviour
     **************************************************************************/
     public Vector2 CalcAngleSpeed(float spd, Vector2 dir, float lat)
     {
-        float empdate = 69.171f;                               //Earth Miles Per Degree At The Equator
-        float dr = -Mathf.Atan(dir.y / dir.x);                 //(this the value for all longitude degrees)
-        float empdalat = empdate / Mathf.Cos(DegsToRads(lat)); //Earth Miles Per Degree At LATitude
-        Debug.Log(dr/Mathf.PI * 180.0f);                       //(latitude needs to be compensated for the angle from the equator)
-            float xdph = Mathf.Cos(dr) * spd / empdate;        //convert mph to Degrees Per Hour
+        float empdate = 69.171f;                                //Earth Miles Per Degree At The Equator
+        float dr = Mathf.Atan2(dir.y, dir.x);                   //(this the value for all longitude degrees)
+        float empdalat = empdate / Mathf.Cos(DegsToRads(lat));  //Earth Miles Per Degree At LATitude
+        //Debug.Log(dr * Mathf.Rad2Deg);                        //(latitude needs to be compensated for the angle from the equator)
+        float xdph = Mathf.Cos(dr) * spd / empdate;             //convert mph to Degrees Per Hour
         float ydph = Mathf.Sin(dr) * spd / empdalat;
 
         return (new Vector2(xdph, ydph));

@@ -100,10 +100,11 @@ public class GameTime : MonoBehaviour
         changed to 1/10th of a second for rapid update of the 
         date/time text field
 
+        changed to 1 minute = 3 game hrs (jvt 30/3/20)
     *************************************************************/
     void TimeTick()
     {
-        gTime = gmTime.AddMinutes(timeScale/10.0f); //this converts timeScale minutes of game time into one second of Real Time
+        gTime = gmTime.AddMinutes(timeScale*3.0f/10.0f); //this converts timeScale minutes of game time into one second of Real Time
                                                     //(assumes 0.1 second update rate from the InvokeRepeating above)
         gHour = gTime.Hour;                         //a quick access value for course time checks
         if (gHour > 11)
@@ -153,7 +154,7 @@ public class GameTime : MonoBehaviour
     public float FindMySpeed (float untph)
     {
         // unpth = unity units per hour
-        return (untph / 60.0f * gmTimeScale);
+        return (untph *3.0f / 60.0f * gmTimeScale);
     }
 
     /**************************************************************
@@ -167,6 +168,6 @@ public class GameTime : MonoBehaviour
     ***************************************************************/
     public float gmHoursToRealSeconds(float hrs)
     {
-        return (hrs / 60.0f / gmTimeScale);
+        return (hrs * 3.0f / 60.0f * gmTimeScale);
     }
 }
