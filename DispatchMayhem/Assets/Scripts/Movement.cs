@@ -179,15 +179,14 @@ public class Movement : MonoBehaviour
     **************************************************************************/
     public Vector2 CalcAngleSpeed(float spd, Vector2 dir, float lat)
     {
-        float empdate = 69.171f;                                     //Earth Miles Per Degree At The Equator (this the value for all longitude degrees)
-        float dr = -Mathf.Atan(dir.y / dir.x);
-        float empdalat = empdate / Mathf.Cos(DegsToRads(lat));      //Earth Miles Per Degree At LATitude (latitude needs to be compensated for the angle from the equator)
-        Debug.Log(dr/Mathf.PI * 180.0f);
-        float xdph = Mathf.Cos(dr) * spd / empdate;                 //convert mph to Degrees Per Hour
+        float empdate = 69.171f;                               //Earth Miles Per Degree At The Equator
+        float dr = -Mathf.Atan(dir.y / dir.x);                 //(this the value for all longitude degrees)
+        float empdalat = empdate / Mathf.Cos(DegsToRads(lat)); //Earth Miles Per Degree At LATitude
+        Debug.Log(dr/Mathf.PI * 180.0f);                       //(latitude needs to be compensated for the angle from the equator)
+            float xdph = Mathf.Cos(dr) * spd / empdate;        //convert mph to Degrees Per Hour
         float ydph = Mathf.Sin(dr) * spd / empdalat;
 
         return (new Vector2(xdph, ydph));
-
     }
 
     /*******************************************************************
