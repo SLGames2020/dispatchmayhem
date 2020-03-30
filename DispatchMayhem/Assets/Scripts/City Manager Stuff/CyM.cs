@@ -16,6 +16,7 @@ public class CyM : MonoBehaviour
     public static CyM inst { get { return instance; } }
 
     public GameObject cityPrefab;
+    public TextAsset jsonfile1;
     public List<GameObject> openCities;
 
     //**** CONSTANTS DECLRATIONS ****
@@ -41,17 +42,17 @@ public class CyM : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        foreach (Country cntry in GM.inst.countriesSupported)
+        //Leaving commented stuff in as this is how it should be done
+        //but I can't get Resources.Load to work right
+        //foreach (Country cntry in GM.inst.countriesSupported)
         {
-            string tmppath = "./Assets/Scripts/City Manager Stuff/CitiesLists/" + cntry.ISOcode + ".json";
-            //string tmppath = cntry.ISOcode;
-            //TextAsset jsonfile1 = Resources.Load<TextAsset>(tmppath);
-            string jsonstr = File.ReadAllText(tmppath, Encoding.UTF8);
-
+            //string tmppath = cntry.ISOcode + ".json";
+            //TextAsset jsonfile1 = Resources.Load(tmppath) as TextAsset;
+            string jsonstr = jsonfile1.ToString();
             //Debug.Log(tmppath);
             //Debug.Log(jsonstr);
+            //string jsonstr = File.ReadAllText(tmppath, Encoding.UTF8);
 
-            //CitylistJSONobj cntrydata = JsonUtility.FromJson<CitylistJSONobj>(jsonfile.text);
             CitylistJSONobj cntrydata = JsonUtility.FromJson<CitylistJSONobj>(jsonstr);
             int cnt = 0;
             int cnt2 = 0;
@@ -67,19 +68,15 @@ public class CyM : MonoBehaviour
                     ctyscript.label = cty.city;
                     ctyscript.stillOpen = true;
                     Vector2 tv2 = cty.GetGPS();
-                    //tv2 -= new Vector2(1.0f, 0.0f);
-                    //ctyGO.GetComponent<MapSupport>().gps = cty.GetGPS();
                     MapSupport msup = ctyGO.GetComponent<MapSupport>();
                     msup.gps = tv2;
                     msup.baseScale = new Vector3(0.15f, 0.15f, 0.15f);
                     openCities.Add(ctyGO);
-                    //Debug.Log("City: " + cty.city + " @" + cty.GetGPS());
                     cnt++;
                 }
                 cnt2++;
                 if (cnt > 10) break;               //only 10 cities for now
             }
-            //Debug.Log("place " + cnt + "of " + cnt2);
         }
     }
 

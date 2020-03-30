@@ -90,7 +90,7 @@ public class Movement : MonoBehaviour
                 if ((mapSupport.gps - destination).magnitude > closeEnough)     //if we're not at the destination
                 {
                     NM.Inst.GetRoute(mapSupport.gps, destination, FoundRoute);  //reroute to the destination
-                    SoundManager.instance.TruckIdle(loading);
+                    SoundManager.instance.SoundEffect(loading);
                 }
             }
             else if (GameTime.inst.gmTime < hazardWaitTime)                     //the highway wait timing is seperate here so we can have
@@ -117,7 +117,7 @@ public class Movement : MonoBehaviour
             {
                 if ((mapSupport.gps - destination).magnitude < closeEnough)   //if we're close to the destination, and we have travelled a route
                 {
-                    SoundManager.instance.Warning(unloading);
+                    SoundManager.instance.SoundEffect(unloading);
                     currLoad.state = Load.LoadState.DELIVERED;
                     // JD TODO: at this point we need to ensure the coin icon appears in the TruckerUI panel to claim the money. 
                     // We will need a new panel created to claim the job which upon claim, assigns the money to the players currency 
@@ -222,7 +222,7 @@ public class Movement : MonoBehaviour
         if (GameTime.inst.gmTime < loadDelayTime)   //if we are currently being loaded/unloaded
         {
             Debug.Log("We are still Loading");      //icon and/or error sound is needed here
-            SoundManager.instance.Warning(idle);
+            SoundManager.instance.SoundEffect(idle);
         }
         else
         {
@@ -232,7 +232,7 @@ public class Movement : MonoBehaviour
             loadMark = -1;                              //flag that we don't have a route (loading point) yet
             haulCost = 0.0f;
             haulDistance = 0.0f;
-            SoundManager.instance.TruckMoving(moving);
+            SoundManager.instance.SoundEffect(moving);
 
             haulingCost = currLoad.haulingCost;
             origin = currLoad.origin;
