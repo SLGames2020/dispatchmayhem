@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LoadM : MonoBehaviour
+public class LdM : MonoBehaviour
 {
-    private static LoadM instance = null;
-    public static LoadM inst { get { return instance; } }
+    private static LdM instance = null;
+    public static LdM inst { get { return instance; } }
 
     public GameObject trailer;
     public GameObject loadPrefab;
@@ -25,7 +25,7 @@ public class LoadM : MonoBehaviour
     private const int CONSTRUCTION_LARGE = 2;
     private const int CONSTRUCTION = 3;
     private const int LIQUIDS = 4;
-    private const int UNDEFINED = 5;             //error catch, only ever set at instantiation (always equal to TOTALPRODUCTS)
+    private const int UNDEFINEDLOAD = 5;       //error catch, only ever set at instantiation (always equal to TOTALPRODUCTS)
     private const int TOTALPRODUCTS = 5;
     //}
 
@@ -64,7 +64,7 @@ public class LoadM : MonoBehaviour
     {
         instance = null;
     }
-
+/*
     public void AllowedLoads()
     {
         space = trailer.GetComponent<Trailer>().GetMaxSpace();
@@ -127,7 +127,7 @@ public class LoadM : MonoBehaviour
         }
 
     }
-
+*/
     /*****************************************************************************
         CreateNewLoad
 

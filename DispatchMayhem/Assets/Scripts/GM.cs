@@ -23,6 +23,7 @@ public class GM : MonoBehaviour
                                                                                  //this came from here (https://simplemaps.com/data/ca-cities) and is free as long as we credit them                                                                                
 
     public GameObject[] Trucks;
+    public GameObject[] Trailers;
     [HideInInspector] public List<Load> ActiveJobs = new List<Load>();
 
     void Awake()
@@ -91,4 +92,50 @@ public class GM : MonoBehaviour
         jobsButton.SetActive(false);
     }
 
+    /*****************************************************************************
+        SaveGame
+
+        This method rounds up all the active game data and stores it to the 
+        Player prefs for now. 
+
+        This should eventually be moved to a save file with support for multiple
+        saves
+
+    *****************************************************************************/
+    public void SaveGame()
+    {
+        int x = 0;
+
+        int numoftrucks = Trucks.Length;        
+        PlayerPrefs.SetInt("NumOfTrucks", numoftrucks);
+        
+        for (x = 0; x < numoftrucks; x++)
+        {
+            PlayerPrefs.SetInt("TruckType" + x, 0);         //only one truck type for now
+
+            MapSupport trkmap = Trucks[x].GetComponent<MapSupport>();
+            PlayerPrefs.SetFloat("PosX" + x, trkmap.gps.x);
+            PlayerPrefs.SetFloat("PosY" + x, trkmap.gps.y);
+
+            Movement trkmov = Trucks[x].GetComponent<Movement>();
+            PlayerPrefs.SetInt("HasLoad" + x, trkmov.hasLoad ? 1 : 0);
+
+            Load trkload = Trucks[x].GetComponent<Load>();
+            PlayerPrefs.SetInt  ("ProdType"+ x, trkload.productType  );
+            PlayerPrefs.SetFloat("OriginX" + x, trkload.origin.x     );
+            PlayerPrefs.SetFloat("OriginY" + x, trkload.origin.y     );
+            PlayerPrefs.SetFloat("DestX"   + x, trkload.destination.x);
+            PlayerPrefs.SetFloat("DestY"   + x, trkload.destination.y);
+            PlayerPrefs.SetFloat("LoadVal" + x, trkload.value        );
+        }
+
+        int numoftrailers = Trailers.Length;
+        PlayerPrefs.SetInt("NumOfTrailers", numoftrailers);
+
+        for (x = 0; x < numoftrailers; x++)
+        {
+            Trailer trltrail = Trailers[x].GetComponent<Trailer>();
+            PlayerPrefs.SetInt("TrailType" + x, trltrail.GetTrailerType());
+        }
+    }
 }

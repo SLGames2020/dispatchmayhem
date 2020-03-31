@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class DryVan : Trailer
 {
-    TrailerType type = TrailerType.DRYVAN;
+    public int type = DRYVAN;
     public GameObject dryvan;
     void Start()
     {

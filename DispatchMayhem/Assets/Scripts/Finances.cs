@@ -19,6 +19,7 @@ public class Finances : MonoBehaviour
 
     private float purchasePrice = 0.0f;
     private int lastMinute;
+
     void Awake()
     {
         if (instance == null)

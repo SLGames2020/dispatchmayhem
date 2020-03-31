@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Flatbed : Trailer
 {
-    TrailerType type = TrailerType.FLATBED;
+    public int type = FLATBED;
     public GameObject flatbed;
     void Start()
     {

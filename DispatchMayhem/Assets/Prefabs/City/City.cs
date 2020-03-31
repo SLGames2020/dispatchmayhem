@@ -53,7 +53,7 @@ public class City : MonoBehaviour
 
         while (stillOpen)
         {
-            LoadM.inst.CreateNewLoad(label, mapSupport.gps);
+            LdM.inst.CreateNewLoad(label, mapSupport.gps);
             yield return new WaitForSeconds(Random.Range(1, CyM.inst.LOADSPAWNTIME));       //have the yield at the end so we get loads right away
         }
     }

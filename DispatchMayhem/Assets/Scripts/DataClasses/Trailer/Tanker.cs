@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Tanker : Trailer
 {
-    TrailerType type = TrailerType.TANKER;
+    public int type = TANKER;
     public GameObject tanker;
 
     void Start()
