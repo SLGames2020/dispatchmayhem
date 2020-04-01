@@ -26,6 +26,8 @@ public class GM : MonoBehaviour
     public GameObject[] Trailers;
     [HideInInspector] public List<Load> ActiveJobs = new List<Load>();
 
+    public bool haveSave = false;
+
     void Awake()
     {
         if (instance == null)
@@ -35,6 +37,16 @@ public class GM : MonoBehaviour
         else if (instance != this)
         {
             Destroy(this.gameObject);
+        }
+
+        if (PlayerPrefs.HasKey("HaveSave"))
+        {
+            haveSave = (PlayerPrefs.GetInt("HaveSave") == 1) ? true : false;
+        }
+        else
+        {
+            haveSave = false;
+            PlayerPrefs.SetInt("HaveSave", 0);
         }
 
     }
@@ -111,22 +123,25 @@ public class GM : MonoBehaviour
         
         for (x = 0; x < numoftrucks; x++)
         {
-            PlayerPrefs.SetInt("TruckType" + x, 0);         //only one truck type for now
+            if (Trucks[x] != null)
+            {
+                PlayerPrefs.SetInt("TruckType" + x, 0);         //only one truck type for now
 
-            MapSupport trkmap = Trucks[x].GetComponent<MapSupport>();
-            PlayerPrefs.SetFloat("PosX" + x, trkmap.gps.x);
-            PlayerPrefs.SetFloat("PosY" + x, trkmap.gps.y);
+                MapSupport trkmap = Trucks[x].GetComponent<MapSupport>();
+                PlayerPrefs.SetFloat("PosX" + x, trkmap.gps.x);
+                PlayerPrefs.SetFloat("PosY" + x, trkmap.gps.y);
 
-            Movement trkmov = Trucks[x].GetComponent<Movement>();
-            PlayerPrefs.SetInt("HasLoad" + x, trkmov.hasLoad ? 1 : 0);
+                Movement trkmov = Trucks[x].GetComponent<Movement>();
+                PlayerPrefs.SetInt("HasLoad" + x, trkmov.hasLoad ? 1 : 0);
 
-            Load trkload = Trucks[x].GetComponent<Load>();
-            PlayerPrefs.SetInt  ("ProdType"+ x, trkload.productType  );
-            PlayerPrefs.SetFloat("OriginX" + x, trkload.origin.x     );
-            PlayerPrefs.SetFloat("OriginY" + x, trkload.origin.y     );
-            PlayerPrefs.SetFloat("DestX"   + x, trkload.destination.x);
-            PlayerPrefs.SetFloat("DestY"   + x, trkload.destination.y);
-            PlayerPrefs.SetFloat("LoadVal" + x, trkload.value        );
+                Load trkload = Trucks[x].GetComponent<Load>();
+                PlayerPrefs.SetInt("ProdType" + x, trkload.productType);
+                PlayerPrefs.SetFloat("OriginX" + x, trkload.origin.x);
+                PlayerPrefs.SetFloat("OriginY" + x, trkload.origin.y);
+                PlayerPrefs.SetFloat("DestX" + x, trkload.destination.x);
+                PlayerPrefs.SetFloat("DestY" + x, trkload.destination.y);
+                PlayerPrefs.SetFloat("LoadVal" + x, trkload.value);
+            }
         }
 
         int numoftrailers = Trailers.Length;
@@ -134,8 +149,81 @@ public class GM : MonoBehaviour
 
         for (x = 0; x < numoftrailers; x++)
         {
-            Trailer trltrail = Trailers[x].GetComponent<Trailer>();
-            PlayerPrefs.SetInt("TrailType" + x, trltrail.GetTrailerType());
+            if (Trailers[x] != null)
+            {
+                Trailer trltrail = Trailers[x].GetComponent<Trailer>();
+                PlayerPrefs.SetInt("TrailType" + x, trltrail.GetTrailerType());
+            }
+        }
+
+        haveSave = true;
+        PlayerPrefs.SetInt("HaveSave", 1);
+    }
+
+    /*****************************************************************************
+        LoadGame
+
+        This method retrieves the last saved data from the Player Prefs, and 
+        restore the state of the trucks and loads as they were saved.
+
+        Note for now the list of loads from the cities is not restored and
+        will be recreated as normal 
+
+    *****************************************************************************/
+    public void LoadGame()
+    {
+        int x = 0;
+        int tmpint = 0;
+        float tmpfloat = 0.0f;
+        int numoftrucks = 0;
+
+        if (PlayerPrefs.HasKey("NumOfTrucks"))
+        {
+            numoftrucks = PlayerPrefs.GetInt("NumOfTrucks");
+        }
+
+        if (numoftrucks > 1)
+        {
+            //TODO: Spawn in other trucks/drivers when we have them
+        }
+
+        for (x = 0; x < numoftrucks; x++)
+        {
+            if (Trucks[x] != null)
+            {
+                tmpint = PlayerPrefs.GetInt("TruckType" + x);                     //only one truck type for now
+
+                MapSupport trkmap = Trucks[x].GetComponent<MapSupport>();
+                trkmap.gps.x = PlayerPrefs.GetFloat("PosX" + x);
+                trkmap.gps.y = PlayerPrefs.GetFloat("PosY" + x);
+
+                Movement trkmov = Trucks[x].GetComponent<Movement>();
+                trkmov.hasLoad = (PlayerPrefs.GetInt("HasLoad" + x) == 1) ? true : false;
+
+                Load trkload = Trucks[x].GetComponent<Load>();
+                trkload.productType = PlayerPrefs.GetInt("ProdType" + x);
+                trkload.origin.x = PlayerPrefs.GetFloat("OriginX" + x);
+                trkload.origin.y = PlayerPrefs.GetFloat("OriginY" + x);
+                trkload.destination.x = PlayerPrefs.GetFloat("DestX" + x);
+                trkload.destination.y = PlayerPrefs.GetFloat("DestY" + x);
+                trkload.value = PlayerPrefs.GetFloat("LoadVal" + x);
+            }
+        }
+
+        int numoftrailers = 0;
+        if (PlayerPrefs.HasKey("NumOfTrailers"))
+        {
+            numoftrailers = PlayerPrefs.GetInt("NumOfTrailers");
+        }
+
+        for (x = 0; x < numoftrailers; x++)
+        {
+            if (Trailers[x] != null)
+            {
+                Trailer trltrail = Trailers[x].GetComponent<Trailer>();
+                trltrail.type = PlayerPrefs.GetInt("TrailType" + x);
+            }
         }
     }
 }
+
