@@ -7553,6 +7553,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mixer: {fileID: 24100000, guid: 8fbed769317a9784da08d939868544ff, type: 2}
+  slider: {fileID: 1865726470}
 --- !u!114 &1865726470
 MonoBehaviour:
   m_ObjectHideFlags: 0
