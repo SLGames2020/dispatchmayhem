@@ -16,6 +16,10 @@ public class UIM : MonoBehaviour
     public GameObject TrucksPanel;
     public GameObject JobsPanel;
     public GameObject TruckerPanel;
+    public GameObject TruckPanel;
+    public GameObject TrailerPanel;
+    public GameObject ConfirmPanel;
+    public GameObject GameOverPanel;
 
     public GameObject[] Trucks;
 
@@ -52,6 +56,10 @@ public class UIM : MonoBehaviour
         TrucksPanel.SetActive(false);
         JobsPanel.SetActive(false);
         TruckerPanel.SetActive(false);
+        TruckPanel.SetActive(false);
+        TrailerPanel.SetActive(false);
+        ConfirmPanel.SetActive(false);
+        GameOverPanel.SetActive(false);
     }
 
     public void exitGame()

@@ -8,12 +8,17 @@ public class Finances : MonoBehaviour
     private static Finances instance = null;
     public static Finances inst { get { return instance; } }
 
+    public GameObject confirmPurchase;
+        public Text confirmPriceText;
+        public Text confirmMessage;
+        public GameObject yesButton;
+
     public Text cashText;
 
     public float currCurrency;
-    //int spentCurrency;
-    //int TotalCurrencyMade = currCurency + spentCurreny;
 
+    private float purchasePrice = 0.0f;
+    private int lastMinute;
     void Awake()
     {
         if (instance == null)
@@ -28,23 +33,36 @@ public class Finances : MonoBehaviour
         if (PlayerPrefs.HasKey("money"))
         {
             currCurrency = PlayerPrefs.GetFloat("money");
+            if (currCurrency < 0.0f)                        //proto: just restart with more cash for easy testing
+            {
+                PlayerPrefs.SetFloat("money", 500000.0f);
+                currCurrency = 500000.0f;
+            }
         }
         else
         {
-            PlayerPrefs.SetFloat("money", 1500.0f);
-            currCurrency = 1500.0f;
+            PlayerPrefs.SetFloat("money", 500000.0f);
+            currCurrency = 500000.0f;
         }
 
-    }
-        // Start is called before the first frame update
-    //void Start()
-    //{
+        //confirmPriceText = confirmPurchase.FindComponentInChildWithTag<Text>("ConfirmPrice");
 
-    //}
+
+    }
+    // Start is called before the first frame update
+    void Start()
+    {
+        lastMinute = GameTime.inst.gmTime.Minute;
+    }
 
     // Update is called once per frame
-        void Update()
+    void Update()
         {
+        if (lastMinute != GameTime.inst.gmTime.Minute)
+        {
+            lastMinute = GameTime.inst.gmTime.Minute;
+            AddMoney(-5.0f);
+        }
         int tmpcur = (int)currCurrency;
         cashText.text = tmpcur.ToString();
         }
@@ -70,7 +88,49 @@ public class Finances : MonoBehaviour
 
         if (currCurrency <= 0.0f)
         {
-            Debug.Log("Player out of Money!");
+            GM.inst.GameOver();
         }
+    }
+
+    /*************************************************************************
+        ValidatePurchase
+
+        this method will display the confirmation panel with the passed in
+        purchase price. 
+
+        closing this panel and decrementing the player's cash is dependant
+        on the "PurchaseYes" and "PurchaseNo"/"close" methods below
+
+    ***************************************************************************/
+    public void ValidatePurchase(float price, string name)
+    {
+
+        if (price < currCurrency)
+        {
+            yesButton.SetActive(true);
+            purchasePrice = price;
+            confirmMessage.text = "Are you sure you wish to buy the " + name +"?";
+        }
+        else
+        {
+            yesButton.SetActive(false);
+            purchasePrice = 0.0f;
+            confirmMessage.text = "You cannot afford the " + name;
+        }
+        int tmpp = (int)price;                          //get rid of decimal places
+        confirmPriceText.text = '$' + tmpp.ToString();
+        confirmPurchase.SetActive(true);
+    }
+
+    public void PurchaseYes()
+    {
+        AddMoney(-purchasePrice);
+        confirmPurchase.SetActive(false);
+    }
+
+    public void PurchaseNo()
+    {
+        purchasePrice = 0;
+        confirmPurchase.SetActive(false);
     }
 }

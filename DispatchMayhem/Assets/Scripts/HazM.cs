@@ -42,7 +42,7 @@ public class HazM : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
@@ -78,7 +78,6 @@ public class HazM : MonoBehaviour
         maps.baseScale = new Vector3(6.0f, 1.5f, 4.5f);
         numOfInspectors++;
         Debug.Log("inspector spawned");
-
     }
 
     /*********************************************************
@@ -125,7 +124,7 @@ public class HazM : MonoBehaviour
         {
             waittime = baseInspectionTime * 4.0f;
         }
-        SoundManager.instance.Warning(warning);                 //for now just one warning for all, but different sounds could be used for different levels of inspections
+        SoundManager.instance.SoundEffect(warning);                 //for now just one warning for all, but different sounds could be used for different levels of inspections
         return waittime;
     }
 
