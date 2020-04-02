@@ -1891,7 +1891,7 @@ PrefabInstance:
         type: 3}
       propertyPath: idle
       value: 
-      objectReference: {fileID: 8300000, guid: 32d8239460235ce4282a8a8267034c91, type: 3}
+      objectReference: {fileID: 8300000, guid: 5d5724a81d54b07478a2e3a3460f2c11, type: 3}
     - target: {fileID: 8188259209050289435, guid: adcf97836f001c34f8033458c1b16b2a,
         type: 3}
       propertyPath: moving
