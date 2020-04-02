@@ -69,7 +69,6 @@ public class Finances : MonoBehaviour
 
     private void OnApplicationQuit()
     {
-        PlayerPrefs.SetFloat("money", currCurrency);
         instance = null;
     }
 
