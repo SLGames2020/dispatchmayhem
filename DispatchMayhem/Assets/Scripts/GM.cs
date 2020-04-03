@@ -197,7 +197,8 @@ public class GM : MonoBehaviour
 
                 if (trkmov.hasLoad)
                 {
-                    Load trkload = Trucks[x].GetComponent<Load>();
+                    //Load trkload = Trucks[x].GetComponent<Load>();
+                    Load trkload = trkmov.currLoad;
                     trkload.productType = PlayerPrefs.GetInt("ProdType" + x);
                     trkload.origin.x = PlayerPrefs.GetFloat("OriginX" + x);
                     trkload.origin.y = PlayerPrefs.GetFloat("OriginY" + x);

@@ -260,7 +260,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: c6560e78b0f96c345a6a072d0bc47fc8, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 0.495
   m_Pitch: 1
   Loop: 1
@@ -1505,6 +1505,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1659291978}
     m_Modifications:
+    - target: {fileID: 4745527727462398088, guid: c8b63eea187c7cf448509787ad2b7954,
+        type: 3}
+      propertyPath: m_Name
+      value: CreditsPanel
+      objectReference: {fileID: 0}
+    - target: {fileID: 4745527727462398088, guid: c8b63eea187c7cf448509787ad2b7954,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4745527727049582893, guid: c8b63eea187c7cf448509787ad2b7954,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1624,16 +1634,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4745527727462398088, guid: c8b63eea187c7cf448509787ad2b7954,
-        type: 3}
-      propertyPath: m_Name
-      value: CreditsPanel
-      objectReference: {fileID: 0}
-    - target: {fileID: 4745527727462398088, guid: c8b63eea187c7cf448509787ad2b7954,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7256703991571310303, guid: c8b63eea187c7cf448509787ad2b7954,
         type: 3}
@@ -1795,6 +1795,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5237361399565312084, guid: fe07ef46e9aac5743aa227d4d236815b,
+        type: 3}
+      propertyPath: m_Name
+      value: Truck2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5237361399565312084, guid: fe07ef46e9aac5743aa227d4d236815b,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7698701530442055076, guid: fe07ef46e9aac5743aa227d4d236815b,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1914,16 +1924,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5237361399565312084, guid: fe07ef46e9aac5743aa227d4d236815b,
-        type: 3}
-      propertyPath: m_Name
-      value: Truck2
-      objectReference: {fileID: 0}
-    - target: {fileID: 5237361399565312084, guid: fe07ef46e9aac5743aa227d4d236815b,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3270579688811649514, guid: fe07ef46e9aac5743aa227d4d236815b,
         type: 3}
@@ -3407,6 +3407,7 @@ MonoBehaviour:
   moving: {fileID: 8300000, guid: 9d5a37cdd24c46047b1dbfb3373829e4, type: 3}
   loading: {fileID: 8300000, guid: 32d8239460235ce4282a8a8267034c91, type: 3}
   unloading: {fileID: 8300000, guid: 32d8239460235ce4282a8a8267034c91, type: 3}
+  onDuty: 0
   hasLoad: 0
   timeRemaining: 0
 --- !u!114 &928117325
