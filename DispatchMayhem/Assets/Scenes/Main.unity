@@ -7480,6 +7480,8 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   Trailers: []
+  loadPrefab: {fileID: 8065267893138532041, guid: e12a4446a469fbe43bf70df1a35233e3,
+    type: 3}
   ActiveJobs: []
   haveSave: 0
 --- !u!114 &1714626570

@@ -24,6 +24,7 @@ public class GM : MonoBehaviour
 
     public GameObject[] Trucks;
     public GameObject[] Trailers;
+    public GameObject loadPrefab;
     [HideInInspector] public List<Load> ActiveJobs = new List<Load>();
 
     public bool haveSave = false;
@@ -125,7 +126,7 @@ public class GM : MonoBehaviour
                 PlayerPrefs.SetInt("OnDuty" + x, trkmov.onDuty ? 1 : 0);
                 PlayerPrefs.SetInt("HasLoad" + x, trkmov.hasLoad ? 1 : 0);
 
-                if (trkmov.hasLoad) 
+                if (trkmov.onDuty) 
                 {
                     Load trkload = trkmov.currLoad;
                     PlayerPrefs.SetInt("ProdType" + x, trkload.productType);
@@ -134,6 +135,7 @@ public class GM : MonoBehaviour
                     PlayerPrefs.SetFloat("DestX" + x, trkload.destination.x);
                     PlayerPrefs.SetFloat("DestY" + x, trkload.destination.y);
                     PlayerPrefs.SetFloat("LoadVal" + x, trkload.value);
+                    PlayerPrefs.SetFloat("HaulingCost" + x, trkload.haulingCost);
                 }
             }
         }
@@ -195,16 +197,28 @@ public class GM : MonoBehaviour
                 trkmov.onDuty = (PlayerPrefs.GetInt("OnDuty" + x) == 1) ? true : false;
                 trkmov.hasLoad = (PlayerPrefs.GetInt("HasLoad" + x) == 1) ? true : false;
 
-                if (trkmov.hasLoad)
+                if (trkmov.onDuty)
                 {
-                    //Load trkload = Trucks[x].GetComponent<Load>();
-                    Load trkload = trkmov.currLoad;
+                    GameObject ldgo = Instantiate(loadPrefab, this.transform.position, Quaternion.identity);
+                    Load trkload = ldgo.GetComponent<Load>();
                     trkload.productType = PlayerPrefs.GetInt("ProdType" + x);
-                    trkload.origin.x = PlayerPrefs.GetFloat("OriginX" + x);
-                    trkload.origin.y = PlayerPrefs.GetFloat("OriginY" + x);
+
+                    if (trkmov.hasLoad)                                         //if the load is already picked up, then use the current truck's location
+                    {                                                           //as the origin for finding the route (in "loadTruck" below)
+                        trkload.origin.x = trkmap.gps.x;
+                        trkload.origin.y = trkmap.gps.y;
+                    }
+                    else
+                    {
+                        trkload.origin.x = PlayerPrefs.GetFloat("OriginX" + x);
+                        trkload.origin.y = PlayerPrefs.GetFloat("OriginY" + x);
+                    }
                     trkload.destination.x = PlayerPrefs.GetFloat("DestX" + x);
                     trkload.destination.y = PlayerPrefs.GetFloat("DestY" + x);
                     trkload.value = PlayerPrefs.GetFloat("LoadVal" + x);
+                    trkload.haulingCost = PlayerPrefs.GetFloat("HaulingCost" + x);
+
+                    trkmov.loadTruck(trkload);
                 }
             }
         }
