@@ -16,8 +16,8 @@ public class GameTime : MonoBehaviour
     public static float[] trafficDelays = { 1.0f, 1.5f, 3.0f, 6.0f };
     public float GetTrafficDelay(int trafficlevel) { return trafficDelays[trafficlevel]; }
 
-    [Range(0.3333f, 10.0f)]
-    public float timeScale = 10.0f;
+    [Range(0.3333f, 50.0f)]
+    public float timeScale = 1.0f;
 
     private DateTime gTime;
      public DateTime gmTime { get { return gTime; } }
@@ -128,7 +128,7 @@ public class GameTime : MonoBehaviour
     ************************************************************/
     void UpdateTimeScale(float newscale, bool svit)
     {
-        if ((newscale >= 0.1f) && (newscale <= 10.0f))
+        if ((newscale >= 0.1f) && (newscale <= 50.0f))
         {
             gmTimeScale = newscale;
             if (svit)
