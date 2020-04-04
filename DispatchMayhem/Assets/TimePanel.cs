@@ -25,6 +25,6 @@ public class TimePanel : MonoBehaviour
         gameObject.GetComponent<Image>().sprite = ButtonImages[buttonID];
 
         // update the time manager to process at new speed.
-        GameTime.inst.timeScale = (buttonID+1) * 1.0f;
+        GameTime.inst.timeScale = (buttonID * buttonID * 5.0f) + 1.0f;
     }
 }

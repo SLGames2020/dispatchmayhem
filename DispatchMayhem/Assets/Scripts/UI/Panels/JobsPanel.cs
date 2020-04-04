@@ -124,11 +124,23 @@ public class JobsPanel : BasePanel
 
     public void ShowNewLoads()
     {
+
+        foreach (Transform child in loadBoxContent.transform)
+        {
+            GameObject LoadGO = child.gameObject.GetComponent<ListObject>().listGO;
+            // get the load from the GO:
+            Load currLoad = LoadGO.GetComponent<Load>();
+            if (currLoad.DueDate.Subtract(GameTime.inst.gmTime).TotalSeconds <= 0)
+            {
+                GameObject.Destroy(child.gameObject);
+               numListItems--;
+            }
+        }
+
         ActiveBtn.GetComponent<Button>().interactable = true;
         NewBtn.GetComponent<Button>().interactable = false;
         NewLoadBox.SetActive(true);
-        ActiveLoadBox.SetActive(false);
-        LoadActiveItems();
+        ActiveLoadBox.SetActive(false);        
     }
 
     /****************************************************************************
@@ -154,9 +166,11 @@ public class JobsPanel : BasePanel
         Text DestText = template.transform.Find("DropOff").gameObject.GetComponent<Text>();
         DestText.text = ld.destinationLabel;
         Text timeText = template.transform.Find("Time").gameObject.GetComponent<Text>();
-        timeText.text = ld.DueDate.DayOfWeek.ToString() + " " + ld.DueDate.ToShortTimeString();
+        timeText.text = ld.DueDate.ToShortDateString() + " " + ld.DueDate.ToShortTimeString();//ld.DueDate.DayOfWeek.ToString() + " " + ld.DueDate.ToShortTimeString();
 
         GameObject LoadTypeIcon = template.transform.Find("LoadType").gameObject;
+
+        // JDTODO - switch loadtypeIcons icon based on the load type from the load.
 
         GameObject Btn = template.transform.Find("Button").gameObject;
         Btn.GetComponentInChildren<Text>().text = ld.value.ToString();
