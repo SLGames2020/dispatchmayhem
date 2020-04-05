@@ -10,6 +10,7 @@ public class Load : MonoBehaviour
     public string originLabel;                                                      // where to pickup load
     public string destinationLabel;                                                 // where to drop off load
     public string productLabel;
+    public string productIcon;
 
     public float value;                                                             // cost gained or lost from successfully delivering or failing to deliver in time.
     public float haulingCost = 1.5f;
@@ -37,15 +38,4 @@ public class Load : MonoBehaviour
     {
         state = LoadState.UNASSIGNED;
     }
-
-    //public void GenerateGoodsAndPrices()
-    //{
-    //    typeIDX = Random.Range(0, 2); // create an enum later for all the types of load contents
-
-    //    double tmpDueInc = Random.Range(0.1000f, 6.600f);
-    //    DueDate = System.DateTime.Now.Add(System.TimeSpan.FromDays( tmpDueInc));
-
-    //    //JD TODO: in the future make load contents and due date from current time scale the price
-    //    value = Random.Range(100, 10000);
-    //}
 }

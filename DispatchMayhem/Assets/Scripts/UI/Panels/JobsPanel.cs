@@ -43,11 +43,15 @@ public class JobsPanel : BasePanel
                 Text DestText = template.transform.Find("DropOff").gameObject.GetComponent<Text>();
                 DestText.text = ld.destinationLabel;
                 Text timeText = template.transform.Find("Time").gameObject.GetComponent<Text>();
-                timeText.text = ld.DueDate.DayOfWeek.ToString() + " " + ld.DueDate.ToShortTimeString();
+                timeText.text = ld.DueDate.ToShortDateString() + " " + ld.DueDate.ToShortTimeString();
+
                 Text LoadText = template.transform.Find("LoadText").gameObject.GetComponent<Text>();
                 LoadText.text = ld.value.ToString();
 
                 GameObject LoadTypeIcon = template.transform.Find("LoadType").gameObject;
+
+                Texture2D Loadedtexture = Resources.Load<Texture2D>("Textures pack/UI Icons/" + ld.productIcon);
+                LoadTypeIcon.GetComponent<RawImage>().texture = Loadedtexture;
 
                 GameObject driver1 = template.transform.Find("Driver1").gameObject;
                 GameObject driver2 = template.transform.Find("Driver2").gameObject;
@@ -166,12 +170,12 @@ public class JobsPanel : BasePanel
         Text DestText = template.transform.Find("DropOff").gameObject.GetComponent<Text>();
         DestText.text = ld.destinationLabel;
         Text timeText = template.transform.Find("Time").gameObject.GetComponent<Text>();
-        timeText.text = ld.DueDate.ToShortDateString() + " " + ld.DueDate.ToShortTimeString();//ld.DueDate.DayOfWeek.ToString() + " " + ld.DueDate.ToShortTimeString();
+        timeText.text = ld.DueDate.ToShortDateString() + " " + ld.DueDate.ToShortTimeString();
 
         GameObject LoadTypeIcon = template.transform.Find("LoadType").gameObject;
-
-        // JDTODO - switch loadtypeIcons icon based on the load type from the load.
-
+        
+        Texture2D Loadedtexture = Resources.Load<Texture2D>("Textures pack/UI Icons/" + ld.productIcon);
+        LoadTypeIcon.GetComponent<RawImage>().texture = Loadedtexture;
         GameObject Btn = template.transform.Find("Button").gameObject;
         Btn.GetComponentInChildren<Text>().text = ld.value.ToString();
 
