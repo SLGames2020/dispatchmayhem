@@ -7,16 +7,14 @@ using UnityEngine.UI;
 public class SliderScript : MonoBehaviour
 {
     public AudioMixer mixer;
-    public Slider slider;
-
-    public void Start()
-    {
-        slider.value = PlayerPrefs.GetFloat("MusicVolume", 0.75f);
-    }
 
     public void SetLevel(float sliderValue)
     {
-        mixer.SetFloat("MusicVol", Mathf.Log10(sliderValue) * 20);
-        PlayerPrefs.SetFloat("MusicVolume", sliderValue);
+        mixer.SetFloat("MainMusicVol", Mathf.Log10 (sliderValue) * 20);
+    }
+
+    public void SetLevel2(float sliderValue2)
+    {
+        mixer.SetFloat("SoundFxVol", Mathf.Log10 (sliderValue2) * 20);
     }
 }

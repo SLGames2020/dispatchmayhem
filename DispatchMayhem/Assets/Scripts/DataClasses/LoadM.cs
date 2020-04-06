@@ -31,16 +31,14 @@ public class LoadM : MonoBehaviour
 
     public int allowed;
     //make sure to add new product labels before the "Undefined" entry
-    private string[] productLabels = { "Boxes", "Cold Goods", "Construction (Large)", "Construction", "Liquids", "Undefined" };
-    public string getProductLabel(int pidx) { return productLabels[pidx]; }
+    private static string[] productLabels = { "Boxes", "Cold Goods", "Construction (Large)", "Construction", "Liquids", "Undefined" };
+    public static string getProductLabel(int pidx) { return productLabels[pidx]; }
     public int productMax = 0;
 
     public JobsPanel panelToAddLoadsTo;
 
     void Awake()
     {
-        //Debug.Log("City Manager Awake");
-
         if (instance == null)
         {
             instance = this;
@@ -132,7 +130,66 @@ public class LoadM : MonoBehaviour
 
             pay = 100 * space;
         }
+    }
 
+    private string GenerateIcon(int productType)
+    {
+        string iconName = "water";
+
+        switch (productType)
+        {
+            case BOXES:
+                {
+                    iconName = "boxes";
+                    break;
+                }
+            case COLDGOODS:
+                {
+                    int randVal = Random.Range(0, 2);
+                    if (randVal == 0)
+                    {
+                        iconName = "dairy";
+                    }
+                    else
+                    {
+                        iconName = "fruit";
+                    }
+                    break;
+                }
+            case CONSTRUCTION_LARGE:
+                {
+                    iconName = "ibeams";
+                    break;
+                }
+            case CONSTRUCTION:
+                {
+                    iconName = "wood";
+                    break;
+                }
+            case LIQUIDS:
+                {
+                    int randVal = Random.Range(0, 5);
+                    if (randVal == 0)
+                    {
+                        iconName = "gas";
+                    }
+                    else if (randVal == 1)
+                    {
+                        iconName = "milk";
+                    }
+                    else if (randVal == 2)
+                    {
+                        iconName = "water";
+                    }
+                    else if (randVal == 3)
+                    {
+                        iconName = "oil";
+                    }
+
+                    break;
+                }
+        }
+        return iconName;
     }
 */
     /*****************************************************************************
@@ -163,6 +220,7 @@ public class LoadM : MonoBehaviour
         ld.destination = des;
         ld.productType = Random.Range(0, TOTALPRODUCTS);
         ld.productLabel = productLabels[ld.productType];
+        ld.productIcon = GenerateIcon(ld.productType);
         ld.DueDate = GetDeliveryTime(GameTime.inst.gmTime);
         ld.value = GetDeliveryValue(ld.productType, ld.DueDate);
         ldgo.name = ld.productLabel + " (" + ld.originLabel + " to " + ld.destinationLabel + ")";
