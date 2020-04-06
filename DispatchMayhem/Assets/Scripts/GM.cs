@@ -199,12 +199,12 @@ public class GM : MonoBehaviour
 
                 if (trkmov.onDuty)
                 {
-                    GameObject ldgo = Instantiate(loadPrefab, this.transform.position, Quaternion.identity);
+                    GameObject ldgo = Instantiate(loadPrefab, Trucks[x].transform.position, Quaternion.identity);
                     Load trkload = ldgo.GetComponent<Load>();
                     trkload.productType = PlayerPrefs.GetInt("ProdType" + x);
 
-                    if (trkmov.hasLoad)                                         //if the load is already picked up, then use the current truck's location
-                    {                                                           //as the origin for finding the route (in "loadTruck" below)
+                    if (trkmov.hasLoad)                        //if the load is already picked up, then use the current truck's location
+                    {                                          //as the origin for finding the route (in "loadTruck" below)
                         trkload.origin.x = trkmap.gps.x;
                         trkload.origin.y = trkmap.gps.y;
                     }
