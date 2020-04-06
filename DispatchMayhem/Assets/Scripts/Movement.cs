@@ -22,6 +22,7 @@ public class Movement : MonoBehaviour
     public AudioClip loading;
     public AudioClip unloading;
 
+    public bool onDuty = false;
     public bool hasLoad = false;
 
     private MapSupport mapSupport;
@@ -91,6 +92,7 @@ public class Movement : MonoBehaviour
                 {
                     NM.Inst.GetRoute(mapSupport.gps, destination, FoundRoute);  //reroute to the destination
                     SoundManager.instance.SoundEffect(loading);
+                    hasLoad = true;
                 }
             }
             else if (GameTime.inst.gmTime < hazardWaitTime)                     //the highway wait timing is seperate here so we can have
@@ -125,7 +127,10 @@ public class Movement : MonoBehaviour
                     // list in the game manager.
                     //JVT: Temporarily just adding load value to player's cash
                     Finances.inst.AddMoney(currLoad.value);
+                    Destroy(currLoad);
                     currLoad = null;
+                    hasLoad = false;
+                    onDuty = false;
                 }
                 destinationMarker = route.Count;                       //when all is done, stop everything
             }
@@ -233,6 +238,7 @@ public class Movement : MonoBehaviour
             loadMark = -1;                              //flag that we don't have a route (loading point) yet
             haulCost = 0.0f;
             haulDistance = 0.0f;
+            onDuty = true;
             SoundManager.instance.SoundEffect(moving);
 
             haulingCost = currLoad.haulingCost;

@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class DropDeck : Trailer
 {
-    TrailerType type = TrailerType.DROPDECK;
+    //TrailerType type = TrailerType.DROPDECK;
+    int type = DROPDECK;
     public GameObject dropdeck;
     void Start()
     {
