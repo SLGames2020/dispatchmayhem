@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -16,6 +17,7 @@ public class GM : MonoBehaviour
     private static GM instance = null;
     public static GM inst { get { return instance; } }
 
+    public GameObject loadingPanel;
     public GameObject gameOverPanel;
     public GameObject jobsButton;
 
@@ -91,4 +93,19 @@ public class GM : MonoBehaviour
         jobsButton.SetActive(false);
     }
 
+    //----------------------------------------------------------//
+    //                   Loading Screen                         //
+    //----------------------------------------------------------//
+
+    public void Loading()
+    {
+        loadingPanel.SetActive(true); 
+        StartCoroutine(Wait());
+    }
+
+    IEnumerator Wait()
+    {
+        yield return new WaitForSecondsRealtime(5);
+        loadingPanel.SetActive(false);
+    }
 }

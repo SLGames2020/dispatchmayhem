@@ -20,6 +20,7 @@ public class UIM : MonoBehaviour
     public GameObject TrailerPanel;
     public GameObject ConfirmPanel;
     public GameObject GameOverPanel;
+    //public GameObject LoadingPanel;
     public GameObject CreditsPanel;
 
     public GameObject[] Trucks;
@@ -62,6 +63,7 @@ public class UIM : MonoBehaviour
         ConfirmPanel.SetActive(false);
         GameOverPanel.SetActive(false);
         CreditsPanel.SetActive(false);
+        //LoadingPanel.SetActive(false);
 
     }
 
