@@ -8,13 +8,32 @@ public class SliderScript : MonoBehaviour
 {
     public AudioMixer mixer;
 
-    public void SetLevel(float sliderValue)
+    public string mixerName;
+
+    private void Start()
     {
-        mixer.SetFloat("MainMusicVol", Mathf.Log10 (sliderValue) * 20);
+        float tmpvol = 0.0f;
+
+        if (PlayerPrefs.HasKey(mixerName))
+        {
+            Debug.Log("loading Volume: " + mixerName);
+            tmpvol = PlayerPrefs.GetFloat(mixerName);
+            mixer.SetFloat(mixerName, Mathf.Log10(tmpvol) * 20);
+            this.gameObject.GetComponent<Slider>().value = tmpvol;
+        }
     }
 
-    public void SetLevel2(float sliderValue2)
+    public void SetLevel(float sliderValue)
     {
-        mixer.SetFloat("SoundFxVol", Mathf.Log10 (sliderValue2) * 20);
+        Debug.Log("saving volume: " + mixerName);
+        mixer.SetFloat(mixerName, Mathf.Log10 (sliderValue) * 20);
+        PlayerPrefs.SetFloat(mixerName, sliderValue);
     }
+
+    //public void SetLevel2(float sliderValue2)
+    //{
+    //    Debug.Log("saving fx");
+    //    mixer.SetFloat("SoundFxVol", Mathf.Log10 (sliderValue2) * 20);
+    //    PlayerPrefs.SetFloat("SoundFxVol", sliderValue2);
+    //}
 }
