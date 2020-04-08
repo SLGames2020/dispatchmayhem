@@ -65,6 +65,7 @@
             for (int i = 0; i < count; i++)
             {
                 var spawnedObject = _spawnedObjects[i];
+
                 if (spawnedObject != null)  
                 {
                     MapSupport msup = spawnedObject.GetComponent<MapSupport>();
@@ -77,8 +78,9 @@
                 }
                 else
                 {
-                    Debug.Log("Removing Null map object!");
+                    Debug.Log("Removing Null map object! n(" + i + ")");
                     _spawnedObjects.RemoveAt(i);
+
                 }
 
             }
@@ -124,7 +126,9 @@
             }
             else
             {
+                Debug.Log(go.name + " added to map" + "("+_spawnedObjects.Count + ")");
                 _spawnedObjects.Add(go);
+                Debug.Log("(" + _spawnedObjects.Count + ")");
                 go.transform.localPosition = _map.GeoToWorldPosition(Vec2To2d(ms.gps), true);
                 go.transform.localScale = new Vector3(_spawnScale, _spawnScale, _spawnScale);
             }

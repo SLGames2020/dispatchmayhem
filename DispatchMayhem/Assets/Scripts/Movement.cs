@@ -125,10 +125,10 @@ public class Movement : MonoBehaviour
                     // We will need a new panel created to claim the job which upon claim, assigns the money to the players currency 
                     // in the game manager then makes the load assigned to the truck null as well as removes it from the activeJobs 
                     // list in the game manager
-                    GameObject coin = Instantiate(UIM.inst.CoinIcon, this.transform);
-                    coin.GetComponent<CoinUp>().value = currLoad.value;
-                    coin.SetActive(true);
-                    Debug.Log("spawning Coin: " + coin.transform.position);
+                    //GameObject coin = Instantiate(UIM.inst.CoinIcon);
+                    //coin.GetComponent<CoinUp>().value = currLoad.value;
+                    //coin.SetActive(true);
+                    //Debug.Log("spawning Coin: " + coin.GetComponent<MapSupport>().gps);
                     //JVT: Temporarily just adding load value to player's cash
                     //Finances.inst.AddMoney(currLoad.value);
                     Destroy(currLoad);

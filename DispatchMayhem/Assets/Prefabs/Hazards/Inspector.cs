@@ -12,7 +12,6 @@ public class Inspector : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Debug.Log("Inspector Started");
         lastHour = GameTime.inst.gmHour;
     }
 
@@ -42,7 +41,6 @@ public class Inspector : MonoBehaviour
             {                                       //it's last inspection has completed
                 lifespan = wtime;
             }
-            Debug.Log("Inspection Time: " + wtime);
         }
     }
 }
