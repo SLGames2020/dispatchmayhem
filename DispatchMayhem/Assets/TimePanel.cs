@@ -10,7 +10,12 @@ public class TimePanel : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+       if (PlayerPrefs.HasKey("TimeButton"))
+        {
+            int buttonID = PlayerPrefs.GetInt("TimeButton");
+            gameObject.GetComponent<Image>().sprite = ButtonImages[buttonID];
+            GameTime.inst.timeScale = (buttonID * buttonID * 5.0f) + 1.0f;
+        }
     }
 
     // Update is called once per frame
@@ -26,5 +31,7 @@ public class TimePanel : MonoBehaviour
 
         // update the time manager to process at new speed.
         GameTime.inst.timeScale = (buttonID * buttonID * 5.0f) + 1.0f;
+
+        PlayerPrefs.SetInt("TimeButton", buttonID);
     }
 }

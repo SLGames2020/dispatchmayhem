@@ -15,6 +15,7 @@ public class Finances : MonoBehaviour
 
     public Text cashText;
 
+    public static float startingCurrency = 500000.0f;
     public float currCurrency;
 
     private float purchasePrice = 0.0f;
@@ -29,30 +30,14 @@ public class Finances : MonoBehaviour
         {
             Destroy(this.gameObject);
         }
-
-        if (PlayerPrefs.HasKey("money"))
-        {
-            currCurrency = PlayerPrefs.GetFloat("money");
-            if (currCurrency < 0.0f)                        //proto: just restart with more cash for easy testing
-            {
-                PlayerPrefs.SetFloat("money", 500000.0f);
-                currCurrency = 500000.0f;
-            }
-        }
-        else
-        {
-            PlayerPrefs.SetFloat("money", 500000.0f);
-            currCurrency = 500000.0f;
-        }
-
         //confirmPriceText = confirmPurchase.FindComponentInChildWithTag<Text>("ConfirmPrice");
-
-
     }
     // Start is called before the first frame update
     void Start()
     {
         lastMinute = GameTime.inst.gmTime.Minute;
+
+        currCurrency = startingCurrency;
     }
 
     // Update is called once per frame
