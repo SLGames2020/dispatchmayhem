@@ -131,7 +131,7 @@ public class LoadM : MonoBehaviour
             pay = 100 * space;
         }
     }
-
+    */
     private string GenerateIcon(int productType)
     {
         string iconName = "water";
@@ -191,7 +191,7 @@ public class LoadM : MonoBehaviour
         }
         return iconName;
     }
-*/
+
     /*****************************************************************************
         CreateNewLoad
 
