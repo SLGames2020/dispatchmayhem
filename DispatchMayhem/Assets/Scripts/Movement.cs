@@ -14,6 +14,7 @@ public class Movement : MonoBehaviour
     [HideInInspector] public Load currLoad;
 
     public float haulDistance = 0.0f;
+    public float LifeTimehaulDistance = 0.0f;
     public float haulCost = 0.0f;
     public float truckSpeed = 65.244f;               //legislated 105kph in miles
 
@@ -120,6 +121,12 @@ public class Movement : MonoBehaviour
                 if ((mapSupport.gps - destination).magnitude < closeEnough)   //if we're close to the destination, and we have travelled a route
                 {
                     SoundManager.instance.SoundEffect(unloading);
+                    if (currLoad.state != Load.LoadState.DELIVERED)
+                    {
+                        LifeTimehaulDistance += haulDistance;
+                        Debug.Log("LifeTimehaulDistance: " + LifeTimehaulDistance);
+                    }
+
                     currLoad.state = Load.LoadState.DELIVERED;
                     // JD TODO: at this point we need to ensure the coin icon appears in the TruckerUI panel to claim the money. 
                     // We will need a new panel created to claim the job which upon claim, assigns the money to the players currency 

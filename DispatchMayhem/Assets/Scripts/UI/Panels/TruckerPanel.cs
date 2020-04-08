@@ -10,39 +10,60 @@ public class TruckerPanel : BasePanel
     public Text wage;
     public Text hours;
     public GameObject truck;
+    public int playexp = 0;
+    public int totalxp = 0;
+    public int playlvl = 1;
+    public int playwage = 1;
 
-    
+    public static TruckerPanel instance = null;
+
+    private void Awake()
+    {
+
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else if (instance != this)
+        {
+            Destroy(gameObject);
+        }
+
+        DontDestroyOnLoad(gameObject);
+    }
+
 
     void levelup()
     {
-        truck.GetComponent<Truck>();
-
-        while( >= 100)
+        
+        while(playexp >= 100)
         {
-            //wage.text += 1;
-            //lvl.text += 1;
+             playlvl++;
+             playwage++;
+             playexp = 0;
         }
     }
 
     void UpdateHours()
     {
-
+       
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        xp.text = "1";
-        lvl.text = "1";
-        wage.text = "1";
+        xp.text = "" + playexp;
+        lvl.text = "" + playlvl;
+        wage.text = "" + playwage;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Space))
-        {
-            xp.text += 1;
-        }
+        xp.text = "" + totalxp;
+        lvl.text = "" + playlvl;
+        wage.text = "" + playwage;
+        totalxp = (int)truck.GetComponent<Movement>().LifeTimehaulDistance;
+        levelup();
     }
 }
