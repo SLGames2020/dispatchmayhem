@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class ReferVan : Trailer
 {
-    TrailerType type = TrailerType.REFERVAN;
+    //TrailerType type = TrailerType.REFERVAN;
+    int type = REFERVAN;
     public GameObject refervan;
     void Start()
     {

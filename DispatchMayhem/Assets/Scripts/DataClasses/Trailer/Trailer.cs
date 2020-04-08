@@ -10,19 +10,23 @@ public class Trailer : MonoBehaviour
     public float health;
     public float cost;
 
-    public enum TrailerType
-    {
-        FLATBED,
-        DROPDECK,
-        DRYVAN,
-        REFERVAN,
-        TANKER
-    }
+    //public enum TrailerType
+    //{
+    public const int FLATBED = 0;
+    public const int DROPDECK = 1;
+    public const int DRYVAN = 2;
+    public const int REFERVAN = 3;
+    public const int TANKER = 4;
+    public const int UNDEFINEDTRAILER = 5;
+    public const int TOTALTRAILERS = 5;
+    //}
 
     public GameObject trailer;
-    public TrailerType type;
+    //public TrailerType type;
+    public int type;
 
-    public TrailerType GetTrailerType()
+    //public TrailerType GetTrailerType()
+    public int GetTrailerType()
     {
         return type;
     }
