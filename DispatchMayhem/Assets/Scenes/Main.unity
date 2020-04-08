@@ -4424,6 +4424,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mainMusic: {fileID: 53055952}
   soundEffects: {fileID: 1153719621}
+  mixer: {fileID: 24100000, guid: 8fbed769317a9784da08d939868544ff, type: 2}
+  mixers:
+  - MainMusicVol
+  - SoundFxVol
 --- !u!82 &1170085150 stripped
 AudioSource:
   m_CorrespondingSourceObject: {fileID: 690457836, guid: f6f49996127db0341a13bb4a51df16f5,
@@ -5169,6 +5173,7 @@ MonoBehaviour:
   ConfirmPanel: {fileID: 908452947}
   GameOverPanel: {fileID: 5503229451707516738}
   CreditsPanel: {fileID: 1237221234}
+  CoinIcon: {fileID: 1848112984}
   Trucks: []
 --- !u!4 &1377043276
 Transform:
@@ -8527,6 +8532,12 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!1 &1848112984 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3979047775602664890, guid: f6f49996127db0341a13bb4a51df16f5,
+    type: 3}
+  m_PrefabInstance: {fileID: 1673617886}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1865726467
 GameObject:
   m_ObjectHideFlags: 0

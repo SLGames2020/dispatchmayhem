@@ -108,7 +108,7 @@ public class Movement : MonoBehaviour
                 Vector3 newlook = this.transform.position - lastPosition[lastPosition.Length-1]; // lastpossum; // lastPosition[1];
 
                 Quaternion newrot = Quaternion.LookRotation(newlook);
-                this.transform.rotation = Quaternion.Slerp(this.transform.rotation, newrot, 1.0f * Time.deltaTime);
+                this.transform.rotation = Quaternion.Slerp(this.transform.rotation, newrot, GameTime.inst.timeScale * Time.deltaTime);
 
                 if ((mapSupport.gps - route[destinationMarker]).magnitude < closeEnough)
                 {
@@ -124,9 +124,13 @@ public class Movement : MonoBehaviour
                     // JD TODO: at this point we need to ensure the coin icon appears in the TruckerUI panel to claim the money. 
                     // We will need a new panel created to claim the job which upon claim, assigns the money to the players currency 
                     // in the game manager then makes the load assigned to the truck null as well as removes it from the activeJobs 
-                    // list in the game manager.
+                    // list in the game manager
+                    GameObject coin = Instantiate(UIM.inst.CoinIcon, this.transform);
+                    coin.GetComponent<CoinUp>().value = currLoad.value;
+                    coin.SetActive(true);
+                    Debug.Log("spawning Coin: " + coin.transform.position);
                     //JVT: Temporarily just adding load value to player's cash
-                    Finances.inst.AddMoney(currLoad.value);
+                    //Finances.inst.AddMoney(currLoad.value);
                     Destroy(currLoad);
                     currLoad = null;
                     hasLoad = false;
