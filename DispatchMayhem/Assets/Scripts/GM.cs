@@ -1,6 +1,8 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Country
 {
@@ -16,6 +18,7 @@ public class GM : MonoBehaviour
     private static GM instance = null;
     public static GM inst { get { return instance; } }
 
+    public GameObject loadingPanel;
     public GameObject gameOverPanel;
     public GameObject jobsButton;
 
@@ -28,7 +31,7 @@ public class GM : MonoBehaviour
     [HideInInspector] public List<Load> ActiveJobs = new List<Load>();
 
     public bool haveSave = false;
-
+    
     void Awake()
     {
         if (instance == null)
@@ -46,6 +49,7 @@ public class GM : MonoBehaviour
     void Start()
     {
         haveSave = PlayerPrefs.HasKey("HaveSave");
+        Loading();
     }
 
     // Update is called once per frame
@@ -93,6 +97,41 @@ public class GM : MonoBehaviour
     {
         gameOverPanel.SetActive(true);
         jobsButton.SetActive(false);
+    }
+
+    //----------------------------------------------------------//
+    //                   Loading Screen                         //
+    //----------------------------------------------------------//
+
+    public void Loading()
+    {
+        loadingPanel.SetActive(true);
+        StartCoroutine(Wait());
+    }
+
+    IEnumerator Wait()
+    {
+        //string txt = loadingPanel.GetComponentInChildren<Text>().text;
+        Text SrcText_0 = loadingPanel.transform.Find("Text (TMP)").gameObject.GetComponent<Text>();
+        SrcText_0.text = "Loading ";
+
+        for (int counter = 0; counter < 4; counter++)
+        {
+            SrcText_0.text = "Loading .";
+
+            yield return new WaitForSecondsRealtime(0.25f);
+            //Text SrcText_1 = loadingPanel.transform.Find("Loading .").gameObject.GetComponent<Text>();
+            SrcText_0.text = "Loading . .";
+
+            yield return new WaitForSecondsRealtime(0.25f);
+            //Text SrcText_2 = loadingPanel.transform.Find("Loading ...").gameObject.GetComponent<Text>();
+            SrcText_0.text = "Loading . . .";
+
+            yield return new WaitForSecondsRealtime(0.25f);
+            SrcText_0.text = "Loading ";
+            yield return new WaitForSecondsRealtime(0.25f);
+        }
+        loadingPanel.SetActive(false);
     }
 
     /*****************************************************************************
