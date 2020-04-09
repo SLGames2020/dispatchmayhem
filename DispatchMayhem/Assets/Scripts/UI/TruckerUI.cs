@@ -22,7 +22,7 @@ public class TruckerUI : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
@@ -37,6 +37,7 @@ public class TruckerUI : MonoBehaviour
 
     public void AnimateIn()
     {
+        TruckerPanel.GetComponent<TruckerPanel>().DriverID = TruckerID;
         UIM.inst.LoadPanel(TruckerPanel);
         if (GM.inst.Trucks[TruckerID].GetComponent<Load>() == null)
         {
@@ -64,13 +65,13 @@ public class TruckerUI : MonoBehaviour
             {
                 yield return new WaitForSeconds(0.025f);
                 // increase X with an Ease animation
-                InfoItems[i].transform.Translate(((SHORT_INFO_IN+20) - InfoItems[i].transform.localPosition.x) / 25, 0,0);
+                InfoItems[i].transform.Translate(((SHORT_INFO_IN + 20) - InfoItems[i].transform.localPosition.x) / 25, 0, 0);
             }
         }
         yield return new WaitForSeconds(5f);
 
         // animate each info section for the trucker out
-        for (int i = NUM_INFO_ITEMS-1; i >=0 ; i--)
+        for (int i = NUM_INFO_ITEMS - 1; i >= 0; i--)
         {
             while (InfoItems[i].transform.localPosition.x > SHORT_INFO_OUT)
             {
@@ -78,7 +79,7 @@ public class TruckerUI : MonoBehaviour
                 InfoItems[i].transform.Translate(((SHORT_INFO_OUT - 20) + InfoItems[i].transform.localPosition.x) / 25, 0, 0);
             }
         }
-        
+
         yield return null;
 
     }

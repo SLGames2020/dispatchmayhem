@@ -8,12 +8,13 @@ public class Movement : MonoBehaviour
 {
     public routeCallBack FoundRoute;
 
-    [HideInInspector]public GameObject load;
+    [HideInInspector] public GameObject load;
     //public Button assButt;
 
     [HideInInspector] public Load currLoad;
 
     public float haulDistance = 0.0f;
+    public float LifeTimehaulDistance = 0.0f;
     public float haulCost = 0.0f;
     public float truckSpeed = 65.244f;               //legislated 105kph in miles
 
@@ -36,7 +37,7 @@ public class Movement : MonoBehaviour
     private float lastTime;
     private float haulingCost;
     private DateTime hazardWaitTime;
-    private Vector2 lastgps;                    
+    private Vector2 lastgps;
 
     private int destinationMarker = 0;
     private int loadMark = -1;                                   //the point in the route list to delay for loading
@@ -74,15 +75,15 @@ public class Movement : MonoBehaviour
         {
             currLoad.state = Load.LoadState.DELIVERING;
 
-            for (int x=0; x < lastPosition.Length - 1; x++)                     //save an array of last positions to smooth out the movement
+            for (int x = 0; x < lastPosition.Length - 1; x++)                     //save an array of last positions to smooth out the movement
             {                                                                   //slerp/lerp does not work very well with the mapmanager controlling an objects transform
-                lastPosition[x+1] = lastPosition[x];
+                lastPosition[x + 1] = lastPosition[x];
             }
             lastPosition[0] = this.transform.position;
 
-            if (GameTime.inst.gmTime < loadDelayTime )                          //if we are loading, don't move
-            {                                                                                
-                                                                                //Need a loading graphic/state here
+            if (GameTime.inst.gmTime < loadDelayTime)                          //if we are loading, don't move
+            {
+                //Need a loading graphic/state here
             }
             else if (destinationMarker == loadMark)                             //if we're at the loading point
             {
@@ -98,14 +99,14 @@ public class Movement : MonoBehaviour
             else if (GameTime.inst.gmTime < hazardWaitTime)                     //the highway wait timing is seperate here so we can have
             {                                                                   //different hooks for the hazards and the loading/unloading delay times
                 //Debug.Log("Hazard Waiting");                                    //add a sound here
-            }                                                                   
+            }
             else if (loadMark != -1)                                            //only move if we've received a loading point
             {
                 Vector2 tv2 = route[destinationMarker];
                 lastgps = mapSupport.gps;
                 mapSupport.gps = Move(mapSupport.gps, tv2, truckSpeed);
 
-                Vector3 newlook = this.transform.position - lastPosition[lastPosition.Length-1]; // lastpossum; // lastPosition[1];
+                Vector3 newlook = this.transform.position - lastPosition[lastPosition.Length - 1]; // lastpossum; // lastPosition[1];
 
                 Quaternion newrot = Quaternion.LookRotation(newlook);
                 this.transform.rotation = Quaternion.Slerp(this.transform.rotation, newrot, 1.0f * Time.deltaTime);
@@ -120,6 +121,12 @@ public class Movement : MonoBehaviour
                 if ((mapSupport.gps - destination).magnitude < closeEnough)   //if we're close to the destination, and we have travelled a route
                 {
                     SoundManager.instance.SoundEffect(unloading);
+                    if (currLoad.state != Load.LoadState.DELIVERED)
+                    {
+                        LifeTimehaulDistance += haulDistance;
+                        Debug.Log("LifeTimehaulDistance: " + LifeTimehaulDistance);
+                    }
+
                     currLoad.state = Load.LoadState.DELIVERED;
                     // JD TODO: at this point we need to ensure the coin icon appears in the TruckerUI panel to claim the money. 
                     // We will need a new panel created to claim the job which upon claim, assigns the money to the players currency 
@@ -211,7 +218,7 @@ public class Movement : MonoBehaviour
         hazardWaitTime = GameTime.inst.gmTime;
         hazardWaitTime = hazardWaitTime.AddHours(wt);
         //Debug.Log("current time: " + GameTime.inst.gmTime + " hazard Time: " + hazardWaitTime);
-    } 
+    }
     /****************************************************************
         loadTruck
         
@@ -261,7 +268,7 @@ public class Movement : MonoBehaviour
                 lastTime = Time.time + 1.0f;                                //block us from calling mapbox more than once per second
             }
         }
-        
+
     }
 
     /**************************************************************
@@ -304,7 +311,7 @@ public class Movement : MonoBehaviour
         const float r = 3958.755866f;                                       //radius of the earth
 
         float a = (Mathf.Sin(deltaphi / 2.0f) * Mathf.Sin(deltaphi / 2.0f))
-                + (Mathf.Cos(phi1) * Mathf.Cos(phi2) 
+                + (Mathf.Cos(phi1) * Mathf.Cos(phi2)
                 * (Mathf.Sin(deltlambda / 2.0f) * Mathf.Sin(deltlambda / 2.0f)));
 
         float c = 2.0f * Mathf.Atan2(Mathf.Sqrt(a), Mathf.Sqrt(1.0f - a));
