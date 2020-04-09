@@ -10,16 +10,22 @@ public class TruckerPanel : BasePanel
     public Text wage;
     public Text hours;
     public GameObject truck;
-    public int playexp = 0;
-    public int totalxp = 0;
-    public int playlvl = 1;
-    public int playwage = 1;
+    struct TruckerInfo
+    {
+        public int playexp;
+        public int totalxp;
+        public int playlvl;
+        public int playwage;
+    }
+
+    TruckerInfo[] TruckData;
+
+    public int DriverID;
 
     public static TruckerPanel instance = null;
 
     private void Awake()
     {
-
         if (instance == null)
         {
             instance = this;
@@ -35,12 +41,15 @@ public class TruckerPanel : BasePanel
 
     void levelup()
     {
-        
-        while(playexp >= 100)
+        TruckData[DriverID].playlvl = 1;
+        TruckData[DriverID].playwage = 1;
+        TruckData[DriverID].playexp = TruckData[DriverID].totalxp / 2;
+
+        while (TruckData[DriverID].playexp >= (150 * TruckData[DriverID].playlvl))
         {
-             playlvl++;
-             playwage++;
-             playexp = 0;
+            TruckData[DriverID].playwage = TruckData[DriverID].playwage + (TruckData[DriverID].playlvl /2);
+            TruckData[DriverID].playexp -= (150 * TruckData[DriverID].playlvl);
+            TruckData[DriverID].playlvl++;
         }
     }
 
@@ -49,21 +58,49 @@ public class TruckerPanel : BasePanel
        
     }
 
+    void UpdateLoads()
+    {
+        Load currLoad =  GM.inst.Trucks[DriverID].GetComponent<Movement>().currLoad;
+
+        /*
+         string txt = ld.originLabel + " to " + ld.destinationLabel;
+                template.transform.SetParent(ActiveloadBoxContent.transform, false);
+                template.GetComponentInChildren<Text>().text = txt;
+
+                Text SrcText = template.transform.Find("Pickup").gameObject.GetComponent<Text>();
+                SrcText.text = ld.originLabel;
+                Text DestText = template.transform.Find("DropOff").gameObject.GetComponent<Text>();
+                DestText.text = ld.destinationLabel;
+                Text timeText = template.transform.Find("Time").gameObject.GetComponent<Text>();
+                timeText.text = ld.DueDate.ToShortDateString() + " " + ld.DueDate.ToShortTimeString();
+
+                Text LoadText = template.transform.Find("LoadText").gameObject.GetComponent<Text>();
+                LoadText.text = ld.value.ToString();
+
+                GameObject LoadTypeIcon = template.transform.Find("LoadType").gameObject;
+
+                Texture2D Loadedtexture = Resources.Load<Texture2D>("Textures pack/UI Icons/" + ld.productIcon);
+                LoadTypeIcon.GetComponent<RawImage>().texture = Loadedtexture;
+         */
+    }
+
     // Start is called before the first frame update
     void Start()
     {
-        xp.text = "" + playexp;
-        lvl.text = "" + playlvl;
-        wage.text = "" + playwage;
+        xp.text = "" + TruckData[DriverID].playexp;
+        lvl.text = "" + TruckData[DriverID].playlvl;
+        wage.text = "" + TruckData[DriverID].playwage;
     }
 
     // Update is called once per frame
     void Update()
     {
-        xp.text = "" + totalxp;
-        lvl.text = "" + playlvl;
-        wage.text = "" + playwage;
-        totalxp = (int)truck.GetComponent<Movement>().LifeTimehaulDistance;
+        xp.text = "" + TruckData[DriverID].totalxp;
+        lvl.text = "" + TruckData[DriverID].playlvl;
+        wage.text = "" + TruckData[DriverID].playwage;
+        TruckData[DriverID].totalxp = (int)truck.GetComponent<Movement>().LifeTimehaulDistance;
         levelup();
+        UpdateLoads();
+        UpdateHours();
     }
 }
