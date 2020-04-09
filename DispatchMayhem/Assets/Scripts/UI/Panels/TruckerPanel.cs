@@ -9,13 +9,20 @@ public class TruckerPanel : BasePanel
     public Text lvl;
     public Text wage;
     public Text hours;
+    public Text source;
+    public Text destination;
+    public Text ETA;
+    public Text Hours;
+
     public GameObject truck;
+
     struct TruckerInfo
     {
         public int playexp;
         public int totalxp;
         public int playlvl;
         public int playwage;
+        public int playhrs;
     }
 
     TruckerInfo[] TruckData;
@@ -54,8 +61,11 @@ public class TruckerPanel : BasePanel
     }
 
     void UpdateHours()
-    {
-       
+    { 
+        //Load currLoad = GM.inst.Trucks[DriverID].GetComponent<Movement>().currLoad;
+        //playhrs = loadMove;
+
+        hours.text = "" + TruckData[DriverID].playhrs;
     }
 
     void UpdateLoads()
@@ -63,14 +73,19 @@ public class TruckerPanel : BasePanel
         Load currLoad =  GM.inst.Trucks[DriverID].GetComponent<Movement>().currLoad;
 
         /*
+         //Might not be needed
          string txt = ld.originLabel + " to " + ld.destinationLabel;
                 template.transform.SetParent(ActiveloadBoxContent.transform, false);
                 template.GetComponentInChildren<Text>().text = txt;
 
+                //replace this with source and see if works.
                 Text SrcText = template.transform.Find("Pickup").gameObject.GetComponent<Text>();
                 SrcText.text = ld.originLabel;
+                //replace this with destination see if works.
                 Text DestText = template.transform.Find("DropOff").gameObject.GetComponent<Text>();
                 DestText.text = ld.destinationLabel;
+
+                //Might not need this two
                 Text timeText = template.transform.Find("Time").gameObject.GetComponent<Text>();
                 timeText.text = ld.DueDate.ToShortDateString() + " " + ld.DueDate.ToShortTimeString();
 
