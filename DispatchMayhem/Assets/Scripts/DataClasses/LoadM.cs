@@ -62,76 +62,13 @@ public class LoadM : MonoBehaviour
     {
         instance = null;
     }
-    /*
+ 
     public void AllowedLoads()
     {
-        space = trailer.GetComponent<Trailer>().GetMaxSpace();
-        bool isAllowed = true;
-        //Trailer.TrailerType currType;
-        int currType;
-
-        if (allowed == BOXES)
-        {
-            currType = trailer.GetComponent<DryVan>().GetTrailerType();
-            //if (currType != Trailer.TrailerType.DRYVAN)
-            if (currType != DRYVAN)
-            {
-                isAllowed = false;
-                Debug.Log("This product is not allowed please select the correct trailer");
-            }
-
-            pay = 100 * space;
-        }
-        else if (allowed == COLDGOODS)
-        {
-            currType = trailer.GetComponent<ReferVan>().GetTrailerType();
-            //if (currType != Trailer.TrailerType.REFERVAN)
-            if (currType != REFERVAN)
-            {
-                isAllowed = false;
-                Debug.Log("This product is not allowed please select the correct trailer");
-            }
-
-            pay = 100 * space;
-        }
-        else if (allowed == CONSTRUCTION)
-        {
-            currType = trailer.GetComponent<Flatbed>().GetTrailerType();
-            //if (currType != Trailer.TrailerType.FLATBED)
-            if (currType != FLATBED)
-            {
-                isAllowed = false;
-                Debug.Log("This product is not allowed please select the correct trailer");
-            }
-
-            pay = 100 * space;
-        }
-        else if (allowed == CONSTRUCTION_LARGE)
-        {
-            currType = trailer.GetComponent<DropDeck>().GetTrailerType();
-            //if (currType != Trailer.TrailerType.DROPDECK)
-            if (currType != DROPDECK)
-            {
-                isAllowed = false;
-                Debug.Log("This product is not allowed please select the correct trailer");
-            }
-
-            pay = 100 * space;
-        }
-        else if (allowed == LIQUIDS)
-        {
-            currType = trailer.GetComponent<Tanker>().GetTrailerType();
-            //if (currType != Trailer.TrailerType.TANKER)
-            if (currType != TANKER)
-            {
-                isAllowed = false;
-                Debug.Log("This product is not allowed please select the correct trailer");
-            }
-
-            pay = 100 * space;
-        }
+        
     }
-    */
+    
+
     private string GenerateIcon(int productType)
     {
         string iconName = "water";
