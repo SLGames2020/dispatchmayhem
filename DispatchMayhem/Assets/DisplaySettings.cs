@@ -21,10 +21,10 @@ public class DisplaySettings : MonoBehaviour
 
     void OnEnable()
     {
-        Debug.Log("Settings Enabled");
+        //Debug.Log("Settings Enabled");
         if (GM.inst.haveSave)
         {
-            Debug.Log("And has save");
+            //Debug.Log("And has save");
             loadButton.GetComponent<Image>().sprite = saveButton.GetComponent<Image>().sprite;
         }
     }

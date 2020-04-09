@@ -8,14 +8,14 @@ public class CoinUp : MonoBehaviour
 
     public float value = 0.0f;
 
-    private Vector3 start;
-    private float coinSpeed = 20.0f;
+    private Vector3 startPos;
+    private float coinSpeed = 7.5f;
     private bool clicked = false;
    
     // Start is called before the first frame update
     void Start()
     {
-        start = this.transform.position;
+        startPos = this.transform.position;
     }
 
     // Update is called once per frame
@@ -23,13 +23,15 @@ public class CoinUp : MonoBehaviour
     {
         if (clicked)
         {
-            if ((this.transform.position - moneyTarget.position).magnitude < 0.1f)
+            if ((this.transform.position - moneyTarget.position).magnitude < 0.5f)
             {
                 Finances.inst.AddMoney(value);
                 //TODO: Add a "money gained" sound
-                Destroy(this.gameObject);
+                clicked = false;
+                this.transform.position = startPos;
+                this.gameObject.SetActive(false);
             }
-            this.transform.position = Vector3.Lerp(start, moneyTarget.position, coinSpeed * Time.deltaTime);
+            this.transform.position = Vector3.Lerp(this.transform.position, moneyTarget.position, coinSpeed * Time.deltaTime);
         }
     }
 
