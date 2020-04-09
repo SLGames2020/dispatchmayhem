@@ -5561,6 +5561,12 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1517399548}
   m_CullTransparentMesh: 0
+--- !u!1 &1520507184 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3553837193960443958, guid: f6f49996127db0341a13bb4a51df16f5,
+    type: 3}
+  m_PrefabInstance: {fileID: 1673617886}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1529484460 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7871597581901717322, guid: f6f49996127db0341a13bb4a51df16f5,
@@ -7126,7 +7132,7 @@ PrefabInstance:
     - target: {fileID: 107090205849340375, guid: f6f49996127db0341a13bb4a51df16f5,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1063381597653304196, guid: f6f49996127db0341a13bb4a51df16f5,
         type: 3}
@@ -7624,6 +7630,11 @@ PrefabInstance:
       propertyPath: Hours
       value: 
       objectReference: {fileID: 566423830}
+    - target: {fileID: 67749253299699702, guid: f6f49996127db0341a13bb4a51df16f5,
+        type: 3}
+      propertyPath: ActiveloadBoxContent
+      value: 
+      objectReference: {fileID: 1520507184}
     - target: {fileID: 217945314104843742, guid: f6f49996127db0341a13bb4a51df16f5,
         type: 3}
       propertyPath: TruckerPanel

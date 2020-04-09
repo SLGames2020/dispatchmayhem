@@ -42,11 +42,12 @@ public class TruckerPanel : BasePanel
             Destroy(gameObject);
         }
 
+        TruckData = new TruckerInfo[3];
         DontDestroyOnLoad(gameObject);
     }
 
 
-    void levelup()
+    public void levelup()
     {
         TruckData[DriverID].playlvl = 1;
         TruckData[DriverID].playwage = 1;
@@ -60,43 +61,41 @@ public class TruckerPanel : BasePanel
         }
     }
 
-    void UpdateHours()
+    public void UpdateHours()
     { 
-        //Load currLoad = GM.inst.Trucks[DriverID].GetComponent<Movement>().currLoad;
-        //playhrs = loadMove;
+        //Does not seem to function as initially thought, attempting to get loadstate of delivering to determine that the driver is moving to conduct hours
+        //Load hasLoad = GM.inst.Trucks[DriverID].GetComponent<Load>().LoadState.DELIVERING;
+        //TruckData[DriverID].playhrs = hasLoad;
 
         hours.text = "" + TruckData[DriverID].playhrs;
     }
 
-    void UpdateLoads()
+    public void UpdateLoads()
     {
         Load currLoad =  GM.inst.Trucks[DriverID].GetComponent<Movement>().currLoad;
 
-        /*
-         //Might not be needed
-         string txt = ld.originLabel + " to " + ld.destinationLabel;
-                template.transform.SetParent(ActiveloadBoxContent.transform, false);
-                template.GetComponentInChildren<Text>().text = txt;
-
+        //Attempted to mess around with it changing things run into multiple errors will need assitance to try and figure this out as i have tried
+        //removing the text source, etc. And have resulted in errors also tried setting source.text to currLoad.transfrom... and still have not worked
                 //replace this with source and see if works.
-                Text SrcText = template.transform.Find("Pickup").gameObject.GetComponent<Text>();
-                SrcText.text = ld.originLabel;
+                //Text source = currLoad.transform.Find("Pickup").gameObject.GetComponent<Text>();
+                //source.text = currLoad.originLabel;
+
                 //replace this with destination see if works.
-                Text DestText = template.transform.Find("DropOff").gameObject.GetComponent<Text>();
-                DestText.text = ld.destinationLabel;
+                //Text destination = currLoad.transform.Find("DropOff").gameObject.GetComponent<Text>();
+                //destination.text = currLoad.destinationLabel;
 
                 //Might not need this two
-                Text timeText = template.transform.Find("Time").gameObject.GetComponent<Text>();
-                timeText.text = ld.DueDate.ToShortDateString() + " " + ld.DueDate.ToShortTimeString();
+                //Text timeText = currLoad.transform.Find("Time").gameObject.GetComponent<Text>();
+                //text = currLoad.DueDate.ToShortDateString() + " " + currLoad.DueDate.ToShortTimeString();
 
-                Text LoadText = template.transform.Find("LoadText").gameObject.GetComponent<Text>();
-                LoadText.text = ld.value.ToString();
+                //Text LoadText = currLoad.transform.Find("LoadText").gameObject.GetComponent<Text>();
+                //LoadText.text = currLoad.value.ToString();
 
-                GameObject LoadTypeIcon = template.transform.Find("LoadType").gameObject;
+                //GameObject LoadTypeIcon = currLoad.transform.Find("LoadType").gameObject;
 
-                Texture2D Loadedtexture = Resources.Load<Texture2D>("Textures pack/UI Icons/" + ld.productIcon);
-                LoadTypeIcon.GetComponent<RawImage>().texture = Loadedtexture;
-         */
+                //Texture2D Loadedtexture = Resources.Load<Texture2D>("Textures pack/UI Icons/" + currLoad.productIcon);
+                //LoadTypeIcon.GetComponent<RawImage>().texture = Loadedtexture;
+         
     }
 
     // Start is called before the first frame update
@@ -110,10 +109,13 @@ public class TruckerPanel : BasePanel
     // Update is called once per frame
     void Update()
     {
+        float wage1;
         xp.text = "" + TruckData[DriverID].totalxp;
         lvl.text = "" + TruckData[DriverID].playlvl;
         wage.text = "" + TruckData[DriverID].playwage;
         TruckData[DriverID].totalxp = (int)truck.GetComponent<Movement>().LifeTimehaulDistance;
+        wage1 = GameTime.inst.gmHoursToRealSeconds(TruckData[DriverID].playwage) * Time.deltaTime;
+        Finances.inst.AddMoney(-wage1);
         levelup();
         UpdateLoads();
         UpdateHours();
