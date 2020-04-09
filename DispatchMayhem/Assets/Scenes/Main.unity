@@ -4212,6 +4212,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 29c78fba6ca4a794a80cc0fd66e6866e, type: 3}
+--- !u!114 &1139844058 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5948913328490149098, guid: f6f49996127db0341a13bb4a51df16f5,
+    type: 3}
+  m_PrefabInstance: {fileID: 1673617886}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1140147254 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7523928410292868698, guid: f6f49996127db0341a13bb4a51df16f5,
@@ -4702,6 +4714,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1258417158 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7004642851151716333, guid: f6f49996127db0341a13bb4a51df16f5,
+    type: 3}
+  m_PrefabInstance: {fileID: 1673617886}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!82 &1276447300 stripped
 AudioSource:
   m_CorrespondingSourceObject: {fileID: 2452786535436346653, guid: f6f49996127db0341a13bb4a51df16f5,
@@ -7102,7 +7126,7 @@ PrefabInstance:
     - target: {fileID: 107090205849340375, guid: f6f49996127db0341a13bb4a51df16f5,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1063381597653304196, guid: f6f49996127db0341a13bb4a51df16f5,
         type: 3}
@@ -7580,6 +7604,26 @@ PrefabInstance:
       propertyPath: wage
       value: 
       objectReference: {fileID: 2136084591}
+    - target: {fileID: 67749253299699702, guid: f6f49996127db0341a13bb4a51df16f5,
+        type: 3}
+      propertyPath: source
+      value: 
+      objectReference: {fileID: 1258417158}
+    - target: {fileID: 67749253299699702, guid: f6f49996127db0341a13bb4a51df16f5,
+        type: 3}
+      propertyPath: destination
+      value: 
+      objectReference: {fileID: 1139844058}
+    - target: {fileID: 67749253299699702, guid: f6f49996127db0341a13bb4a51df16f5,
+        type: 3}
+      propertyPath: ETA
+      value: 
+      objectReference: {fileID: 1743263174}
+    - target: {fileID: 67749253299699702, guid: f6f49996127db0341a13bb4a51df16f5,
+        type: 3}
+      propertyPath: Hours
+      value: 
+      objectReference: {fileID: 566423830}
     - target: {fileID: 217945314104843742, guid: f6f49996127db0341a13bb4a51df16f5,
         type: 3}
       propertyPath: TruckerPanel
@@ -8108,6 +8152,18 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1743263174 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1182897517713447236, guid: f6f49996127db0341a13bb4a51df16f5,
+    type: 3}
+  m_PrefabInstance: {fileID: 1673617886}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1754075170 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6074523914541830569, guid: f6f49996127db0341a13bb4a51df16f5,
