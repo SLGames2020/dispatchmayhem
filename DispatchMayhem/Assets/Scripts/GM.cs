@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Country
 {
@@ -30,7 +31,7 @@ public class GM : MonoBehaviour
     [HideInInspector] public List<Load> ActiveJobs = new List<Load>();
 
     public bool haveSave = false;
-
+    
     void Awake()
     {
         if (instance == null)
@@ -48,6 +49,7 @@ public class GM : MonoBehaviour
     void Start()
     {
         haveSave = PlayerPrefs.HasKey("HaveSave");
+        Loading();
     }
 
     // Update is called once per frame
@@ -97,23 +99,41 @@ public class GM : MonoBehaviour
         jobsButton.SetActive(false);
     }
 
-<<<<<<< HEAD
     //----------------------------------------------------------//
     //                   Loading Screen                         //
     //----------------------------------------------------------//
 
     public void Loading()
     {
-        loadingPanel.SetActive(true); 
+        loadingPanel.SetActive(true);
         StartCoroutine(Wait());
     }
 
     IEnumerator Wait()
     {
-        yield return new WaitForSecondsRealtime(5);
+        //string txt = loadingPanel.GetComponentInChildren<Text>().text;
+        Text SrcText_0 = loadingPanel.transform.Find("Text (TMP)").gameObject.GetComponent<Text>();
+        SrcText_0.text = "Loading ";
+
+        for (int counter = 0; counter < 4; counter++)
+        {
+            SrcText_0.text = "Loading .";
+
+            yield return new WaitForSecondsRealtime(0.25f);
+            //Text SrcText_1 = loadingPanel.transform.Find("Loading .").gameObject.GetComponent<Text>();
+            SrcText_0.text = "Loading . .";
+
+            yield return new WaitForSecondsRealtime(0.25f);
+            //Text SrcText_2 = loadingPanel.transform.Find("Loading ...").gameObject.GetComponent<Text>();
+            SrcText_0.text = "Loading . . .";
+
+            yield return new WaitForSecondsRealtime(0.25f);
+            SrcText_0.text = "Loading ";
+            yield return new WaitForSecondsRealtime(0.25f);
+        }
         loadingPanel.SetActive(false);
     }
-=======
+
     /*****************************************************************************
     SaveGame
 
@@ -263,6 +283,5 @@ public class GM : MonoBehaviour
                 }
             }
         }
->>>>>>> d1f52ec61d6463f7940cbdd071b5e4597fb2aa87
     }
 }
