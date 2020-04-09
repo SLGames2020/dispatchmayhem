@@ -30,4 +30,10 @@ public class SliderScript : MonoBehaviour
         PlayerPrefs.SetFloat(mixerName, sliderValue);
     }
 
+    //public void SetLevel2(float sliderValue2)
+    //{
+    //    Debug.Log("saving fx");
+    //    mixer.SetFloat("SoundFxVol", Mathf.Log10 (sliderValue2) * 20);
+    //    PlayerPrefs.SetFloat("SoundFxVol", sliderValue2);
+    //}
 }
