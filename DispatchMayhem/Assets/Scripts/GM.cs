@@ -143,7 +143,7 @@ public class GM : MonoBehaviour
     This should eventually be moved to a save file with support for multiple
     saves
 
-*****************************************************************************/
+    *****************************************************************************/
     public void SaveGame()
     {
         int x = 0;
