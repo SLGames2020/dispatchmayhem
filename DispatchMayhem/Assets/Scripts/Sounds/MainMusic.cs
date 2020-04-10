@@ -10,7 +10,6 @@ public class MainMusic : MonoBehaviour
     void Start()
     {
         SoundManager.instance.MainMusic(mainMusic);
-        
     }
 
     // Update is called once per frame
