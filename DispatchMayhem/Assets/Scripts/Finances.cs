@@ -46,7 +46,7 @@ public class Finances : MonoBehaviour
         if (lastMinute != GameTime.inst.gmTime.Minute)
         {
             lastMinute = GameTime.inst.gmTime.Minute;
-            AddMoney(-5.0f);
+            AddMoney(-3.0f);
         }
         int tmpcur = (int)currCurrency;
         cashText.text = tmpcur.ToString();
