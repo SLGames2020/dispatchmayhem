@@ -22,6 +22,7 @@ public class UIM : MonoBehaviour
     public GameObject GameOverPanel;
     //public GameObject LoadingPanel;
     public GameObject CreditsPanel;
+    public GameObject CoinIcon;
 
     public GameObject[] Trucks;
 

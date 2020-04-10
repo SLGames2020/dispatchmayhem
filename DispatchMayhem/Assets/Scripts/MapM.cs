@@ -65,6 +65,7 @@
             for (int i = 0; i < count; i++)
             {
                 var spawnedObject = _spawnedObjects[i];
+
                 if (spawnedObject != null)  
                 {
                     MapSupport msup = spawnedObject.GetComponent<MapSupport>();
@@ -77,8 +78,9 @@
                 }
                 else
                 {
-                    Debug.Log("Removing Null map object!");
+                    Debug.Log("Removing Null map object! n(" + i + ")");
                     _spawnedObjects.RemoveAt(i);
+
                 }
 
             }

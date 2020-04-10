@@ -6,6 +6,11 @@ using UnityEngine.UI;
 
 public class SliderScript : MonoBehaviour
 {
+    //TODO: 1) The saving of the volume settings (and game settings in general) should have
+    //         a seperate button so its understood to not be part of the Save Game button
+    //      2) The setting of the mixer and saving/retrieving of the values should be moved 
+    //         to the sound manager
+
     public AudioMixer mixer;
 
     public string mixerName;
@@ -16,16 +21,13 @@ public class SliderScript : MonoBehaviour
 
         if (PlayerPrefs.HasKey(mixerName))
         {
-            Debug.Log("loading Volume: " + mixerName);
             tmpvol = PlayerPrefs.GetFloat(mixerName);
-            mixer.SetFloat(mixerName, Mathf.Log10(tmpvol) * 20);
             this.gameObject.GetComponent<Slider>().value = tmpvol;
         }
     }
 
     public void SetLevel(float sliderValue)
     {
-        Debug.Log("saving volume: " + mixerName);
         mixer.SetFloat(mixerName, Mathf.Log10 (sliderValue) * 20);
         PlayerPrefs.SetFloat(mixerName, sliderValue);
     }
