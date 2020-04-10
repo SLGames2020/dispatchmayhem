@@ -31,4 +31,5 @@ public class SliderScript : MonoBehaviour
         mixer.SetFloat(mixerName, Mathf.Log10 (sliderValue) * 20);
         PlayerPrefs.SetFloat(mixerName, sliderValue);
     }
+
 }
