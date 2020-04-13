@@ -24,10 +24,6 @@ public class NM : MonoBehaviour
     private static NM instance = null;
     public static NM Inst { get { return instance; } }
 
-
-    //public routeCallBack FindRoute;
-    //private Vector2[] testRoute;
-
     public string accessToken = "pk.eyJ1Ijoic2xnYW1lcyIsImEiOiJjazVlMm00MXYwMGxoM2ZwYnN1NjIxcjJxIn0.IGD0z3Stw1R5fXMAWpz2JA";
 
     private TcpClient mapboxClient;
@@ -153,14 +149,10 @@ private void OnApplicationQuit()
 
             if (coordarray.Length == 0)
             {
-                //Debug.Log("Does not Contain a Waypoint list");
                 dist = -1.0f;                                         //return no route data found
             }
             else
             {
-                //Debug.Log("Start: " + startidx + " End: " + endidx + " Length: " + coordarray.Length);
-                //Debug.Log("Waypoint List: " + coordarray);
-
                 List<Vector2> waypoints = new List<Vector2>();
                 waypoints.Clear();
 
@@ -176,8 +168,7 @@ private void OnApplicationQuit()
                         scanning = false;
                     }
                     string wypnt = coordarray.Substring(startidx, endidx - startidx);                           //wypnt is now a single [#.###,#.###] data set
-                    //Debug.Log(wypnt);
-                    //Debug.Log("Start: " + startidx + " End: " + endidx + " Length: " + coordarray.Length);
+
                     if (scanning)                                                                               //only do the substring if we have more waypoints
                     {                                                                                           //otherwise we get an error
                         coordarray = coordarray.Substring(endidx + 1, coordarray.Length - endidx - 1);
@@ -193,8 +184,8 @@ private void OnApplicationQuit()
                 }
                 cb(waypoints, dist);                                                                            //once complete, send it all to the call back
 
-                int minway = (int)((waypoints.Count * 0.20f) + 1.0f);                                           //here we want to grab a random way point outside of the cities
-                int maxway = (int) (waypoints.Count * 0.80f);                                                   //(so our hazards are not right on top of the city markers)
+                int minway = (int)((waypoints.Count * 0.30f) + 1.0f);                                           //here we want to grab a random way point outside of the cities
+                int maxway = (int) (waypoints.Count * 0.70f);                                                   //(so our hazards are not right on top of the city markers)
                 if (minway == maxway) maxway++;
                 HazM.Inst.AddRoadLoc(waypoints[UnityEngine.Random.Range(minway, maxway)]);                      //pull out a single waypoint and send it to the Hazard Manager so it can build
             }
