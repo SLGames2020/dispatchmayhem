@@ -11,6 +11,7 @@ public class TruckerPanel : BasePanel
     public Text hours;
     public Text source;
     public Text destination;
+    public Text load;
     public Text ETA;
     public Text Hours;
 
@@ -64,38 +65,36 @@ public class TruckerPanel : BasePanel
     public void UpdateHours()
     {
         //Does not seem to function as initially thought, attempting to get loadstate of delivering to determine that the driver is moving to conduct hours
-        //Load hasLoad = GM.inst.Trucks[DriverID].GetComponent<Load>().LoadState.DELIVERING;
+        Load hasLoad = GM.inst.Trucks[DriverID].GetComponent<Load>();
         //TruckData[DriverID].playhrs = hasLoad;
+        if (hasLoad != null && hasLoad.state == Load.LoadState.DELIVERING )
+        {
+            hours.text = "" + TruckData[DriverID].playhrs;
+        }
 
-        hours.text = "" + TruckData[DriverID].playhrs;
     }
 
     public void UpdateLoads()
     {
         Load currLoad = GM.inst.Trucks[DriverID].GetComponent<Movement>().currLoad;
+        if (currLoad != null)
+        {
+            //Attempted to mess around with it changing things run into multiple errors will need assitance to try and figure this out as i have tried
+            //removing the text source, etc. And have resulted in errors also tried setting source.text to currLoad.transfrom... and still have not worked
+            //replace this with source and see if works.
+            //Text source = currLoad.transform.Find("Pickup").gameObject.GetComponent<Text>();
+            source.text = currLoad.originLabel;
 
-        //Attempted to mess around with it changing things run into multiple errors will need assitance to try and figure this out as i have tried
-        //removing the text source, etc. And have resulted in errors also tried setting source.text to currLoad.transfrom... and still have not worked
-        //replace this with source and see if works.
-        //Text source = currLoad.transform.Find("Pickup").gameObject.GetComponent<Text>();
-        //source.text = currLoad.originLabel;
+            //replace this with destination see if works.
+            destination.text = currLoad.destinationLabel;
 
-        //replace this with destination see if works.
-        //Text destination = currLoad.transform.Find("DropOff").gameObject.GetComponent<Text>();
-        //destination.text = currLoad.destinationLabel;
+            //load.text = currLoad.value.ToString();
 
-        //Might not need this two
-        //Text timeText = currLoad.transform.Find("Time").gameObject.GetComponent<Text>();
-        //text = currLoad.DueDate.ToShortDateString() + " " + currLoad.DueDate.ToShortTimeString();
+            GameObject LoadTypeIcon = gameObject.transform.Find("LoadType").gameObject;
 
-        //Text LoadText = currLoad.transform.Find("LoadText").gameObject.GetComponent<Text>();
-        //LoadText.text = currLoad.value.ToString();
-
-        //GameObject LoadTypeIcon = currLoad.transform.Find("LoadType").gameObject;
-
-        //Texture2D Loadedtexture = Resources.Load<Texture2D>("Textures pack/UI Icons/" + currLoad.productIcon);
-        //LoadTypeIcon.GetComponent<RawImage>().texture = Loadedtexture;
-
+            Texture2D Loadedtexture = Resources.Load<Texture2D>("Textures pack/UI Icons/" + currLoad.productIcon);
+            LoadTypeIcon.GetComponent<RawImage>().texture = Loadedtexture;
+        }
     }
 
     // Start is called before the first frame update
