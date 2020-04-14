@@ -69,7 +69,8 @@ public class Load : MonoBehaviour
         float tmpdst = Mathf.Abs((destination.y - origin.y) * 69.171f);  
         tmpdst += Mathf.Abs((destination.x - origin.x) * 69.171f * Mathf.Cos(origin.y * Mathf.PI / 180.0f));
         routeDistance = tmpdst;
-        value = haulingPayment * tmpdst;
+        int tmpval = (int)(haulingPayment * tmpdst);
+        value = (float)tmpval;
         //Debug.Log("Load(" + originLabel + " - " + destinationLabel + ") Valued at: $" + value + " for " + tmpdst + " miles");
     }
 
@@ -87,7 +88,8 @@ public class Load : MonoBehaviour
             route.Add(pnt);
         }
         routeDistance = dst / 1609.34f;                              //convert mapbox distance in meters to miles
-        value = haulingPayment * dst;
+        int tmpval = (int)(haulingPayment * dst);
+        value = (float) tmpval;
         Debug.Log("Load (" + originLabel + " - " + destinationLabel + "): " + route.Count + " Waypoints, Valued at: $" + value + " for " + dst + " miles");
     }
 }

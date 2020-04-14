@@ -78,7 +78,7 @@
                 }
                 else
                 {
-                    Debug.Log("Removing Null map object! n(" + i + ")");
+                    //Debug.Log("Removing Null map object! n(" + i + ")");
                     _spawnedObjects.RemoveAt(i);
 
                 }

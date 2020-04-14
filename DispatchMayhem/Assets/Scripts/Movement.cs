@@ -127,7 +127,7 @@ public class Movement : MonoBehaviour
                     if (currLoad.state != Load.LoadState.DELIVERED)
                     {
                         LifeTimehaulDistance += haulDistance;
-                        Debug.Log("LifeTimehaulDistance: " + LifeTimehaulDistance);
+                        //Debug.Log("LifeTimehaulDistance: " + LifeTimehaulDistance);
                     }
 
                     currLoad.state = Load.LoadState.DELIVERED;
