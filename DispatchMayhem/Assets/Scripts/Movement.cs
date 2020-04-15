@@ -22,6 +22,7 @@ public class Movement : MonoBehaviour
     public AudioClip moving;
     public AudioClip loading;
     public AudioClip unloading;
+    public AudioClip warning;
 
     public bool onDuty = false;
     public bool hasLoad = false;
@@ -92,6 +93,7 @@ public class Movement : MonoBehaviour
                 Truck trk = this.gameObject.GetComponent<Truck>();              //check to see if the player sent the right truck
                 if (trk.productType != currLoad.productType)                    //if not, notify of an error 
                 {                                                               //TODO: add error graphic and sounds
+                    SoundManager.instance.SoundEffect(warning);
                     Debug.Log("Cannot Load " + currLoad.productLabel + " with " + trk.rigLabel);
                     Destroy(currLoad);
                     currLoad = null;
