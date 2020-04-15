@@ -18,20 +18,17 @@ public class LoadM : MonoBehaviour
     public float pay;
     public float space;
 
-    //private enum Products
-    //{
-    private const int BOXES = 0;                //using const ints because Enums are difficult to use randomly
-    private const int COLDGOODS = 1;
-    private const int CONSTRUCTION_LARGE = 2;
-    private const int CONSTRUCTION = 3;
-    private const int LIQUIDS = 4;
-    private const int UNDEFINED = 5;             //error catch, only ever set at instantiation (always equal to TOTALPRODUCTS)
-    private const int TOTALPRODUCTS = 5;
-    //}
+    private const int DRYVAN = 0;                  //using const ints because Enums are difficult to use randomly
+    private const int FOODGRADE = 1;
+    private const int FLATBED = 2;
+    private const int REEFER = 3;
+    private const int STEPDECK = 4;
+    private const int CHEMICAL = 5;
+    private const int UNDEFINED = 6;             //error catch, only ever set at instantiation (always equal to TOTALPRODUCTS)
+    private const int TOTALPRODUCTS = 6;        //if these are changed make sure Truck.cs productType also matches
 
-    public int allowed;
-    //make sure to add new product labels before the "Undefined" entry
-    private static string[] productLabels = { "Boxes", "Cold Goods", "Construction (Large)", "Construction", "Liquids", "Undefined" };
+    public int allowed;                                        //make sure to add new product labels before the "Undefined" entry
+    public static string[] productLabels = { "Dry Van", "Food Grade", "Flatbed", "Reefer", "Step-Deck",  "Chemical", "Undefined" };
     public static string getProductLabel(int pidx) { return productLabels[pidx]; }
     public int productMax = 0;
 
@@ -75,12 +72,12 @@ public class LoadM : MonoBehaviour
 
         switch (productType)
         {
-            case BOXES:
+            case DRYVAN:
                 {
                     iconName = "boxes";
                     break;
                 }
-            case COLDGOODS:
+            case REEFER:
                 {
                     int randVal = Random.Range(0, 2);
                     if (randVal == 0)
@@ -93,36 +90,45 @@ public class LoadM : MonoBehaviour
                     }
                     break;
                 }
-            case CONSTRUCTION_LARGE:
+            case STEPDECK:
                 {
                     iconName = "ibeams";
                     break;
                 }
-            case CONSTRUCTION:
+            case FLATBED:
                 {
                     iconName = "wood";
                     break;
                 }
-            case LIQUIDS:
+            case CHEMICAL:
                 {
-                    int randVal = Random.Range(0, 5);
+                    int randVal = Random.Range(0, 2);
                     if (randVal == 0)
                     {
                         iconName = "gas";
                     }
                     else if (randVal == 1)
                     {
-                        iconName = "milk";
-                    }
-                    else if (randVal == 2)
-                    {
-                        iconName = "water";
-                    }
-                    else if (randVal == 3)
-                    {
                         iconName = "oil";
                     }
-
+                    break;
+                }
+            case FOODGRADE:
+                {
+                    int randVal = Random.Range(0, 2);
+                    //if (randVal == 0)                 //need a seperate icon otherwise it'll be too confusing
+                    //{                                 //and the icon looks like crude oil so we'll keep it 
+                        iconName = "milk";              //in the chemicals
+                    //}
+                    //else if (randVal == 1)
+                    //{
+                    //    iconName = "oil";
+                    //}
+                    break;
+                }
+            default:
+                {
+                    iconName = "undefined";
                     break;
                 }
         }
@@ -139,27 +145,28 @@ public class LoadM : MonoBehaviour
     ******************************************************************************/
     public void CreateNewLoad(string orlbl, Vector2 orgps)
     {
-        Vector2 des;
+        Vector2 desgps;
         GameObject go;
 
         do
         {
             go = CyM.inst.openCities[Random.Range(0, CyM.inst.openCities.Count - 1)];
-            des = go.GetComponent<MapSupport>().gps;
+            desgps = go.GetComponent<MapSupport>().gps;
         }
-        while (des == orgps);                     //loop till we find a city that isn't the calling city
+        while (desgps == orgps);                     //loop till we find a city that isn't the calling city
 
         GameObject ldgo = Instantiate(loadPrefab, this.transform.position, Quaternion.identity);
         Load ld = ldgo.GetComponent<Load>();
         ld.originLabel = orlbl;
         ld.origin = orgps;
         ld.destinationLabel = go.GetComponent<City>().label;
-        ld.destination = des;
-        ld.productType = Random.Range(0, TOTALPRODUCTS);
+        ld.destination = desgps;
+        ld.productType = Random.Range(0, GM.inst.totalDrivers*2);
         ld.productLabel = productLabels[ld.productType];
         ld.productIcon = GenerateIcon(ld.productType);
         ld.DueDate = GetDeliveryTime(GameTime.inst.gmTime);
-        ld.value = GetDeliveryValue(ld.productType, ld.DueDate);
+        ld.haulingPayment = GetDeliveryValue(ld.productType, ld.DueDate);
+        ld.FindRoute();
         ldgo.name = ld.productLabel + " (" + ld.originLabel + " to " + ld.destinationLabel + ")";
         ldgo.transform.parent = this.transform;
 
@@ -178,10 +185,9 @@ public class LoadM : MonoBehaviour
         GetDeliveryTime
 
         This method generates a random delivery time (days before delivery is over due)
-        of between 3 and 5 days. But for sake of variety and urgency, there will be a
-        10% chance for a 2 day deliver, and a 2.5% chance for a one day delivery. This 
-        more rare loads will also have greater payout factors. (determined by the 
-        GetDeliveryValue method.
+        of between 1.5 and 2.5 days. But for sake of variety and urgency, there will be a
+        7.5% chance 3+ day deliveries, and a 2.5% chance for a one day delivery. 
+        (see GetDeliveryValue for the pay scales)
 
         Delivery times are returned in int hours so we don't have to deal with odd
         minutes of the day.
@@ -194,17 +200,17 @@ public class LoadM : MonoBehaviour
         float chnce = Random.Range(0.0f, 100.0f);
         int hrs = 0;
 
-        if (chnce < 2.5f)
+        if (chnce < 2.5f)                          //2.5% chance of a rush delivery
         {
             hrs = 12 + Random.Range(0, 24);        // up to 1.5 days delivery time
         }
-        else if (chnce < 10.0)
+        else if (chnce < 90.0)                      //90% chance for the normal stuff
         {
             hrs = 36 + Random.Range(0, 24);         //up to 2.5 days delivery time
         }
-        else
+        else                                        //7.5% chance for "intermodal" deliveries
         {
-            hrs = 72 + Random.Range(0, 96);        //and this is 3 to 7 days delivery for regular price
+            hrs = 72 + Random.Range(0, 96);        //and this is 3 to 7 days delivery for reduced rate
         }
 
         retval = retval.AddHours(hrs);
@@ -216,10 +222,10 @@ public class LoadM : MonoBehaviour
         GetDeliveryValue
 
         This method takes in the delivery time and the load type and determines 
-        what the value the load (money recieved by the player upon delivery)
+        what the value per mile is of delivering the load
 
         Load values are determined by the Goods table, with a factor added in for 
-        rushed loads (overnight deliver 3X, next day is 1.5X)
+        rushed loads: overnight is 3X, next day is standard, and long delivery pays less
 
     *********************************************************************************/
     private float GetDeliveryValue(int good, System.DateTime tim)
@@ -228,23 +234,24 @@ public class LoadM : MonoBehaviour
 
         switch (good)                               //using two digits ints for the values
         {                                           //so they appeared rounded to hundreds
-            case BOXES:
-                retval = 20 + Random.Range(0, 10);
+            case DRYVAN:
+                retval = Random.Range(1.5f, 2.10f);
                 break;
-            case COLDGOODS:
-                retval = 25 + Random.Range(0, 15);
+            case REEFER:
+                retval = Random.Range(1.85f, 2.25f);
                 break;
-            case CONSTRUCTION_LARGE:
-                retval = 30 + Random.Range(0, 25);
+            case STEPDECK:
+                retval = Random.Range(2.50f, 3.50f);
                 break;
-            case CONSTRUCTION:
-                retval = 20 + Random.Range(0, 20);
+            case FLATBED:
+                retval = Random.Range(2.30f, 3.00f);
                 break;
-            case LIQUIDS:
-                retval = 30 + Random.Range(0, 30);
+            case CHEMICAL:
+            case FOODGRADE:
+                retval = Random.Range(2.50f, 3.50f);
                 break;
             default:
-                retval = 20 + Random.Range(0, 10);
+                retval = Random.Range(1.50f, 3.50f);
                 break;
         }
 
@@ -252,12 +259,14 @@ public class LoadM : MonoBehaviour
         {
             retval *= 3.0f;
         }
-        else if ((tim - GameTime.inst.gmTime).TotalDays <= 2.5f)
+        else if ((tim - GameTime.inst.gmTime).TotalDays <= 2.5f) //Normal window for loads
         {
-            retval *= 1.5f;
+            retval *= 1.0f;
         }
-
-        retval *= 100;                                      //now scalled to be thousands 
+        else                                                    //"Intermodal" delivers pay less because of the
+        {                                                       //longer time allotment (3 to 7 days)
+            retval *= 0.85f;
+        }
 
         return (retval);
     }

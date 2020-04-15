@@ -75,7 +75,7 @@ public class CoinM : MonoBehaviour
         {
             coins[cidx].GetComponent<CoinUp>().value = val;
             retval = true;
-            Debug.Log("Coin " + cidx + " value set to " + val);
+            //Debug.Log("Coin " + cidx + " value set to " + val);
         }
 
         return retval;
@@ -93,7 +93,7 @@ public class CoinM : MonoBehaviour
     public void EnableCoin(int cidx)
     {
         coins[cidx].SetActive(true);
-        Debug.Log("Coin " + cidx + " activated at: " + coins[cidx].transform.position);
+        //Debug.Log("Coin " + cidx + " activated at: " + coins[cidx].transform.position);
     } 
 
 }

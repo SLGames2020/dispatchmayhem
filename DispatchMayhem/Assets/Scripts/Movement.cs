@@ -8,7 +8,7 @@ public class Movement : MonoBehaviour
 {
     public routeCallBack FoundRoute;
 
-    [HideInInspector] public GameObject load;
+    //[HideInInspector] public GameObject load;
     //public Button assButt;
 
     [HideInInspector] public Load currLoad;
@@ -88,12 +88,26 @@ public class Movement : MonoBehaviour
             else if (destinationMarker == loadMark)                             //if we're at the loading point
             {
                 loadMark = -1;                                                  //flush out the load point until we get a new point
-                loadDelayTime = GameTime.inst.gmTime.AddHours(1.0f);            //wait an hour for unloading (this needs to reference a proper Time Manager Delay reference)
-                if ((mapSupport.gps - destination).magnitude > closeEnough)     //if we're not at the destination
+
+                Truck trk = this.gameObject.GetComponent<Truck>();              //check to see if the player sent the right truck
+                if (trk.productType != currLoad.productType)                    //if not, notify of an error 
+                {                                                               //TODO: add error graphic and sounds
+                    Debug.Log("Cannot Load " + currLoad.productLabel + " with " + trk.rigLabel);
+                    Destroy(currLoad);
+                    currLoad = null;
+                    hasLoad = false;
+                    onDuty = false;
+                    destinationMarker = route.Count;
+                }
+                else
                 {
-                    NM.Inst.GetRoute(mapSupport.gps, destination, FoundRoute);  //reroute to the destination
-                    SoundManager.instance.SoundEffect(loading);
-                    hasLoad = true;
+                    loadDelayTime = GameTime.inst.gmTime.AddHours(1.0f);            //wait an hour for unloading (this needs to reference a proper Time Manager Delay reference)
+                    if ((mapSupport.gps - destination).magnitude > closeEnough)     //if we're not at the destination
+                    {
+                        NM.Inst.GetRoute(mapSupport.gps, destination, FoundRoute);  //reroute to the destination
+                        SoundManager.instance.SoundEffect(loading);
+                        hasLoad = true;
+                    }
                 }
             }
             else if (GameTime.inst.gmTime < hazardWaitTime)                     //the highway wait timing is seperate here so we can have
@@ -127,7 +141,7 @@ public class Movement : MonoBehaviour
                     if (currLoad.state != Load.LoadState.DELIVERED)
                     {
                         LifeTimehaulDistance += haulDistance;
-                        Debug.Log("LifeTimehaulDistance: " + LifeTimehaulDistance);
+                        //Debug.Log("LifeTimehaulDistance: " + LifeTimehaulDistance);
                     }
 
                     currLoad.state = Load.LoadState.DELIVERED;
@@ -172,15 +186,10 @@ public class Movement : MonoBehaviour
         Vector2 todest = Destination - CurrentPosition;
         Vector2 degspeed = CalcAngleSpeed(speed, todest, CurrentPosition.y);        //calculates the deg/sec as a (lat,long) vector
 
-        //Debug.Log("current: " + CurrentPosition + " Destination: " + Destination);
-        //Debug.Log("Direction" + todest + " Degspd (MPH): " + degspeed);
-
         degspeed.x = GameTime.inst.gmHoursToRealSeconds(degspeed.x);
         degspeed.y = GameTime.inst.gmHoursToRealSeconds(degspeed.y);
 
-        //Debug.Log("Degspd (degs/sec): (" + degspeed.x + "," + degspeed.y +")");
         Vector2 NewLoc = CurrentPosition + degspeed * Time.deltaTime;
-        //Debug.Log("NewLoc: " + NewLoc);
         timeRemaining = (todest / degspeed).magnitude;
 
         return NewLoc;
@@ -200,11 +209,11 @@ public class Movement : MonoBehaviour
     public Vector2 CalcAngleSpeed(float spd, Vector2 dir, float lat)
     {
         float empdate = 69.171f;                                //Earth Miles Per Degree At The Equator
-        float dr = Mathf.Atan2(dir.y, dir.x);                   //(this the value for all longitude degrees)
+        float dr = Mathf.Atan2(dir.y, dir.x);                   //(this is the same value for distances between lattitudes)
         float empdalat = empdate / Mathf.Cos(DegsToRads(lat));  //Earth Miles Per Degree At LATitude
-        //Debug.Log(dr * Mathf.Rad2Deg);                        //(latitude needs to be compensated for the angle from the equator)
-        float xdph = Mathf.Cos(dr) * spd / empdate;             //convert mph to Degrees Per Hour
-        float ydph = Mathf.Sin(dr) * spd / empdalat;
+                                                                //(distance between longitudes needs to be compensated for the angle from the equator)
+        float xdph = Mathf.Cos(dr) * spd / empdalat;            //convert mph to Degrees Per Hour
+        float ydph = Mathf.Sin(dr) * spd / empdate;
 
         return (new Vector2(xdph, ydph));
     }
@@ -224,7 +233,6 @@ public class Movement : MonoBehaviour
     {
         hazardWaitTime = GameTime.inst.gmTime;
         hazardWaitTime = hazardWaitTime.AddHours(wt);
-        //Debug.Log("current time: " + GameTime.inst.gmTime + " hazard Time: " + hazardWaitTime);
     }
     /****************************************************************
         loadTruck
@@ -292,7 +300,6 @@ public class Movement : MonoBehaviour
             route.Add(pnt);
         }
         loadMark = route.Count - 1;                                     //set the loading point (delay) to the last entry
-        //Debug.Log("Route of " + route.Count + " waypoints recieved");
     }
 
     /**********************************************************************

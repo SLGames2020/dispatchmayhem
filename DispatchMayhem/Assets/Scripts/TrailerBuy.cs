@@ -7,7 +7,7 @@ public class TrailerBuy : MonoBehaviour
 
     public void BuyNewTanker()
     {
-        Finances.inst.ValidatePurchase(40000.0f, "Tanker");
+        //Finances.inst.ValidatePurchase(40000.0f, "Tanker");
     }
     //// Start is called before the first frame update
     //void Start()
