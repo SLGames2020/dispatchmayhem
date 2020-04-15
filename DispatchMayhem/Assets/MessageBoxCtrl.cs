@@ -23,6 +23,7 @@ public class MessageBoxCtrl : MonoBehaviour
         topicTextObj.text = topic;
         messageTextObj.text = message;
         buttonTextObj.text = buttonTxt;
+        //Debug.Log(title + " " + topic + " " + message + " " + buttonTxt);
     }
 
     //// Update is called once per frame

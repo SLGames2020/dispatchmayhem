@@ -94,12 +94,11 @@ public class UIM : MonoBehaviour
     {
         
         MessageBoxCtrl mbc = MessagePanel.GetComponent<MessageBoxCtrl>();
-
+        //Debug.Log(type + " " + topic + " " + message + " " + btntxt);
+        MessagePanel.SetActive(true);
         mbc.title = type;
         mbc.topic = topic;
         mbc.message = message;
         mbc.buttonTxt = btntxt;
-        MessagePanel.SetActive(true);
-
     }
 }

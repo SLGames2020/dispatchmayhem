@@ -93,8 +93,8 @@ public class Movement : MonoBehaviour
                 if (trk.productType != currLoad.productType)                    //if not, notify of an error 
                 {                                                               //TODO: add error graphic and sounds
                     string mess = "Cannot transport " + currLoad.productLabel + " load \n";
-                    mess += "with " + trk.rigLabel + "\n";
-                    mess += "(driver refused at gate, no delivery available)";
+                    mess += "with " + trk.rigLabel + "\n\n";
+                    mess += "(driver refused at gate, \nno delivery available)";
                     UIM.inst.MessageBox("Wrong Truck", "Warning!", mess, "Close");
                     
                     Debug.Log(mess);
