@@ -19,25 +19,25 @@ public class Truck : MonoBehaviour
     public int level;
 
     void Start()
-    {
+    {    
         switch (truckType)
         {
             case TruckTypes.DRYVAN:
                 productType = 0;
                 break;
-            case TruckTypes.REEFER:
+            case TruckTypes.FOODGRADE:
                 productType = 1;
                 break;
-            case TruckTypes.STEPDECK:
+            case TruckTypes.FLATBED:
                 productType = 2;
                 break;
-            case TruckTypes.FLATBED:
+            case TruckTypes.REEFER:
                 productType = 3;
                 break;
-            case TruckTypes.CHEMICAL:
+            case TruckTypes.STEPDECK:
                 productType = 4;
                 break;
-            case TruckTypes.FOODGRADE:
+            case TruckTypes.CHEMICAL:
                 productType = 5;
                 break;
         }

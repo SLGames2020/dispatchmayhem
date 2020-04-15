@@ -27,6 +27,9 @@ public class GM : MonoBehaviour
 
     public GameObject[] Trucks;
     public GameObject[] Trailers;
+    public GameObject[] Drivers;
+    public int totalDrivers = 1;
+
     public GameObject loadPrefab;
     [HideInInspector] public List<Load> ActiveJobs = new List<Load>();
 
@@ -85,6 +88,18 @@ public class GM : MonoBehaviour
         Trucks[truckIndex].GetComponent<Movement>().loadTruck(loaddata);
     }
 
+    /****************************************************************************
+        ActivateTruck
+
+        This method activates a new truck and increase the number of trucks supported
+
+    ******************************************************************************/
+    public void ActivateTrucknDriver(int trkid)
+    {
+        Trucks[trkid].SetActive(true);
+        Drivers[trkid].SetActive(true);
+        totalDrivers = trkid + 1;
+    }
 
     /*****************************************************************************
         GameOver

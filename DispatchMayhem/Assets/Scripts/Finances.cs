@@ -3,15 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+public delegate void ValidPurchaseCallBack(bool yesno);
+
+
 public class Finances : MonoBehaviour
 {
     private static Finances instance = null;
     public static Finances inst { get { return instance; } }
-
+       
     public GameObject confirmPurchase;
         public Text confirmPriceText;
         public Text confirmMessage;
         public GameObject yesButton;
+        ValidPurchaseCallBack validCallBack;
 
     public Text cashText;
 
@@ -86,9 +90,9 @@ public class Finances : MonoBehaviour
         on the "PurchaseYes" and "PurchaseNo"/"close" methods below
 
     ***************************************************************************/
-    public void ValidatePurchase(float price, string name)
+    public void ValidatePurchase(float price, string name, ValidPurchaseCallBack cb)
     {
-
+        validCallBack = cb;
         if (price < currCurrency)
         {
             yesButton.SetActive(true);
@@ -110,11 +114,13 @@ public class Finances : MonoBehaviour
     {
         AddMoney(-purchasePrice);
         confirmPurchase.SetActive(false);
+        validCallBack(true);                    //tell the purchasing panel the player accepted
     }
 
     public void PurchaseNo()
     {
         purchasePrice = 0;
         confirmPurchase.SetActive(false);
+        validCallBack(false);                   //tell the purchasing panel the player declined
     }
 }

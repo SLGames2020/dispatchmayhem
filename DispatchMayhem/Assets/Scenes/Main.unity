@@ -2550,6 +2550,12 @@ MonoBehaviour:
     m_VerticalOverflow: 1
     m_LineSpacing: 1
   m_Text: Loading
+--- !u!1 &654586368 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7407289493087659104, guid: f6f49996127db0341a13bb4a51df16f5,
+    type: 3}
+  m_PrefabInstance: {fileID: 1673617886}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &666250657
 GameObject:
   m_ObjectHideFlags: 0
@@ -3604,6 +3610,12 @@ MonoBehaviour:
   m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &873375047 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2438423183432505727, guid: f6f49996127db0341a13bb4a51df16f5,
+    type: 3}
+  m_PrefabInstance: {fileID: 1673617886}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &883660223 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3132420335041821128, guid: c8b63eea187c7cf448509787ad2b7954,
@@ -4063,6 +4075,12 @@ AudioSource:
 --- !u!1 &931952236 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6181129002945702489, guid: f6f49996127db0341a13bb4a51df16f5,
+    type: 3}
+  m_PrefabInstance: {fileID: 1673617886}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &942100209 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2041254574747694856, guid: f6f49996127db0341a13bb4a51df16f5,
     type: 3}
   m_PrefabInstance: {fileID: 1673617886}
   m_PrefabAsset: {fileID: 0}
@@ -8217,6 +8235,26 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2147226210184396651, guid: f6f49996127db0341a13bb4a51df16f5,
+        type: 3}
+      propertyPath: Drivers.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2147226210184396651, guid: f6f49996127db0341a13bb4a51df16f5,
+        type: 3}
+      propertyPath: Drivers.Array.data[0]
+      value: 
+      objectReference: {fileID: 942100209}
+    - target: {fileID: 2147226210184396651, guid: f6f49996127db0341a13bb4a51df16f5,
+        type: 3}
+      propertyPath: Drivers.Array.data[1]
+      value: 
+      objectReference: {fileID: 654586368}
+    - target: {fileID: 2147226210184396651, guid: f6f49996127db0341a13bb4a51df16f5,
+        type: 3}
+      propertyPath: Drivers.Array.data[2]
+      value: 
+      objectReference: {fileID: 873375047}
     m_RemovedComponents:
     - {fileID: 4236823835906553769, guid: f6f49996127db0341a13bb4a51df16f5, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: f6f49996127db0341a13bb4a51df16f5, type: 3}
@@ -8556,6 +8594,11 @@ MonoBehaviour:
   - {fileID: 1438886640}
   - {fileID: 1897016461}
   Trailers: []
+  Drivers:
+  - {fileID: 942100209}
+  - {fileID: 654586368}
+  - {fileID: 873375047}
+  totalDrivers: 1
   loadPrefab: {fileID: 8065267893138532041, guid: e12a4446a469fbe43bf70df1a35233e3,
     type: 3}
   ActiveJobs: []

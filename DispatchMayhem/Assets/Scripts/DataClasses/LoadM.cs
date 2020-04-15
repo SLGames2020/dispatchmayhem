@@ -18,17 +18,17 @@ public class LoadM : MonoBehaviour
     public float pay;
     public float space;
 
-    private const int VAN = 0;                  //using const ints because Enums are difficult to use randomly
-    private const int REEFER = 1;
-    private const int STEPDECK = 2;
-    private const int FLATBED = 3;
-    private const int CHEMICAL = 4;
-    private const int FOODGRADE = 5;
+    private const int DRYVAN = 0;                  //using const ints because Enums are difficult to use randomly
+    private const int FOODGRADE = 1;
+    private const int FLATBED = 2;
+    private const int REEFER = 3;
+    private const int STEPDECK = 4;
+    private const int CHEMICAL = 5;
     private const int UNDEFINED = 6;             //error catch, only ever set at instantiation (always equal to TOTALPRODUCTS)
     private const int TOTALPRODUCTS = 6;        //if these are changed make sure Truck.cs productType also matches
 
     public int allowed;                                        //make sure to add new product labels before the "Undefined" entry
-    public static string[] productLabels = { "Dry Van", "Reefer", "Step-Deck", "Flatbed", "Chemical", "Food Grade", "Undefined" };
+    public static string[] productLabels = { "Dry Van", "Food Grade", "Flatbed", "Reefer", "Step-Deck",  "Chemical", "Undefined" };
     public static string getProductLabel(int pidx) { return productLabels[pidx]; }
     public int productMax = 0;
 
@@ -72,7 +72,7 @@ public class LoadM : MonoBehaviour
 
         switch (productType)
         {
-            case VAN:
+            case DRYVAN:
                 {
                     iconName = "boxes";
                     break;
@@ -116,14 +116,14 @@ public class LoadM : MonoBehaviour
             case FOODGRADE:
                 {
                     int randVal = Random.Range(0, 2);
-                    if (randVal == 0)
-                    {
-                        iconName = "milk";
-                    }
-                    else if (randVal == 1)
-                    {
-                        iconName = "oil";
-                    }
+                    //if (randVal == 0)                 //need a seperate icon otherwise it'll be too confusing
+                    //{                                 //and the icon looks like crude oil so we'll keep it 
+                        iconName = "milk";              //in the chemicals
+                    //}
+                    //else if (randVal == 1)
+                    //{
+                    //    iconName = "oil";
+                    //}
                     break;
                 }
             default:
@@ -161,7 +161,7 @@ public class LoadM : MonoBehaviour
         ld.origin = orgps;
         ld.destinationLabel = go.GetComponent<City>().label;
         ld.destination = desgps;
-        ld.productType = Random.Range(0, TOTALPRODUCTS);
+        ld.productType = Random.Range(0, GM.inst.totalDrivers*2);
         ld.productLabel = productLabels[ld.productType];
         ld.productIcon = GenerateIcon(ld.productType);
         ld.DueDate = GetDeliveryTime(GameTime.inst.gmTime);
@@ -234,7 +234,7 @@ public class LoadM : MonoBehaviour
 
         switch (good)                               //using two digits ints for the values
         {                                           //so they appeared rounded to hundreds
-            case VAN:
+            case DRYVAN:
                 retval = Random.Range(1.5f, 2.10f);
                 break;
             case REEFER:
