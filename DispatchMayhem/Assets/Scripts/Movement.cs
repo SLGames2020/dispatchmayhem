@@ -8,7 +8,7 @@ public class Movement : MonoBehaviour
 {
     public routeCallBack FoundRoute;
 
-    [HideInInspector] public GameObject load;
+    //[HideInInspector] public GameObject load;
     //public Button assButt;
 
     [HideInInspector] public Load currLoad;
@@ -88,12 +88,26 @@ public class Movement : MonoBehaviour
             else if (destinationMarker == loadMark)                             //if we're at the loading point
             {
                 loadMark = -1;                                                  //flush out the load point until we get a new point
-                loadDelayTime = GameTime.inst.gmTime.AddHours(1.0f);            //wait an hour for unloading (this needs to reference a proper Time Manager Delay reference)
-                if ((mapSupport.gps - destination).magnitude > closeEnough)     //if we're not at the destination
+
+                Truck trk = this.gameObject.GetComponent<Truck>();              //check to see if the player sent the right truck
+                if (trk.productType != currLoad.productType)                    //if not, notify of an error 
+                {                                                               //TODO: add error graphic and sounds
+                    Debug.Log("Cannot Load " + currLoad.productLabel + " with " + trk.rigLabel);
+                    Destroy(currLoad);
+                    currLoad = null;
+                    hasLoad = false;
+                    onDuty = false;
+                    destinationMarker = route.Count;
+                }
+                else
                 {
-                    NM.Inst.GetRoute(mapSupport.gps, destination, FoundRoute);  //reroute to the destination
-                    SoundManager.instance.SoundEffect(loading);
-                    hasLoad = true;
+                    loadDelayTime = GameTime.inst.gmTime.AddHours(1.0f);            //wait an hour for unloading (this needs to reference a proper Time Manager Delay reference)
+                    if ((mapSupport.gps - destination).magnitude > closeEnough)     //if we're not at the destination
+                    {
+                        NM.Inst.GetRoute(mapSupport.gps, destination, FoundRoute);  //reroute to the destination
+                        SoundManager.instance.SoundEffect(loading);
+                        hasLoad = true;
+                    }
                 }
             }
             else if (GameTime.inst.gmTime < hazardWaitTime)                     //the highway wait timing is seperate here so we can have

@@ -71,6 +71,7 @@
                     MapSupport msup = spawnedObject.GetComponent<MapSupport>();
                     Vector2d loc = Vec2To2d(msup.gps);
                     if (spawnedObject.tag == "City") loc = loc + new Vector2d(-3.20f, 0.15f); //shift over the cities because they are positioned improperly for some reason
+                    else if (spawnedObject.tag == "Truck") loc = loc + new Vector2d(-3.20f, 0.15f);
 
                     Vector2d tloc = new Vector2d(loc.y, loc.x);
                     spawnedObject.transform.localPosition = _map.GeoToWorldPosition(tloc, true);

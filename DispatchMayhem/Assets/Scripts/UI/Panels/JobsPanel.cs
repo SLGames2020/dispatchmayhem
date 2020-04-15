@@ -72,21 +72,24 @@ public class JobsPanel : BasePanel
 
         if (GM.inst.Trucks[DriverID] != null)
         {
-            driver.SetActive(true);
-            if (GM.inst.Trucks[DriverID].GetComponent<Movement>().currLoad == null)
+            if (GM.inst.Trucks[DriverID].active)    //only check for active after not null to avoid errors
             {
-                driver.GetComponent<Button>().onClick.AddListener(delegate { AssignLoad(load, DriverID, listItem); });
-            }
-            else
-            {
-                Color FadeColor = driver.GetComponent<Image>().color;
-                FadeColor.r = 0.5f;
-                FadeColor.g = 0.5f;
-                FadeColor.b = 0.5f;
-                FadeColor.a = 0.25f;
-                driver.GetComponent<Image>().color = FadeColor;
-                driver.transform.GetChild(0).GetComponent<Image>().color = FadeColor;
-                driver.transform.GetChild(1).gameObject.SetActive(false);
+                driver.SetActive(true);
+                if (GM.inst.Trucks[DriverID].GetComponent<Movement>().currLoad == null)
+                {
+                    driver.GetComponent<Button>().onClick.AddListener(delegate { AssignLoad(load, DriverID, listItem); });
+                }
+                else
+                {
+                    Color FadeColor = driver.GetComponent<Image>().color;
+                    FadeColor.r = 0.5f;
+                    FadeColor.g = 0.5f;
+                    FadeColor.b = 0.5f;
+                    FadeColor.a = 0.25f;
+                    driver.GetComponent<Image>().color = FadeColor;
+                    driver.transform.GetChild(0).GetComponent<Image>().color = FadeColor;
+                    driver.transform.GetChild(1).gameObject.SetActive(false);
+                }
             }
         }
 

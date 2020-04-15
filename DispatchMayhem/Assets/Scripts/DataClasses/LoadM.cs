@@ -18,8 +18,6 @@ public class LoadM : MonoBehaviour
     public float pay;
     public float space;
 
-    //private enum Products
-    //{
     private const int VAN = 0;                  //using const ints because Enums are difficult to use randomly
     private const int REEFER = 1;
     private const int STEPDECK = 2;
@@ -27,14 +25,10 @@ public class LoadM : MonoBehaviour
     private const int CHEMICAL = 4;
     private const int FOODGRADE = 5;
     private const int UNDEFINED = 6;             //error catch, only ever set at instantiation (always equal to TOTALPRODUCTS)
-    private const int TOTALPRODUCTS = 6;
-    //}
+    private const int TOTALPRODUCTS = 6;        //if these are changed make sure Truck.cs productType also matches
 
-
-
-    public int allowed;
-    //make sure to add new product labels before the "Undefined" entry
-    private static string[] productLabels = { "Van", "Reefer", "Step-Deck", "Flatbed", "Chemical", "Food Grade", "Undefined" };
+    public int allowed;                                        //make sure to add new product labels before the "Undefined" entry
+    public static string[] productLabels = { "Dry Van", "Reefer", "Step-Deck", "Flatbed", "Chemical", "Food Grade", "Undefined" };
     public static string getProductLabel(int pidx) { return productLabels[pidx]; }
     public int productMax = 0;
 

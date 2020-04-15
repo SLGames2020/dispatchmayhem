@@ -3897,7 +3897,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ac810d37ab220d40b5b88f3e4493e65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  load: {fileID: 0}
   currLoad: {fileID: 0}
   haulDistance: 0
   LifeTimehaulDistance: 0
@@ -3936,6 +3935,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b05e978b0d85c04f8835dee3d39a981, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  truckType: 0
+  productType: 0
   rigLabel: DAVE
   status: 0
   xp: 0
@@ -5615,7 +5616,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 135616, guid: b7f1d4f9cba84794dad97533ef1d0a8e, type: 3}
       propertyPath: m_Name
-      value: Map Tanker
+      value: Map FoodGrade
+      objectReference: {fileID: 0}
+    - target: {fileID: 135616, guid: b7f1d4f9cba84794dad97533ef1d0a8e, type: 3}
+      propertyPath: m_TagString
+      value: Truck
+      objectReference: {fileID: 0}
+    - target: {fileID: 135616, guid: b7f1d4f9cba84794dad97533ef1d0a8e, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 400402, guid: b7f1d4f9cba84794dad97533ef1d0a8e, type: 3}
       propertyPath: m_LocalPosition.x
@@ -5623,7 +5632,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400402, guid: b7f1d4f9cba84794dad97533ef1d0a8e, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.3
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 400402, guid: b7f1d4f9cba84794dad97533ef1d0a8e, type: 3}
       propertyPath: m_LocalPosition.z
@@ -5708,6 +5717,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b05e978b0d85c04f8835dee3d39a981, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  truckType: 5
+  productType: 0
   rigLabel: Joe
   status: 0
   xp: 0
@@ -5726,7 +5737,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gps: {x: 0, y: 0}
-  baseScale: {x: 200, y: 200, z: 200}
+  baseScale: {x: 0.6, y: 0.6, z: 0.6}
 --- !u!114 &1438886643
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5739,7 +5750,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ac810d37ab220d40b5b88f3e4493e65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  load: {fileID: 0}
   currLoad: {fileID: 0}
   haulDistance: 0
   LifeTimehaulDistance: 0
@@ -8543,8 +8553,8 @@ MonoBehaviour:
   jobsButton: {fileID: 0}
   Trucks:
   - {fileID: 928117323}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 1438886640}
+  - {fileID: 1897016461}
   Trailers: []
   loadPrefab: {fileID: 8065267893138532041, guid: e12a4446a469fbe43bf70df1a35233e3,
     type: 3}
@@ -9633,7 +9643,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 103712, guid: e80716950af176e4e929fdeeee216943, type: 3}
       propertyPath: m_Name
-      value: Map DropDeck
+      value: Map Flatbed
+      objectReference: {fileID: 0}
+    - target: {fileID: 103712, guid: e80716950af176e4e929fdeeee216943, type: 3}
+      propertyPath: m_TagString
+      value: Truck
+      objectReference: {fileID: 0}
+    - target: {fileID: 103712, guid: e80716950af176e4e929fdeeee216943, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 488862, guid: e80716950af176e4e929fdeeee216943, type: 3}
       propertyPath: m_LocalPosition.x
@@ -9641,7 +9659,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 488862, guid: e80716950af176e4e929fdeeee216943, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -0.1
       objectReference: {fileID: 0}
     - target: {fileID: 488862, guid: e80716950af176e4e929fdeeee216943, type: 3}
       propertyPath: m_LocalPosition.z
@@ -9726,6 +9744,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b05e978b0d85c04f8835dee3d39a981, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  truckType: 3
+  productType: 0
   rigLabel: Bill
   status: 0
   xp: 0
@@ -9744,7 +9764,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gps: {x: 0, y: 0}
-  baseScale: {x: 200, y: 200, z: 200}
+  baseScale: {x: 0.6, y: 0.6, z: 0.6}
 --- !u!114 &1897016464
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9757,7 +9777,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ac810d37ab220d40b5b88f3e4493e65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  load: {fileID: 0}
   currLoad: {fileID: 0}
   haulDistance: 0
   LifeTimehaulDistance: 0
