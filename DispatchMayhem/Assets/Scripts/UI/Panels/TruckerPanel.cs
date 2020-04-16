@@ -64,7 +64,6 @@ public class TruckerPanel : BasePanel
 
     public void UpdateHours()
     {
-        //Does not seem to function as initially thought, attempting to get loadstate of delivering to determine that the driver is moving to conduct hours
         Load hasLoad = GM.inst.Trucks[DriverID].GetComponent<Load>();
         //TruckData[DriverID].playhrs = hasLoad;
         if (hasLoad != null && hasLoad.state == Load.LoadState.DELIVERING )
@@ -79,13 +78,8 @@ public class TruckerPanel : BasePanel
         Load currLoad = GM.inst.Trucks[DriverID].GetComponent<Movement>().currLoad;
         if (currLoad != null)
         {
-            //Attempted to mess around with it changing things run into multiple errors will need assitance to try and figure this out as i have tried
-            //removing the text source, etc. And have resulted in errors also tried setting source.text to currLoad.transfrom... and still have not worked
-            //replace this with source and see if works.
-            //Text source = currLoad.transform.Find("Pickup").gameObject.GetComponent<Text>();
             source.text = currLoad.originLabel;
 
-            //replace this with destination see if works.
             destination.text = currLoad.destinationLabel;
 
             //load.text = currLoad.value.ToString();
