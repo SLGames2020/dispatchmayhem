@@ -11,8 +11,6 @@ public class TruckerPanel : BasePanel
     public Text hours;
     public Text source;
     public Text destination;
-    public Text load;
-    public Text ETA;
     public Text Hours;
 
     public GameObject truck;
@@ -81,8 +79,6 @@ public class TruckerPanel : BasePanel
             source.text = currLoad.originLabel;
 
             destination.text = currLoad.destinationLabel;
-
-            //load.text = currLoad.value.ToString();
 
             GameObject LoadTypeIcon = gameObject.transform.Find("LoadType").gameObject;
 
