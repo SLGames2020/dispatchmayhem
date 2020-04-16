@@ -92,7 +92,12 @@ public class Movement : MonoBehaviour
                 Truck trk = this.gameObject.GetComponent<Truck>();              //check to see if the player sent the right truck
                 if (trk.productType != currLoad.productType)                    //if not, notify of an error 
                 {                                                               //TODO: add error graphic and sounds
-                    Debug.Log("Cannot Load " + currLoad.productLabel + " with " + trk.rigLabel);
+                    string mess = "Cannot transport " + currLoad.productLabel + " load \n";
+                    mess += "with " + trk.rigLabel + "\n\n";
+                    mess += "(driver refused at gate, \nno delivery available)";
+                    UIM.inst.MessageBox("Wrong Truck", "Warning!", mess, "Close");
+                    
+                    Debug.Log(mess);
                     Destroy(currLoad);
                     currLoad = null;
                     hasLoad = false;
