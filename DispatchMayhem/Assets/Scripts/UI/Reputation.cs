@@ -10,15 +10,24 @@ public class Reputation : MonoBehaviour
 
     void Rep()
     {
-        Movement loadjr = GM.inst.GetComponent<Movement>();
-        if(Input.GetKeyDown(KeyCode.Space))
+        Load hasLoad = GM.inst.GetComponent<Load>();
+        if (hasLoad != null)
         {
-            float movement = 1f;
-            float horizontalInput = Input.GetAxis("Horizontal");
+            if (hasLoad.state == Load.LoadState.DELIVERED)
+            {
+                float movement = 10f;
+                float horizontalInput = 1.0f;
 
-            Heart.transform.position = transform.position + new Vector3(horizontalInput * movement, 0);
+                Heart.transform.localPosition = transform.localPosition + new Vector3(horizontalInput * movement, 0);
+            }
+            else if (hasLoad.state == Load.LoadState.UNASSIGNED)
+            {
+                float movement = -10f;
+                float horizontalInput = 1.0f;
+
+                Heart.transform.localPosition = transform.localPosition + new Vector3(horizontalInput * movement, 0);
+            }
         }
-       
         
     }
 

@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -11,7 +12,14 @@ public class TruckerPanel : BasePanel
     public Text hours;
     public Text source;
     public Text destination;
-    public Text Hours;
+
+    public GameObject Oil;
+    public GameObject Box;
+    public GameObject Food;
+    public GameObject LoadIcon;
+
+    private DateTime pTime;
+    private int pHour;
 
     public GameObject truck;
 
@@ -66,6 +74,10 @@ public class TruckerPanel : BasePanel
         //TruckData[DriverID].playhrs = hasLoad;
         if (hasLoad != null && hasLoad.state == Load.LoadState.DELIVERING )
         {
+            pTime = System.DateTime.Now;
+            pHour = pTime.Hour;
+            TruckData[DriverID].playhrs = pHour;
+
             hours.text = "" + TruckData[DriverID].playhrs;
         }
 
@@ -80,10 +92,31 @@ public class TruckerPanel : BasePanel
 
             destination.text = currLoad.destinationLabel;
 
-            GameObject LoadTypeIcon = gameObject.transform.Find("LoadType").gameObject;
+            if(LoadIcon = null)
+            {
+                Debug.Log("Image not found");
+            }
+            else if(LoadIcon != null)
+            {
 
-            Texture2D Loadedtexture = Resources.Load<Texture2D>("Textures pack/UI Icons/" + currLoad.productIcon);
-            LoadTypeIcon.GetComponent<RawImage>().texture = Loadedtexture;
+                if(LoadIcon = Oil)
+                {
+                    Debug.Log("You are delivering Oil");
+                    Oil.SetActive(true);
+                    
+                }
+                else if(LoadIcon = Box)
+                {
+                    Debug.Log("You are delivering Boxed Goods");
+                    Box.SetActive(true);
+                }
+                else if(LoadIcon = Food)
+                {
+                    Debug.Log("You are delivering Food");
+                    Food.SetActive(true);
+                }
+
+            }
         }
     }
 
