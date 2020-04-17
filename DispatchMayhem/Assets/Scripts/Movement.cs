@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -94,7 +94,11 @@ public class Movement : MonoBehaviour
                 if (trk.productType != currLoad.productType)                    //if not, notify of an error 
                 {                                                               //TODO: add error graphic and sounds
                     SoundManager.instance.SoundEffect(warning);
-                    Debug.Log("Cannot Load " + currLoad.productLabel + " with " + trk.rigLabel);
+                    string mess = "Cannot transport " + currLoad.productLabel + " load \n";
+                    mess += "with " + trk.rigLabel + "\n\n";
+                    mess += "(driver refused at gate, \nno delivery available)";
+                    UIM.inst.MessageBox("Wrong Truck", "Warning!", mess, "Close");
+
                     Destroy(currLoad);
                     currLoad = null;
                     hasLoad = false;
