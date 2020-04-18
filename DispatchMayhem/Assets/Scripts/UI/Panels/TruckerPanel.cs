@@ -114,35 +114,38 @@ public class TruckerPanel : BasePanel
             source.text = currLoad.originLabel;
 
             destination.text = currLoad.destinationLabel;
-
-            if (LoadIcon == null)
+            
+            if(currLoad.state == Load.LoadState.ASSIGNED)
             {
-                Debug.Log("Image not found");
-                Debug.Log("LoadIcon: " + LoadIcon);
-            }
-            else if (LoadIcon != null)
-            {
-                Oil.SetActive(false);
-                Box.SetActive(false);
-                Food.SetActive(false);
-                Milk.SetActive(false);
+                if (LoadIcon == null)
+                {
+                    Debug.Log("Image not found");
+                    Debug.Log("LoadIcon: " + LoadIcon);
+                }
+                else if (LoadIcon != null)
+                {
+                    Oil.SetActive(false);
+                    Box.SetActive(false);
+                    Food.SetActive(false);
+                    Milk.SetActive(false);
 
-                if (LoadIcon == Oil)
-                {
-                    Oil.SetActive(true);
+                    if (LoadIcon == Oil)
+                    {
+                        Oil.SetActive(true);
 
-                }
-                else if (LoadIcon == Box)
-                {
-                    Box.SetActive(true);
-                }
-                else if (LoadIcon == Food)
-                {
-                    Food.SetActive(true);
-                }
-                else if (LoadIcon == Milk)
-                {
-                    Milk.SetActive(true);
+                    }
+                    else if (LoadIcon == Box)
+                    {
+                        Box.SetActive(true);
+                    }
+                    else if (LoadIcon == Food)
+                    {
+                        Food.SetActive(true);
+                    }
+                    else if (LoadIcon == Milk)
+                    {
+                        Milk.SetActive(true);
+                    }
                 }
 
             }
