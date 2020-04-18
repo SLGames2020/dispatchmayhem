@@ -66,7 +66,7 @@ public class LoadM : MonoBehaviour
     }
 
 
-    public string GenerateIcon(int productType)
+    private string GenerateIcon(int productType)
     {
         string iconName = "water";
 
