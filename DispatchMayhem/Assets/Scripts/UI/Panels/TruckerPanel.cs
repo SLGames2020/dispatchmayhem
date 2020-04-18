@@ -15,9 +15,13 @@ public class TruckerPanel : BasePanel
 
 
     public GameObject Oil;
+    public GameObject Gas;
     public GameObject Box;
     public GameObject Food;
     public GameObject Milk;
+    public GameObject Dairy;
+    public GameObject Logs;
+    public GameObject ibeams;
     public GameObject LoadIcon = null;
 
     private DateTime pTime;
@@ -86,23 +90,39 @@ public class TruckerPanel : BasePanel
 
     }
 
-    public void SetIcon(string productName)
+    public void SetIcon(string productName, int DriveID)
     {
-        if(productName == "milk")
+        if (productName == "milk")
         {
             LoadIcon = Milk;
         }
-        else if(productName == "oil")
+        else if (productName == "oil")
         {
             LoadIcon = Oil;
         }
-        else if(productName == "boxes")
+        else if (productName == "boxes")
         {
             LoadIcon = Box;
         }
-        else if(productName == "fruit")
+        else if (productName == "fruit")
         {
             LoadIcon = Food;
+        }
+        else if (productName == "gas")
+        {
+            LoadIcon = Gas;
+        }
+        else if (productName == "dairy")
+        {
+            LoadIcon = Dairy;
+        }
+        else if (productName == "wood")
+        {
+            LoadIcon = Logs;
+        }
+        else if (productName == "ibeams")
+        {
+            LoadIcon = ibeams;
         }
     }
 
@@ -115,40 +135,30 @@ public class TruckerPanel : BasePanel
 
             destination.text = currLoad.destinationLabel;
             
-            if(currLoad.state == Load.LoadState.ASSIGNED)
+            Oil.SetActive(false);
+            Box.SetActive(false);
+            Food.SetActive(false);
+            Milk.SetActive(false);
+
+            if (LoadIcon == Oil)
             {
-                if (LoadIcon == null)
-                {
-                    Debug.Log("Image not found");
-                    Debug.Log("LoadIcon: " + LoadIcon);
-                }
-                else if (LoadIcon != null)
-                {
-                    Oil.SetActive(false);
-                    Box.SetActive(false);
-                    Food.SetActive(false);
-                    Milk.SetActive(false);
-
-                    if (LoadIcon == Oil)
-                    {
-                        Oil.SetActive(true);
-
-                    }
-                    else if (LoadIcon == Box)
-                    {
-                        Box.SetActive(true);
-                    }
-                    else if (LoadIcon == Food)
-                    {
-                        Food.SetActive(true);
-                    }
-                    else if (LoadIcon == Milk)
-                    {
-                        Milk.SetActive(true);
-                    }
-                }
-
+                Oil.SetActive(true);
             }
+            else if (LoadIcon == Box)
+            {
+                Box.SetActive(true);
+            }
+            else if (LoadIcon == Food)
+            {
+                Food.SetActive(true);
+            }
+            else if (LoadIcon == Milk)
+            {
+                Milk.SetActive(true);
+            }
+                
+
+            
         }
     }
 
