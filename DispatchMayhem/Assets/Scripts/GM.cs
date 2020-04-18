@@ -86,6 +86,7 @@ public class GM : MonoBehaviour
     public void AssignLoadToTruck(int truckIndex, Load loaddata)
     {
         Trucks[truckIndex].GetComponent<Movement>().loadTruck(loaddata);
+        this.GetComponent<TruckerPanel>().SetIcon(loaddata.productIcon);
     }
 
     /****************************************************************************

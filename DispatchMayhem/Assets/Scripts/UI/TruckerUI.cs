@@ -37,7 +37,7 @@ public class TruckerUI : MonoBehaviour
 
     public void AnimateIn()
     {
-        TruckerPanel.GetComponent<TruckerPanel>().DriverID = TruckerID;
+        GM.inst.GetComponent<TruckerPanel>().DriverID = TruckerID;
         UIM.inst.LoadPanel(TruckerPanel);
         if (GM.inst.Trucks[TruckerID].GetComponent<Load>() == null)
         {

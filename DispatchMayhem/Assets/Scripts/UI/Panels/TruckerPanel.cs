@@ -38,21 +38,21 @@ public class TruckerPanel : BasePanel
 
     public int DriverID;
 
-    public static TruckerPanel instance = null;
+   // public static TruckerPanel instance = null;
 
     private void Awake()
     {
-        if (instance == null)
+        /*if (instance == null)
         {
             instance = this;
         }
         else if (instance != this)
         {
             Destroy(gameObject);
-        }
+        }*/
 
         TruckData = new TruckerInfo[3];
-        DontDestroyOnLoad(gameObject);
+        //DontDestroyOnLoad(gameObject);
     }
 
 
@@ -86,6 +86,26 @@ public class TruckerPanel : BasePanel
 
     }
 
+    public void SetIcon(string productName)
+    {
+        if(productName == "milk")
+        {
+            LoadIcon = Milk;
+        }
+        else if(productName == "oil")
+        {
+            LoadIcon = Oil;
+        }
+        else if(productName == "boxes")
+        {
+            LoadIcon = Box;
+        }
+        else if(productName == "fruit")
+        {
+            LoadIcon = Food;
+        }
+    }
+
     public void UpdateLoads()
     {
         Load currLoad = GM.inst.Trucks[DriverID].GetComponent<Movement>().currLoad;
@@ -106,32 +126,23 @@ public class TruckerPanel : BasePanel
                 Box.SetActive(false);
                 Food.SetActive(false);
                 Milk.SetActive(false);
-                Debug.Log("LoadIcon: " + LoadIcon);
 
                 if (LoadIcon == Oil)
                 {
-                    Debug.Log("You are delivering Oil");
                     Oil.SetActive(true);
-                    Debug.Log("LoadIcon: " + LoadIcon);
 
                 }
                 else if (LoadIcon == Box)
                 {
-                    Debug.Log("You are delivering Boxed Goods");
                     Box.SetActive(true);
-                    Debug.Log("LoadIcon: " + LoadIcon);
                 }
                 else if (LoadIcon == Food)
                 {
-                    Debug.Log("You are delivering Food");
                     Food.SetActive(true);
-                    Debug.Log("LoadIcon: " + LoadIcon);
                 }
                 else if (LoadIcon == Milk)
                 {
-                    Debug.Log("You are delivering Milk");
                     Milk.SetActive(true);
-                    Debug.Log("LoadIcon: " + LoadIcon);
                 }
 
             }
