@@ -4848,6 +4848,12 @@ PrefabInstance:
       propertyPath: Milk
       value: 
       objectReference: {fileID: 1673617895}
+    - target: {fileID: 67749253299699702, guid: f6f49996127db0341a13bb4a51df16f5,
+        type: 3}
+      propertyPath: ActiveTemplate
+      value: 
+      objectReference: {fileID: 2639892911160912598, guid: 60a1d5edf1ae0fc45b0d39149f03c76a,
+        type: 3}
     - target: {fileID: 2637632272284409826, guid: f6f49996127db0341a13bb4a51df16f5,
         type: 3}
       propertyPath: m_IsActive
@@ -4980,6 +4986,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_RootOrder
       value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 8977482519576817461, guid: f6f49996127db0341a13bb4a51df16f5,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -353
+      objectReference: {fileID: 0}
+    - target: {fileID: 8977482519576817461, guid: f6f49996127db0341a13bb4a51df16f5,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -209
+      objectReference: {fileID: 0}
+    - target: {fileID: 1593683608196624631, guid: f6f49996127db0341a13bb4a51df16f5,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 4236823835906553769, guid: f6f49996127db0341a13bb4a51df16f5, type: 3}
