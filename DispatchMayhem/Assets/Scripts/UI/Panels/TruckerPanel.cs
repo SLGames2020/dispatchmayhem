@@ -17,10 +17,11 @@ public class TruckerPanel : BasePanel
     public GameObject Box;
     public GameObject Food;
     public GameObject Milk;
-    public GameObject LoadIcon;
+    
 
     private DateTime pTime;
     private int pHour;
+    private int LoadIcon;
 
     public GameObject truck;
 
@@ -94,46 +95,26 @@ public class TruckerPanel : BasePanel
 
             destination.text = currLoad.destinationLabel;
 
-            if(LoadIcon == null)
+            LoadM icons = GM.inst.GetComponent<LoadM>();
+            icons.GenerateIcon(LoadIcon);
+            Debug.Log("LoadIcon: " + LoadIcon);
+
+            if(LoadIcon == 0)
             {
-                Debug.Log("Image not found");
-                Debug.Log("LoadIcon: " + LoadIcon);
+                Box.SetActive(true);
+                Debug.Log("Delivering Box: " + LoadIcon);
             }
-            else if(LoadIcon != null)
+            else if(LoadIcon == 1)
             {
-                Oil.SetActive(false);
-                Box.SetActive(false);
-                Food.SetActive(false);
-                Milk.SetActive(false);
-                Debug.Log("LoadIcon: " + LoadIcon);
-
-                if(LoadIcon == Oil)
-                {
-                    Debug.Log("You are delivering Oil");
-                    Oil.SetActive(true);
-                    Debug.Log("LoadIcon: " + LoadIcon);
-
-                }
-                else if(LoadIcon == Box)
-                {
-                    Debug.Log("You are delivering Boxed Goods");
-                    Box.SetActive(true);
-                    Debug.Log("LoadIcon: " + LoadIcon);
-                }
-                else if(LoadIcon == Food)
-                {
-                    Debug.Log("You are delivering Food");
-                    Food.SetActive(true);
-                    Debug.Log("LoadIcon: " + LoadIcon);
-                }
-                else if(LoadIcon == Milk)
-                {
-                    Debug.Log("You are delivering Milk");
-                    Milk.SetActive(true);
-                    Debug.Log("LoadIcon: " + LoadIcon);
-                }
-
+                Milk.SetActive(true);
+                Debug.Log("Delivering Milk: " + LoadIcon);
             }
+            else if(LoadIcon == 4)
+            {
+                Oil.SetActive(true);
+                Debug.Log("Delivering Oil: " + LoadIcon);
+            }
+
         }
     }
 
