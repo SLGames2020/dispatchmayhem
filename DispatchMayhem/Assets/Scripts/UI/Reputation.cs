@@ -10,17 +10,18 @@ public class Reputation : MonoBehaviour
 
     void Rep()
     {
-        Load hasLoad = GM.inst.GetComponent<Load>();
-        if (hasLoad != null)
+        Load repLoad = GM.inst.GetComponent<Load>();
+        if (repLoad != null)
         {
-            if (hasLoad.state == Load.LoadState.DELIVERED)
+            Debug.Log("repLoad: " + repLoad.state);
+            if (repLoad.state == Load.LoadState.DELIVERED)
             {
                 float movement = 10f;
                 float horizontalInput = 1.0f;
 
                 Heart.transform.localPosition = transform.localPosition + new Vector3(horizontalInput * movement, 0);
             }
-            else if (hasLoad.state == Load.LoadState.UNASSIGNED)
+            else if (repLoad.state == Load.LoadState.UNASSIGNED)
             {
                 float movement = -10f;
                 float horizontalInput = 1.0f;

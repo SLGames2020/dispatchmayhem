@@ -16,6 +16,7 @@ public class TruckerPanel : BasePanel
     public GameObject Oil;
     public GameObject Box;
     public GameObject Food;
+    public GameObject Milk;
     public GameObject LoadIcon;
 
     private DateTime pTime;
@@ -68,17 +69,18 @@ public class TruckerPanel : BasePanel
         }
     }
 
-    public void UpdateHours()
+    public void UpdateHours(System.DateTime pTime)
     {
         Load hasLoad = GM.inst.Trucks[DriverID].GetComponent<Load>();
         //TruckData[DriverID].playhrs = hasLoad;
         if (hasLoad != null && hasLoad.state == Load.LoadState.DELIVERING )
         {
-            pTime = System.DateTime.Now;
-            pHour = pTime.Hour;
-            TruckData[DriverID].playhrs = pHour;
+            System.DateTime playerHour = new System.DateTime(pTime.Hour);
+
+            int pHours = TruckData[DriverID].playhrs;
 
             hours.text = "" + TruckData[DriverID].playhrs;
+            
         }
 
     }
@@ -92,28 +94,43 @@ public class TruckerPanel : BasePanel
 
             destination.text = currLoad.destinationLabel;
 
-            if(LoadIcon = null)
+            if(LoadIcon == null)
             {
                 Debug.Log("Image not found");
+                Debug.Log("LoadIcon: " + LoadIcon);
             }
             else if(LoadIcon != null)
             {
+                Oil.SetActive(false);
+                Box.SetActive(false);
+                Food.SetActive(false);
+                Milk.SetActive(false);
+                Debug.Log("LoadIcon: " + LoadIcon);
 
-                if(LoadIcon = Oil)
+                if(LoadIcon == Oil)
                 {
                     Debug.Log("You are delivering Oil");
                     Oil.SetActive(true);
-                    
+                    Debug.Log("LoadIcon: " + LoadIcon);
+
                 }
-                else if(LoadIcon = Box)
+                else if(LoadIcon == Box)
                 {
                     Debug.Log("You are delivering Boxed Goods");
                     Box.SetActive(true);
+                    Debug.Log("LoadIcon: " + LoadIcon);
                 }
-                else if(LoadIcon = Food)
+                else if(LoadIcon == Food)
                 {
                     Debug.Log("You are delivering Food");
                     Food.SetActive(true);
+                    Debug.Log("LoadIcon: " + LoadIcon);
+                }
+                else if(LoadIcon == Milk)
+                {
+                    Debug.Log("You are delivering Milk");
+                    Milk.SetActive(true);
+                    Debug.Log("LoadIcon: " + LoadIcon);
                 }
 
             }
@@ -140,7 +157,7 @@ public class TruckerPanel : BasePanel
         Finances.inst.AddMoney(-wage1);
         levelup();
         UpdateLoads();
-        UpdateHours();
+        UpdateHours(pTime);
     }
 }
 

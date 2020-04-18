@@ -3387,7 +3387,17 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 243162389263653156, guid: 8fbed769317a9784da08d939868544ff,
         type: 2}
+    - target: {fileID: 5665547199644198189, guid: f6f49996127db0341a13bb4a51df16f5,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7407289493087659104, guid: f6f49996127db0341a13bb4a51df16f5,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5455502046437987366, guid: f6f49996127db0341a13bb4a51df16f5,
         type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -4833,6 +4843,11 @@ PrefabInstance:
       propertyPath: Food
       value: 
       objectReference: {fileID: 2051352216}
+    - target: {fileID: 67749253299699702, guid: f6f49996127db0341a13bb4a51df16f5,
+        type: 3}
+      propertyPath: Milk
+      value: 
+      objectReference: {fileID: 1673617895}
     - target: {fileID: 2637632272284409826, guid: f6f49996127db0341a13bb4a51df16f5,
         type: 3}
       propertyPath: m_IsActive
@@ -4878,11 +4893,6 @@ PrefabInstance:
       propertyPath: m_RootOrder
       value: 32
       objectReference: {fileID: 0}
-    - target: {fileID: 5665547199644198189, guid: f6f49996127db0341a13bb4a51df16f5,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 6780210462708285538, guid: f6f49996127db0341a13bb4a51df16f5,
         type: 3}
       propertyPath: m_Sprite
@@ -4908,11 +4918,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_RootOrder
       value: 33
-      objectReference: {fileID: 0}
-    - target: {fileID: 5455502046437987366, guid: f6f49996127db0341a13bb4a51df16f5,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4397952784126625131, guid: f6f49996127db0341a13bb4a51df16f5,
         type: 3}
@@ -5075,6 +5080,12 @@ MonoBehaviour:
   m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1673617895 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1593683608196624631, guid: f6f49996127db0341a13bb4a51df16f5,
+    type: 3}
+  m_PrefabInstance: {fileID: 1673617886}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1695847516 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8298106754185249808, guid: f6f49996127db0341a13bb4a51df16f5,
