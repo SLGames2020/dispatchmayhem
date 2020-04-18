@@ -22,6 +22,8 @@ public class GM : MonoBehaviour
     public GameObject gameOverPanel;
     public GameObject jobsButton;
 
+    public Reputation repStatus;
+
     public Country[] countriesSupported = { new Country("CA", 400000) };         //the ISO 3166-2 codes, and minimum supported city size for the countries we're supporting (eventually should be made user configurable)
                                                                                  //this came from here (https://simplemaps.com/data/ca-cities) and is free as long as we credit them                                                                                
 
