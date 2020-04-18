@@ -159,12 +159,12 @@ public class Movement : MonoBehaviour
                         mess += " was late. Reputation is reduced with a payment penalty of $" + penalty;
                         
                         UIM.inst.MessageBox("Late Delivery", "Warning!", mess, "Close");
-                        //GM.inst.repStatus.Rep(false);
+                        GM.inst.repStatus.Rep(false);
                         currLoad.value *= 0.80f;
                     }
                     else                                                         
                     {
-                        //GM.inst.repStatus.Rep(true);
+                        GM.inst.repStatus.Rep(true);
                     }
 
                     if (CoinM.inst.SetCoinValue(currLoad.driverID, currLoad.value)) //Display a coin for the player to click to get paid

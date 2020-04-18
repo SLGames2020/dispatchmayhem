@@ -7,21 +7,23 @@ public class Reputation : MonoBehaviour
 {
     public Image Heart;
 
+    bool GoodDelivevery;
 
-    void Rep()
+    public void Rep(bool GoodDelievery)
     {
+
         Load repLoad = GM.inst.GetComponent<Load>();
         if (repLoad != null)
         {
             Debug.Log("repLoad: " + repLoad.state);
-            if (repLoad.state == Load.LoadState.DELIVERED)
+            if (GoodDelievery == true)
             {
                 float movement = 10f;
                 float horizontalInput = 1.0f;
 
                 Heart.transform.localPosition = transform.localPosition + new Vector3(horizontalInput * movement, 0);
             }
-            else if (repLoad.state == Load.LoadState.UNASSIGNED)
+            else if (GoodDelievery == false)
             {
                 float movement = -10f;
                 float horizontalInput = 1.0f;
@@ -42,6 +44,6 @@ public class Reputation : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Rep();
+        Rep(GoodDelivevery);
     }
 }

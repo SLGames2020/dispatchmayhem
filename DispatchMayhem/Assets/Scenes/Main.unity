@@ -11439,6 +11439,7 @@ MonoBehaviour:
   loadingPanel: {fileID: 690548217}
   gameOverPanel: {fileID: 5503229451707516738}
   jobsButton: {fileID: 0}
+  repStatus: {fileID: 608833406}
   Trucks:
   - {fileID: 928117323}
   - {fileID: 1438886640}
