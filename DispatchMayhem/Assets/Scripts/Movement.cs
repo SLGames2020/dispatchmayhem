@@ -151,7 +151,22 @@ public class Movement : MonoBehaviour
                     }
 
                     currLoad.state = Load.LoadState.DELIVERED;
-                                                                
+                                                             
+                    if (currLoad.DueDate < GameTime.inst.gmTime)                    //late deliveries suffer a 20% penalty
+                    {                                                               //and the company reputation is lowered
+                        int penalty = (int)(currLoad.value * 0.20f);
+                        string mess = "The " + currLoad.productLabel + " load from " + currLoad.originLabel + " to " + currLoad.destinationLabel;
+                        mess += " was late. Reputation is reduced with a payment penalty of $" + penalty;
+                        
+                        UIM.inst.MessageBox("Late Delivery", "Warning!", mess, "Close");
+                        GM.inst.repStatus.Rep(false);
+                        currLoad.value *= 0.80f;
+                    }
+                    else                                                         
+                    {
+                        GM.inst.repStatus.Rep(true);
+                    }
+
                     if (CoinM.inst.SetCoinValue(currLoad.driverID, currLoad.value)) //Display a coin for the player to click to get paid
                     {
                         CoinM.inst.EnableCoin(currLoad.driverID);

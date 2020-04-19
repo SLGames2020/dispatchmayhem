@@ -8,10 +8,11 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 3233231636357174130}
+  - component: {fileID: 859895920559419138}
   - component: {fileID: 7837732061841770868}
   - component: {fileID: 7474593612621696143}
   - component: {fileID: 2703949949888999050}
+  - component: {fileID: 266783429935172070}
   m_Layer: 0
   m_Name: CityMark
   m_TagString: Untagged
@@ -19,8 +20,8 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &3233231636357174130
-Transform:
+--- !u!224 &859895920559419138
+RectTransform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -30,9 +31,14 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 15, y: 15, z: 15}
   m_Children: []
-  m_Father: {fileID: 1736034770410901445}
+  m_Father: {fileID: 2746679775006141490}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: -0.06}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!33 &7837732061841770868
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -50,7 +56,7 @@ MeshRenderer:
   m_GameObject: {fileID: 4839923455125291012}
   m_Enabled: 1
   m_CastShadows: 1
-  m_ReceiveShadows: 1
+  m_ReceiveShadows: 0
   m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
@@ -91,6 +97,14 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!222 &266783429935172070
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4839923455125291012}
+  m_CullTransparentMesh: 0
 --- !u!1 &5944389879667330494
 GameObject:
   m_ObjectHideFlags: 0
@@ -99,7 +113,7 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 1736034770410901445}
+  - component: {fileID: 2746679775006141490}
   - component: {fileID: 2877860227348290972}
   - component: {fileID: 8731822194333936418}
   m_Layer: 0
@@ -109,8 +123,8 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &1736034770410901445
-Transform:
+--- !u!224 &2746679775006141490
+RectTransform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -120,10 +134,15 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children:
-  - {fileID: 3233231636357174130}
+  - {fileID: 859895920559419138}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2877860227348290972
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -136,13 +155,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec084d0c9111a644da8e0c970fa31ad7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  loadPrefab: {fileID: 8065267893138532041, guid: e12a4446a469fbe43bf70df1a35233e3,
-    type: 3}
-  listItemTemplate: {fileID: 0}
-  loadBoxContent: {fileID: 0}
+  nameLabel: {fileID: 0}
   label: unknown city
   stillOpen: 1
-  loads: []
   mapSupport: {fileID: 0}
 --- !u!114 &8731822194333936418
 MonoBehaviour:
@@ -157,3 +172,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gps: {x: 0, y: 0}
+  baseScale: {x: 200, y: 200, z: 200}

@@ -10,6 +10,7 @@ public class MessageBoxCtrl : MonoBehaviour
     public Text titleTextObj;
     public Text typeTextObj;
     public Text messageTextObj;
+    public AudioClip warning;
     public TextMeshProUGUI buttonTextObj;
 
     public string title = "Title";
@@ -20,6 +21,7 @@ public class MessageBoxCtrl : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        SoundManager.instance.SoundEffect(warning);
         titleTextObj.text = title;
         typeTextObj.text = topic;
         messageTextObj.text = message;
