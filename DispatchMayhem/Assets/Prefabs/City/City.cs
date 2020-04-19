@@ -29,12 +29,12 @@ public class City : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (nameLabel != null)
-        {
-            Vector3 namepos = Camera.main.WorldToScreenPoint(this.transform.position);
-            namepos.z = 1.0f;
-            nameLabel.transform.position = namepos;
-        }
+        //if (nameLabel != null)
+        //{
+        //    Vector3 namepos = Camera.main.WorldToScreenPoint(this.transform.position);
+        //    //namepos.y = 0.0f;
+        //    nameLabel.transform.position = namepos;
+        //}
     }
 
     /**************************************************************************

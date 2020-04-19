@@ -161,7 +161,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c3aa2a00cd99a746a25392e2665e723, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cityPrefab: {fileID: 5944389879667330494, guid: 94cd19da4a39af443a473c278e6b79e6,
+  cityPrefab: {fileID: 3689067206126144404, guid: 2897d43d6017a64418a066ea66c3cd6b,
     type: 3}
   jsonfile1: {fileID: 4900000, guid: 2f330acf5397625488e29f533a09e228, type: 3}
   openCities: []

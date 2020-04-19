@@ -1,4 +1,4 @@
-﻿/*******      City Manager        *******
+/*******      City Manager        *******
 Responsible for loading city data and
 placing the supported cities on the map.
 Deactivating cities will also be done
@@ -58,24 +58,28 @@ public class CyM : MonoBehaviour
             int cnt2 = 0;
             foreach (CityJSONobj cty in cntrydata.cities)
             {
-                //if (cty.population >= cntry.POPcutoff)
-                if (cty.admin == "Ontario")
+                //if (cty.population >= cntry.POPcutoff)                        //all large cities of Canada
+                if (cty.admin == "Ontario")                                     //just ontario for now
                 {
-                    GameObject ctyGO = Instantiate(cityPrefab, Vector3.zero, Quaternion.identity);
-                    ctyGO.transform.parent = this.transform;
-                    ctyGO.name = cty.city;
-                    City ctyscript = ctyGO.GetComponent<City>();
-                    ctyscript.label = cty.city;
-                    ctyscript.stillOpen = true;
-                    Vector2 tv2 = cty.GetGPS();
-                    MapSupport msup = ctyGO.GetComponent<MapSupport>();
-                    msup.gps = tv2;
-                    //msup.baseScale = new Vector3(0.15f, 0.15f, 0.15f);
-                    openCities.Add(ctyGO);
+                    if (((cty.city != "Sudbury") && (cnt2 < 10))                //top 10 cities (but not sudbury because we can't fit it with out enabling the zoom)
+                     || ((cty.city == "Cornwall") || cty.city == "Brockville")) //and Cornwall and Brockville as a nod to SLC ;)
+                    {
+                        GameObject ctyGO = Instantiate(cityPrefab, Vector3.zero, Quaternion.identity);
+                        ctyGO.transform.parent = this.transform;
+                        ctyGO.name = cty.city;
+                        City ctyscript = ctyGO.GetComponent<City>();
+                        ctyscript.label = cty.city;
+                        ctyscript.stillOpen = true;
+                        Vector2 tv2 = cty.GetGPS();
+                        MapSupport msup = ctyGO.GetComponent<MapSupport>();
+                        msup.gps = tv2;
+                        //msup.baseScale = new Vector3(0.15f, 0.15f, 0.15f);    //scale for the first city prototype (keep in until prototype is removed)
+                        openCities.Add(ctyGO);
+                    }
                     cnt++;
                 }
                 cnt2++;
-                if (cnt > 10) break;               //only 10 cities for now
+                //if (cnt > 10) break;               //early breakout (only 10 cities for previously)
             }
         }
     }
