@@ -70,7 +70,7 @@ public class CyM : MonoBehaviour
                     Vector2 tv2 = cty.GetGPS();
                     MapSupport msup = ctyGO.GetComponent<MapSupport>();
                     msup.gps = tv2;
-                    msup.baseScale = new Vector3(0.15f, 0.15f, 0.15f);
+                    //msup.baseScale = new Vector3(0.15f, 0.15f, 0.15f);
                     openCities.Add(ctyGO);
                     cnt++;
                 }

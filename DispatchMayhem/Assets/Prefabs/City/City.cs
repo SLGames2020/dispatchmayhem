@@ -10,7 +10,7 @@ public class City : MonoBehaviour
     public string label = "unknown city";
     public bool stillOpen = true;
 
-    public MapSupport mapSupport;
+    [HideInInspector] public MapSupport mapSupport;
 
     private void Awake()
     {
@@ -19,16 +19,22 @@ public class City : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        nameLabel.text = label;
+        if (nameLabel != null)
+        {
+            nameLabel.text = label;
+        }
         StartCoroutine(SpawnLoad());
     }
 
     // Update is called once per frame
     void Update()
     {
-        Vector3 namepos = Camera.main.WorldToScreenPoint(this.transform.position);
-        namepos.z = 1.0f;
-        nameLabel.transform.position = namepos;
+        if (nameLabel != null)
+        {
+            Vector3 namepos = Camera.main.WorldToScreenPoint(this.transform.position);
+            namepos.z = 1.0f;
+            nameLabel.transform.position = namepos;
+        }
     }
 
     /**************************************************************************
@@ -40,8 +46,8 @@ public class City : MonoBehaviour
     ****************************************************************************/
     private IEnumerator SpawnLoad()
     {
-        GameObject go;
-        Vector2 des;
+        //GameObject go;
+        //Vector2 des;
 
         while (stillOpen)
         {
