@@ -21,12 +21,16 @@ public class MessageBoxCtrl : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+
+    }
+
+    void OnEnable()
+    {
         SoundManager.instance.SoundEffect(warning);
         titleTextObj.text = title;
         typeTextObj.text = topic;
         messageTextObj.text = message;
         buttonTextObj.text = buttonTxt;
-        //Debug.Log(title + " " + topic + " " + message + " " + buttonTxt);
     }
 
     //// Update is called once per frame

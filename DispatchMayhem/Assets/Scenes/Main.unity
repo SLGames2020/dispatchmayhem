@@ -165,7 +165,7 @@ MonoBehaviour:
     type: 3}
   jsonfile1: {fileID: 4900000, guid: 2f330acf5397625488e29f533a09e228, type: 3}
   openCities: []
-  LOADSPAWNTIME: 45
+  LOADSPAWNTIME: 30
 --- !u!1 &16627200 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 9099401709861451462, guid: b224cbf2b0c73af46b217da5d070fbe8,
@@ -11766,7 +11766,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   loadingPanel: {fileID: 690548217}
   gameOverPanel: {fileID: 5503229451707516738}
-  jobsButton: {fileID: 0}
+  jobsButton: {fileID: 2062158162}
   repStatus: {fileID: 608833406}
   Trucks:
   - {fileID: 928117323}
@@ -14990,6 +14990,12 @@ MonoBehaviour:
   m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &2062158162 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5933739395865739003, guid: f6f49996127db0341a13bb4a51df16f5,
+    type: 3}
+  m_PrefabInstance: {fileID: 1673617886}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2074796580 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8268741495036202933, guid: f6f49996127db0341a13bb4a51df16f5,
