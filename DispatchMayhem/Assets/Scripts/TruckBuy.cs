@@ -16,7 +16,13 @@ public class TruckBuy : MonoBehaviour
     public void BuyUlitmateTruck()
     {
         truckBoughtID = 1;          
-        Finances.inst.ValidatePurchase(250000f, "Ultimate Truck", truckBought);
+        Finances.inst.ValidatePurchase(100000f, "FoodGrade", truckBought);
+    }
+
+    public void BuyFlatbedTruck()
+    {
+        truckBoughtID = 2;
+        Finances.inst.ValidatePurchase(100000f, "FlatBed", truckBought);
     }
 
     //// Update is called once per frame
