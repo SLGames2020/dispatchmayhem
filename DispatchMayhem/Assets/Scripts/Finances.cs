@@ -50,7 +50,9 @@ public class Finances : MonoBehaviour
         if (lastMinute != GameTime.inst.gmTime.Minute)
         {
             lastMinute = GameTime.inst.gmTime.Minute;
-            AddMoney((float)(-GM.inst.totalDrivers));
+            float overhed = (float)(-GM.inst.totalDrivers);
+            overhed /= 2.0f;
+            AddMoney(overhed);
         }
         int tmpcur = (int)currCurrency;
         cashText.text = tmpcur.ToString();

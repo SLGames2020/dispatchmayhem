@@ -16,7 +16,7 @@ public class Load : MonoBehaviour
     public string productIcon;
 
     public float value = 0.0f;                                                      // cost gained or lost from successfully delivering or failing to deliver in time. (this is set in the callback for getting the route)
-    public float haulingCost = 0.5f;                                                // The cost of the driver and general operation of the truck per mile (pay, fuel, general maitenance)
+    public float haulingCost = 0.10f;                                               // The cost of the driver and general operation of the truck per mile (pay, fuel, general maitenance)
     public float haulingPayment = 2.5f;                                             // The amount of money per mile earned from transportint the load (determined by the load type)
     public System.DateTime DueDate;                                                 // when the load needs to be dropped off by.
     public int productType;

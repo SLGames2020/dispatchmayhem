@@ -157,7 +157,7 @@ public class Movement : MonoBehaviour
                         int penalty = (int)(currLoad.value * 0.20f);
                         string mess = "The " + currLoad.productLabel + " load from " + currLoad.originLabel + " to " + currLoad.destinationLabel;
                         mess += " was late. Reputation is reduced with a payment penalty of $" + penalty;
-                        Debug.Log("penalty $" + penalty + " (" + currLoad.value + ")");
+
                         UIM.inst.MessageBox("Late Delivery", "Warning!", mess, "Close");
                         GM.inst.repStatus.Rep(false);
                         currLoad.value *= 0.80f;
