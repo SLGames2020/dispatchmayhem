@@ -11,16 +11,12 @@ public class Reputation : MonoBehaviour
 
     public void Rep(bool GoodDelievery)
     {
-
-        Load repLoad = GM.inst.GetComponent<Load>();
-        if (repLoad != null)
-        {
-            Debug.Log("repLoad: " + repLoad.state);
+        
             if (GoodDelievery == true)
             {
                 float movement = 10f;
                 float horizontalInput = 1.0f;
-                Vector3 maxposition = new Vector3(100f, -440f, 0); ;
+                Vector3 maxposition = new Vector3(-343.5f,  0f, 0);
                 if (Heart.transform.localPosition != maxposition)
                 {
                     Heart.transform.localPosition = transform.localPosition + new Vector3(horizontalInput * movement, 0);
@@ -30,27 +26,29 @@ public class Reputation : MonoBehaviour
             {
                 float movement = -10f;
                 float horizontalInput = 1.0f;
-                Vector3 maxposition = new Vector3(-100f, -440f, 0);
+                Vector3 maxposition = new Vector3(-743.5f, 0f, 0);
 
                 if (Heart.transform.localPosition != maxposition)
                 {
                     Heart.transform.localPosition = transform.localPosition + new Vector3(horizontalInput * movement, 0);
                 }
+          
             }
-        }
 
     }
 
 
     // Start is called before the first frame update
-    void Start()
+   /* void Start()
     {
-
+        Rep(GoodDelivevery);
+        Debug.Log("GoodDelivevery: " + GoodDelivevery);
+        Debug.Log("CurrenPosition: " + Heart.transform.localPosition.x);
     }
 
     // Update is called once per frame
     void Update()
     {
-        Rep(GoodDelivevery);
-    }
+     
+    }*/
 }
