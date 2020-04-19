@@ -46,8 +46,6 @@ public class UIM : MonoBehaviour
         instance = null;
     }
 
-
-
     public void LoadPanel(GameObject Panel)
     {
         ClosePanel();
@@ -96,7 +94,6 @@ public class UIM : MonoBehaviour
 ****************************************************************************/
     public void MessageBox(string type, string topic, string message, string btntxt)
     {
-
         MessageBoxCtrl mbc = MessagePanel.GetComponent<MessageBoxCtrl>();
         mbc.title = type;
         mbc.topic = topic;
