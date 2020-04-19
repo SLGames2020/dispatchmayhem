@@ -61,7 +61,7 @@ public class CyM : MonoBehaviour
                 //if (cty.population >= cntry.POPcutoff)                        //all large cities of Canada
                 if (cty.admin == "Ontario")                                     //just ontario for now
                 {
-                    if (((cty.city != "Sudbury") && (cnt2 < 10))                //top 10 cities (but not sudbury because we can't fit it with out enabling the zoom)
+                    if (((cty.city != "Sudbury") && (cnt < 10))                 //top 10 cities (but not sudbury because we can't fit it with out enabling the zoom)
                      || ((cty.city == "Cornwall") || cty.city == "Brockville")) //and Cornwall and Brockville as a nod to SLC ;)
                     {
                         GameObject ctyGO = Instantiate(cityPrefab, Vector3.zero, Quaternion.identity);
