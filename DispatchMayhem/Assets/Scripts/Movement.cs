@@ -118,7 +118,7 @@ public class Movement : MonoBehaviour
             }
             else if (GameTime.inst.gmTime < hazardWaitTime)                     //the highway wait timing is seperate here so we can have
             {                                                                   //different hooks for the hazards and the loading/unloading delay times
-                //Debug.Log("Hazard Waiting");                                    //add a sound here
+                //Debug.Log("Hazard Waiting");                                  //add a sound here
             }
             else if (loadMark != -1)                                            //only move if we've received a loading point
             {
@@ -143,7 +143,6 @@ public class Movement : MonoBehaviour
             {
                 if ((mapSupport.gps - destination).magnitude < closeEnough)   //if we're close to the destination, and we have travelled a route
                 {
-                    Debug.Log("Delivery arrived!");
                     SoundManager.instance.SoundEffect(unloading);
                     if (currLoad.state != Load.LoadState.DELIVERED)
                     {

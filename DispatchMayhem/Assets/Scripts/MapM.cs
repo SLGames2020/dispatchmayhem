@@ -9,7 +9,6 @@ namespace Mapbox.Examples
     using Mapbox.Unity.MeshGeneration.Factories;
     using Mapbox.Unity.Utilities;
 
-
     public class MapM : MonoBehaviour
     {
         private static MapM instance = null;
@@ -61,55 +60,26 @@ namespace Mapbox.Examples
 
         private void Update()
         {
-            int count = _spawnedObjects.Count;
-            for (int i = 0; i < count; i++)
-            {
-                if (i < _spawnedObjects.Count)              //objects (inspector?) are getting despawned asyncronously
-                {                                           //and we occasional end up with index out of bounds
-                    var spawnedObject = _spawnedObjects[i];
+            for (int i = 0; i < _spawnedObjects.Count; i++)                     //make sure to always get the up to date count
+            {                                                                   //because we'll get an index out of range after we remove one below
+                var spawnedObject = _spawnedObjects[i];
 
-                    if (spawnedObject != null)
-                    {
-                        MapSupport msup = spawnedObject.GetComponent<MapSupport>();
-                        Vector2d loc = Vec2To2d(msup.gps);
-                        if (spawnedObject.tag == "City") loc = loc + new Vector2d(-3.20f, 0.15f); //shift over the cities because they are positioned improperly for some reason
-                        else if (spawnedObject.tag == "Truck") loc = loc + new Vector2d(-3.20f, 0.15f);
+                if (spawnedObject != null)
+                {
+                    MapSupport msup = spawnedObject.GetComponent<MapSupport>();
+                    Vector2d loc = Vec2To2d(msup.gps);
+                    if (spawnedObject.tag == "City") loc = loc + new Vector2d(-3.20f, 0.15f); //shift over the cities because they are positioned improperly for some reason
+                    else if (spawnedObject.tag == "Truck") loc = loc + new Vector2d(-3.20f, 0.15f);
 
-                        Vector2d tloc = new Vector2d(loc.y, loc.x);
-                        spawnedObject.transform.localPosition = _map.GeoToWorldPosition(tloc, true);
-                        spawnedObject.transform.localScale = new Vector3(msup.baseScale.x * _map.Zoom, msup.baseScale.y * _map.Zoom, msup.baseScale.z * _map.Zoom);
-                    }
-                    else
-                    {
-                        //Debug.Log("Removing Null map object! n(" + i + ")");
-                        _spawnedObjects.RemoveAt(i);
-
-                    }
+                    Vector2d tloc = new Vector2d(loc.y, loc.x);
+                    spawnedObject.transform.localPosition = _map.GeoToWorldPosition(tloc, true);
+                    spawnedObject.transform.localScale = new Vector3(msup.baseScale.x * _map.Zoom, msup.baseScale.y * _map.Zoom, msup.baseScale.z * _map.Zoom);
                 }
-
+                else
+                {
+                    _spawnedObjects.RemoveAt(i);        
+                }                                       
             }
-
-            //---------------------------------------------------------------------------------//
-            //                               MAP CONTROLS                                      //
-            //---------------------------------------------------------------------------------//
-
-            //if (Input.GetAxis("Mouse ScrollWheel") > 0.0f) // zoom in
-            //{
-            //    _map.UpdateMap(_map.AbsoluteZoom + 1.0f);
-            //    if (_map.AbsoluteZoom >= 12.0f)
-            //    {
-            //        _map.UpdateMap(12.0f);
-            //    }
-            //}
-
-            //if (Input.GetAxis("Mouse ScrollWheel") < 0.0f) // zoom out
-            //{
-            //    _map.UpdateMap(_map.AbsoluteZoom - 1.0f);
-            //    if (_map.AbsoluteZoom <= 8.0f)
-            //    {
-            //        _map.UpdateMap(8.0f);
-            //    }
-            //}
         }
 
         /******************************************************************************************
