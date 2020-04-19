@@ -20,15 +20,22 @@ public class Reputation : MonoBehaviour
             {
                 float movement = 10f;
                 float horizontalInput = 1.0f;
-
-                Heart.transform.localPosition = transform.localPosition + new Vector3(horizontalInput * movement, 0);
+                Vector3 maxposition = new Vector3(100f, -440f, 0); ;
+                if (Heart.transform.localPosition != maxposition)
+                {
+                    Heart.transform.localPosition = transform.localPosition + new Vector3(horizontalInput * movement, 0);
+                }
             }
             else if (GoodDelievery == false)
             {
                 float movement = -10f;
                 float horizontalInput = 1.0f;
+                Vector3 maxposition = new Vector3(-100f, -440f, 0);
 
-                Heart.transform.localPosition = transform.localPosition + new Vector3(horizontalInput * movement, 0);
+                if (Heart.transform.localPosition != maxposition)
+                {
+                    Heart.transform.localPosition = transform.localPosition + new Vector3(horizontalInput * movement, 0);
+                }
             }
         }
 
