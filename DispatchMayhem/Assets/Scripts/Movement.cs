@@ -143,6 +143,7 @@ public class Movement : MonoBehaviour
             {
                 if ((mapSupport.gps - destination).magnitude < closeEnough)   //if we're close to the destination, and we have travelled a route
                 {
+                    Debug.Log("Delivery arrived!");
                     SoundManager.instance.SoundEffect(unloading);
                     if (currLoad.state != Load.LoadState.DELIVERED)
                     {

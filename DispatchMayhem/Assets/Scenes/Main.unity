@@ -165,7 +165,7 @@ MonoBehaviour:
     type: 3}
   jsonfile1: {fileID: 4900000, guid: 2f330acf5397625488e29f533a09e228, type: 3}
   openCities: []
-  LOADSPAWNTIME: 120
+  LOADSPAWNTIME: 45
 --- !u!1 &16627200 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 9099401709861451462, guid: b224cbf2b0c73af46b217da5d070fbe8,
@@ -9620,6 +9620,26 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2147226210184396651, guid: f6f49996127db0341a13bb4a51df16f5,
+        type: 3}
+      propertyPath: Drivers.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2147226210184396651, guid: f6f49996127db0341a13bb4a51df16f5,
+        type: 3}
+      propertyPath: Drivers.Array.data[0]
+      value: 
+      objectReference: {fileID: 942100209}
+    - target: {fileID: 2147226210184396651, guid: f6f49996127db0341a13bb4a51df16f5,
+        type: 3}
+      propertyPath: Drivers.Array.data[1]
+      value: 
+      objectReference: {fileID: 654586368}
+    - target: {fileID: 2147226210184396651, guid: f6f49996127db0341a13bb4a51df16f5,
+        type: 3}
+      propertyPath: Drivers.Array.data[2]
+      value: 
+      objectReference: {fileID: 873375047}
     - target: {fileID: 1313795662, guid: f6f49996127db0341a13bb4a51df16f5, type: 3}
       propertyPath: OutputAudioMixerGroup
       value: 
@@ -11131,26 +11151,6 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2147226210184396651, guid: f6f49996127db0341a13bb4a51df16f5,
-        type: 3}
-      propertyPath: Drivers.Array.size
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 2147226210184396651, guid: f6f49996127db0341a13bb4a51df16f5,
-        type: 3}
-      propertyPath: Drivers.Array.data[0]
-      value: 
-      objectReference: {fileID: 942100209}
-    - target: {fileID: 2147226210184396651, guid: f6f49996127db0341a13bb4a51df16f5,
-        type: 3}
-      propertyPath: Drivers.Array.data[1]
-      value: 
-      objectReference: {fileID: 654586368}
-    - target: {fileID: 2147226210184396651, guid: f6f49996127db0341a13bb4a51df16f5,
-        type: 3}
-      propertyPath: Drivers.Array.data[2]
-      value: 
-      objectReference: {fileID: 873375047}
     - target: {fileID: 2808473757968414003, guid: f6f49996127db0341a13bb4a51df16f5,
         type: 3}
       propertyPath: m_Sprite
@@ -12795,7 +12795,7 @@ PrefabInstance:
     - target: {fileID: 1001933505994027599, guid: f01a11440e1c6474f96c2fd350a00447,
         type: 3}
       propertyPath: m_textInfo.characterCount
-      value: 10
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 1001933505994027599, guid: f01a11440e1c6474f96c2fd350a00447,
         type: 3}
@@ -12890,7 +12890,27 @@ PrefabInstance:
     - target: {fileID: 5273251869985647996, guid: f01a11440e1c6474f96c2fd350a00447,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 1500
+      value: 6000
+      objectReference: {fileID: 0}
+    - target: {fileID: 5273251869985647996, guid: f01a11440e1c6474f96c2fd350a00447,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.125
+      objectReference: {fileID: 0}
+    - target: {fileID: 5273251869985647996, guid: f01a11440e1c6474f96c2fd350a00447,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.125
+      objectReference: {fileID: 0}
+    - target: {fileID: 5273251869985647996, guid: f01a11440e1c6474f96c2fd350a00447,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.125
+      objectReference: {fileID: 0}
+    - target: {fileID: 5273251869985647996, guid: f01a11440e1c6474f96c2fd350a00447,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 80
       objectReference: {fileID: 0}
     - target: {fileID: 1953803928208157464, guid: f01a11440e1c6474f96c2fd350a00447,
         type: 3}
@@ -12951,6 +12971,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_FontData.m_HorizontalOverflow
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5273251869985647997, guid: f01a11440e1c6474f96c2fd350a00447,
+        type: 3}
+      propertyPath: m_FontData.m_FontSize
+      value: 288
+      objectReference: {fileID: 0}
+    - target: {fileID: 5273251869985647997, guid: f01a11440e1c6474f96c2fd350a00447,
+        type: 3}
+      propertyPath: m_FontData.m_MaxSize
+      value: 288
+      objectReference: {fileID: 0}
+    - target: {fileID: 5273251869985647997, guid: f01a11440e1c6474f96c2fd350a00447,
+        type: 3}
+      propertyPath: m_FontData.m_RichText
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5273251870391090834, guid: f01a11440e1c6474f96c2fd350a00447,
         type: 3}

@@ -1,4 +1,4 @@
-﻿namespace Mapbox.Examples
+namespace Mapbox.Examples
 
 {
     using System.Collections;
@@ -64,24 +64,27 @@
             int count = _spawnedObjects.Count;
             for (int i = 0; i < count; i++)
             {
-                var spawnedObject = _spawnedObjects[i];
+                if (i < _spawnedObjects.Count)              //objects (inspector?) are getting despawned asyncronously
+                {                                           //and we occasional end up with index out of bounds
+                    var spawnedObject = _spawnedObjects[i];
 
-                if (spawnedObject != null)  
-                {
-                    MapSupport msup = spawnedObject.GetComponent<MapSupport>();
-                    Vector2d loc = Vec2To2d(msup.gps);
-                    if (spawnedObject.tag == "City") loc = loc + new Vector2d(-3.20f, 0.15f); //shift over the cities because they are positioned improperly for some reason
-                    else if (spawnedObject.tag == "Truck") loc = loc + new Vector2d(-3.20f, 0.15f);
+                    if (spawnedObject != null)
+                    {
+                        MapSupport msup = spawnedObject.GetComponent<MapSupport>();
+                        Vector2d loc = Vec2To2d(msup.gps);
+                        if (spawnedObject.tag == "City") loc = loc + new Vector2d(-3.20f, 0.15f); //shift over the cities because they are positioned improperly for some reason
+                        else if (spawnedObject.tag == "Truck") loc = loc + new Vector2d(-3.20f, 0.15f);
 
-                    Vector2d tloc = new Vector2d(loc.y, loc.x);
-                    spawnedObject.transform.localPosition = _map.GeoToWorldPosition(tloc, true);
-                    spawnedObject.transform.localScale = new Vector3(msup.baseScale.x * _map.Zoom, msup.baseScale.y * _map.Zoom, msup.baseScale.z * _map.Zoom);
-                }
-                else
-                {
-                    //Debug.Log("Removing Null map object! n(" + i + ")");
-                    _spawnedObjects.RemoveAt(i);
+                        Vector2d tloc = new Vector2d(loc.y, loc.x);
+                        spawnedObject.transform.localPosition = _map.GeoToWorldPosition(tloc, true);
+                        spawnedObject.transform.localScale = new Vector3(msup.baseScale.x * _map.Zoom, msup.baseScale.y * _map.Zoom, msup.baseScale.z * _map.Zoom);
+                    }
+                    else
+                    {
+                        //Debug.Log("Removing Null map object! n(" + i + ")");
+                        _spawnedObjects.RemoveAt(i);
 
+                    }
                 }
 
             }
