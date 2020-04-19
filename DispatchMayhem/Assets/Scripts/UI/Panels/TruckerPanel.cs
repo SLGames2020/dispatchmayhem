@@ -74,21 +74,6 @@ public class TruckerPanel : BasePanel
         }
     }
 
-    public void UpdateHours(System.DateTime pTime)
-    {
-        Load hasLoad = GM.inst.Trucks[DriverID].GetComponent<Load>();
-        //TruckData[DriverID].playhrs = hasLoad;
-        if (hasLoad != null && hasLoad.state == Load.LoadState.DELIVERING)
-        {
-            System.DateTime playerHour = new System.DateTime(pTime.Hour);
-
-            int pHours = TruckData[DriverID].playhrs;
-
-            hours.text = "" + TruckData[DriverID].playhrs;
-
-        }
-
-    }
 
     public void SetIcon(string productName, int DriveID)
     {
@@ -182,7 +167,6 @@ public class TruckerPanel : BasePanel
         Finances.inst.AddMoney(-wage1);
         levelup();
         UpdateLoads();
-        UpdateHours(pTime);
     }
 }
 
