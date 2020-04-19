@@ -17,6 +17,7 @@ public class TextTracker : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //nameLabel.enabled = !(GM.inst.loadingPanel.activeSelf);
         Vector3 namepos = Camera.main.WorldToScreenPoint(this.transform.position);
         namepos += posShift;
         nameLabel.transform.position = namepos;
