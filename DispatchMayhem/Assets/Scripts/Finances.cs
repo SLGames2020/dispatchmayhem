@@ -19,7 +19,7 @@ public class Finances : MonoBehaviour
 
     public Text cashText;
 
-    public static float startingCurrency = 500000.0f;
+    public static float startingCurrency = 100000.0f;
     public float currCurrency;
 
     private float purchasePrice = 0.0f;
