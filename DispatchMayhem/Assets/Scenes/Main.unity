@@ -165,7 +165,7 @@ MonoBehaviour:
     type: 3}
   jsonfile1: {fileID: 4900000, guid: 2f330acf5397625488e29f533a09e228, type: 3}
   openCities: []
-  LOADSPAWNTIME: 30
+  LOADSPAWNTIME: 60
 --- !u!1 &16627200 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 9099401709861451462, guid: b224cbf2b0c73af46b217da5d070fbe8,
@@ -1694,6 +1694,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1628736777}
     m_Modifications:
+    - target: {fileID: 5061166151301938341, guid: 91b8ca45d368fac4487e62c757d74305,
+        type: 3}
+      propertyPath: m_Name
+      value: CoinIcon3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5061166151301938341, guid: 91b8ca45d368fac4487e62c757d74305,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5753798551715717087, guid: 91b8ca45d368fac4487e62c757d74305,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1813,16 +1823,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 0.99199
-      objectReference: {fileID: 0}
-    - target: {fileID: 5061166151301938341, guid: 91b8ca45d368fac4487e62c757d74305,
-        type: 3}
-      propertyPath: m_Name
-      value: CoinIcon3
-      objectReference: {fileID: 0}
-    - target: {fileID: 5061166151301938341, guid: 91b8ca45d368fac4487e62c757d74305,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4033411031944518614, guid: 91b8ca45d368fac4487e62c757d74305,
         type: 3}
@@ -1992,6 +1992,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1659291978}
     m_Modifications:
+    - target: {fileID: 4745527727462398088, guid: c8b63eea187c7cf448509787ad2b7954,
+        type: 3}
+      propertyPath: m_Name
+      value: CreditsPanel
+      objectReference: {fileID: 0}
+    - target: {fileID: 4745527727462398088, guid: c8b63eea187c7cf448509787ad2b7954,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4745527727049582893, guid: c8b63eea187c7cf448509787ad2b7954,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2111,16 +2121,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4745527727462398088, guid: c8b63eea187c7cf448509787ad2b7954,
-        type: 3}
-      propertyPath: m_Name
-      value: CreditsPanel
-      objectReference: {fileID: 0}
-    - target: {fileID: 4745527727462398088, guid: c8b63eea187c7cf448509787ad2b7954,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7256703991571310303, guid: c8b63eea187c7cf448509787ad2b7954,
         type: 3}
@@ -2329,6 +2329,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5237361399565312084, guid: fe07ef46e9aac5743aa227d4d236815b,
+        type: 3}
+      propertyPath: m_Name
+      value: Truck2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5237361399565312084, guid: fe07ef46e9aac5743aa227d4d236815b,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7698701530442055076, guid: fe07ef46e9aac5743aa227d4d236815b,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2448,16 +2458,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5237361399565312084, guid: fe07ef46e9aac5743aa227d4d236815b,
-        type: 3}
-      propertyPath: m_Name
-      value: Truck2
-      objectReference: {fileID: 0}
-    - target: {fileID: 5237361399565312084, guid: fe07ef46e9aac5743aa227d4d236815b,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3270579688811649514, guid: fe07ef46e9aac5743aa227d4d236815b,
         type: 3}
@@ -3702,6 +3702,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1628736777}
     m_Modifications:
+    - target: {fileID: 5061166151301938341, guid: 91b8ca45d368fac4487e62c757d74305,
+        type: 3}
+      propertyPath: m_Name
+      value: CoinIcon2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5061166151301938341, guid: 91b8ca45d368fac4487e62c757d74305,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5753798551715717087, guid: 91b8ca45d368fac4487e62c757d74305,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3821,16 +3831,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 0.99199
-      objectReference: {fileID: 0}
-    - target: {fileID: 5061166151301938341, guid: 91b8ca45d368fac4487e62c757d74305,
-        type: 3}
-      propertyPath: m_Name
-      value: CoinIcon2
-      objectReference: {fileID: 0}
-    - target: {fileID: 5061166151301938341, guid: 91b8ca45d368fac4487e62c757d74305,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4033411031944518614, guid: 91b8ca45d368fac4487e62c757d74305,
         type: 3}
@@ -8263,6 +8263,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1659291978}
     m_Modifications:
+    - target: {fileID: 4745527727462398088, guid: c8b63eea187c7cf448509787ad2b7954,
+        type: 3}
+      propertyPath: m_Name
+      value: TutorialPannel
+      objectReference: {fileID: 0}
+    - target: {fileID: 4745527727462398088, guid: c8b63eea187c7cf448509787ad2b7954,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4745527727049582893, guid: c8b63eea187c7cf448509787ad2b7954,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -8382,16 +8392,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4745527727462398088, guid: c8b63eea187c7cf448509787ad2b7954,
-        type: 3}
-      propertyPath: m_Name
-      value: TutorialPannel
-      objectReference: {fileID: 0}
-    - target: {fileID: 4745527727462398088, guid: c8b63eea187c7cf448509787ad2b7954,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7256703991571310303, guid: c8b63eea187c7cf448509787ad2b7954,
         type: 3}
@@ -9063,6 +9063,26 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2147226210184396651, guid: f6f49996127db0341a13bb4a51df16f5,
+        type: 3}
+      propertyPath: Drivers.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2147226210184396651, guid: f6f49996127db0341a13bb4a51df16f5,
+        type: 3}
+      propertyPath: Drivers.Array.data[0]
+      value: 
+      objectReference: {fileID: 942100209}
+    - target: {fileID: 2147226210184396651, guid: f6f49996127db0341a13bb4a51df16f5,
+        type: 3}
+      propertyPath: Drivers.Array.data[1]
+      value: 
+      objectReference: {fileID: 654586368}
+    - target: {fileID: 2147226210184396651, guid: f6f49996127db0341a13bb4a51df16f5,
+        type: 3}
+      propertyPath: Drivers.Array.data[2]
+      value: 
+      objectReference: {fileID: 873375047}
     - target: {fileID: 1313795662, guid: f6f49996127db0341a13bb4a51df16f5, type: 3}
       propertyPath: OutputAudioMixerGroup
       value: 
@@ -9160,26 +9180,6 @@ PrefabInstance:
       propertyPath: m_RootOrder
       value: 3
       objectReference: {fileID: 0}
-    - target: {fileID: 2147226210184396651, guid: f6f49996127db0341a13bb4a51df16f5,
-        type: 3}
-      propertyPath: Drivers.Array.size
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 2147226210184396651, guid: f6f49996127db0341a13bb4a51df16f5,
-        type: 3}
-      propertyPath: Drivers.Array.data[0]
-      value: 
-      objectReference: {fileID: 942100209}
-    - target: {fileID: 2147226210184396651, guid: f6f49996127db0341a13bb4a51df16f5,
-        type: 3}
-      propertyPath: Drivers.Array.data[1]
-      value: 
-      objectReference: {fileID: 654586368}
-    - target: {fileID: 2147226210184396651, guid: f6f49996127db0341a13bb4a51df16f5,
-        type: 3}
-      propertyPath: Drivers.Array.data[2]
-      value: 
-      objectReference: {fileID: 873375047}
     - target: {fileID: 690457836, guid: f6f49996127db0341a13bb4a51df16f5, type: 3}
       propertyPath: OutputAudioMixerGroup
       value: 
@@ -11385,6 +11385,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1441636096875689300, guid: b224cbf2b0c73af46b217da5d070fbe8,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7555777712415339930, guid: b224cbf2b0c73af46b217da5d070fbe8,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -11586,11 +11591,6 @@ PrefabInstance:
       value: -209
       objectReference: {fileID: 0}
     - target: {fileID: 401927501397230574, guid: b224cbf2b0c73af46b217da5d070fbe8,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1441636096875689300, guid: b224cbf2b0c73af46b217da5d070fbe8,
         type: 3}
       propertyPath: m_IsActive
       value: 0

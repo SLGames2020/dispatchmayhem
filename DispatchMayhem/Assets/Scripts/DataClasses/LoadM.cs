@@ -161,7 +161,7 @@ public class LoadM : MonoBehaviour
         ld.origin = orgps;
         ld.destinationLabel = go.GetComponent<City>().label;
         ld.destination = desgps;
-        ld.productType = Random.Range(0, GM.inst.totalDrivers);
+        ld.productType = Random.Range(0, GM.inst.totalDrivers+1);
         ld.productLabel = productLabels[ld.productType];
         ld.productIcon = GenerateIcon(ld.productType);
         ld.DueDate = GetDeliveryTime(GameTime.inst.gmTime);
