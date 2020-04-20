@@ -230,7 +230,7 @@ public class LoadM : MonoBehaviour
     *********************************************************************************/
     private float GetDeliveryValue(int good, System.DateTime tim)
     {
-        float retval = 0.15f;                       //adding an offset to compensate for the overhead costs
+        float retval = 0.25f;                       //adding an offset to compensate for the overhead costs
                                                     //(so they balance out, but the constant draw down forces the player to act quickly)
         switch (good)                               //using two digits ints for the values
         {                                           //so they appeared rounded to hundreds

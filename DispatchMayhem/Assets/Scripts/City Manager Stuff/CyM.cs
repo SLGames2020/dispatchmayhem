@@ -62,7 +62,8 @@ public class CyM : MonoBehaviour
                 if (cty.admin == "Ontario")                                     //just ontario for now
                 {
                     if (((cty.city != "Sudbury") && (cnt < 10))                 //top 10 cities (but not sudbury because we can't fit it with out enabling the zoom)
-                     || ((cty.city == "Cornwall") || cty.city == "Brockville")) //and Cornwall and Brockville as a nod to SLC ;)
+                     || ((cty.city == "Cornwall") || cty.city == "Brockville")  //add Cornwall, Brockville, and Kingston as a nod to SLC ;)
+                     ||  (cty.city == "Kingston"))
                     {
                         GameObject ctyGO = Instantiate(cityPrefab, Vector3.zero, Quaternion.identity);
                         ctyGO.transform.parent = this.transform;
