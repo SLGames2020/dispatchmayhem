@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -131,6 +131,7 @@ public class JobsPanel : BasePanel
 
     public void ShowNewLoads()
     {
+        GM.inst.CullJobs();                         //remove any expired jobs before we load up the list
 
         foreach (Transform child in loadBoxContent.transform)
         {

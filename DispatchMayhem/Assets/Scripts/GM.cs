@@ -80,6 +80,36 @@ public class GM : MonoBehaviour
         AssignLoadToTruck(DriverIndex, load);
     }
 
+    /************************************************************
+        CullJobs
+
+        This method removes loads for the active jobs list 
+        if they are within 4 hours of deliver (ie no chance of
+        being delivered on time). This will not only clean up the list
+        but also free up space as we seem to only be able to present so
+        many at once.
+
+    *************************************************************/
+    public void CullJobs()
+    {
+        List<Load> culls = new List<Load>();
+        culls.Clear();
+
+        foreach (Load ld in ActiveJobs)
+        {
+            DateTime tmchk = GameTime.inst.gmTime;
+            tmchk.AddHours(3.0f);
+            if (ld.DueDate < tmchk)
+            {
+                culls.Add(ld); 
+            }
+        }
+        foreach (Load ld in culls)
+        {
+            ActiveJobs.Remove(ld);
+        }
+    }
+
     /****************************************************************************
        AddTruckToList
        As Trucks are added to the map they are added to our GameManager Script.
