@@ -244,8 +244,8 @@ PlayerSettings:
   AndroidTargetArchitectures: 6
   AndroidSplashScreenScale: 0
   androidSplashScreen: {fileID: 0}
-  AndroidKeystoreName: C:/Users/might/Desktop/Dispatch Mayham/dispatchmayhem/DispatchMayhem/newkeystone.keystore
-  AndroidKeyaliasName: mitchell
+  AndroidKeystoreName: C:/Users/Easyhome/Documents/Keystones/user.keystore
+  AndroidKeyaliasName: ryan
   AndroidBuildApkPerCpuArchitecture: 0
   AndroidTVCompatibility: 1
   AndroidIsGame: 1
