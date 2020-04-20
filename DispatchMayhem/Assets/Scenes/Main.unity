@@ -1201,6 +1201,18 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1673617886}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &275242776 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2147226210184396651, guid: f6f49996127db0341a13bb4a51df16f5,
+    type: 3}
+  m_PrefabInstance: {fileID: 1673617886}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 275242775}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08c0bf2bfd4bc864fb3bd94fdd809603, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &291695534
 GameObject:
   m_ObjectHideFlags: 0
@@ -10914,6 +10926,36 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8696798906142556224, guid: f6f49996127db0341a13bb4a51df16f5,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8696798906142556224, guid: f6f49996127db0341a13bb4a51df16f5,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8696798906142556224, guid: f6f49996127db0341a13bb4a51df16f5,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8696798906142556224, guid: f6f49996127db0341a13bb4a51df16f5,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 275242776}
+    - target: {fileID: 8696798906142556224, guid: f6f49996127db0341a13bb4a51df16f5,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: BuyFlatbedTruck
+      objectReference: {fileID: 0}
+    - target: {fileID: 8696798906142556224, guid: f6f49996127db0341a13bb4a51df16f5,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 4236823835906553769, guid: f6f49996127db0341a13bb4a51df16f5, type: 3}
