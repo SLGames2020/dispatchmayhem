@@ -135,7 +135,7 @@ private void OnApplicationQuit()
             int startidx = dlstring.IndexOf(searchstring);
             int offset = searchstring.Length;
             startidx += offset;
-            searchstring = ",\"duration\":";
+            searchstring = ",\"legs\":";
             int endidx = dlstring.IndexOf(searchstring);
             float dist = float.Parse(dlstring.Substring(startidx, endidx - startidx));
 
